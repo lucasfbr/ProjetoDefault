@@ -9,7 +9,7 @@ class Post extends Model
 {
 
     protected $fillable = [
-        'user_id','titulo','conteudo'
+        'user_id','titulo','conteudo','img_p','img_g'
     ];
 
     public function user(){
@@ -17,4 +17,10 @@ class Post extends Model
         return $this->belongsTo(User::class);
 
     }
+
+    //public function getConteudoAttribute($value){
+
+        //return mb_strimwidth("$value", 0, 500, "...");
+
+    //}
 }

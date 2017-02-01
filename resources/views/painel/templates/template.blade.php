@@ -282,7 +282,7 @@
                             <!-- Menu Footer-->
                             <li class="user-footer">
                                 <div class="pull-left">
-                                    <a href="{{ url('/painel/perfil') }}" class="btn btn-default btn-flat">Perfil</a>
+                                    <a href="{{ url('/painel/user') }}" class="btn btn-default btn-flat">Perfil</a>
                                 </div>
                                 <div class="pull-right">
                                     <a href="{{ url('/logout') }}"
@@ -384,9 +384,11 @@
 
 <!-- jQuery 2.1.4 -->
 <script src="/assets/painel/plugins/jQuery/jQuery-2.1.4.min.js"></script>
+
 <!-- jQuery UI 1.11.4 -->
 <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+
 <script>
     $.widget.bridge('uibutton', $.ui.button);
 </script>
@@ -395,6 +397,17 @@
 
 <!-- Bootstrap 3.3.5 -->
 <script src="/assets/painel/js/bootstrap.min.js"></script>
+
+<!-- CK Editor -->
+<!--<script src="https://cdn.ckeditor.com/4.4.3/standard/ckeditor.js"></script>-->
+
+
+<!--<script>
+    // Replace the <textarea id="editor1"> with a CKEditor
+    // instance, using default configuration.
+    CKEDITOR.replace( 'conteudo' );
+</script>-->
+
 <!-- Morris.js charts -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
 <script src="/assets/painel/plugins/morris/morris.min.js"></script>
@@ -422,6 +435,7 @@
 <script src="/assets/painel/dist/js/pages/dashboard.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="/assets/painel/dist/js/demo.js"></script>
+
 
 
 </body>

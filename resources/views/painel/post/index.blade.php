@@ -49,7 +49,7 @@
                                 <td width="150px">{{$post->titulo}}</td>
                                 <td>{{$post->conteudo}}</td>
                                 <td width="150px">
-                                    <a href="/painel/post/list/{{$post->id}}" class="btn btn-default" alt="Exibir o post" title="Exibir o post"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
+                                    <a href="/painel/post/detail/{{$post->id}}" class="btn btn-default" alt="Exibir o post" title="Exibir o post"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
                                     <a href="/painel/post/edit/{{$post->id}}" class="btn btn-info" alt="Editar o post" title="Editar o post"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
                                     <a href="/painel/post/delete/{{$post->id}}" class="btn btn-danger" alt="Excluir o post" title="Excluir o post"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
                                 </td>

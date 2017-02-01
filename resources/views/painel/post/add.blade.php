@@ -2,7 +2,6 @@
 
 @section('content')
 
-
     <section class="content-header">
         <h1>
             Posts
@@ -22,23 +21,54 @@
 
             <div class="box-body">
 
+                @if (session('sucesso'))
+                    <div class="alert alert-success alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        {{ session('sucesso') }}
+                    </div>
+                @elseif(session('erro'))
+                    <div class="alert alert-danger alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        {{ session('erro') }}
+                    </div>
+                @endif
 
                 <div class="box-header with-border">
                     <h3 class="box-title">Cadatre um novo post</h3>
                 </div>
                 <!-- /.box-header -->
                 <!-- form start -->
-                <form role="form" method="post" action="/painel/post/create">
+                <form role="form" method="post" action="/painel/post/create" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     <div class="box-body">
                         <div class="form-group">
                             <label for="titulo">Título</label>
                             <input class="form-control" id="titulo" name="titulo" placeholder="Título do post" type="text">
                         </div>
+
                         <div class="form-group">
                             <label>Conteúdo</label>
-                            <textarea class="form-control" rows="3" id="conteudo" name="conteudo" placeholder="Conteúdo do post"></textarea>
+                            <textarea class="form-control" id="conteudo" name="conteudo" rows="10" placeholder="Conteúdo do post ..."></textarea>
                         </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="img">Imagem destacada</label>
+                                <input type="file" id="img_p" name="img_p">
+
+                                <p class="help-block">Selecione uma imagem para ser exibida no resumo</p>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="img">Imagem do texto</label>
+                                <input type="file" id="img_g" name="img_g">
+
+                                <p class="help-block">Selecione uma imagem para ser exibida com o post completo</p>
+                            </div>
+                        </div>
+
                     </div>
 
                     <input type="hidden" name="user_id" id="user_id" value="{{ Auth::user()->id }}">

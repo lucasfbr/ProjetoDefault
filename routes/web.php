@@ -19,9 +19,11 @@ Route::group(['prefix' => 'painel'], function (){
     Route::get('/post', 'Painel\PostController@index');
     Route::get('/post/add', 'Painel\PostController@add');
     Route::post('/post/create', 'Painel\PostController@create');
+    Route::get('/post/detail/{id}', 'Painel\PostController@detail');
     Route::get('/post/edit/{id}', 'Painel\PostController@edit');
     Route::post('/post/update/{id}', 'Painel\PostController@update');
     Route::get('/post/delete/{id}', 'Painel\PostController@delete');
+
     //UserController
     Route::get('/user', 'Painel\UserController@index');
     //RoleController
