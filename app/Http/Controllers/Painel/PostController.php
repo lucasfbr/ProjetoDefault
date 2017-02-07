@@ -6,14 +6,14 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 use App\Post;
-
-use Illuminate\Http\File;
+use Intervention\Image\Facades\Image;
 
 
 class PostController extends Controller
 {
     private $post;
     private $extensoes = ['jpg', 'png'];
+    private $caminhoImg = '/assets/all/imagens_post/';
 
     public function __construct(Post $post)
     {
@@ -46,6 +46,7 @@ class PostController extends Controller
 
     public function create(Request $request){
 
+
         $this->validate($request, [
 
             'user_id' => 'required',
@@ -53,34 +54,6 @@ class PostController extends Controller
             'conteudo' => 'required|min:10'
 
         ]);
-
-
-        if($request->file('img_p') || $request->file('img_g')){
-
-            $imgP = $request->file('img_p');
-            $imgG = $request->file('img_g');
-
-            if($imgP){
-                $extensaoP = $imgP->getClientOriginalExtension();
-
-                if(!in_array($extensaoP, $this->extensoes)){
-
-                    return back()->with('erro', 'Imagem do resumo fora dos padrões, portanto devem ser no formato .jpg ou .png');
-
-                }
-            }
-
-            if($imgG){
-                $extensaoG = $imgG->getClientOriginalExtension();
-
-                if(!in_array($extensaoG, $this->extensoes)){
-
-                    return back()->with('erro', 'Imagem do post fora dos padrões, portanto devem ser no formato .jpg ou .png');
-
-                }
-            }
-
-        }
 
         $post = new Post();
 
@@ -92,31 +65,38 @@ class PostController extends Controller
 
         if($post->save()){
 
-            if($imgP || $imgG){
+            if($request->file('img_p')){
 
-                $img_p_name = 'post_id_'.$post->id.'_'.$imgP->getClientOriginalName();
-                $img_g_name = 'post_id_'.$post->id.'_'.$imgG->getClientOriginalName();
+                $image = $request->file('img_p');
 
-                $path = base_path() . '/public/assets/all/imagens_post/';
+                $filename  = 'P_' . time() . '.' . $image->getClientOriginalExtension();
 
-                $request->file('img_p')->move($path, $img_p_name);
+                $path = public_path($this->caminhoImg . $filename);
 
-                $request->file('img_g')->move($path, $img_g_name);
+                Image::make($image->getRealPath())->resize(200, 200)->save($path);
 
-                $post->img_p = $path.$img_p_name;
-                $post->img_g = $path.$img_g_name;
+                $post->img_p = $this->caminhoImg . $filename;
 
-                if($post->save()){
-                    return redirect('/painel/post')->with('sucesso', 'Post cadastrado com sucesso!');
-                }else{
-                    return redirect('/painel/post')->with('erro', 'Post cadastrado com sucesso, mas ocorreu algum erro a salvar as fotos, tente novamente mais tarde');
-                }
-
-            }else{
-
-                return redirect('/painel/post')->with('sucesso', 'Post cadastrado com sucesso!');
-
+                $post->save();
             }
+
+            if($request->file('img_g')){
+
+                $image = $request->file('img_g');
+
+                $filename  = 'G_' . time() . '.' . $image->getClientOriginalExtension();
+
+                $path = public_path($this->caminhoImg . $filename);
+
+                Image::make($image->getRealPath())->resize(400, 300)->save($path);
+
+                $post->img_g = $this->caminhoImg . $filename;
+
+                $post->save();
+            }
+
+            return redirect('/painel/post')->with('sucesso', 'Post cadastrado com sucesso!');
+
 
         }else{
 

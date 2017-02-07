@@ -4,18 +4,25 @@ namespace App\Http\Controllers\Painel;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Permission;
 
 class PermissionController extends Controller
 {
 
-    public function __construct()
+    private $permission;
+
+    public function __construct(Permission $permission)
     {
         $this->middleware('auth');
+
+        $this->permission = $permission;
     }
 
     public function index(){
 
-        return view('painel.permission.index');
+        $permissions = $this->permission->all();
+
+        return view('painel.permission.index', ['permissions' => $permissions]);
 
     }
 
