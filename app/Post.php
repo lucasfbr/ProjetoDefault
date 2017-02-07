@@ -18,9 +18,15 @@ class Post extends Model
 
     }
 
-    //public function getConteudoAttribute($value){
+    public function getImgpAttribute($value){
 
-        //return mb_strimwidth("$value", 0, 500, "...");
+        return str_replace("/public", "", "$value");
 
-    //}
+    }
+
+    public function getImggAttribute($value){
+
+        return str_replace("/public", "", "$value");
+
+    }
 }

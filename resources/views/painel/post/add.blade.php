@@ -23,12 +23,14 @@
 
                 @if (session('sucesso'))
                     <div class="alert alert-success alert-dismissible" role="alert">
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                    aria-hidden="true">&times;</span></button>
                         {{ session('sucesso') }}
                     </div>
                 @elseif(session('erro'))
                     <div class="alert alert-danger alert-dismissible" role="alert">
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                    aria-hidden="true">&times;</span></button>
                         {{ session('erro') }}
                     </div>
                 @endif
@@ -41,14 +43,34 @@
                 <form role="form" method="post" action="/painel/post/create" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     <div class="box-body">
-                        <div class="form-group">
-                            <label for="titulo">Título</label>
-                            <input class="form-control" id="titulo" name="titulo" placeholder="Título do post" type="text">
+
+                        <div class="col-md-12">
+                            <div class="form-group{{ $errors->has('titulo') ? ' has-error' : '' }}">
+                                <label for="titulo">Título</label>
+                                <input class="form-control" id="titulo" name="titulo" value="{{ old('titulo') }}"
+                                       type="text">
+
+                                @if ($errors->has('titulo'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('titulo') }}</strong>
+                                    </span>
+                                @endif
+
+                            </div>
                         </div>
 
-                        <div class="form-group">
-                            <label>Conteúdo</label>
-                            <textarea class="form-control" id="conteudo" name="conteudo" rows="10" placeholder="Conteúdo do post ..."></textarea>
+                        <div class="col-md-12">
+                            <div class="form-group{{ $errors->has('conteudo') ? ' has-error' : '' }}">
+                                <label>Conteúdo</label>
+                                <textarea class="form-control" id="conteudo" name="conteudo" rows="10"
+                                          placeholder="Conteúdo do post ...">{{ old('conteudo') }}</textarea>
+
+                                @if ($errors->has('conteudo'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('conteudo') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
                         </div>
 
                         <div class="col-md-6">
@@ -80,7 +102,6 @@
             </div>
 
         </div>
-
 
 
     </section>
