@@ -266,13 +266,13 @@
                     <!-- User Account: style can be found in dropdown.less -->
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <img src="/assets/painel/{{ Auth::user()->foto }}" class="user-image" alt="User Image">
+                            <img src="{{Auth::user()->foto}}" class="user-image" alt="User Image">
                             <span class="hidden-xs">{{ Auth::user()->name }}</span>
                         </a>
                         <ul class="dropdown-menu">
                             <!-- User image -->
                             <li class="user-header">
-                                <img src="/assets/painel/{{ Auth::user()->foto }}" class="img-circle" alt="User Image">
+                                <img src="{{Auth::user()->foto}}" class="img-circle" alt="User Image">
 
                                 <p>
                                     {{ Auth::user()->name }} - {{ Auth::user()->profissao }}
@@ -282,7 +282,7 @@
                             <!-- Menu Footer-->
                             <li class="user-footer">
                                 <div class="pull-left">
-                                    <a href="{{ url('/painel/user') }}" class="btn btn-default btn-flat">Perfil</a>
+                                    <a href="{{ url('/painel/perfil') }}" class="btn btn-default btn-flat">Perfil</a>
                                 </div>
                                 <div class="pull-right">
                                     <a href="{{ url('/logout') }}"
@@ -312,7 +312,7 @@
             <!-- Sidebar user panel -->
             <div class="user-panel">
                 <div class="pull-left image">
-                    <img src="/assets/painel/{{ Auth::user()->foto }}" class="img-circle" alt="User Image">
+                    <img src="{{Auth::user()->foto}}" class="img-circle" alt="User Image">
                 </div>
                 <div class="pull-left info">
                     <p>{{ Auth::user()->name }}</p>
@@ -353,6 +353,9 @@
                 <li><a href="/painel/portifolio"><i class="glyphicon glyphicon-th" aria-hidden="true"></i>Portifólio</a></li>
                 <li><a href="/painel/sobre"><i class="glyphicon glyphicon-th-list" aria-hidden="true"></i>Sobre a empresa</a></li>
                 <li><a href="/painel/contato"><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i>Contato</a></li>
+
+                <li class="header">CONFIG. DO USUÁRIO</li>
+                <li><a href="/painel/perfil"><i class="glyphicon glyphicon-user" aria-hidden="true"></i>Perfil de Usuário</a></li>
 
             </ul>
         </section>
