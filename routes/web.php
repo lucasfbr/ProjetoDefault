@@ -26,6 +26,12 @@ Route::group(['prefix' => 'painel'], function (){
 
     //UserController
     Route::get('/user', 'Painel\UserController@index');
+    Route::get('/user/add', 'Painel\UserController@add');
+    Route::post('/user/create', 'Painel\UserController@create');
+    Route::get('/user/detail/{id}', 'Painel\UserController@detail');
+    Route::get('/user/edit/{id}', 'Painel\UserController@edit');
+    Route::post('/user/update/{id}', 'Painel\UserController@update');
+    Route::get('/user/delete/{id}', 'Painel\UserController@delete');
     //RoleController
     Route::get('/role', 'Painel\RoleController@index');
     //PermissionController

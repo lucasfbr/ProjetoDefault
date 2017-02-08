@@ -29,6 +29,30 @@ class User extends Authenticatable
     ];
 
 
+    public function getFotoAttribute($value){
+
+        $fotoUsuario = '';
+
+        if($value){
+            $fotoUsuario = $value;
+        }else{
+            $fotoUsuario = '/assets/painel/images/homem.jpg';
+        }
+
+        return $fotoUsuario;
+
+    }
+
+    public function setPasswordAttribute($value){
+
+        if($value){
+            $this->attributes['password'] = bcrypt($value);
+        }
+
+
+
+    }
+
 
     public function roles(){
 
