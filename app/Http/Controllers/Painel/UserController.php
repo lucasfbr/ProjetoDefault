@@ -59,7 +59,8 @@ class UserController extends Controller
 
         $user->name = $request->input('name');
         $user->email = $request->input('email');
-        $user->password = $request->input('password');
+        $user->password = bcrypt($request->input('password'));
+        $user->tipo = $request->input('tipo');
         $user->save();
 
         if($request->file('foto')){
@@ -96,9 +97,15 @@ class UserController extends Controller
 
         $user = $this->user->find($id);
 
-        $dados = $request->only('name', 'email', 'password');
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
 
-        $user->update($dados);
+        if($request->input('password') != ''){
+            $user->password = bcrypt($request->input('password'));
+        }
+
+        $user->tipo = $request->input('tipo');
+        $user->save();
 
         if($request->file('foto')){
 

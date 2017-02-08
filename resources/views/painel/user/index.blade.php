@@ -43,7 +43,6 @@
                         <th>Nome</th>
                         <th>E-mail</th>
                         <th>Tipo</th>
-                        <th>Empresa</th>
                         <th>Status</th>
                         <th>Ações</th>
                     </tr>
@@ -53,7 +52,6 @@
                             <td width="150px">{{$user->name}}</td>
                             <td>{{$user->email}}</td>
                             <td>{{$user->tipo}}</td>
-                            <td>{{$user->empresa}}</td>
                             <td>{{$user->status}}</td>
                             <td width="150px">
                                 <a href="/painel/user/detail/{{$user->id}}" class="btn btn-default" alt="Exibir o usuário" title="Exibir o usuário"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>

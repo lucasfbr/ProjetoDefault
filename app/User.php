@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'ddd', 'fone', 'celular', 'estado', 'cidade', 'bairro', 'endereco', 'numero', 'profissao', 'empresa', 'sexo', 'foto', 'educacao', 'habilidades', 'notas',
+        'name', 'email', 'password', 'ddd', 'fone', 'celular', 'estado', 'cidade', 'profissao', 'empresa', 'sexo', 'foto', 'educacao', 'habilidades', 'notas',
     ];
 
     /**
@@ -43,13 +43,42 @@ class User extends Authenticatable
 
     }
 
+    /*
     public function setPasswordAttribute($value){
 
         if($value){
             $this->attributes['password'] = bcrypt($value);
         }
 
+    }*/
 
+    public function getTipoAttribute($value){
+
+        $tipo = '';
+
+        if($value == 0){
+            $tipo = 'Administrador';
+        }elseif ($value == 1){
+            $tipo = 'Consultor';
+        }else{
+            $tipo = 'Cliente';
+        }
+
+        return $tipo;
+
+    }
+
+    public function getStatusAttribute($value){
+
+        $status = '';
+
+        if($value == 0){
+            $status = 'Inativo';
+        }else{
+            $status = 'Ativo';
+        }
+
+        return $status;
 
     }
 

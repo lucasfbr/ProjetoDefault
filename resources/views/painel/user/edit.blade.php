@@ -35,7 +35,7 @@
                 @endif
 
                 <div class="box-header with-border">
-                    <h3 class="box-title">Cadatre um novo usuário</h3>
+                    <h3 class="box-title">Edite os dados do usuário</h3>
                 </div>
                 <!-- /.box-header -->
                 <!-- form start -->
@@ -87,10 +87,33 @@
                             </div>
                         </div>
 
+                        <div class="col-md-12">
+                            <div class="form-group{{ $errors->has('tipo') ? ' has-error' : '' }}">
+                                <label>Tipo de usuário</label>
+                                <br />
+                                <label class="radio-inline">
+                                    <input type="radio" name="tipo" id="tipo1" value="0" {{ $user->tipo == 'Administrador' ? 'checked' : '' }}> Administtrador
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="tipo" id="tipo2" value="1" {{ $user->tipo == 'Consultor' ? 'checked' : '' }}> Consultor
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="tipo" id="tipo3" value="2" {{ $user->tipo == 'Cliente' ? 'checked' : '' }}> Cliente
+                                </label>
+
+                                @if ($errors->has('tipo'))
+                                    <span class="help-block">
+                                            <strong>{{ $errors->first('tipo') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+
                     </div>
 
                     <div class="box-footer">
-                        <input type="submit" class="btn btn-primary" value="Cadastrar">
+                        <input type="submit" class="btn btn-primary" value="Editar">
                     </div>
                 </form>
 

@@ -23,12 +23,14 @@
 
                 @if (session('sucesso'))
                     <div class="alert alert-success alert-dismissible" role="alert">
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                    aria-hidden="true">&times;</span></button>
                         {{ session('sucesso') }}
                     </div>
                 @elseif(session('erro'))
                     <div class="alert alert-danger alert-dismissible" role="alert">
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                    aria-hidden="true">&times;</span></button>
                         {{ session('erro') }}
                     </div>
                 @endif
@@ -45,7 +47,8 @@
 
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                             <label for="titulo">Nome</label>
-                            <input class="form-control" id="name" name="name" type="text" value="{{ old('email') }}" required autofocus>
+                            <input class="form-control" id="name" name="name" type="text" value="{{ old('email') }}"
+                                   autofocus>
                             @if ($errors->has('name'))
                                 <span class="help-block">
                                         <strong>{{ $errors->first('name') }}</strong>
@@ -55,7 +58,8 @@
 
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                             <label>E-mail</label>
-                            <input class="form-control" id="email" name="email" type="text" value="{{ old('email') }}" required autofocus>
+                            <input class="form-control" id="email" name="email" type="text" value="{{ old('email') }}"
+                                   autofocus>
                             @if ($errors->has('email'))
                                 <span class="help-block">
                                         <strong>{{ $errors->first('email') }}</strong>
@@ -65,7 +69,7 @@
 
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                             <label>Senha</label>
-                            <input id="password" type="password" class="form-control" name="password" required>
+                            <input id="password" type="password" class="form-control" name="password">
                             @if ($errors->has('password'))
                                 <span class="help-block">
                                         <strong>{{ $errors->first('password') }}</strong>
@@ -75,15 +79,38 @@
 
                         <div class="form-group">
                             <label>Confirma senha</label>
-                            <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+                            <input id="password-confirm" type="password" class="form-control"
+                                   name="password_confirmation">
                         </div>
 
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <div class="form-group">
                                 <label for="img">Foto</label>
                                 <input type="file" id="foto" name="foto">
 
                                 <p class="help-block">Selecione uma foto ou imagem para o usuário</p>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="form-group{{ $errors->has('tipo') ? ' has-error' : '' }}">
+                                <label>Tipo de usuário</label>
+                                <br />
+                                <label class="radio-inline">
+                                    <input type="radio" name="tipo" id="tipo1" value="0"> Administtrador
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="tipo" id="tipo2" value="1"> Consultor
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="tipo" id="tipo3" value="2" checked> Cliente
+                                </label>
+
+                                @if ($errors->has('tipo'))
+                                    <span class="help-block">
+                                            <strong>{{ $errors->first('tipo') }}</strong>
+                                    </span>
+                                @endif
                             </div>
                         </div>
 
