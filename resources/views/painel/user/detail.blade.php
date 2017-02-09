@@ -48,7 +48,7 @@
                                         <strong><i class="fa fa-book margin-r-5"></i>Formação</strong>
 
                                         <p class="text-muted">
-                                            B.S. in Computer Science from the University of Tennessee at Knoxville
+                                            {{ $user->formacao }}
                                         </p>
 
                                         <hr>
@@ -62,61 +62,65 @@
                                         <strong><i class="fa fa-pencil margin-r-5"></i>Habilidades</strong>
 
                                         <p>
-                                            <span class="label label-danger">UI Design</span>
-                                            <span class="label label-success">Coding</span>
-                                            <span class="label label-info">Javascript</span>
-                                            <span class="label label-warning">PHP</span>
-                                            <span class="label label-primary">Node.js</span>
+                                            @foreach($user->habilidades as $habilidade)
+                                                <span class="label label-primary">{{$habilidade}}</span>
+                                            @endforeach
                                         </p>
 
                                         <hr>
 
-                                        <strong><i class="fa fa-file-text-o margin-r-5"></i> E-mail</strong>
+                                        <strong><i class="fa fa-at margin-r-5"></i> E-mail</strong>
 
                                         <p>{{ $user->email }}</p>
                                     </div>
                                     <div class="box-body col-md-6">
-                                        <strong><i class="fa fa-book margin-r-5"></i>Telefone</strong>
+                                        <strong><i class="fa fa-phone margin-r-5"></i>Telefone</strong>
 
                                         <p class="text-muted">
-                                            {{ $user->telefone }}
+                                            {{ $user->fone }}
                                         </p>
 
                                         <hr>
 
-                                        <strong><i class="fa fa-map-marker margin-r-5"></i>Celular</strong>
+                                        <strong><i class="fa fa-mobile margin-r-5"></i>Celular</strong>
 
                                         <p class="text-muted">{{ $user->celular }}</p>
 
                                         <hr>
 
-                                        <strong><i class="fa fa-pencil margin-r-5"></i>Sexo</strong>
+                                        <strong><i class="fa fa-venus-mars margin-r-5"></i>Sexo</strong>
 
                                         <p>{{ $user->sexo }}</p>
 
                                         <hr>
 
-                                        <strong><i class="fa fa-pencil margin-r-5"></i>Cadastrado(a) desde:</strong>
+                                        <strong><i class="fa fa-calendar margin-r-5"></i>Cadastrado(a) desde:</strong>
 
                                         <p>{{ $user->created_at }}</p>
 
                                         <hr>
 
+                                    </div>
+                                    <!-- /.box-body -->
+
+                                    <div  class="box-body col-md-12">
                                         <strong><i class="fa fa-file-text-o margin-r-5"></i> Notas</strong>
 
                                         <p>{{ $user->notas }}</p>
                                     </div>
-                                    <!-- /.box-body -->
 
+                                @if($user->tipo == 'Consultor')
 
                                 <div class="box-footer no-padding col-md-12">
                                     <ul class="nav nav-stacked">
-                                        <li><a href="#">Projects <span class="pull-right badge bg-blue">31</span></a></li>
-                                        <li><a href="#">Tasks <span class="pull-right badge bg-aqua">5</span></a></li>
-                                        <li><a href="#">Completed Projects <span class="pull-right badge bg-green">12</span></a></li>
-                                        <li><a href="#">Followers <span class="pull-right badge bg-red">842</span></a></li>
+                                        <li><a href="#">Projetos <span class="pull-right badge bg-blue">31</span></a></li>
+                                        <li><a href="#">Tarefas <span class="pull-right badge bg-aqua">5</span></a></li>
+                                        <li><a href="#">Projetos Completos <span class="pull-right badge bg-green">12</span></a></li>
+                                        <li><a href="#">Segidores <span class="pull-right badge bg-red">842</span></a></li>
                                     </ul>
                                 </div>
+
+                                @endif
 
                             </div>
                             <!-- /.widget-user -->

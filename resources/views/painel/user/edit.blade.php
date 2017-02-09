@@ -24,12 +24,14 @@
 
                 @if (session('sucesso'))
                     <div class="alert alert-success alert-dismissible" role="alert">
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                    aria-hidden="true">&times;</span></button>
                         {{ session('sucesso') }}
                     </div>
                 @elseif(session('erro'))
                     <div class="alert alert-danger alert-dismissible" role="alert">
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                    aria-hidden="true">&times;</span></button>
                         {{ session('erro') }}
                     </div>
                 @endif
@@ -39,7 +41,8 @@
                 </div>
                 <!-- /.box-header -->
                 <!-- form start -->
-                <form role="form" method="post" action="/painel/user/update/{{ $user->id }}" enctype="multipart/form-data">
+                <form role="form" method="post" action="/painel/user/update/{{ $user->id }}"
+                      enctype="multipart/form-data">
                     {{ csrf_field() }}
                     <div class="box-body">
 
@@ -63,6 +66,29 @@
                             @endif
                         </div>
 
+                        <div class="form-group{{ $errors->has('tipo') ? ' has-error' : '' }}">
+                            <label>Tipo de usuário</label>
+                            <br/>
+                            <label class="radio-inline">
+                                <input type="radio" name="tipo" id="tipo1"
+                                       value="0" {{ $user->tipo == 'Administrador' ? 'checked' : '' }}> Administtrador
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="tipo" id="tipo2"
+                                       value="1" {{ $user->tipo == 'Consultor' ? 'checked' : '' }}> Consultor
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="tipo" id="tipo3"
+                                       value="2" {{ $user->tipo == 'Cliente' ? 'checked' : '' }}> Cliente
+                            </label>
+
+                            @if ($errors->has('tipo'))
+                                <span class="help-block">
+                                            <strong>{{ $errors->first('tipo') }}</strong>
+                                    </span>
+                            @endif
+                        </div>
+
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                             <label>Senha</label>
                             <input id="password" type="password" class="form-control" name="password">
@@ -75,38 +101,102 @@
 
                         <div class="form-group">
                             <label>Confirma senha</label>
-                            <input id="password-confirm" type="password" class="form-control" name="password_confirmation">
+                            <input id="password-confirm" type="password" class="form-control"
+                                   name="password_confirmation">
                         </div>
 
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="img">Foto</label>
-                                <input type="file" id="foto" name="foto">
 
-                                <p class="help-block">Selecione uma foto ou imagem para o usuário</p>
-                            </div>
+                        <div class="form-group">
+                            <label for="img">Foto</label>
+                            <input type="file" id="foto" name="foto">
+
+                            <p class="help-block">Selecione uma foto ou imagem para o usuário</p>
                         </div>
 
-                        <div class="col-md-12">
-                            <div class="form-group{{ $errors->has('tipo') ? ' has-error' : '' }}">
-                                <label>Tipo de usuário</label>
-                                <br />
-                                <label class="radio-inline">
-                                    <input type="radio" name="tipo" id="tipo1" value="0" {{ $user->tipo == 'Administrador' ? 'checked' : '' }}> Administtrador
-                                </label>
-                                <label class="radio-inline">
-                                    <input type="radio" name="tipo" id="tipo2" value="1" {{ $user->tipo == 'Consultor' ? 'checked' : '' }}> Consultor
-                                </label>
-                                <label class="radio-inline">
-                                    <input type="radio" name="tipo" id="tipo3" value="2" {{ $user->tipo == 'Cliente' ? 'checked' : '' }}> Cliente
-                                </label>
 
-                                @if ($errors->has('tipo'))
-                                    <span class="help-block">
-                                            <strong>{{ $errors->first('tipo') }}</strong>
-                                    </span>
-                                @endif
+                        <div class="form-group">
+                            <label for="estado">Estado</label>
+                            <input class="form-control" id="estado" name="estado" type="text"
+                                   value="{{$user->estado}}"
+                                   autofocus>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="cidade">Cidade</label>
+                            <input class="form-control" id="cidade" name="cidade" type="text"
+                                   value="{{$user->cidade}}"
+                                   autofocus>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label for="profissao">Profissão</label>
+                            <input class="form-control" id="profissao" name="profissao" type="text"
+                                   value="{{$user->profissao}}"
+                                   autofocus>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="empresa">Empresa</label>
+                            <input class="form-control" id="empresa" name="empresa" type="text"
+                                   value="{{$user->empresa}}"
+                                   autofocus>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="formacao">Formação</label>
+                            <textarea id="formacao" name="formacao" class="form-control"
+                                      rows="5">{{$user->formacao}}</textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="habilidades">Habilidades</label>
+                            <textarea id="habilidades" name="habilidades" class="form-control" rows="5">{{$user->habilidades}}</textarea>
+                            <p class="help-block">Separe cada habilidade por virgula. Ex: Word, Excell, Power Point</p>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Telefone</label>
+
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-phone"></i>
+                                </div>
+                                <input type="text" id="fone" name="fone" class="form-control" data-inputmask='"mask": "(99) 9999-9999"' data-mask value="{{$user->fone}}">
                             </div>
+                            <!-- /.input group -->
+                        </div>
+
+                        <div class="form-group">
+                            <label>Celular</label>
+
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-phone"></i>
+                                </div>
+                                <input type="text" id="celular" name="celular" class="form-control" data-inputmask='"mask": "(99) 99999-9999"' data-mask value="{{$user->celular}}">
+                            </div>
+                            <!-- /.input group -->
+                        </div>
+
+
+                        <div class="form-group">
+                            <label for="sexo">Sexo</label>
+                            <br/>
+                            <label class="radio-inline">
+                                <input type="radio" name="sexo" id="sexo"
+                                       value="m" {{ $user->sexo == 'Masculino' ? 'checked' : '' }}> Masculino
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="sexo" id="sexo"
+                                       value="f" {{ $user->sexo == 'Feminino' ? 'checked' : '' }}> Feminino
+                            </label>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="notas">Notas</label>
+                            <textarea id="notas" name="notas" class="form-control" rows="5">{{$user->notas}}</textarea>
+                            <p class="help-block">Informações adicionais sobre o usuário</p>
                         </div>
 
 
@@ -120,7 +210,6 @@
             </div>
 
         </div>
-
 
 
     </section>

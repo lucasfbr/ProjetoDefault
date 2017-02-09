@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Permission;
+use Carbon\Carbon;
 
 class User extends Authenticatable
 {
@@ -16,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'ddd', 'fone', 'celular', 'estado', 'cidade', 'profissao', 'empresa', 'sexo', 'foto', 'educacao', 'habilidades', 'notas',
+        'name', 'email', 'password', 'ddd', 'fone', 'celular', 'estado', 'cidade', 'profissao', 'empresa', 'sexo', 'foto', 'formacao', 'habilidades', 'notas',
     ];
 
     /**
@@ -27,6 +28,12 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function getCreatedAtAttribute($value){
+
+        return  Carbon::parse($value)->format('d/m/Y');
+
+    }
 
 
     public function getFotoAttribute($value){
@@ -42,15 +49,6 @@ class User extends Authenticatable
         return $fotoUsuario;
 
     }
-
-    /*
-    public function setPasswordAttribute($value){
-
-        if($value){
-            $this->attributes['password'] = bcrypt($value);
-        }
-
-    }*/
 
     public function getTipoAttribute($value){
 
@@ -82,6 +80,27 @@ class User extends Authenticatable
 
     }
 
+    public function getSexoAttribute($value){
+
+        $sexo = '';
+
+        if($value == 'm'){
+            $sexo = 'Masculino';
+        }else{
+            $sexo = 'Feminino';
+        }
+
+        return $sexo;
+
+    }
+
+    /*public function getHabilidadesAttribute($value){
+
+        $dados = explode(",", $value);
+
+        return $dados;
+
+    }*/
 
     public function roles(){
 

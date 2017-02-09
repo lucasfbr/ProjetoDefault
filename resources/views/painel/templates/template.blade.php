@@ -395,8 +395,12 @@
 <script>
     $.widget.bridge('uibutton', $.ui.button);
 </script>
-<script src="/assets/painel/js/jquery.mask.js"></script>
+
 <script src="/assets/painel/js/funcoesPainel.js"></script>
+
+<script src="/assets/painel/plugins/input-mask/jquery.inputmask.js"></script>
+<script src="/assets/painel/plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
+<script src="/assets/painel/plugins/input-mask/jquery.inputmask.extensions.js"></script>
 
 <!-- Bootstrap 3.3.5 -->
 <script src="/assets/painel/js/bootstrap.min.js"></script>

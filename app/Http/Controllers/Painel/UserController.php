@@ -35,6 +35,8 @@ class UserController extends Controller
 
         $user = $this->user->find($id);
 
+        $user->habilidades = $this->formataHabilidades($user->habilidades);
+
         return view('painel.user.detail', ['user' => $user]);
 
     }
@@ -60,7 +62,19 @@ class UserController extends Controller
         $user->name = $request->input('name');
         $user->email = $request->input('email');
         $user->password = bcrypt($request->input('password'));
+        $user->cidade = $request->input('cidade');
+        $user->estado = $request->input('estado');
         $user->tipo = $request->input('tipo');
+        $user->formacao = $request->input('formacao');
+        $user->profissao = $request->input('profissao');
+        $user->empresa = $request->input('empresa');
+        //$user->habilidades = substr($request->input('habilidades'), 0, -1);
+        $user->habilidades = $request->input('habilidades');
+        $user->fone = $request->input('fone');
+        $user->celular = $request->input('celular');
+        $user->sexo = $request->input('sexo');
+        $user->notas = $request->input('notas');
+
         $user->save();
 
         if($request->file('foto')){
@@ -104,7 +118,19 @@ class UserController extends Controller
             $user->password = bcrypt($request->input('password'));
         }
 
+        $user->cidade = $request->input('cidade');
+        $user->estado = $request->input('estado');
         $user->tipo = $request->input('tipo');
+        $user->formacao = $request->input('formacao');
+        $user->profissao = $request->input('profissao');
+        $user->empresa = $request->input('empresa');
+        //$user->habilidades = substr($request->input('habilidades'), 0, -1);
+        $user->habilidades = $request->input('habilidades');
+        $user->fone = $request->input('fone');
+        $user->celular = $request->input('celular');
+        $user->sexo = $request->input('sexo');
+        $user->notas = $request->input('notas');
+
         $user->save();
 
         if($request->file('foto')){
@@ -161,5 +187,15 @@ class UserController extends Controller
             return '/assets/all/imagens_user/'.$img_name;
 
         }
+    }
+
+    public function formataHabilidades($value){
+
+        $habilidades = explode(",", $value);
+
+        //var_dump($habilidades);exit;
+
+        return $habilidades;
+
     }
 }

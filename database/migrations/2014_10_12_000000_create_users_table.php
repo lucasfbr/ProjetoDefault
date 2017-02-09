@@ -29,7 +29,7 @@ class CreateUsersTable extends Migration
             $table->enum('sexo', ['m', 'f']);
             $table->string('foto', 255)->nullable();
             $table->text('formacao')->nullable();
-            $table->text('habiliadades')->nullable();
+            $table->text('habilidades')->nullable();
             $table->text('notas')->nullable();
             $table->enum('tipo', [0,1,2])->default(2);//0 - root; 1 - consultor; 2 - cliente
             $table->enum('status', [0,1])->default(0);//0 - inativo; 1 - ativo
