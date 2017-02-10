@@ -1,4 +1,4 @@
-@extends('auth.templates.template')
+@extends('auth.templates.template2')
 
 @section('content')
 <div class="container">

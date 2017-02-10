@@ -1,4 +1,4 @@
-@extends('auth.templates.template')
+@extends('auth.templates.template2')
 
 <!-- Main Content -->
 @section('content')
