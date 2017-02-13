@@ -71,18 +71,16 @@
                 <div class="col-xs-12">
                     <div class="checkbox icheck">
                         <label>
-                            <input type="checkbox"> Estou de acordo com os<a href="#" data-toggle="modal" data-target="#myModal"> termos</a>
+                            <input type="checkbox" name="termos" id="termos"> Estou de acordo com os<a href="#" data-toggle="modal" data-target="#myModal"> termos</a>
                         </label>
                     </div>
                 </div>
             </div>
 
-            <div class="row">
-                <!-- /.col -->
-                <div class="col-xs-4">
-                    <button type="submit" class="btn btn-primary btn-block btn-flat right-side">Registro</button>
+            <div class="row submitRegister">
+                <div class="col-xs-12">
+                    <button name="btnRegistrar" id="btnRegistrar" type="submit" class="btn btn-primary btn-block btn-flat">Registro</button>
                 </div>
-                <!-- /.col -->
             </div>
         </form>
 
@@ -132,7 +130,10 @@
                     </p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <div class="col-ms-2">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
                 </div>
             </div>
         </div>

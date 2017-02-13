@@ -11,7 +11,7 @@
 |
 */
 
-Route::group(['prefix' => 'painel'], function (){
+Route::group(['middleware' => 'perfil' , 'prefix' => 'painel'], function (){
 
     //HomeController
     Route::get('/', 'Painel\HomeController@index');
@@ -32,6 +32,8 @@ Route::group(['prefix' => 'painel'], function (){
     Route::get('/user/edit/{id}', 'Painel\UserController@edit');
     Route::post('/user/update/{id}', 'Painel\UserController@update');
     Route::get('/user/delete/{id}', 'Painel\UserController@delete');
+    Route::get('/user/ativar/{id}', 'Painel\UserController@ativar');
+    Route::get('/user/desativar/{id}', 'Painel\UserController@desativar');
     //RoleController
     Route::get('/role', 'Painel\RoleController@index');
     //PermissionController

@@ -170,6 +170,31 @@ class UserController extends Controller
 
     }
 
+    public function ativar($id){
+
+        $user = $this->user->find($id);
+
+        $user->status = '1';
+        if($user->save()){
+            return redirect('/painel/user')->with('sucesso', 'Usuario ativado com sucesso!');
+        }else{
+            return redirect('/painel/user')->with('erro', 'Erro ao ativar o usuário, tente novamente mais tarde!');
+        }
+    }
+
+    public function desativar($id){
+
+        $user = $this->user->find($id);
+
+        $user->status = '0';
+        if($user->save()){
+            return redirect('/painel/user')->with('sucesso', 'Usuario desativado com sucesso!');
+        }else{
+            return redirect('/painel/user')->with('erro', 'Erro ao desativar o usuário, tente novamente mais tarde!');
+        }
+
+    }
+
     public function validaImagem($foto, $user){
 
         $extensao = $foto->getClientOriginalExtension();

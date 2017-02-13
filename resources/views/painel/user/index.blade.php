@@ -53,10 +53,17 @@
                             <td>{{$user->email}}</td>
                             <td>{{$user->tipo}}</td>
                             <td>{{$user->status}}</td>
-                            <td width="150px">
-                                <a href="/painel/user/detail/{{$user->id}}" class="btn btn-success" alt="Exibir o usuário" title="Exibir o usuário"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
+                            <td width="180px">
+                                <a href="/painel/user/detail/{{$user->id}}" class="btn btn-info" alt="Exibir o usuário" title="Exibir o usuário"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
                                 <a href="/painel/user/edit/{{$user->id}}" class="btn btn-warning" alt="Editar o usuário" title="Editar o usuário"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
                                 <a href="/painel/user/delete/{{$user->id}}" onclick="return confirm('Realmente deseja excluir este usuário?')" class="btn btn-danger" alt="Excluir o usuário" title="Excluir o usuário"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
+                                @if(($user->tipo == 'Consultor') || ($user->tipo == 'Administrador'))
+                                    @if($user->status == 'Ativo')
+                                        <a href="/painel/user/desativar/{{$user->id}}" onclick="return confirm('Realmente deseja desativar este usuário?')" class="btn btn-success" alt="Desativar usuário" title="Desativar usuário"><span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span></a>
+                                    @else
+                                        <a href="/painel/user/ativar/{{$user->id}}" onclick="return confirm('Realmente deseja ativar este usuário?')" class="btn btn-success" alt="Ativar usuário" title="Ativar usuário"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></a>
+                                    @endif
+                                @endif
                             </td>
                         </tr>
                     @empty
