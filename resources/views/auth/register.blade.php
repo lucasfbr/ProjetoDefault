@@ -68,10 +68,15 @@
 
 
             <div class="row">
-                <div class="col-xs-12">
+                <div class="col-xs-12 {{ $errors->has('termos') ? ' has-error' : '' }}">
                     <div class="checkbox icheck">
                         <label>
                             <input type="checkbox" name="termos" id="termos"> Estou de acordo com os<a href="#" data-toggle="modal" data-target="#myModal"> termos</a>
+                            @if ($errors->has('termos'))
+                                <span class="help-block">
+                                        <strong>{{ $errors->first('termos') }}</strong>
+                                    </span>
+                            @endif
                         </label>
                     </div>
                 </div>
@@ -118,21 +123,10 @@
 
                     Nam fermentum velit ligula, in dignissim leo semper at. Donec tortor nibh, eleifend eu semper nec, finibus vel magna. Suspendisse ac arcu aliquet, cursus mi sed, mollis nunc. Praesent vitae tempor magna. Curabitur aliquet purus vel justo scelerisque blandit. Curabitur fringilla, tellus mollis facilisis hendrerit, risus ipsum bibendum mauris, a molestie tellus purus non velit. Curabitur varius consectetur elementum. Vestibulum iaculis orci non nisi elementum, nec rutrum dui blandit. Praesent a sodales ipsum, a tristique massa. Donec posuere egestas libero tincidunt luctus. Nulla hendrerit nibh lorem, id pellentesque mauris dapibus at. Vestibulum velit sapien, luctus ac rhoncus non, venenatis quis lectus. Nulla non tortor commodo, rutrum felis at, dignissim felis. Sed consectetur quam id est tempor ultrices. Proin ac sagittis mi, vel placerat elit.
                     </p>
-                    <p>
-                    Nullam eget scelerisque purus. In vitae magna convallis, dignissim mi id, euismod nunc. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In id sem est. Cras rutrum magna velit, vel interdum est sagittis vitae. Nunc et magna ac dolor varius egestas. Suspendisse viverra eget quam a aliquam.
-
-                    Pellentesque euismod luctus erat, vel aliquet tortor. Nulla hendrerit sem ultricies lacus dignissim condimentum a a nisl. Aliquam erat volutpat. Ut placerat euismod erat sed mollis. Proin placerat rhoncus scelerisque. Donec risus magna, condimentum vitae commodo at, laoreet sit amet ligula. Curabitur ac interdum turpis. Sed elit arcu, scelerisque vel ullamcorper id, venenatis quis sem. Aliquam sed tellus suscipit, porttitor ligula eu, pharetra leo. Sed ullamcorper eu sem et congue. Suspendisse a iaculis metus. Curabitur efficitur efficitur suscipit. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nulla a ante nisi. Sed eleifend pulvinar tempor. Quisque accumsan dolor id viverra tempus.
-
-                    Vestibulum ultricies a justo quis consequat. Maecenas scelerisque et libero at sollicitudin. Curabitur sed enim nec augue fermentum feugiat. Aenean imperdiet nunc in bibendum sagittis. Donec fringilla est ultricies dignissim tempus. Phasellus sit amet purus ante. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc lacus elit, feugiat tincidunt eros id, rutrum sodales erat. Fusce porta ex tortor, in consequat mi ornare eu. Proin vulputate gravida urna a laoreet. In ullamcorper tortor sit amet ipsum aliquet placerat. Proin rhoncus purus eget lorem feugiat, egestas tempor ligula rutrum. Vestibulum maximus elit vitae nulla interdum consectetur.
-                    </p>
-                    <p>
-                    Mauris vulputate lacus et rhoncus elementum. Duis feugiat tellus in eros tincidunt, vitae cursus ipsum tempor. Donec sit amet orci id felis tincidunt imperdiet. Donec velit lorem, volutpat vitae massa non, feugiat egestas ipsum. Nulla facilisi. Ut orci mi, consectetur quis pellentesque ut, convallis sed purus. Quisque ut tellus vitae nisi congue pellentesque gravida vel ante. Phasellus magna dui, fermentum aliquam massa nec, vestibulum sodales neque. Phasellus fringilla dapibus sapien eget imperdiet. Nulla facilisi. Sed porttitor, mauris ut interdum bibendum, mauris lorem facilisis erat, et faucibus risus diam non turpis. Nunc eu mi sodales, posuere magna eu, blandit tortor. Quisque nisl ipsum, sodales eu ultrices ut, laoreet id elit.</p>
-                    </p>
                 </div>
                 <div class="modal-footer">
                     <div class="col-ms-2">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Voltar</button>
                     </div>
                 </div>
             </div>

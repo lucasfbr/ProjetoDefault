@@ -9,7 +9,7 @@
             {{ csrf_field() }}
 
             <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }} has-feedback">
-                <input type="text" name="email" id="email" class="form-control" placeholder="Email" value="{{ old('email') }}" required autofocus>
+                <input type="text" name="email" id="email" class="form-control" placeholder="Email" value="{{ old('email') }}" autofocus>
                 <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
                 @if ($errors->has('email'))
                     <span class="help-block">
@@ -18,7 +18,7 @@
                 @endif
             </div>
             <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }} has-feedback">
-                <input type="password" name="password" id="password" class="form-control" placeholder="Password" required>
+                <input type="password" name="password" id="password" class="form-control" placeholder="Password">
                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                 @if ($errors->has('password'))
                     <span class="help-block">
