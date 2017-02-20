@@ -13,8 +13,30 @@ require('./bootstrap');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('example', require('./components/Example.vue'));
+//Vue.component('example', require('./components/Example.vue'));
 
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+    data: {
+        user: []
+    },
+    ready: function () {
+
+        var self = this;
+
+        self.$http.get('http://localhost:8000/list').then(function (response) {
+
+            var aux = [];
+
+            for(var k in response.data) {
+
+                self.user.push(response.data[k]);
+            }
+
+        })
+
+    }
 });
+
+
+

@@ -44,3 +44,5 @@ Route::group(['middleware' => 'perfil' , 'prefix' => 'painel'], function (){
 Auth::routes();
 
 Route::get('/', 'Portal\HomeController@index');
+
+Route::get('/list', 'Portal\HomeController@listUser');
