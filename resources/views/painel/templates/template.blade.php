@@ -74,7 +74,7 @@
                                     <li><!-- start message -->
                                         <a href="#">
                                             <div class="pull-left">
-                                                <img src="{{ Auth::user()->name }}" class="img-circle" alt="User Image">
+                                                <img src="{{ Auth::user()->foto }}" class="img-circle" alt="User Image">
                                             </div>
                                             <h4>
                                                 Support Team
@@ -87,7 +87,7 @@
                                     <li>
                                         <a href="#">
                                             <div class="pull-left">
-                                                <img src="dist/img/user3-128x128.jpg" class="img-circle"
+                                                <img src="/assets/painel/dist/img/user3-128x128.jpg" class="img-circle"
                                                      alt="User Image">
                                             </div>
                                             <h4>
@@ -100,7 +100,7 @@
                                     <li>
                                         <a href="#">
                                             <div class="pull-left">
-                                                <img src="dist/img/user4-128x128.jpg" class="img-circle"
+                                                <img src="/assets/painel/dist/img/user4-128x128.jpg" class="img-circle"
                                                      alt="User Image">
                                             </div>
                                             <h4>
@@ -113,7 +113,7 @@
                                     <li>
                                         <a href="#">
                                             <div class="pull-left">
-                                                <img src="dist/img/user3-128x128.jpg" class="img-circle"
+                                                <img src="/assets/painel/dist/img/user3-128x128.jpg" class="img-circle"
                                                      alt="User Image">
                                             </div>
                                             <h4>
@@ -126,7 +126,7 @@
                                     <li>
                                         <a href="#">
                                             <div class="pull-left">
-                                                <img src="dist/img/user4-128x128.jpg" class="img-circle"
+                                                <img src="/assets/painel/dist/img/user4-128x128.jpg" class="img-circle"
                                                      alt="User Image">
                                             </div>
                                             <h4>
@@ -387,6 +387,10 @@
     <div class="control-sidebar-bg"></div>
 </div>
 <!-- ./wrapper -->
+
+
+<!-- arquivo com todas as definicoes do VueJs -->
+<script src="/js/app.js"></script>
 
 <!-- jQuery 2.1.4 -->
 <script src="/assets/painel/plugins/jQuery/jQuery-2.1.4.min.js"></script>

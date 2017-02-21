@@ -26,6 +26,7 @@ Route::group(['middleware' => 'perfil' , 'prefix' => 'painel'], function (){
 
     //UserController
     Route::get('/user', 'Painel\UserController@index');
+    Route::get('/user/list', 'Painel\UserController@listUser');
     Route::get('/user/add', 'Painel\UserController@add');
     Route::post('/user/create', 'Painel\UserController@create');
     Route::get('/user/detail/{id}', 'Painel\UserController@detail');

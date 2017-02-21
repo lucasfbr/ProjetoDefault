@@ -14,11 +14,24 @@ require('./bootstrap');
  */
 
 //Vue.component('example', require('./components/Example.vue'));
-
+/*
 const app = new Vue({
     el: '#app',
     data: {
-        user: []
+        user: [],
+        search: '',
+        coluna: 'name',
+        ordenacao: '1'
+    },
+    methods:{
+        ordenar: function (e, coluna) {
+
+            e.preventDefault();
+
+            this.coluna = coluna;
+            this.ordenacao = this.ordenacao * -1;
+        }
+
     },
     ready: function () {
 
@@ -32,6 +45,48 @@ const app = new Vue({
 
                 self.user.push(response.data[k]);
             }
+
+        })
+
+    }
+});*/
+
+const app = new Vue({
+    el: '#app',
+    data: {
+        nome: 'Lucas Rosa',
+        user: [],
+        search: '',
+        coluna: 'name',
+        ordenacao: '1'
+    },
+    methods:{
+        ordenar: function (e, coluna) {
+
+            e.preventDefault();
+
+            this.coluna = coluna;
+            this.ordenacao = this.ordenacao * -1;
+        }
+
+    },
+    ready: function () {
+
+
+        //alert('dasdasdasds')
+
+        var self = this;
+
+        self.$http.get('http://localhost:8000/painel/user/list').then(function (response) {
+
+            console.log(response.data)
+
+            /*var aux = [];
+
+            for(var k in response.data) {
+
+                self.user.push(response.data[k]);
+            }*/
 
         })
 

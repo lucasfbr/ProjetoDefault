@@ -23,11 +23,20 @@ class UserController extends Controller
 
     public function index(){
 
-        //$nome = auth()->user()->name;
-
+        $nome = auth()->user()->name;
         $users = $this->user->all();
 
         return view('painel.user.index', ['users' => $users]);
+
+    }
+
+    //metodo que responderá a requisição ajax vinda do vuejs
+    //retorna um objeto json
+    public function listUser(){
+
+        $users = $this->user->all();
+
+        return response()->json($users);
 
     }
 

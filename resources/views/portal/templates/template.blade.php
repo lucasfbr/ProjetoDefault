@@ -13,6 +13,9 @@
     <!-- Styles -->
     <link href="/assets/all/css/app.css" rel="stylesheet">
 
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
     <!-- Scripts -->
     <script>
         window.Laravel = <?php echo json_encode([

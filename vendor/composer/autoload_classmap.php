@@ -7,10 +7,6 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'CreatePasswordResetsTable' => $baseDir . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
-<<<<<<< HEAD
-    'CreatePerfisTable' => $baseDir . '/database/migrations/2017_02_02_214242_create_perfis_table.php',
-=======
->>>>>>> 3dcc8a6b1e86da4f2f2570a5bda7d5209658e094
     'CreatePermissionsTable' => $baseDir . '/database/migrations/2017_01_28_194727_create_permissions_table.php',
     'CreatePostsTable' => $baseDir . '/database/migrations/2017_01_28_164330_create_posts_table.php',
     'CreateRolesTable' => $baseDir . '/database/migrations/2017_01_28_194713_create_roles_table.php',
@@ -546,4 +542,5 @@ return array(
     'SebastianBergmann\\Version' => $vendorDir . '/sebastian/version/src/Version.php',
     'TestCase' => $baseDir . '/tests/TestCase.php',
     'Text_Template' => $vendorDir . '/phpunit/php-text-template/src/Template.php',
+    'UsersTableSeeder' => $baseDir . '/database/seeds/UsersTableSeeder.php',
 );
