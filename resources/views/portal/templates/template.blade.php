@@ -11,10 +11,7 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Styles -->
-    <link href="/assets/all/css/app.css" rel="stylesheet">
-
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link href="/css/main.css" rel="stylesheet">
 
     <!-- Scripts -->
     <script>
@@ -84,7 +81,8 @@
     @yield('content')
 </div>
 
-<script src="/js/app.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/vue.js"></script>
 
 
 </body>

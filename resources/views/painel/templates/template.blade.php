@@ -366,7 +366,7 @@
     </aside>
 
     <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
+    <div class="content-wrapper" id="app">
         <!-- Content Header (Page header) -->
 
         @yield('content')
@@ -390,7 +390,7 @@
 
 
 <!-- arquivo com todas as definicoes do VueJs -->
-<script src="/js/app.js"></script>
+<script src="/js/main.js"></script>
 
 <!-- jQuery 2.1.4 -->
 <script src="/assets/painel/plugins/jQuery/jQuery-2.1.4.min.js"></script>
