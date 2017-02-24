@@ -29,11 +29,11 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function getCreatedAtAttribute($value){
+    /*public function getCreatedAtAttribute($value){
 
         return  Carbon::parse($value)->format('d/m/Y');
 
-    }
+    }*/
 
 
     public function getFotoAttribute($value){

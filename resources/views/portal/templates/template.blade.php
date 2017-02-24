@@ -11,7 +11,7 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Styles -->
-    <link href="/css/main.css" rel="stylesheet">
+    <link href="/css/portal.css" rel="stylesheet">
 
     <!-- Scripts -->
     <script>
@@ -81,9 +81,8 @@
     @yield('content')
 </div>
 
+<script src="/js/portal.js"></script>
 <script src="/js/main.js"></script>
-<script src="/js/vue.js"></script>
-
 
 </body>
 </html>

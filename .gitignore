@@ -1,7 +1,5 @@
 /.idea
 .env
-node_modules/
-public/assets/portal/
 public/css/
 public/js/
 
