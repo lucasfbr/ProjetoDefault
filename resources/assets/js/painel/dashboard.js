@@ -48,6 +48,7 @@ $(function () {
   /* jQueryKnob */
   $(".knob").knob();
 
+
   //jvectormap data
   var visitorsData = {
     "US": 398, //USA
