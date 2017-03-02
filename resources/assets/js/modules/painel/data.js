@@ -4,11 +4,9 @@ module.exports = {
     search: '',
     ordenacao: '1',
     coluna: 'name',
-    nome: '',
-    email: '',
-    estado: '',
-    cidade: '',
-    tipo: '',
-    status: ''
+    filtro: [],
+    cep: '',
+    endereco: {},
+    naoLocalizado: false
 
 };

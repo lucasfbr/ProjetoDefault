@@ -70,19 +70,25 @@ class UserController extends Controller
 
         $user->name = $request->input('name');
         $user->email = $request->input('email');
-        $user->password = bcrypt($request->input('password'));
-        $user->cidade = $request->input('cidade');
+        $user->cep = $request->input('cep');
         $user->estado = $request->input('estado');
-        $user->tipo = $request->input('tipo');
-        $user->formacao = $request->input('formacao');
-        $user->profissao = $request->input('profissao');
-        $user->empresa = $request->input('empresa');
-        //$user->habilidades = substr($request->input('habilidades'), 0, -1);
-        $user->habilidades = $request->input('habilidades');
+        $user->cidade = $request->input('cidade');
+        $user->bairro = $request->input('bairro');
+        $user->logradouro = $request->input('logradouro');
+        $user->numero = $request->input('numero');
+        $user->complemento = $request->input('complemento');
         $user->fone = $request->input('fone');
         $user->celular = $request->input('celular');
+        $user->empresa = $request->input('empresa');
+        $user->profissao = $request->input('profissao');
         $user->sexo = $request->input('sexo');
+        $user->password = bcrypt($request->input('password'));
+        $user->formacao = $request->input('formacao');
+        $user->habilidades = $request->input('habilidades');
         $user->notas = $request->input('notas');
+        $user->tipo = $request->input('tipo');
+
+        //$user->habilidades = substr($request->input('habilidades'), 0, -1);
 
         $user->save();
 
@@ -120,25 +126,28 @@ class UserController extends Controller
 
         $user = $this->user->find($id);
 
-        $user->name = $request->input('name');
-        $user->email = $request->input('email');
-
         if($request->input('password') != ''){
             $user->password = bcrypt($request->input('password'));
         }
 
-        $user->cidade = $request->input('cidade');
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->cep = $request->input('cep');
         $user->estado = $request->input('estado');
-        $user->tipo = $request->input('tipo');
-        $user->formacao = $request->input('formacao');
-        $user->profissao = $request->input('profissao');
-        $user->empresa = $request->input('empresa');
-        //$user->habilidades = substr($request->input('habilidades'), 0, -1);
-        $user->habilidades = $request->input('habilidades');
+        $user->cidade = $request->input('cidade');
+        $user->bairro = $request->input('bairro');
+        $user->logradouro = $request->input('logradouro');
+        $user->numero = $request->input('numero');
+        $user->complemento = $request->input('complemento');
         $user->fone = $request->input('fone');
         $user->celular = $request->input('celular');
+        $user->empresa = $request->input('empresa');
+        $user->profissao = $request->input('profissao');
         $user->sexo = $request->input('sexo');
+        $user->formacao = $request->input('formacao');
+        $user->habilidades = $request->input('habilidades');
         $user->notas = $request->input('notas');
+        $user->tipo = $request->input('tipo');
 
         $user->save();
 

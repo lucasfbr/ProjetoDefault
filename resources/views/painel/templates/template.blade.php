@@ -385,10 +385,20 @@
 <script src="/js/main.js"></script>
 
 
+<!-- InputMask -->
+<script src="/assets/painel/plugins/input-mask/jquery.inputmask.js"></script>
+<script src="/assets/painel/plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
+<script src="/assets/painel/plugins/input-mask/jquery.inputmask.extensions.js"></script>
 
 <script>
-    $.widget.bridge('uibutton', $.ui.button);
+    $(function () {
+
+        $("[data-mask]").inputmask();
+
+    });
+
 </script>
+
 
 <!-- Morris.js charts -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
