@@ -55,7 +55,7 @@
 
                                         <strong><i class="fa fa-map-marker margin-r-5"></i>Localização</strong>
 
-                                        <p class="text-muted">{{ $user->cidade }}, {{ $user->estado }}</p>
+                                        <p class="text-muted">{{$user->logradouro}}, {{$user->numero}}, {{$user->bairro}}, {{ $user->cidade }}, {{ $user->estado }}</p>
 
                                         <hr>
 

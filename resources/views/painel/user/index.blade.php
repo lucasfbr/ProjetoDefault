@@ -57,7 +57,7 @@
                     </label>
 
                     <label class="checkbox-inline">
-                        <input type="checkbox" value="endereco" v-model="filtro">
+                        <input type="checkbox" value="logradouro" v-model="filtro">
                         Endereço
 
                         <label class="checkbox-inline">
@@ -128,7 +128,7 @@
                         <th>Ações</th>
                     </tr>
 
-                    <tr v-for="u in user | filterBy search in | orderBy coluna ordenacao">
+                    <tr v-for="u in user | filterBy search in filtro | orderBy coluna ordenacao">
                         <td width="150px">@{{u.name}}</td>
                         <td>@{{u.estado}}</td>
                         <td>@{{u.cidade}}</td>
@@ -148,24 +148,49 @@
                                title="Excluir o usuário"><span class="glyphicon glyphicon-remove"
                                                                aria-hidden="true"></span></a>
 
-                            <span v-if="u.status == 'Ativo' && u.tipo == 'Administrador'">
-                                    <a href="" onclick="return confirm('Realmente deseja desativar este usuário?')"
+                            <span v-if="u.status == 'Ativo'">
+                                    <a href="/painel/user/desativar/@{{u.id}}"
+                                       onclick="return confirm('Realmente deseja desativar este usuário?')"
                                        class="btn btn-success" alt="Desativar usuário" title="Desativar usuário">
                                         <span class="glyphicon glyphicon-thumbs-up"></span>
                                     </a>
-                                    </span>
+                            </span>
 
                             <span v-else>
-                                    <a href="" onclick="return confirm('Realmente deseja ativar este usuário?')"
+                                    <a href="/painel/user/ativar/@{{u.id}}"
+                                       onclick="return confirm('Realmente deseja ativar este usuário?')"
                                        class="btn btn-success" alt="Ativar usuário" title="Ativar usuário">
                                         <span class="glyphicon glyphicon-thumbs-down"></span>
                                     </a>
-                                    </span>
+                            </span>
 
                         </td>
                     </tr>
 
                 </table>
+
+                    <div class="row">
+                        <nav aria-label="Page navigation" class="text-center">
+                            <ul class="pagination">
+                                <li v-bind:class="{ 'disabled' :  pagination.current === 1}">
+                                    <a href="#" aria-label="Previous" v-on:click="previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+
+                                <li v-for="list in pagination.listPagination" v-bind:class="{ 'active' : pagination.current === $index + 1 }">
+                                    <a href="#" v-on:click="pagePagination($event, $index)">
+                                    @{{ $index + 1 }}
+                                    </a>
+                                </li>
+                                <li v-bind:class="{ 'disabled' :  pagination.current === pagination.totalPages }">
+                                    <a href="#" aria-label="Next" v-on:click="next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
 
             </div>
 

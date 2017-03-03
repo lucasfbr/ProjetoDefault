@@ -26,5 +26,52 @@ module.exports = {
         self.coluna = coluna;
         self.ordenacao = self.ordenacao * -1;
 
+    },
+    previous: function (e) {
+
+        e.preventDefault();
+
+        console.log( 'maxpage : ' +this.pagination.maxPage )
+        console.log( 'current : ' + this.pagination.current )
+        console.log( 'totalItens : ' +this.pagination.totalItens )
+        console.log( 'totalPages : ' +this.pagination.totalPages )
+
+        if(this.pagination.current === 1){
+            return false;
+        }
+
+        this.pagination.current = this.pagination.current - 1;
+
+        this.user = this.pagination.listPagination[this.pagination.current - 1];
+
+    },
+    pagePagination: function (e, current) {
+
+        e.preventDefault();
+
+        this.pagination.current = current + 1;
+
+        this.user = this.pagination.listPagination[current];
+
+    },
+    next: function (e) {
+
+        e.preventDefault();
+
+        console.log( 'maxpage : ' +this.pagination.maxPage )
+        console.log( 'current : ' + this.pagination.current )
+        console.log( 'totalItens : ' +this.pagination.totalItens )
+        console.log( 'totalPages : ' +this.pagination.totalPages )
+
+
+        if(this.pagination.current === this.pagination.totalPages){
+            return false;
+        }
+
+        this.pagination.current = this.pagination.current + 1;
+
+        this.user = this.pagination.listPagination[this.pagination.current - 1];
+
     }
+
 };

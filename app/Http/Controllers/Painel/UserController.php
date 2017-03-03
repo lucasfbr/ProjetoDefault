@@ -34,9 +34,11 @@ class UserController extends Controller
     //retorna um objeto json
     public function listUser(){
 
-        $users = $this->user->all();
+        $users = new \App\User;
 
-        return response()->json($users);
+        $data = $users->orderBy('name', 'asc')->get();
+
+        return response()->json($data);
 
     }
 
