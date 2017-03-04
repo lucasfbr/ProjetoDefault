@@ -313,22 +313,12 @@
                     <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
                 </div>
             </div>
-            <!-- search form -->
-            <form action="#" method="get" class="sidebar-form">
-                <div class="input-group">
-                    <input type="text" name="q" class="form-control" placeholder="Search...">
-                    <span class="input-group-btn">
-                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
-                </button>
-              </span>
-                </div>
-            </form>
-            <!-- /.search form -->
+
             <!-- sidebar menu: : style can be found in sidebar.less -->
             <ul class="sidebar-menu">
                 <li class="header">CONFIG. SISTEMA</li>
                 <li><a href="/painel"><i class="glyphicon glyphicon-home"></i>Início</a></li>
-                <li><a href="/painel/config"><i class="glyphicon glyphicon-th-large"></i>Configurações Básicas</a></li>
+                <li><a href="/painel/configuracoes"><i class="glyphicon glyphicon-th-large"></i>Configurações Básicas</a></li>
                 <li><a href="/painel/user"><i class="fa fa-users" aria-hidden="true"></i>Usuários</a></li>
                 <li class="treeview">
                     <a href="#">
@@ -343,10 +333,9 @@
                 <li class="header">CONFIG. PORTAL</li>
                 <li><a href="/painel/artigo"><i class="fa fa-newspaper-o" aria-hidden="true"></i>Artigos</a></li>
                 <li><a href="/painel/post"><i class="fa fa-bars" aria-hidden="true"></i>Posts</a></li>
-                <li><a href="/painel/servico"><i class="fa fa-share-alt" aria-hidden="true"></i>Serviços</a></li>
+                <li><a href="/painel/service"><i class="fa fa-share-alt" aria-hidden="true"></i>Serviços</a></li>
                 <li><a href="/painel/portifolio"><i class="glyphicon glyphicon-th" aria-hidden="true"></i>Portifólio</a></li>
-                <li><a href="/painel/sobre"><i class="glyphicon glyphicon-th-list" aria-hidden="true"></i>Sobre a empresa</a></li>
-                <li><a href="/painel/contato"><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i>Contato</a></li>
+                <li><a href="/painel/quemsomos"><i class="glyphicon glyphicon-th-list" aria-hidden="true"></i>Quem somos</a></li>
 
                 <li class="header">CONFIG. DO USUÁRIO</li>
                 <li><a href="/painel/perfil"><i class="glyphicon glyphicon-user" aria-hidden="true"></i>Perfil de Usuário</a></li>

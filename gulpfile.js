@@ -11,12 +11,16 @@ elixir((mix) => {
     mix.scripts([
         '../../../node_modules/jquery/dist/jquery.js',
         '../../../node_modules/bootstrap/dist/js/bootstrap.js',
+        'portal/funcoes.js',
+        'portal/jquery.1.11.1.js'
     ], 'public/js/portal.js');
 
+    //css do portal
     mix.styles([
         '../../../node_modules/bootstrap/dist/css/bootstrap.css',
         '../../../node_modules/font-awesome/css/font-awesome.css',
         '../../../node_modules/ionicons/css/ionicons.css',
+        'portal/estilo.css'
 
     ], 'public/css/portal.css');
 

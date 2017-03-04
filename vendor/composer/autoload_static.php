@@ -295,10 +295,15 @@ class ComposerStaticInitc3b23e549bf6d11cdc8f96b9f7d016c3
     );
 
     public static $classMap = array (
+        'CreateArtigosTable' => __DIR__ . '/../..' . '/database/migrations/2017_03_04_092229_create_artigos_table.php',
+        'CreateConfiguracoesTable' => __DIR__ . '/../..' . '/database/migrations/2017_03_04_081925_create_configuracoes_table.php',
         'CreatePasswordResetsTable' => __DIR__ . '/../..' . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
         'CreatePermissionsTable' => __DIR__ . '/../..' . '/database/migrations/2017_01_28_194727_create_permissions_table.php',
+        'CreatePortifolioTable' => __DIR__ . '/../..' . '/database/migrations/2017_03_04_080740_create_portifolio_table.php',
         'CreatePostsTable' => __DIR__ . '/../..' . '/database/migrations/2017_01_28_164330_create_posts_table.php',
+        'CreateQuemSomosTable' => __DIR__ . '/../..' . '/database/migrations/2017_03_04_081029_create_quem_somos_table.php',
         'CreateRolesTable' => __DIR__ . '/../..' . '/database/migrations/2017_01_28_194713_create_roles_table.php',
+        'CreateServicesTable' => __DIR__ . '/../..' . '/database/migrations/2017_03_04_080456_create_services_table.php',
         'CreateUsersTable' => __DIR__ . '/../..' . '/database/migrations/2014_10_12_000000_create_users_table.php',
         'DatabaseSeeder' => __DIR__ . '/../..' . '/database/seeds/DatabaseSeeder.php',
         'File_Iterator' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Iterator.php',

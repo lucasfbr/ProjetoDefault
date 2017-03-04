@@ -1,88 +1,106 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Matheus Paludo | Consultoria Juridica</title>
 
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    <title>{{ config('app.name', 'Laravel') }}</title>
-
-    <!-- Styles -->
     <link href="/css/portal.css" rel="stylesheet">
 
-    <!-- Scripts -->
-    <script>
-        window.Laravel = <?php echo json_encode([
-            'csrfToken' => csrf_token(),
-        ]); ?>
-    </script>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
 </head>
-<body>
-<div id="portal">
-    <nav class="navbar navbar-default navbar-static-top">
-        <div class="container">
-            <div class="navbar-header">
+<body data-spy="scroll" data-target=".menu-navegacao" data-offset="80">
 
-                <!-- Collapsed Hamburger -->
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
-                    <span class="sr-only">Toggle Navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
+<!-- Menu da aplicacao -->
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#page-top">Logo</a>
+        </div>
 
-                <!-- Branding Image -->
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
-                </a>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse navbar-right menu-navegacao" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li><a href="#page-top"></a></li>
+                <li class="active"><a href="/">Home</a></li>
+                <li><a href="#servicos">Servicos</a></li>
+                <li><a href="#portifolio">Portifolio</a></li>
+                <li><a href="#quemsomos">Quem Somos</a></li>
+                <li><a href="#localizacao">Localizacao</a></li>
+                <li><a href="#contato">Contato</a></li>
+                <li><a href="/login">Login</a></li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+<!-- Fim Menu da aplicacao -->
+
+@yield('content')
+
+<!-- footer -->
+<footer class="navbar-inverse">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-4 col-md-4 text-left end-rodape">
+                <address>
+                    <strong>Matheus Paludo Consultoria Juridica</strong><br>
+                    R. São Leopoldo, 429 - Vila Jardim<br>
+                    Porto Alegre RS, CEP 91330-690<br>
+                    <abbr title="Telefone">Tel:</abbr> (51) 92678620
+                </address>
             </div>
 
-            <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                <!-- Left Side Of Navbar -->
-                <ul class="nav navbar-nav">
-                    &nbsp;
-                </ul>
+            <div class="col-xs-12 col-sm-4 col-md-4 text-center ">
+                <div class="icon-rodape">
+                    <div class="col-xs-3">
+                        <a href="" title="Facebook" alt="Facebook"><img src="/img/icones/facebook.png"
+                                                                        class="img-responsive"></a><br/>
+                        <a href="" title="Twitter" alt="Twitter"><img src="/img/icones/twitter.png"
+                                                                      class="img-responsive"></a>
+                    </div>
+                    <div class="col-xs-3">
+                        <a href="" title="Youtube" alt="Youtube"><img src="/img/icones/youtube.png"
+                                                                      class="img-responsive"></a><br/>
+                        <a href="" title="Linkedin" alt="Linkedin"><img src="/img/icones/linkedin.png"
+                                                                        class="img-responsive"></a>
+                    </div>
+                    <div class="col-xs-3">
+                        <a href="" title="Skipe" alt="Skipe"><img src="/img/icones/skype.png" class="img-responsive"></a><br/>
+                        <a href="" title="Googleplus" alt="Googleplus"><img src="/img/icones/googleplus.png" class="img-responsive"></a>
+                    </div>
+                </div>
+            </div>
 
-                <!-- Right Side Of Navbar -->
-                <ul class="nav navbar-nav navbar-right">
-                    <!-- Authentication Links -->
-                    @if (Auth::guest())
-                        <li><a href="{{ url('/login') }}">Login</a></li>
-                        <li><a href="{{ url('/register') }}">Register</a></li>
-                    @else
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                {{ Auth::user()->name }} <span class="caret"></span>
-                            </a>
+            <div class="col-xs-12 col-sm-4 col-md-4 text-right rodape-direita">
 
-                            <ul class="dropdown-menu" role="menu">
-                                <li>
-                                    <a href="{{ url('/logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        Logout
-                                    </a>
+                <address>
+                    Camus | Desenvolvimento Web<br>
+                    Site: camusdesenvolvimentoweb.com.br<br>
+                    <abbr title="Telefone">Tel:</abbr> (51) 9975-9596
+                </address>
 
-                                    <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
-                                        {{ csrf_field() }}
-                                    </form>
-                                </li>
-                            </ul>
-                        </li>
-                    @endif
-                </ul>
             </div>
         </div>
-    </nav>
+    </div>
+</footer>
 
-    @yield('content')
-</div>
 
-<script src="/js/portal.js"></script>
-<script src="/js/main.js"></script>
-
+<script type="text/javascript" src="/js/portal.js"></script>
 </body>
 </html>

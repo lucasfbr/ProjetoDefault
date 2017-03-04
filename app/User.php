@@ -29,11 +29,11 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    /*public function getCreatedAtAttribute($value){
+    public function getCreatedAtAttribute($value){
 
         return  Carbon::parse($value)->format('d/m/Y');
 
-    }*/
+    }
 
 
     public function getFotoAttribute($value){
@@ -43,7 +43,7 @@ class User extends Authenticatable
         if($value){
             $fotoUsuario = $value;
         }else{
-            $fotoUsuario = '/assets/painel/images/homem.jpg';
+            $fotoUsuario = '/img/default3.png';
         }
 
         return $fotoUsuario;

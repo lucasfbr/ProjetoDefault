@@ -6,10 +6,15 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'CreateArtigosTable' => $baseDir . '/database/migrations/2017_03_04_092229_create_artigos_table.php',
+    'CreateConfiguracoesTable' => $baseDir . '/database/migrations/2017_03_04_081925_create_configuracoes_table.php',
     'CreatePasswordResetsTable' => $baseDir . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
     'CreatePermissionsTable' => $baseDir . '/database/migrations/2017_01_28_194727_create_permissions_table.php',
+    'CreatePortifolioTable' => $baseDir . '/database/migrations/2017_03_04_080740_create_portifolio_table.php',
     'CreatePostsTable' => $baseDir . '/database/migrations/2017_01_28_164330_create_posts_table.php',
+    'CreateQuemSomosTable' => $baseDir . '/database/migrations/2017_03_04_081029_create_quem_somos_table.php',
     'CreateRolesTable' => $baseDir . '/database/migrations/2017_01_28_194713_create_roles_table.php',
+    'CreateServicesTable' => $baseDir . '/database/migrations/2017_03_04_080456_create_services_table.php',
     'CreateUsersTable' => $baseDir . '/database/migrations/2014_10_12_000000_create_users_table.php',
     'DatabaseSeeder' => $baseDir . '/database/seeds/DatabaseSeeder.php',
     'File_Iterator' => $vendorDir . '/phpunit/php-file-iterator/src/Iterator.php',
