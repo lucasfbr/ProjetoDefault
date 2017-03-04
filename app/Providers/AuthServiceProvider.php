@@ -8,7 +8,7 @@ use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvid
 use App\Post;
 use App\User;
 use App\Permission;
-use App
+
 
 class AuthServiceProvider extends ServiceProvider
 {
