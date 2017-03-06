@@ -73,9 +73,9 @@ Route::group(['middleware' => 'perfil' , 'prefix' => 'painel'], function (){
     //ConfiguracoesController
     Route::get('/configuracoes', 'Painel\ConfiguracoesController@index');
     Route::get('/configuracoes/add', 'Painel\ConfiguracoesController@add');
-    Route::get('/configuracoes/create', 'Painel\ConfiguracoesController@create');
+    Route::post('/configuracoes/create', 'Painel\ConfiguracoesController@create');
     Route::get('/configuracoes/edit/{id}', 'Painel\ConfiguracoesController@edit');
-    Route::get('/configuracoes/update/{id}', 'Painel\ConfiguracoesController@update');
+    Route::post('/configuracoes/update/{id}/{tipo}', 'Painel\ConfiguracoesController@update');
     Route::get('/configuracoes/delete/{id}', 'Painel\ConfiguracoesController@delete');
 
 

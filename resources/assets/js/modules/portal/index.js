@@ -10,7 +10,7 @@ Vue.filter('formatDate', filters.formatDate);
 
 module.exports = new Vue({
 
-    el: '#app',
+    el: '#portal',
     data: data,
     methods: methods,
     ready: system.ready

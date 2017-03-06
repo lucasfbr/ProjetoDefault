@@ -281,7 +281,7 @@
 
             <div class="row">
                 <div class="col-xs-12">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1037.8085226721903!2d-51.15935127075266!3d-30.03356683783013!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95197795847e9b75%3A0xdef6118e72f8063b!2sR.+S%C3%A3o+Leopoldo%2C+429+-+Vila+Jardim%2C+Porto+Alegre+-+RS%2C+91330-690!5e1!3m2!1spt-BR!2sbr!4v1470322356006"
+                    <iframe src="{{info_sistem()->googlemaps}}"
                             width="100%" height="400" frameborder="0" style="border:0" allowfullscreen></iframe>
                 </div>
             </div>

@@ -15,11 +15,16 @@ class CreateConfiguracoesTable extends Migration
     {
         Schema::create('configuracoes', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('tituloSite');
+            $table->string('logo');
+            $table->string('titulo');
+            $table->string('logradouro');
+            $table->string('numero');
+            $table->string('bairro');
+            $table->string('cidade');
+            $table->string('uf');
+            $table->string('cep');
+            $table->string('telefone');
             $table->text('googlemaps');
-            $table->string('nome_rodape');
-            $table->string('endereco_rodape');
-            $table->string('telefone_rodape');
             $table->string('facebook');
             $table->string('youtube');
             $table->string('skype');

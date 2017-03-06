@@ -13,7 +13,7 @@ class PostController extends Controller
 {
     private $post;
     private $extensoes = ['jpg', 'png'];
-    private $caminhoImg = '/assets/all/imagens_post/';
+    private $caminhoImg = '/img/posts/';
 
     public function __construct(Post $post)
     {

@@ -5,6 +5,8 @@ module.exports = {
 
         if(/^[0-9]{5}-[0-9]{3}$/.test(this.cep)){
 
+            //console.log(this.cep)
+
             jQuery.getJSON('http://viacep.com.br/ws/'+this.cep+'/json/', function (endereco) {
 
                 if(endereco.erro){
@@ -13,6 +15,7 @@ module.exports = {
                     return
                 }
                 self.endereco = endereco;
+                jQuery(self.$els.numero).val("");
                 jQuery(self.$els.numero).focus();
             });
         }

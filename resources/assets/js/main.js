@@ -1,5 +1,6 @@
 require('./modules/portal/index');
-require('./modules/painel/user/index');
+require('./modules/painel/index');
+
 
 
 

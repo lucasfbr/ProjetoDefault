@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Matheus Paludo | Consultoria Juridica</title>
+    <title> {{ info_sistem()->titulo != '' ? info_sistem()->titulo : 'Titulo do sistema' }} </title>
 
     <link href="/css/portal.css" rel="stylesheet">
 
@@ -31,7 +31,13 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#page-top">Logo</a>
+
+                @if(info_sistem()->logo)
+                    <a href="/"><img src="{{info_sistem()->logo}}" class="img-responsive img-circle"></a>
+                @else
+                    <a class="navbar-brand" href="#page-top">Logo</a>
+                @endif
+
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -59,31 +65,35 @@
         <div class="row">
             <div class="col-xs-12 col-sm-4 col-md-4 text-left end-rodape">
                 <address>
-                    <strong>Matheus Paludo Consultoria Juridica</strong><br>
+                    <!--<strong>Matheus Paludo Consultoria Juridica</strong><br>
                     R. São Leopoldo, 429 - Vila Jardim<br>
                     Porto Alegre RS, CEP 91330-690<br>
-                    <abbr title="Telefone">Tel:</abbr> (51) 92678620
+                    <abbr title="Telefone">Tel:</abbr> (51) 92678620-->
+
+                    <strong>{{info_sistem()->titulo != '' ? info_sistem()->titulo : 'Titulo do sistema'}}</strong><br>
+                    {{info_sistem()->logradouro != '' ? info_sistem()->logradouro : 'Logradouro'}}, {{info_sistem()->numero != '' ? info_sistem()->numero : 'Numero'}} - {{info_sistem()->bairro!= '' ? info_sistem()->bairro : 'Bairro'}} <br>
+                    {{info_sistem()->cidade != '' ? info_sistem()->cidade : 'Cidade'}} - {{info_sistem()->uf != '' ? info_sistem()->uf : 'Estado'}}, CEP {{info_sistem()->cep != '' ? info_sistem()->cep : 'CEP'}} <br>
+                    <abbr title="Telefone">Tel:</abbr> {{info_sistem()->telefone != '' ? info_sistem()->telefone : 'Telefone'}}
+
+
+
                 </address>
             </div>
 
             <div class="col-xs-12 col-sm-4 col-md-4 text-center ">
                 <div class="icon-rodape">
-                    <div class="col-xs-3">
-                        <a href="" title="Facebook" alt="Facebook"><img src="/img/icones/facebook.png"
-                                                                        class="img-responsive"></a><br/>
-                        <a href="" title="Twitter" alt="Twitter"><img src="/img/icones/twitter.png"
-                                                                      class="img-responsive"></a>
-                    </div>
-                    <div class="col-xs-3">
-                        <a href="" title="Youtube" alt="Youtube"><img src="/img/icones/youtube.png"
-                                                                      class="img-responsive"></a><br/>
-                        <a href="" title="Linkedin" alt="Linkedin"><img src="/img/icones/linkedin.png"
-                                                                        class="img-responsive"></a>
-                    </div>
-                    <div class="col-xs-3">
-                        <a href="" title="Skipe" alt="Skipe"><img src="/img/icones/skype.png" class="img-responsive"></a><br/>
-                        <a href="" title="Googleplus" alt="Googleplus"><img src="/img/icones/googleplus.png" class="img-responsive"></a>
-                    </div>
+                        @foreach(info_sistem()->redesSociais as $redesSociais)
+                            <div class="col-xs-3">
+
+                                @foreach($redesSociais as $key => $rd)
+                                    @if($rd)
+                                    <a href="{{$rd}}" title="{{$key}}" alt="{{$key}}"><img src="/img/icones/{{$key}}.png" class="img-responsive"></a>
+                                    <br>
+                                    @endif
+                                @endforeach
+
+                            </div>
+                        @endforeach
                 </div>
             </div>
 

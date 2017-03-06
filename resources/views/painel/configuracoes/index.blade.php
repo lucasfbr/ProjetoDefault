@@ -27,35 +27,284 @@
                                     aria-hidden="true">&times;</span></button>
                         {{ session('sucesso') }}
                     </div>
-                    <br/>
                 @elseif(session('erro'))
                     <div class="alert alert-danger alert-dismissible" role="alert">
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
                                     aria-hidden="true">&times;</span></button>
                         {{ session('erro') }}
                     </div>
-                    <br/>
                 @endif
 
 
-                <a href="/painel/user/add" class="btn btn-success">Novo Serviço</a>
+                <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingOne">
+                            <h4 class="panel-title">
+                                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne"
+                                   aria-expanded="true" aria-controls="collapseOne">
+                                    Cabeçalho e Rodapé
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel"
+                             aria-labelledby="headingOne">
+                            <div class="panel-body">
+                                Abaixo será possivel gerenciar todas as informações localizadas no cabeçalho e rodapé
+                                do portal Paludo Consultoria
 
-                <br><br>
+                                <hr>
 
-                <table class="table table-bordered table-striped table-hover table-condensed table-responsive">
-                    <tr>
-                        <th>Titulo</th>
-                        <th>texto</th>
-                        <th>Ações</th>
-                    </tr>
+                                <form role="form" method="post" action="/painel/configuracoes/update/{{$dados->id}}/1"
+                                      enctype="multipart/form-data">
+                                    {{ csrf_field() }}
 
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
 
-                </table>
+                                    <div class="row">
+                                        <div class="col-md-3 form-group">
+                                            <label for="titulo">Titulo</label>
+                                            <input class="form-control" id="titulo" name="titulo" type="text"
+                                                   value="{{ $dados->titulo }}"
+                                                   autofocus>
+                                        </div>
+
+                                        <div class="col-md-3 form-group">
+                                            <label for="cep">Cep</label>
+                                            <input class="form-control" id="cep" name="cep" type="text"
+                                                   value="{{ $dados->cep }}"
+                                                   autofocus
+                                                   v-model="cep"
+                                                   v-on:keyup="buscar"
+                                                   data-inputmask='"mask": "99999-999"' data-mask>
+
+                                            <p class="text-danger" style="display: none" v-show="naoLocalizado"><strong>Cep
+                                                    não localizado</strong>. Preencha manualmente</p>
+                                        </div>
+
+                                        <div class="col-md-3 form-group">
+                                            <label for="uf">UF</label>
+                                            <input class="form-control" id="uf" name="uf" type="text"
+                                                   v-model="endereco.uf" value="{{ $dados->uf }}"
+                                                   autofocus>
+
+
+                                        </div>
+
+                                        <div class="col-md-3 form-group">
+                                            <label for="cidade">Cidade</label>
+                                            <input class="form-control" id="cidade" name="cidade" type="text"
+                                                   v-model="endereco.localidade" value="{{ $dados->cidade }}"
+                                                   autofocus>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row">
+
+                                        <div class="col-md-3 form-group">
+                                            <label for="bairro">Bairro</label>
+                                            <input class="form-control" id="bairro" name="bairro" type="text"
+                                                   v-model="endereco.bairro" value="{{ $dados->bairro }}"
+                                                   autofocus>
+                                        </div>
+
+                                        <div class="col-md-3 form-group">
+                                            <label for="logradouro">Logradouro</label>
+                                            <input class="form-control" id="logradouro" name="logradouro" type="text"
+                                                   v-model="endereco.logradouro" value="{{ $dados->logradouro }}"
+                                                   autofocus>
+                                        </div>
+
+                                        <div class="col-md-3 form-group">
+                                            <label for="numero">Numero</label>
+                                            <input class="form-control" id="numero" name="numero" type="text"
+                                                   value="{{ $dados->numero }}"
+                                                   v-el:numero
+                                                   autofocus>
+                                        </div>
+
+
+                                        <div class="col-md-3 form-group">
+                                            <label for="telefone">Telefone</label>
+                                            <input class="form-control" id="telefone" name="telefone" type="text"
+                                                   value="{{ $dados->telefone }}"
+                                                   data-inputmask='"mask": "(99) 9999-9999"' data-mask
+                                                   autofocus>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row">
+
+                                        <div class="col-md-3 form-group">
+                                            <label for="logo">Logo Marca</label>
+                                            <input type="file" id="logo" name="logo">
+
+                                            <p class="help-block">Selecione sua logo</p>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <input type="submit" class="btn btn-primary btn-block" value="Salvar">
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingThree">
+                            <h4 class="panel-title">
+                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion"
+                                   href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                    Redes Sociais e Google Maps
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseThree" class="panel-collapse collapse" role="tabpanel"
+                             aria-labelledby="headingThree">
+                            <div class="panel-body">
+                                Gerencie suas redes sociais e o mapa localizado na página principal. Para alterar o
+                                endereço
+                                atual do mapa, você deve acessar o site do google maps e buscar pelo novo endereço, logo
+                                após
+                                copie o link que será gerado pelo site e cole no campo disponibilizado abaixo.
+
+                                <hr>
+
+                                <form class="form-horizontal" role="form" method="post"
+                                      action="/painel/configuracoes/update/{{$dados->id}}/2"
+                                      enctype="multipart/form-data">
+                                    {{ csrf_field() }}
+
+                                    <div class="form-group">
+                                        <label for="facebook" class="col-sm-1 control-label">Facebook</label>
+                                        <div class="col-sm-11">
+                                            <input type="text" class="form-control" id="facebook" name="facebook"
+                                                   value="{{$dados->facebook}}">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="twitter" class="col-sm-1 control-label">Twitter</label>
+                                        <div class="col-sm-11">
+                                            <input type="text" class="form-control" id="twitter" name="twitter"
+                                                   value="{{$dados->twitter}}">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="linkedin" class="col-sm-1 control-label">LinkedIn</label>
+                                        <div class="col-sm-11">
+                                            <input type="text" class="form-control" id="linkedin" name="linkedin"
+                                                   value="{{$dados->linkedin}}">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="google" class="col-sm-1 control-label">Google</label>
+                                        <div class="col-sm-11">
+                                            <input type="text" class="form-control" id="google" name="google"
+                                                   value="{{$dados->google}}">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="skype" class="col-sm-1 control-label">Skype</label>
+                                        <div class="col-sm-11">
+                                            <input type="text" class="form-control" id="skype" name="skype"
+                                                   value="{{$dados->skype}}">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="youtube" class="col-sm-1 control-label">Youtube</label>
+                                        <div class="col-sm-11">
+                                            <input type="text" class="form-control" id="youtube" name="youtube"
+                                                   value="{{$dados->youtube}}">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="googlemaps" class="col-sm-1 control-label">Google Maps</label>
+                                        <div class="col-sm-11">
+                                            <input type="text" class="form-control" id="googlemaps" name="googlemaps"
+                                                   value="{{$dados->googlemaps}}">
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <input type="submit" class="btn btn-primary btn-block" value="Salvar">
+                                        </div>
+                                    </div>
+
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingTwo">
+                            <h4 class="panel-title">
+                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion"
+                                   href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    Termos do contrato
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel"
+                             aria-labelledby="headingTwo">
+                            <div class="panel-body">
+                                O vendedor online que oferece o PagSeguro a seus clientes como meio de pagamento
+                                facilita
+                                sua vida e foge da burocracia, pois, não precisa negociar com cada um dos bancos e
+                                administradoras de cartões para poder ser remunerado no pós-venda: você faz seu cadastro
+                                gratuito no PagSeguro e automaticamente passa a receber das mais diversas instituições
+                                financeiras por um só canal.
+
+                                Outra vantagem é que você elimina o risco de perder vendas por não ter contrato com o
+                                mesmo
+                                banco do seu cliente e mesmo o comprador que não possui cartão de débito ou crédito pode
+                                pagar por boleto ou fazer transferências bancárias para você. Se seu cliente usar o
+                                PagSeguro e decidir pelo pagamento parcelado, sem problemas: você receberá à vista!
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingFour">
+                            <h4 class="panel-title">
+                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion"
+                                   href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                    Formas de pagamento
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseFour" class="panel-collapse collapse" role="tabpanel"
+                             aria-labelledby="headingFour">
+                            <div class="panel-body">
+                                O vendedor online que oferece o PagSeguro a seus clientes como meio de pagamento
+                                facilita
+                                sua vida e foge da burocracia, pois, não precisa negociar com cada um dos bancos e
+                                administradoras de cartões para poder ser remunerado no pós-venda: você faz seu cadastro
+                                gratuito no PagSeguro e automaticamente passa a receber das mais diversas instituições
+                                financeiras por um só canal.
+
+                                Outra vantagem é que você elimina o risco de perder vendas por não ter contrato com o
+                                mesmo
+                                banco do seu cliente e mesmo o comprador que não possui cartão de débito ou crédito pode
+                                pagar por boleto ou fazer transferências bancárias para você. Se seu cliente usar o
+                                PagSeguro e decidir pelo pagamento parcelado, sem problemas: você receberá à vista!
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
 
             </div>
 
