@@ -13,7 +13,7 @@
 
 <body class="hold-transition register-page">
 
-    <div class="register-box">
+    <div class="register-box" id="auth">
         <div class="register-logo">
             <a href="#">{{ info_sistem()->titulo != '' ? info_sistem()->titulo : 'Titulo do sistema' }}</a>
         </div>
@@ -23,6 +23,7 @@
     </div>
 
 <script src="/js/auth.js"></script>
+<script src="/js/main.js"></script>
 
 </body>
 </html>

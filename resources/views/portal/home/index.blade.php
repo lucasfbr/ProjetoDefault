@@ -93,7 +93,7 @@
 
             <div class="row">
                 <div class="col-xs-12 text-center btn-todos">
-                    <a href="servicos.php" class="btn btn-default btn-lg">Veja todos nossos servicos</a>
+                    <a href="/servicos" class="btn btn-default btn-lg">Veja todos nossos servicos</a>
                 </div>
             </div>
         </div>
@@ -150,7 +150,7 @@
 
             <div class="row">
                 <div class="col-xs-12 text-center btn-todos">
-                    <a href="portifolio.php" class="btn btn-default btn-lg">Veja o portifolio completo</a>
+                    <a href="/portifolio" class="btn btn-default btn-lg">Veja o portifolio completo</a>
                 </div>
             </div>
         </div>
@@ -214,7 +214,7 @@
 
             <div class="row">
                 <div class="col-xs-12 text-center btn-todos">
-                    <a href="quemsomos.php" class="btn btn-default btn-lg">Veja mais</a>
+                    <a href="/quemsomos" class="btn btn-default btn-lg">Veja mais</a>
                 </div>
             </div>
 

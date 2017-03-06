@@ -31,6 +31,7 @@ class CreateConfiguracoesTable extends Migration
             $table->string('twitter');
             $table->string('linkedin');
             $table->string('google');
+            $table->longText('termosDeContrato');
             $table->timestamps();
         });
     }

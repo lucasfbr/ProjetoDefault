@@ -6,14 +6,11 @@ use Illuminate\Http\Request;
 
 use App\Http\Controllers\Controller;
 
-use App\User;
-
-class HomeController extends Controller
+class NossaequipeController extends Controller
 {
     public function index(){
 
-        return view('portal.home.index');
+        return view('portal.nossa-equipe.index');
 
     }
-
 }

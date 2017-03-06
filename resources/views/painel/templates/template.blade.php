@@ -406,16 +406,24 @@
 <script src="/assets/painel/plugins/datepicker/bootstrap-datepicker.js"></script>
 <!-- Bootstrap WYSIHTML5 -->
 <script src="/assets/painel/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+
+
+
 <!-- Slimscroll -->
 <script src="/assets/painel/plugins/slimScroll/jquery.slimscroll.min.js"></script>
 <!-- FastClick -->
 <script src="/assets/painel/plugins/fastclick/fastclick.js"></script>
+
+
+
 <!-- AdminLTE App -->
 <script src="/assets/painel/dist/js/app.min.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="/assets/painel/dist/js/pages/dashboard.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="/assets/painel/dist/js/demo.js"></script>
+
+
 
 
 </body>

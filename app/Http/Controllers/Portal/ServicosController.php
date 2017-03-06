@@ -6,14 +6,12 @@ use Illuminate\Http\Request;
 
 use App\Http\Controllers\Controller;
 
-use App\User;
 
-class HomeController extends Controller
+class ServicosController extends Controller
 {
     public function index(){
 
-        return view('portal.home.index');
+        return view('portal.servico.index');
 
     }
-
 }

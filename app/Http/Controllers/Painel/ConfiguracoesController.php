@@ -22,10 +22,9 @@ class ConfiguracoesController extends Controller
 
     public function index(){
 
-        $dados = $this->config->all();
+        $config = $this->config->find('1');
 
-
-        return view('painel.configuracoes.index', ['dados' => $dados[0]]);
+        return view('painel.configuracoes.index', ['dados' => $config]);
 
     }
 
@@ -82,9 +81,9 @@ class ConfiguracoesController extends Controller
             $config->linkedin = $request->input('linkedin');
             $config->google = $request->input('google');
 
-        }else{
+        }elseif ($tipo == '3'){
 
-
+            $config->termosDeContrato = $request->input('termosDeContrato');
 
         }
 

@@ -30,7 +30,7 @@ elixir((mix) => {
         '../../../node_modules/bootstrap/dist/js/bootstrap.js',
         '../../../node_modules/html5shiv/dist/html5shiv.js',
         '../../../node_modules/respond.js/src/respond.js',
-        '../../../node_modules/icheck/icheck.js',
+        //'../../../node_modules/icheck/icheck.js',
         'auth/funcoes.js'
 
     ], 'public/js/auth.js');

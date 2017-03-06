@@ -81,7 +81,8 @@
             </div>
 
             <div class="col-xs-12 col-sm-4 col-md-4 text-center ">
-                <div class="icon-rodape">
+
+                    @if(info_sistem()->redesSociais)
                         @foreach(info_sistem()->redesSociais as $redesSociais)
                             <div class="col-xs-3">
 
@@ -94,7 +95,8 @@
 
                             </div>
                         @endforeach
-                </div>
+                    @endif
+
             </div>
 
             <div class="col-xs-12 col-sm-4 col-md-4 text-right rodape-direita">

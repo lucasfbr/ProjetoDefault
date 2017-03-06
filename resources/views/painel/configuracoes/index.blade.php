@@ -204,18 +204,18 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="google" class="col-sm-1 control-label">Google</label>
-                                        <div class="col-sm-11">
-                                            <input type="text" class="form-control" id="google" name="google"
-                                                   value="{{$dados->google}}">
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
                                         <label for="skype" class="col-sm-1 control-label">Skype</label>
                                         <div class="col-sm-11">
                                             <input type="text" class="form-control" id="skype" name="skype"
                                                    value="{{$dados->skype}}">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="google" class="col-sm-1 control-label">Google</label>
+                                        <div class="col-sm-11">
+                                            <input type="text" class="form-control" id="google" name="google"
+                                                   value="{{$dados->google}}">
                                         </div>
                                     </div>
 
@@ -259,18 +259,27 @@
                         <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel"
                              aria-labelledby="headingTwo">
                             <div class="panel-body">
-                                O vendedor online que oferece o PagSeguro a seus clientes como meio de pagamento
-                                facilita
-                                sua vida e foge da burocracia, pois, não precisa negociar com cada um dos bancos e
-                                administradoras de cartões para poder ser remunerado no pós-venda: você faz seu cadastro
-                                gratuito no PagSeguro e automaticamente passa a receber das mais diversas instituições
-                                financeiras por um só canal.
 
-                                Outra vantagem é que você elimina o risco de perder vendas por não ter contrato com o
-                                mesmo
-                                banco do seu cliente e mesmo o comprador que não possui cartão de débito ou crédito pode
-                                pagar por boleto ou fazer transferências bancárias para você. Se seu cliente usar o
-                                PagSeguro e decidir pelo pagamento parcelado, sem problemas: você receberá à vista!
+                                No editor abaixo você poderá definir todos os seus termos de contrato. Este texto será fornecido para o usuário que fizer um cadastro
+                                no site. Este usuário não poderá se cadastrar se não aceitar os termos. Caso não queira ativer os termos de contrato basta deixar o campo
+                                em branco.
+
+                                <hr>
+
+                                <form class="form-horizontal" role="form" method="post" action="/painel/configuracoes/update/{{$dados->id}}/3">
+                                    {{ csrf_field() }}
+
+                                    <textarea class="textarea" name="termosDeContrato" style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">{!! $dados->termosDeContrato !!}</textarea>
+
+                                    <br><br>
+
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <input type="submit" class="btn btn-primary btn-block" value="Salvar">
+                                        </div>
+                                    </div>
+
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -314,3 +323,4 @@
     </section>
 
 @endsection
+

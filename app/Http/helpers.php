@@ -16,12 +16,8 @@ function info_sistem()
     $dados['cep'] = '';
     $dados['telefone'] = '';
     $dados['googlemaps'] = '';
-    $dados['google'] = '';
-    $dados['facebook'] = '';
-    $dados['youtube'] = '';
-    $dados['skype'] = '';
-    $dados['twitter'] = '';
-    $dados['linkedin'] = '';
+    $dados['redesSociais'] = '';
+    $dados['termosDeContrato'] = '';
 
     $config = Configuracoes::all();
 
@@ -37,30 +33,26 @@ function info_sistem()
         $dados['cep'] = $config[0]->cep;
         $dados['telefone'] = $config[0]->telefone;
         $dados['googlemaps'] = $config[0]->googlemaps;
+        $dados['termosDeContrato'] = $config[0]->termosDeContrato;
 
-        $dados['redesSociais'] = array(
-            array(
-                'google' => $config[0]->google,
-                'facebook' => $config[0]->facebook,),
-            array(
-                'youtube' => $config[0]->youtube,
-                'skype' => $config[0]->skype,),
-            array(
-                'twitter' => $config[0]->twitter,
-                'linkedin' => $config[0]->linkedin)
-        );
+        if($config[0]->google || $config[0]->facebook || $config[0]->youtube || $config[0]->skype || $config[0]->twitter || $config[0]->linkedin) {
 
+            $dados['redesSociais'] = array(
+                array(
+                    'facebook' => $config[0]->facebook,
+                    'twitter' => $config[0]->twitter
+                ),
+                array(
+                    'linkedin' => $config[0]->linkedin,
+                    'skype' => $config[0]->skype,
+                    ),
+                array(
+                    'google' => $config[0]->google,
+                    'youtube' => $config[0]->youtube
+                )
+            );
+        }
 
-
-        /*
-
-        $dados['google'] = $config[0]->google;
-        $dados['facebook'] = $config[0]->facebook;
-        $dados['youtube'] = $config[0]->youtube;
-        $dados['skype'] = $config[0]->skype;
-        $dados['twitter'] = $config[0]->twitter;
-        $dados['linkedin'] = $config[0]->linkedin;
-        */
     }
 
     //print_r($dados['redesSociais']);exit;

@@ -90,4 +90,16 @@ Auth::routes();
 
 Route::get('/', 'Portal\HomeController@index');
 
-Route::get('/list', 'Portal\HomeController@listUser');
+//ServicoController
+Route::get('/servicos', 'Portal\ServicosController@index');
+
+//PortifolioController
+Route::get('/portifolio', 'Portal\PortifolioController@index');
+
+//QuemSomosController
+Route::get('/quemsomos', 'Portal\QuemsomosController@index');
+
+//NossaEquipeController
+Route::get('/nossaequipe', 'Portal\NossaequipeController@index');
+
+
