@@ -66,29 +66,15 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 servicos_item">
-                    <div><img src="/img/civel.jpg" class="img-responsive img-circle"></div>
-                    <h4>Direito Civil</h4>
-                    <p>descricao do servico apresentado. texto texto texto texto texto texto</p>
-                </div>
 
-                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 servicos_item">
-                    <div><img src="/img/penal.png" class="img-responsive img-circle"></div>
-                    <h4>Direito Penal</h4>
-                    <p>descricao do servico apresentado. texto texto texto texto texto texto</p>
-                </div>
+                @foreach($servicos as $servico)
+                    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 servicos_item">
+                        <div><img src="/{{$servico->imagem}}" class="img-responsive img-circle"></div>
+                        <h4>{{$servico->titulo}}</h4>
+                        {!! $servico->texto !!}
+                    </div>
+                @endforeach
 
-                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 servicos_item">
-                    <div><img src="/img/trabalho.jpg" class="img-responsive img-circle"></div>
-                    <h4>Direito do Trabalho</h4>
-                    <p>descricao do servico apresentado. texto texto texto texto texto texto</p>
-                </div>
-
-                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 servicos_item">
-                    <div><img src="/img/consumidor.png" class="img-responsive img-circle"></div>
-                    <h4>Direito do Consumidor</h4>
-                    <p>descricao do servico apresentado. texto texto texto texto texto texto</p>
-                </div>
             </div>
 
             <div class="row">

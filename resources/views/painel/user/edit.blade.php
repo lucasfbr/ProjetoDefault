@@ -238,7 +238,7 @@
 
                         <div class="row">
 
-                            <div class="col-md-3 form-group">
+                            <div class="col-md-5 form-group">
                                 <label for="img">Foto</label>
                                 <input type="file" id="foto" name="foto">
 
@@ -246,7 +246,7 @@
                             </div>
 
 
-                            <div class="col-md-3 form-group{{ $errors->has('tipo') ? ' has-error' : '' }}">
+                            <div class="col-md-5 form-group{{ $errors->has('tipo') ? ' has-error' : '' }}">
                                 <label>Tipo de usuário</label>
                                 <br/>
                                 <label class="radio-inline">

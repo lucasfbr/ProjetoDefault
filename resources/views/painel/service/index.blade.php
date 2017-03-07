@@ -38,24 +38,26 @@
                 @endif
 
 
-                <a href="/painel/user/add" class="btn btn-success">Novo Serviço</a>
+                <a href="/painel/service/add" class="btn btn-success">Novo Serviço</a>
 
                 <br><br>
 
-                <table class="table table-bordered table-striped table-hover table-condensed table-responsive">
-                    <tr>
-                        <th>Titulo</th>
-                        <th>texto</th>
-                        <th>Ações</th>
-                    </tr>
+                    <div class="row">
 
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
+                        @foreach($servicos as $servico)
+                        <div class="col-sm-6 col-md-3">
+                            <div class="thumbnail">
+                                <img src="/{{$servico->imagem}}" alt="..." class="img-responsive img-rounded">
+                                <div class="caption">
+                                    <h3>{{$servico->titulo}}</h3>
+                                    {!! $servico->texto !!}
+                                    <p><a href="#" class="btn btn-primary" role="button">Editar</a> <a href="/painel/service/delete/{{$servico->id}}" class="btn btn-default" role="button">Excluir</a></p>
+                                </div>
+                            </div>
+                        </div>
+                        @endforeach
 
-                </table>
+                    </div>
 
             </div>
 

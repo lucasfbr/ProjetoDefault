@@ -49,25 +49,25 @@ Route::group(['middleware' => 'perfil' , 'prefix' => 'painel'], function (){
     //ServiceController
     Route::get('/service', 'Painel\ServiceController@index');
     Route::get('/service/add', 'Painel\ServiceController@add');
-    Route::get('/service/create', 'Painel\ServiceController@create');
+    Route::post('/service/create', 'Painel\ServiceController@create');
     Route::get('/service/edit/{id}', 'Painel\ServiceController@edit');
-    Route::get('/service/update/{id}', 'Painel\ServiceController@update');
+    Route::post('/service/update/{id}', 'Painel\ServiceController@update');
     Route::get('/service/delete/{id}', 'Painel\ServiceController@delete');
 
     //PortifolioController
     Route::get('/portifolio', 'Painel\PortifolioController@index');
     Route::get('/portifolio/add', 'Painel\PortifolioController@add');
-    Route::get('/portifolio/create', 'Painel\PortifolioController@create');
+    Route::post('/portifolio/create', 'Painel\PortifolioController@create');
     Route::get('/portifolio/edit/{id}', 'Painel\PortifolioController@edit');
-    Route::get('/portifolio/update/{id}', 'Painel\PortifolioController@update');
+    Route::post('/portifolio/update/{id}', 'Painel\PortifolioController@update');
     Route::get('/portifolio/delete/{id}', 'Painel\PortifolioController@delete');
 
     //QuemSomosController
     Route::get('/quemsomos', 'Painel\QuemsomosController@index');
     Route::get('/quemsomos/add', 'Painel\QuemsomosController@add');
-    Route::get('/quemsomos/create', 'Painel\QuemsomosController@create');
+    Route::post('/quemsomos/create', 'Painel\QuemsomosController@create');
     Route::get('/quemsomos/edit/{id}', 'Painel\QuemsomosController@edit');
-    Route::get('/quemsomos/update/{id}', 'Painel\QuemsomosController@update');
+    Route::post('/quemsomos/update/{id}', 'Painel\QuemsomosController@update');
     Route::get('/quemsomos/delete/{id}', 'Painel\QuemsomosController@delete');
 
     //ConfiguracoesController

@@ -107,10 +107,7 @@
                 </div>
                 <div class="modal-body">
 
-
                     {!! info_sistem()->termosDeContrato != '' ? info_sistem()->termosDeContrato : 'Nenhum contrato definido até o momento' !!}
-                    }
-
 
                 </div>
                 <div class="modal-footer">

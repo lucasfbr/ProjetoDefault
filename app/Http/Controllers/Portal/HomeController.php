@@ -6,13 +6,23 @@ use Illuminate\Http\Request;
 
 use App\Http\Controllers\Controller;
 
-use App\User;
+use App\Service;
 
 class HomeController extends Controller
 {
+    private $servico;
+
+    public function __construct(Service $service){
+
+        $this->servico = $service;
+
+    }
+
     public function index(){
 
-        return view('portal.home.index');
+        $servicos = $this->servico->all();
+
+        return view('portal.home.index', ['servicos' => $servicos]);
 
     }
 
