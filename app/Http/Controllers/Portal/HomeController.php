@@ -12,15 +12,11 @@ class HomeController extends Controller
 {
     private $servico;
 
-    public function __construct(Service $service){
-
-        $this->servico = $service;
-
-    }
-
     public function index(){
 
-        $servicos = $this->servico->all();
+        $serv = new Service;
+
+        $servicos = $serv::where('status', '1')->take(4)->get();
 
         return view('portal.home.index', ['servicos' => $servicos]);
 

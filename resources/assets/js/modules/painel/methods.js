@@ -75,6 +75,12 @@ module.exports = {
 
         this.user = this.pagination.listPagination[this.pagination.current - 1];
 
-    }
+    },
+    totalDigitado: function () {
+
+        this.resumoTotal = parseInt(this.resumoServico.length);
+
+    },
+
 
 };

@@ -10,7 +10,7 @@
         </h1>
         <ol class="breadcrumb">
             <li><a href="/painel"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li class="/painel/user">Usuários</li>
+            <li class=""><a href="/painel/user">usuários</a></li>
             <li class="active">Editar</li>
         </ol>
     </section>

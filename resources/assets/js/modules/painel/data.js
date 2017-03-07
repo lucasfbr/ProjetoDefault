@@ -14,6 +14,8 @@ module.exports = {
         totalItens: 0,
         totalPages: 0,
         listPagination: []
-    }
+    },
+    resumoServico: '',
+    resumoTotal: 0
 
 };

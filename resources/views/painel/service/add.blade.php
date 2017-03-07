@@ -9,7 +9,7 @@
         </h1>
         <ol class="breadcrumb">
             <li><a href="/painel"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li class="/painel/service">serviços</li>
+            <li class="/painel/service"><a href="/painel/service">serviços</a></li>
             <li class="active">Cadastro</li>
         </ol>
     </section>
@@ -55,7 +55,19 @@
                                 @endif
                             </div>
 
-                            <div class="form-group{{ $errors->has('texto') ? ' has-error' : '' }}">
+                        <div class="form-group{{ $errors->has('resumo') ? ' has-error' : '' }}">
+                            <label for="resumo">Resumo</label>
+                            <input class="form-control" id="resumo" name="resumo" v-model="resumoServico" v-on:keyup="totalDigitado" type="text" value="{{ old('resumo') }}" autofocus>
+                            <p>Caracteres: @{{resumoTotal}}</p>
+                            @if ($errors->has('resumo'))
+                                <span class="help-block">
+                                        <strong>{{ $errors->first('resumo') }}</strong>
+                                    </span>
+                            @endif
+                        </div>
+
+
+                        <div class="form-group{{ $errors->has('texto') ? ' has-error' : '' }}">
                                 <label>Descrição</label>
 
                                 <textarea class="form-control textarea" id="texto" name="texto" cols="10" rows="5">{{ old('texto') }}</textarea>
@@ -72,6 +84,12 @@
                                 <input type="file" id="imagem" name="imagem">
 
                                 <p class="help-block">Selecione uma foto ou imagem para o serviço</p>
+                            </div>
+
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" id="status" name="status" value="1"><strong>Exibir na página principal</strong>
+                                </label>
                             </div>
 
                     </div>

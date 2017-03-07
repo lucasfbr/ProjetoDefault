@@ -47,11 +47,11 @@
                         @foreach($servicos as $servico)
                         <div class="col-sm-6 col-md-3">
                             <div class="thumbnail">
-                                <img src="/{{$servico->imagem}}" alt="..." class="img-responsive img-rounded">
+                                <img alt="100%x200" data-src="holder.js/100%x200" style="height: 200px; width: 100%; display: block;" src="/{{$servico->imagem}}" data-holder-rendered="true">
                                 <div class="caption">
-                                    <h3>{{$servico->titulo}}</h3>
-                                    {!! $servico->texto !!}
-                                    <p><a href="#" class="btn btn-primary" role="button">Editar</a> <a href="/painel/service/delete/{{$servico->id}}" class="btn btn-default" role="button">Excluir</a></p>
+                                    <h3>{{ str_limit($servico->titulo, 20)}}</h3>
+                                    <p>{{ $servico->resumo }} <a href="/painel/service/detail/{{$servico->id}}" title="Saiba mais" alt="Saiba mais">[<span class="glyphicon glyphicon-plus"></span>]</a></p>
+                                    <p><a href="/painel/service/edit/{{$servico->id}}" class="btn btn-primary" role="button">Editar</a> <a href="/painel/service/delete/{{$servico->id}}" onclick="return confirm('Realmente deseja excluir este registro?')" class="btn btn-default" role="button">Excluir</a></p>
                                 </div>
                             </div>
                         </div>

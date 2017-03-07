@@ -71,7 +71,7 @@
                     <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 servicos_item">
                         <div><img src="/{{$servico->imagem}}" class="img-responsive img-circle"></div>
                         <h4>{{$servico->titulo}}</h4>
-                        {!! $servico->texto !!}
+                        <p>{{ $servico->resumo }}</p>
                     </div>
                 @endforeach
 

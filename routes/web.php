@@ -52,6 +52,7 @@ Route::group(['middleware' => 'perfil' , 'prefix' => 'painel'], function (){
     Route::post('/service/create', 'Painel\ServiceController@create');
     Route::get('/service/edit/{id}', 'Painel\ServiceController@edit');
     Route::post('/service/update/{id}', 'Painel\ServiceController@update');
+    Route::get('/service/detail/{id}', 'Painel\ServiceController@detail');
     Route::get('/service/delete/{id}', 'Painel\ServiceController@delete');
 
     //PortifolioController
