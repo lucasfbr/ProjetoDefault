@@ -58,7 +58,9 @@ class ServiceController extends Controller
         $servico->resumo = $request->input('resumo');
         $servico->texto = $request->input('texto');
 
-        if(!empty($request->input('status'))) {
+        if(empty($request->input('status'))) {
+            $servico->status = '0';
+        }else{
             $servico->status = $request->input('status');
         }
 
@@ -107,7 +109,9 @@ class ServiceController extends Controller
         $servico->titulo = $request->input('titulo');
         $servico->resumo = $request->input('resumo');
         $servico->texto = $request->input('texto');
-        if(!empty($request->input('status'))) {
+        if(empty($request->input('status'))) {
+            $servico->status = '0';
+        }else{
             $servico->status = $request->input('status');
         }
 

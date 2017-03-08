@@ -73,7 +73,7 @@
                 <div class="form-group col-xs-12">
                     <div class="checkbox">
                         <label>
-                            <input type="checkbox" name="termos" id="termos" v-model="checkTermos" v-on:click="atualizaTermos"> Estou de acordo com os<a href="#" data-toggle="modal" data-target="#myModal"> termos</a>
+                            <input type="checkbox" name="termos" id="termos" v-model="checkTermos" > Estou de acordo com os<a href="#" data-toggle="modal" data-target="#myModal"> termos</a>
                         </label>
                     </div>
                 </div>

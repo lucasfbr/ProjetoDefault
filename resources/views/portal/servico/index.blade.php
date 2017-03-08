@@ -16,113 +16,37 @@
     <!-- Servicos -->
     <section id="servicos">
         <div class="container">
-            <div class="row">
-                <div class="col-xs-12">
-                    <div class="page-header">
-                        <h1>
 
-                        </h1>
+            @forelse($servicos as $key => $servico)
+
+                @if((($key)%2) == 0)
+                    <div class="row page-servicos-row">
+                        @endif
+                        <div class="col-xs-12 col-md-6">
+
+                            <div class="col-md-6">
+                                <img src="/{{$servico->imagem}}" class="img-responsive img-circle">
+                            </div>
+                            <div class="col-md-6">
+                                <h5>{{$servico->titulo}}</h5>
+                                <p class="text-justify">
+                                    {{ $servico->texto }}
+                                </p>
+                            </div>
+                        </div>
+
+                        @if((($key)%2) == 1)
                     </div>
+                @endif
+            @empty
+                <div class="row page-servicos-row">
+                    <div class="col-xs-12">
+                        <h4>Nenhum serviço cadastrado!</h4>
+                    </div>
+
                 </div>
-            </div>
-            <div class="row page-servicos-row">
-                <div class="col-xs-12 col-md-6 servicos_item">
-                    <div class="col-md-6">
-                        <img src="/img/consultoria1.jpg" class="img-responsive img-circle">
-                    </div>
-                    <div class="col-md-6">
-                        <h5>Consultoria On-line</h5>
-                        <p>
-                            descricao do servico apresentado. texto texto texto texto texto texto
-                            descricao do servico apresentado. texto texto texto texto texto texto
-                            descricao do servico apresentado. texto texto texto texto texto texto
+            @endforelse
 
-                        </p>
-                    </div>
-                </div>
-
-                <div class="col-xs-12 col-md-6 servicos_item">
-                    <div class="col-md-6">
-                        <img src="/img/consultoria2.jpg" class="img-responsive img-circle">
-                    </div>
-                    <div class="col-md-6">
-                        <h5>Consultoria Presencial</h5>
-                        <p>
-                            descricao do servico apresentado. texto texto texto texto texto texto
-                            descricao do servico apresentado. texto texto texto texto texto texto
-                            descricao do servico apresentado. texto texto texto texto texto texto
-
-                        </p>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="row page-servicos-row">
-                <div class="col-xs-12 col-md-6 servicos_item">
-                    <div class="col-md-6">
-                        <img src="/img/penal.png" class="img-responsive img-circle">
-                    </div>
-                    <div class="col-md-6">
-                        <h5>Direito Penal</h5>
-                        <p>
-                            descricao do servico apresentado. texto texto texto texto texto texto
-                            descricao do servico apresentado. texto texto texto texto texto texto
-                            descricao do servico apresentado. texto texto texto texto texto texto
-
-                        </p>
-                    </div>
-                </div>
-
-                <div class="col-xs-12 col-md-6 servicos_item">
-                    <div class="col-md-6">
-                        <img src="/img/civel.jpg" class="img-responsive img-circle">
-                    </div>
-                    <div class="col-md-6">
-                        <h5>Direito Civil</h5>
-                        <p>
-                            descricao do servico apresentado. texto texto texto texto texto texto
-                            descricao do servico apresentado. texto texto texto texto texto texto
-                            descricao do servico apresentado. texto texto texto texto texto texto
-
-                        </p>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="row page-servicos-row">
-                <div class="col-xs-12 col-md-6 servicos_item">
-                    <div class="col-md-6">
-                        <img src="/img/trabalho.jpg" class="img-responsive img-circle">
-                    </div>
-                    <div class="col-md-6">
-                        <h5>Direito do Trabalho</h5>
-                        <p>
-                            descricao do servico apresentado. texto texto texto texto texto texto
-                            descricao do servico apresentado. texto texto texto texto texto texto
-                            descricao do servico apresentado. texto texto texto texto texto texto
-
-                        </p>
-                    </div>
-                </div>
-
-                <div class="col-xs-12 col-md-6 servicos_item">
-                    <div class="col-md-6">
-                        <img src="/img/consumidor.png" class="img-responsive img-circle">
-                    </div>
-                    <div class="col-md-6">
-                        <h5>Direito do Consumidor</h5>
-                        <p>
-                            descricao do servico apresentado. texto texto texto texto texto texto
-                            descricao do servico apresentado. texto texto texto texto texto texto
-                            descricao do servico apresentado. texto texto texto texto texto texto
-
-                        </p>
-                    </div>
-                </div>
-
-            </div>
         </div>
     </section>
     <!-- Fim Servicos -->

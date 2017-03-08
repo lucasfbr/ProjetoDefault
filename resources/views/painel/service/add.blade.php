@@ -70,7 +70,7 @@
                         <div class="form-group{{ $errors->has('texto') ? ' has-error' : '' }}">
                                 <label>Descrição</label>
 
-                                <textarea class="form-control textarea" id="texto" name="texto" cols="10" rows="5">{{ old('texto') }}</textarea>
+                                <textarea class="form-control" id="texto" name="texto" cols="10" rows="5">{{ old('texto') }}</textarea>
 
                                 @if ($errors->has('texto'))
                                     <span class="help-block">

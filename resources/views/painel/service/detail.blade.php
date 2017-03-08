@@ -45,7 +45,7 @@
                         <p>{{$servico->resumo}}</p>
                         <hr>
                         <h4>Texto completo</h4>
-                        <p>{!! $servico->texto !!}</p>
+                        <p>{{ $servico->texto }}</p>
                     </div>
                     <!-- /.box-body -->
                 </div>
