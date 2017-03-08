@@ -20,6 +20,7 @@ elixir((mix) => {
         '../../../node_modules/bootstrap/dist/css/bootstrap.css',
         '../../../node_modules/font-awesome/css/font-awesome.css',
         '../../../node_modules/ionicons/css/ionicons.css',
+        'portal/AdminLTE.css',
         'portal/estilo.css'
 
     ], 'public/css/portal.css');

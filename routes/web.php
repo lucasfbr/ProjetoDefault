@@ -61,6 +61,7 @@ Route::group(['middleware' => 'perfil' , 'prefix' => 'painel'], function (){
     Route::post('/portifolio/create', 'Painel\PortifolioController@create');
     Route::get('/portifolio/edit/{id}', 'Painel\PortifolioController@edit');
     Route::post('/portifolio/update/{id}', 'Painel\PortifolioController@update');
+    Route::get('/portifolio/detail/{id}', 'Painel\PortifolioController@detail');
     Route::get('/portifolio/delete/{id}', 'Painel\PortifolioController@delete');
 
     //QuemSomosController

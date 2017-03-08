@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePortifolioTable extends Migration
+class CreatePerfilsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,13 @@ class CreatePortifolioTable extends Migration
      */
     public function up()
     {
-        Schema::create('portifolio', function (Blueprint $table) {
+        Schema::create('perfils', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('titulo');
-            $table->string('imagem');
+            $table->text('resumo');
+            $table->longText('descricao');
+            $table->string('foto_perfil')->nullable();
+            $table->text('habilidades')->nullable();
+            $table->text('notas')->nullable();
             $table->timestamps();
         });
     }
@@ -28,6 +31,6 @@ class CreatePortifolioTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('portifolio');
+        Schema::dropIfExists('perfils');
     }
 }

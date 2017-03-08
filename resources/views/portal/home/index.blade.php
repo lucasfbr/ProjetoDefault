@@ -67,6 +67,7 @@
             </div>
             <div class="row">
 
+             @if(count($servicos) > 0)
                 @foreach($servicos as $servico)
                     <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 servicos_item">
                         <div><img src="/{{$servico->imagem}}" class="img-responsive img-circle"></div>
@@ -75,13 +76,18 @@
                     </div>
                 @endforeach
 
-            </div>
-
-            <div class="row">
-                <div class="col-xs-12 text-center btn-todos">
-                    <a href="/servicos" class="btn btn-default btn-lg">Veja todos nossos servicos</a>
                 </div>
-            </div>
+
+                <div class="row">
+                    <div class="col-xs-12 text-center btn-todos">
+                        <a href="/servicos" class="btn btn-default btn-lg">Veja todos nossos servicos</a>
+                    </div>
+                </div>
+            @else
+                <div class="row">
+                    <div class="alert alert-info text-center"><h4>Nenhum serviço cadastrado até o momento, acesse o seu painel administrativo e entre no menu serviços, assim poderá cadastrar um serviço</h4></div>
+                </div>
+            @endif
         </div>
     </section>
     <!-- Fim Servicos -->
@@ -92,53 +98,42 @@
             <div class="row">
                 <div class="col-xs-12">
                     <div class="page-header">
-                        <h1>Portifolio
+                        <h1>Portifólio
                             <small>conheca nossos trabalhos</small>
                         </h1>
                     </div>
                 </div>
             </div>
-            <div class="row portifolio-row">
-                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-                    <div class="portifolio_item">
-                        <div><img src="/img/foto2.jpg" class="img-responsive grayscale"></div>
-                        <h4>Agrale</h4>
 
+            @if(count($portifolio) > 0)
+
+                <div class="row portifolio-row">
+                    @foreach($portifolio as $porti)
+                        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                            <div class="portifolio_item">
+                                <div><img style="height: 200px; width: 100%; display: block;" src="/{{$porti->imagem}}" class="img-responsive"></div>
+                                <h4>{{$porti->titulo}}</h4>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+
+
+                <div class="row">
+                    <div class="col-xs-12 text-center btn-todos">
+                        <a href="/portifolio" class="btn btn-default btn-lg">Veja o portifólio completo</a>
+                    </div>
+                </div>
+            @else
+
+                <div class="row">
+                    <div class="alert alert-info text-center">
+                        <h4>Nenhum portifólio foi cadastrado até o momento. Acesse o seu painel administrativo e entre no menu portifólio, assim poderá cadastrar um portifólio</h4>
                     </div>
                 </div>
 
-                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-                    <div class="portifolio_item">
-                        <div><img src="/img/foto2.jpg" class="img-responsive grayscale"></div>
-                        <h4>Azaléia</h4>
+            @endif
 
-                    </div>
-                </div>
-
-                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-                    <div class="portifolio_item">
-                        <div><img src="/img/foto2.jpg" class="img-responsive grayscale"></div>
-                        <h4>Gerdau</h4>
-
-                    </div>
-                </div>
-
-                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-                    <div class="portifolio_item">
-                        <div><img src="/img/foto2.jpg" class="img-responsive grayscale"></div>
-                        <h4>Grendene</h4>
-
-                    </div>
-                </div>
-
-            </div>
-
-
-            <div class="row">
-                <div class="col-xs-12 text-center btn-todos">
-                    <a href="/portifolio" class="btn btn-default btn-lg">Veja o portifolio completo</a>
-                </div>
-            </div>
         </div>
     </section>
     <!-- Fim Portifolio -->
@@ -255,6 +250,8 @@
     <!-- Localizacao -->
     <section id="localizacao">
         <div class="container">
+
+
             <div class="row">
                 <div class="col-xs-12">
                     <div class="page-header">
@@ -264,13 +261,20 @@
                     </div>
                 </div>
             </div>
-
-            <div class="row">
-                <div class="col-xs-12">
-                    <iframe src="{{info_sistem()->googlemaps}}"
-                            width="100%" height="400" frameborder="0" style="border:0" allowfullscreen></iframe>
+            @if(info_sistem()->googlemaps)
+                <div class="row">
+                    <div class="col-xs-12">
+                        <iframe src="{{info_sistem()->googlemaps}}"
+                                width="100%" height="400" frameborder="0" style="border:0" allowfullscreen></iframe>
+                    </div>
                 </div>
-            </div>
+            @else
+                <div class="row">
+                    <div class="alert alert-info text-center">
+                        <h4>Nenhum mapa foi cadastrado até o momento. Acesse o painel administrativo, entre em configurações e aṕos em redes sociais e google maps, lá você definirá seu mapa</h4>
+                    </div>
+                </div>
+            @endif
         </div>
     </section>
     <!-- Fim Localizacao -->

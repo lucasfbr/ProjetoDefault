@@ -38,7 +38,7 @@ section#pagina-portifolio{
 }
 
 section#quemsomos{
-    min-height: 60vh;
+    min-height: 30vh;
 }
 
 section#nossa-equipe{
@@ -71,6 +71,9 @@ footer{
 .servicos_item h4{
     margin-top: 20px;
     font-size: 25px;
+    font-weight: 500;
+    line-height: 1.1;
+    color: inherit;
 }
 
 .servicos_item img{
@@ -85,7 +88,9 @@ footer{
 .portifolio_item h4{
     font-size: 20px;
     padding-bottom: 10px;
-
+    font-weight: 500;
+    line-height: 1.1;
+    color: inherit;
 }
 
 .portifolio-row{
@@ -94,7 +99,7 @@ footer{
 
 .quemSomos-img{
     margin: 0 auto;
-    margin-bottom: 10px;
+    margin-bottom: 0px;
 }
 
 .row-quemSomos{
@@ -174,3 +179,4 @@ footer{
 .panel-admin{
     margin-bottom: 0px;
 }
+

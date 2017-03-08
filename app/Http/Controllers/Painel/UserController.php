@@ -46,7 +46,7 @@ class UserController extends Controller
 
         $user = $this->user->find($id);
 
-        $user->habilidades = $this->formataHabilidades($user->habilidades);
+        //$user->habilidades = $this->formataHabilidades($user->habilidades);
 
         return view('painel.user.detail', ['user' => $user]);
 
@@ -85,9 +85,6 @@ class UserController extends Controller
         $user->profissao = $request->input('profissao');
         $user->sexo = $request->input('sexo');
         $user->password = bcrypt($request->input('password'));
-        $user->formacao = $request->input('formacao');
-        $user->habilidades = $request->input('habilidades');
-        $user->notas = $request->input('notas');
         $user->tipo = $request->input('tipo');
 
         //$user->habilidades = substr($request->input('habilidades'), 0, -1);
@@ -146,9 +143,6 @@ class UserController extends Controller
         $user->empresa = $request->input('empresa');
         $user->profissao = $request->input('profissao');
         $user->sexo = $request->input('sexo');
-        $user->formacao = $request->input('formacao');
-        $user->habilidades = $request->input('habilidades');
-        $user->notas = $request->input('notas');
         $user->tipo = $request->input('tipo');
 
         $user->save();
@@ -225,11 +219,11 @@ class UserController extends Controller
 
             $img_name = 'user_id_'.$user->id.'_'.$foto->getClientOriginalName();
 
-            $path =  base_path() . '/public/assets/all/imagens_user/';
+            $path =  base_path() . '/public/img/imagens_user/';
 
             $foto->move($path, $img_name);
 
-            return '/assets/all/imagens_user/'.$img_name;
+            return '/img/imagens_user/'.$img_name;
 
         }
     }

@@ -26,7 +26,8 @@
                         <div class="col-xs-12 quemsomosSobremim">
                             <h4>Sobre Mim</h4>
                             <p>
-                                Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel
+                                Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat,
+                                vel
                                 illum dolore eu feugiat nulla facilisis.
                             </p>
                         </div>
@@ -74,37 +75,110 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </section>
 
-            <div class="row formacao">
+    <section id="quemsomos" class="div_colorida">
+
+        <div class="container ">
+            <div class="row">
                 <div class="col-xs-12">
-                    <h2 class="">Formação</h2>
+                    <div class="row formacao ">
+                        <div class="col-xs-12">
+                            <h2 class="">Formação</h2>
 
-                    <dl class="dl-horizontal">
-                        <dt>Description lists</dt>
-                        <dd>A description list is perfect for defining terms.</dd>
-                        <dt>Euismod</dt>
-                        <dd>Vestibulum id ligula porta felis euismod semper eget lacinia odio sem nec elit.</dd>
-                        <dd>Donec id elit non mi porta gravida at eget metus.</dd>
-                        <dt>Malesuada porta</dt>
-                        <dd>Etiam porta sem malesuada magna mollis euismod.</dd>
-                        <dt>Felis euismod semper eget lacinia</dt>
-                        <dd>Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</dd>
-                        <dt>Description lists</dt>
-                        <dd>A description list is perfect for defining terms.</dd>
-                        <dt>Euismod</dt>
-                        <dd>Vestibulum id ligula porta felis euismod semper eget lacinia odio sem nec elit.</dd>
-                        <dd>Donec id elit non mi porta gravida at eget metus.</dd>
-                        <dt>Malesuada porta</dt>
-                        <dd>Etiam porta sem malesuada magna mollis euismod.</dd>
-                        <dt>Felis euismod semper eget lacinia</dt>
-                        <dd>Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</dd>
-                    </dl>
+                            <ul class="timeline">
+
+                                <!-- timeline time label -->
+                                <li class="time-label">
+                                    <span class="bg-blue">
+                                        10 Jan. 1980
+                                    </span>
+                                </li>
+                                <!-- /.timeline-label -->
+
+                                <!-- timeline item -->
+                                <li>
+                                    <!-- timeline icon -->
+                                    <i class="fa fa-graduation-cap bg-blue"></i>
+                                    <div class="timeline-item">
+
+                                        <h3 class="timeline-header"><a href="#">Support Team</a> ...</h3>
+
+                                        <div class="timeline-body">
+                                            ...
+                                            Content goes here
+                                        </div>
+
+                                        <div class="timeline-footer">
+                                            <a class="btn btn-primary btn-xs">...</a>
+                                        </div>
+                                    </div>
+                                </li>
+                                <!-- timeline time label -->
+                                <li class="time-label">
+                                    <span class="bg-blue">
+                                        10 Fev. 1982
+                                    </span>
+                                </li>
+                                <!-- /.timeline-label -->
+
+                                <!-- timeline item -->
+                                <li>
+                                    <!-- timeline icon -->
+                                    <i class="fa fa-graduation-cap bg-blue"></i>
+                                    <div class="timeline-item">
+
+                                        <h3 class="timeline-header"><a href="#">Support Team</a> ...</h3>
+
+                                        <div class="timeline-body">
+                                            ...
+                                            Content goes here
+                                        </div>
+
+                                        <div class="timeline-footer">
+                                            <a class="btn btn-primary btn-xs">...</a>
+                                        </div>
+                                    </div>
+                                </li>
+                                <!-- END timeline item -->
+                                <!-- timeline time label -->
+                                <li class="time-label">
+                                    <span class="bg-blue">
+                                        10 Fev. 1982
+                                    </span>
+                                </li>
+                                <!-- /.timeline-label -->
+
+                                <!-- timeline item -->
+                                <li>
+                                    <!-- timeline icon -->
+                                    <i class="fa fa-graduation-cap bg-blue"></i>
+                                    <div class="timeline-item">
+
+                                        <h3 class="timeline-header"><a href="#">Support Team</a> ...</h3>
+
+                                        <div class="timeline-body">
+                                            ...
+                                            Content goes here
+                                        </div>
+
+                                        <div class="timeline-footer">
+                                            <a class="btn btn-primary btn-xs">...</a>
+                                        </div>
+                                    </div>
+                                </li>
+                                <!-- END timeline item -->
+                            </ul>
+                        </div>
+                    </div>
+
                 </div>
             </div>
-        </div>
-
+         </div>
 
     </section>
+
     <!-- FimQuem somos -->
-    
+
 @endsection

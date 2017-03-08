@@ -214,27 +214,27 @@
 
                         </div>
 
-                        <div class="row">
+                        <!--<div class="row">
 
                             <div class="col-md-4 form-group">
                                 <label for="formacao">Formação</label>
-                                <textarea id="formacao" name="formacao" class="form-control" rows="5">{{$user->formacao}}</textarea>
+                                <textarea id="formacao" name="formacao" class="form-control" rows="5">{{--$user->formacao--}}</textarea>
                             </div>
 
                             <div class="col-md-4 form-group">
                                 <label for="habilidades">Habilidades</label>
-                                <textarea id="habilidades" name="habilidades" class="form-control" rows="5">{{$user->habilidades}}</textarea>
+                                <textarea id="habilidades" name="habilidades" class="form-control" rows="5">{{--$user->habilidades--}}</textarea>
                                 <p class="help-block">Separe cada habilidade por virgula. Ex: Word, Excell, Power
                                     Point</p>
                             </div>
 
                             <div class="col-md-4 form-group">
                                 <label for="notas">Notas</label>
-                                <textarea id="notas" name="notas" class="form-control" rows="5">{{$user->notas}}</textarea>
+                                <textarea id="notas" name="notas" class="form-control" rows="5">{{--$user->notas--}}</textarea>
                                 <p class="help-block">Informações adicionais sobre o usuário</p>
                             </div>
 
-                        </div>
+                        </div>-->
 
                         <div class="row">
 
