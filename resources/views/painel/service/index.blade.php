@@ -42,6 +42,7 @@
 
                 <br><br>
 
+                    @if(count($servicos) > 0)
                     <div class="row">
 
                         @foreach($servicos as $servico)
@@ -58,6 +59,12 @@
                         @endforeach
 
                     </div>
+                    @else
+                        <div class="alert alert-info text-center col-md-6 col-md-offset-3">
+                            <h4>Nenhum serviço foi cadastrado até o momento!</h4>
+                        </div>
+
+                    @endif
 
             </div>
 

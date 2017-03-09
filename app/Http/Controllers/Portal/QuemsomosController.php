@@ -10,7 +10,7 @@ class QuemsomosController extends Controller
 {
     public function index(){
 
-        return view('portal.quem-somos.index');
+        return view('portal.quemsomos.index');
 
     }
 }

@@ -234,7 +234,7 @@
 
                         <div class="row">
 
-                            <div class="col-md-5 form-group">
+                            <div class="col-md-4 form-group">
                                 <label for="img">Foto</label>
                                 <input type="file" id="foto" name="foto">
 
@@ -242,7 +242,7 @@
                             </div>
 
 
-                            <div class="col-md-5 form-group{{ $errors->has('tipo') ? ' has-error' : '' }}">
+                            <div class="col-md-4 form-group">
                                 <label>Tipo de usuário</label>
                                 <br/>
                                 <label class="radio-inline">
@@ -255,14 +255,23 @@
                                     <input type="radio" name="tipo" id="tipo3" value="2" checked> Cliente
                                 </label>
 
-                                @if ($errors->has('tipo'))
-                                    <span class="help-block">
-                                            <strong>{{ $errors->first('tipo') }}</strong>
-                                    </span>
-                                @endif
                             </div>
 
+                        </div>
 
+                        <div class="row">
+                            <div class="col-md-5 form-group">
+                                <label>Usuário principal</label>
+                                <br/>
+                                <label class="radio-inline">
+                                    <input type="radio" name="usuarioPrincipal" id="usuarioPrincipal" value="1"> Sim
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="usuarioPrincipal" id="usuarioPrincipal" value="0" checked> Não
+                                </label>
+
+                                <p class="help-block">O perfil e a formação do usuário principal serão exibidos na página "Quem Somos"</p>
+                            </div>
                         </div>
 
 

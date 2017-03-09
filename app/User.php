@@ -80,7 +80,7 @@ class User extends Authenticatable
 
     }
 
-    public function getSexoAttribute($value){
+    /*public function getSexoAttribute($value){
 
         $sexo = '';
 
@@ -92,7 +92,7 @@ class User extends Authenticatable
 
         return $sexo;
 
-    }
+    }*/
 
     /*public function getHabilidadesAttribute($value){
 
@@ -101,6 +101,12 @@ class User extends Authenticatable
         return $dados;
 
     }*/
+
+    public function perfil(){
+
+        return $this->hasMany('App\Perfil');
+
+    }
 
     public function roles(){
 

@@ -70,6 +70,7 @@ Route::group(['middleware' => 'perfil' , 'prefix' => 'painel'], function (){
     Route::post('/quemsomos/create', 'Painel\QuemsomosController@create');
     Route::get('/quemsomos/edit/{id}', 'Painel\QuemsomosController@edit');
     Route::post('/quemsomos/update/{id}', 'Painel\QuemsomosController@update');
+    Route::get('/quemsomos/detail/{id}', 'Painel\QuemsomosController@detail');
     Route::get('/quemsomos/delete/{id}', 'Painel\QuemsomosController@delete');
 
     //ConfiguracoesController

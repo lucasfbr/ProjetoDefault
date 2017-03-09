@@ -20,6 +20,10 @@ class CreateFormacaosTable extends Migration
             $table->string('link');
             $table->dateTime('dataFormacao');
             $table->timestamps();
+
+            $table->integer('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+
         });
     }
 

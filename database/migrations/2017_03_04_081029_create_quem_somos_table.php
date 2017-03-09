@@ -15,9 +15,12 @@ class CreateQuemSomosTable extends Migration
     {
         Schema::create('quemsomos', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('titulo');
-            $table->text('texto');
-            $table->string('imagem')->nullable();
+            $table->string('titulo_sobre');
+            $table->text('texto_sobre');
+            $table->string('imagem_sobre')->nullable();
+            $table->string('titulo_missao');
+            $table->text('texto_missao');
+            $table->string('imagem_missao')->nullable();
             $table->enum('status', [0,1])->default(0);
             $table->timestamps();
         });

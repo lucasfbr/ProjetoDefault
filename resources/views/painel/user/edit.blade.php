@@ -271,6 +271,23 @@
 
                         </div>
 
+                        <div class="row">
+                            <div class="col-md-5 form-group">
+                                <label>Usuário principal</label>
+                                <br/>
+                                <label class="radio-inline">
+                                    <input type="radio" name="usuarioPrincipal" id="usuarioPrincipal"
+                                           value="1" {{ $user->usuarioPrincipal == '1' ? 'checked' : '' }}> Sim
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="usuarioPrincipal" id="usuarioPrincipal"
+                                           value="0" {{ $user->usuarioPrincipal == '0' ? 'checked' : '' }}> Não
+                                </label>
+
+                                <p class="help-block">O perfil e a formação do usuário principal serão exibidos na página "Quem Somos"</p>
+                            </div>
+                        </div>
+
 
                     </div>
 

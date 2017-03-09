@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 
 use App\Service;
 use App\Portifolio;
+use App\Quemsomos;
 
 class HomeController extends Controller
 {
@@ -23,7 +24,11 @@ class HomeController extends Controller
 
         $portifolio = $port::where('status', '1')->take(4)->get();
 
-        return view('portal.home.index', ['servicos' => $servicos, 'portifolio' => $portifolio]);
+        $quem = new Quemsomos();
+
+        $quemsomos = $quem::where('status', '1')->take(1)->get();
+
+        return view('portal.home.index', ['servicos' => $servicos, 'portifolio' => $portifolio, 'quemsomos' => $quemsomos]);
 
     }
 

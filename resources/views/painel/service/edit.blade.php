@@ -36,7 +36,7 @@
                 @endif
 
                 <div class="box-header with-border">
-                    <h3 class="box-title">Cadatre um novo serviço</h3>
+                    <h3 class="box-title">Editar serviço</h3>
                 </div>
                 <!-- /.box-header -->
                 <!-- form start -->

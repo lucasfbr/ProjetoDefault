@@ -60,7 +60,7 @@
                 <div class="col-xs-12">
                     <div class="page-header">
                         <h1>Servicos
-                            <small>conheca oque fazemos</small>
+                            <small>conheça oque fazemos</small>
                         </h1>
                     </div>
                 </div>
@@ -99,7 +99,7 @@
                 <div class="col-xs-12">
                     <div class="page-header">
                         <h1>Portifólio
-                            <small>conheca nossos trabalhos</small>
+                            <small>conheça nossos trabalhos</small>
                         </h1>
                     </div>
                 </div>
@@ -145,49 +145,35 @@
                 <div class="col-xs-12">
                     <div class="page-header">
                         <h1>Quem Somos
-                            <small>conheca nossa historia</small>
+                            <small>conheça nossa história</small>
                         </h1>
                     </div>
                 </div>
             </div>
+
+            @if(count($quemsomos) > 0 )
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-6 row-quemSomos">
                     <div class="col-sm-8 text-right">
-                        <h4>Texto sobre a empresa</h4>
+
+                        <h4>{{$quemsomos[0]->titulo_sobre}}</h4>
+
                         <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                            In consequat, orci id volutpat varius, odio nulla condimentum mauris,
-                            in pharetra purus neque ac magna. Praesent consectetur ex eget hendrerit vehicula.
-                            Mauris sit amet metus et mi suscipit aliquam ac in nibh. In euismod urna nec lectus.
-                        </p>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                            In consequat, orci id volutpat varius, odio nulla condimentum mauris,
-                            in pharetra purus neque ac magna. Praesent consectetur ex eget hendrerit vehicula.
-                            Mauris sit amet metus et mi suscipit aliquam ac in nibh. In euismod urna nec lectus.
+                            {{$quemsomos[0]->texto_sobre}}
                         </p>
                     </div>
                     <div class="col-sm-4">
-                        <img src="/img/foto.jpg" class="img-responsive img-rounded quemSomos-img">
+                        <img src="/{{$quemsomos[0]->imagem_sobre}}" class="img-responsive img-rounded quemSomos-img">
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-6">
                     <div class="col-sm-4">
-                        <img src="/img/foto.jpg" class="img-responsive img-rounded quemSomos-img">
+                        <img src="/{{$quemsomos[0]->imagem_missao}}" class="img-responsive img-rounded quemSomos-img">
                     </div>
                     <div class="col-sm-8 text-left">
-                        <h4>Missão da empresa</h4>
+                        <h4>{{$quemsomos[0]->titulo_missao}}</h4>
                         <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                            In consequat, orci id volutpat varius, odio nulla condimentum mauris,
-                            in pharetra purus neque ac magna. Praesent consectetur ex eget hendrerit vehicula.
-                            Mauris sit amet metus et mi suscipit aliquam ac in nibh. In euismod urna nec lectus.
-                        </p>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                            In consequat, orci id volutpat varius, odio nulla condimentum mauris,
-                            in pharetra purus neque ac magna. Praesent consectetur ex eget hendrerit vehicula.
-                            Mauris sit amet metus et mi suscipit aliquam ac in nibh. In euismod urna nec lectus.
+                            {{$quemsomos[0]->texto_missao}}
                         </p>
                     </div>
                 </div>
@@ -198,6 +184,16 @@
                     <a href="/quemsomos" class="btn btn-default btn-lg">Veja mais</a>
                 </div>
             </div>
+
+            @else
+
+                <div class="row">
+                    <div class="alert alert-info text-center">
+                        <h4>Nenhum registro cadastrado até o momento para "Quem somos"</h4>
+                    </div>
+                </div>
+
+            @endif
 
 
 
@@ -212,7 +208,7 @@
                 <div class="col-xs-12">
                     <div class="page-header">
                         <h1>Nossa Equipe
-                            <small>conheça nossos colaboradores</small>
+                            <small>conheça nossos consultores</small>
                         </h1>
                     </div>
                 </div>
