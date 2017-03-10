@@ -15,13 +15,13 @@ class CreateFormacaosTable extends Migration
     {
         Schema::create('formacaos', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('user_id')->unsigned();
             $table->string('titulo');
             $table->text('conteudo');
-            $table->string('link');
-            $table->dateTime('dataFormacao');
+            $table->string('link')->nullable();
+            $table->dateTime('dataFormacao')->nullable();
             $table->timestamps();
 
-            $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
         });

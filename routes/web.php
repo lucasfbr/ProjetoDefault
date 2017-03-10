@@ -11,7 +11,7 @@
 |
 */
 
-Route::group(['middleware' => 'perfil' , 'prefix' => 'painel'], function (){
+Route::group(['middleware' => 'auth' , 'prefix' => 'painel'], function (){
 
     //HomeController
     Route::get('/', 'Painel\HomeController@index');

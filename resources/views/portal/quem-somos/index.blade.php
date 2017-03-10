@@ -14,56 +14,25 @@
 
 
     <!-- Quem somos -->
-    <section id="quemsomos">
+    <section id="quemsomosdetalhes">
         <div class="container">
             <div class="row">
                 <div class="col-xs-12">
                     <div class="col-xs-12 col-sm=4 col-md-4 ">
-                        <img src="img/personagem1.jpg" class="img-responsive">
+                        <img src="{{$perfil->foto_perfil}}" class="img-responsive">
                     </div>
                     <div class="col-xs-12 col-sm-8 col-md-8">
 
                         <div class="col-xs-12 quemsomosSobremim">
                             <h4>Sobre Mim</h4>
                             <p>
-                                Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat,
-                                vel
-                                illum dolore eu feugiat nulla facilisis.
+                                {{$perfil->resumo}}
                             </p>
                         </div>
 
-                        <div class="col-xs-12 co-sm-6 col-md-6">
+                        <div class="col-xs-12">
                             <p>
-                                Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit
-                                lobortis nisl ut
-                                aliquip ex ea commodo consequat.
-                                Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie
-                                consequat, vel
-                                illum dolore eu feugiat.
-                                At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren,
-                                no sea
-                                takimata sanctus est Lorem ipsum dolor sit amet.
-                                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
-                                tempor invidunt
-                                ut labore et dolore magna aliquyam erat,
-                                sed diam voluptua.
-                            </p>
-                        </div>
-                        <div class="col-xs-12 co-sm-6 col-md-6">
-                            <p>
-                                Nullalla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit
-                                praesent
-                                luptatum zzril delenit augue duis dolore te feugait nulla facilisi.
-                                Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id
-                                quod mazim.
-                                Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit
-                                lobortis nisl ut
-                                aliquip. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit
-                                lobortis nisl ut
-                                aliquip.
-                                Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit
-                                lobortis nisl ut
-                                aliquip.
+                                {{$perfil->descricao}}
                             </p>
                         </div>
 
@@ -78,7 +47,7 @@
         </div>
     </section>
 
-    <section id="quemsomos" class="div_colorida">
+    <section id="quemsomosdetalhes" class="div_colorida">
 
         <div class="container ">
             <div class="row">
@@ -89,86 +58,35 @@
 
                             <ul class="timeline">
 
+
+                                @foreach($formacao as $form)
                                 <!-- timeline time label -->
-                                <li class="time-label">
-                                    <span class="bg-blue">
-                                        10 Jan. 1980
-                                    </span>
-                                </li>
-                                <!-- /.timeline-label -->
+                                    <li class="time-label">
+                                        <span class="bg-blue">
+                                            {{$form->dataFormacao}}
+                                        </span>
+                                    </li>
+                                    <!-- /.timeline-label -->
 
-                                <!-- timeline item -->
-                                <li>
-                                    <!-- timeline icon -->
-                                    <i class="fa fa-graduation-cap bg-blue"></i>
-                                    <div class="timeline-item">
+                                    <!-- timeline item -->
+                                    <li>
+                                        <!-- timeline icon -->
+                                        <i class="fa fa-graduation-cap bg-blue"></i>
+                                        <div class="timeline-item">
 
-                                        <h3 class="timeline-header"><a href="#">Support Team</a> ...</h3>
+                                            <h3 class="timeline-header">{{$form->titulo}}</h3>
 
-                                        <div class="timeline-body">
-                                            ...
-                                            Content goes here
+                                            <div class="timeline-body">
+                                                {{$form->conteudo}}
+                                            </div>
+
+                                            <div class="timeline-footer">
+                                                <a class="btn btn-primary btn-xs">...</a>
+                                            </div>
                                         </div>
+                                    </li>
+                                @endforeach
 
-                                        <div class="timeline-footer">
-                                            <a class="btn btn-primary btn-xs">...</a>
-                                        </div>
-                                    </div>
-                                </li>
-                                <!-- timeline time label -->
-                                <li class="time-label">
-                                    <span class="bg-blue">
-                                        10 Fev. 1982
-                                    </span>
-                                </li>
-                                <!-- /.timeline-label -->
-
-                                <!-- timeline item -->
-                                <li>
-                                    <!-- timeline icon -->
-                                    <i class="fa fa-graduation-cap bg-blue"></i>
-                                    <div class="timeline-item">
-
-                                        <h3 class="timeline-header"><a href="#">Support Team</a> ...</h3>
-
-                                        <div class="timeline-body">
-                                            ...
-                                            Content goes here
-                                        </div>
-
-                                        <div class="timeline-footer">
-                                            <a class="btn btn-primary btn-xs">...</a>
-                                        </div>
-                                    </div>
-                                </li>
-                                <!-- END timeline item -->
-                                <!-- timeline time label -->
-                                <li class="time-label">
-                                    <span class="bg-blue">
-                                        10 Fev. 1982
-                                    </span>
-                                </li>
-                                <!-- /.timeline-label -->
-
-                                <!-- timeline item -->
-                                <li>
-                                    <!-- timeline icon -->
-                                    <i class="fa fa-graduation-cap bg-blue"></i>
-                                    <div class="timeline-item">
-
-                                        <h3 class="timeline-header"><a href="#">Support Team</a> ...</h3>
-
-                                        <div class="timeline-body">
-                                            ...
-                                            Content goes here
-                                        </div>
-
-                                        <div class="timeline-footer">
-                                            <a class="btn btn-primary btn-xs">...</a>
-                                        </div>
-                                    </div>
-                                </li>
-                                <!-- END timeline item -->
                             </ul>
                         </div>
                     </div>

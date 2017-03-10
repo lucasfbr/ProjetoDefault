@@ -5,6 +5,8 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Permission;
+use App\Perfil;
+use App\Formacao;
 use Carbon\Carbon;
 
 class User extends Authenticatable
@@ -102,11 +104,6 @@ class User extends Authenticatable
 
     }*/
 
-    public function perfil(){
-
-        return $this->hasMany('App\Perfil');
-
-    }
 
     public function roles(){
 
@@ -129,6 +126,18 @@ class User extends Authenticatable
         }
 
         return $this->roles->contains('name', $roles);
+
+    }
+
+    public function perfis(){
+
+        return $this->hasOne(Perfil::class);
+
+    }
+
+    public function formacao(){
+
+        return $this->hasMany(Formacao::class);
 
     }
 

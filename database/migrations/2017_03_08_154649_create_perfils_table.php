@@ -15,6 +15,7 @@ class CreatePerfilsTable extends Migration
     {
         Schema::create('perfils', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('user_id')->unsigned();
             $table->text('resumo'); //breve descrição do usuário
             $table->longText('descricao'); //descrição completa do usuário
             $table->string('foto_perfil')->nullable(); //foto de corpo inteiro, será utlizada na página quem somos
@@ -37,7 +38,7 @@ class CreatePerfilsTable extends Migration
             $table->text('notas')->nullable();
             $table->timestamps();
 
-            $table->integer('user_id')->unsigned();
+
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
         });

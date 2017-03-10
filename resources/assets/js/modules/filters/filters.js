@@ -6,6 +6,7 @@ module.exports = {
 
         return moment(value).format('DD/MM/YYYY');
 
-    }
+    },
+
 
 };

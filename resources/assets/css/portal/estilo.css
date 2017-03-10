@@ -41,6 +41,10 @@ section#quemsomos{
     min-height: 60vh;
 }
 
+section#quemsomosdetalhes{
+    min-height: 30vh;
+}
+
 section#nossa-equipe{
     min-height: 60vh;
 }

@@ -16,7 +16,7 @@ class UserController extends Controller
 
     public function __construct(User $user)
     {
-        $this->middleware('auth');
+        //$this->middleware('auth');
 
         $this->user = $user;
     }
@@ -72,18 +72,6 @@ class UserController extends Controller
 
         $user->name = $request->input('name');
         $user->email = $request->input('email');
-        $user->cep = $request->input('cep');
-        $user->estado = $request->input('estado');
-        $user->cidade = $request->input('cidade');
-        $user->bairro = $request->input('bairro');
-        $user->logradouro = $request->input('logradouro');
-        $user->numero = $request->input('numero');
-        $user->complemento = $request->input('complemento');
-        $user->fone = $request->input('fone');
-        $user->celular = $request->input('celular');
-        $user->empresa = $request->input('empresa');
-        $user->profissao = $request->input('profissao');
-        $user->sexo = $request->input('sexo');
         $user->password = bcrypt($request->input('password'));
         $user->tipo = $request->input('tipo');
 
