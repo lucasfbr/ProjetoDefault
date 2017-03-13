@@ -54,59 +54,90 @@
                                 Abaixo será possivel gerenciar os banners da página principal
 
                                 <hr>
-                                @if(count($banners) > 0)
-                                    <div class="row">
 
-                                        @foreach($banners as $ban)
-                                            <div class="col-sm-6 col-md-3">
-                                                <div class="thumbnail">
-                                                    <img alt="100%x200" data-src="holder.js/100%x200" style="height: 200px; width: 100%; display: block;" src="{{$ban->banner}}" data-holder-rendered="true">
-                                                    <div class="caption">
-                                                        <h3>{{ str_limit($ban->titulo, 20)}}</h3>
-                                                        <p>{{ $ban->descricao }}</p>
-                                                        <p><a href="/painel/banner/delete/{{$ban->id}}" onclick="return confirm('Realmente deseja excluir este registro?')" class="btn btn-default" role="button">Excluir</a></p>
-                                                        <p><input type="checkbox" value="{{$ban->id}}" {{ $ban->status == '1' ? 'checked' : '' }} v-model="banners"> Ativar no slider</p>
+                                <a href="#" class="btn btn-success" v-on:click="incluirBanner($event)">Novo Banner</a>
+                                <br><br>
+
+                                <div v-show="true">
+
+                                    @if(count($banners) > 0)
+                                        <div class="row">
+
+                                            @foreach($banners as $ban)
+                                                <div class="col-sm-6 col-md-3">
+                                                    <div class="thumbnail">
+                                                        <img alt="100%x200" data-src="holder.js/100%x200" style="height: 200px; width: 100%; display: block;" src="/{{$ban->banner}}" data-holder-rendered="true">
+                                                        <div class="caption">
+                                                            <h3>{{ str_limit($ban->titulo, 20)}}</h3>
+                                                            <p>{{ $ban->descricao }}</p>
+                                                            <p><strong>Status :{!!  $ban->status == '1' ? '<span class="text-green">Ativo</span>' : '<span class="text-red">Inativo</span>'!!}</strong></p>
+                                                            <p>
+                                                                <a href="/painel/banner/delete/{{$ban->id}}" onclick="return confirm('Realmente deseja excluir este registro?')" class="btn btn-default" role="button">Excluir</a>
+                                                                <a href="/painel/banner/update/{{$ban->id}}" class="btn btn-primary" role="button" v-on:click="editarBanner($event, '{{$ban->id}}', '{{$ban->titulo}}', '{{$ban->descricao}}', '{{$ban->status}}')">Editar</a>
+                                                            </p>
+                                                        </div>
                                                     </div>
                                                 </div>
+                                            @endforeach
+
+                                        </div>
+                                    @else
+                                        <div class="row">
+                                            <div class="alert alert-info text-center col-md-6 col-md-offset-3">
+                                                <h4>Nenhum banner cadastrado até o momento!</h4>
                                             </div>
-                                        @endforeach
+                                        </div>
+                                    @endif
+                                </div>
 
-                                    </div>
-                                @else
-                                    <div class="alert alert-info text-center col-md-6 col-md-offset-3">
-                                        <h4>Nenhum banner cadastrado até o momento!</h4>
-                                    </div>
-
-                                @endif
                                 <hr>
 
-                                <form role="form" method="post" action="/painel/banner/create/"
-                                      enctype="multipart/form-data">
-                                {{ csrf_field() }}
+                                <div v-show="banerFormulario">
+                                    <form role="form" method="post" action="/painel/banner/@{{ bannerFuncao }}/" enctype="multipart/form-data">
+                                            {{ csrf_field() }}
+                                            <div class="form-group">
 
-                                    <div class="row">
+                                                <div class="row">
+                                                    <div class="col-md-3 form-group">
+                                                        <label for="titulo">Titulo</label>
+                                                        <input class="form-control" id="titulo" name="titulo" type="text" value="@{{banner.titulo}}"  v-el:titulo>
+                                                    </div>
+                                                    <div class="col-md-3 form-group">
+                                                        <label for="titulo">Descrição</label>
+                                                        <input class="form-control" id="descricao" name="descricao" type="text" value="@{{banner.descricao}}"  v-el:descricao>
+                                                    </div>
 
-                                        <div class="col-md-3 form-group">
-                                            <label for="logo">Banner</label>
-                                            <input type="file" id="banner" name="banner">
+                                                    <div class="col-md-3 form-group{{ $errors->has('banner') ? ' has-error' : '' }}">
+                                                        <label for="logo">Banner</label>
+                                                        <input type="file" id="banner" name="banner">
+                                                        <p class="help-block">Selecione um banner</p>
+                                                        @if ($errors->has('banner'))
+                                                            <span class="help-block">
+                                                                <strong>{{ $errors->first('banner') }}</strong>
+                                                            </span>
+                                                        @endif
+                                                    </div>
 
-                                            <p class="help-block">Selecione uma imagem</p>
-                                        </div>
+                                                    <div class="col-md-3 form-group">
+                                                        <label for="status">Status</label>
+                                                        <input type="checkbox" id="status" name="status" value="1" v-el:checked >
+                                                        <p>Exibe o banner no slider da página principal</p>
+                                                    </div>
+                                                </div>
 
-                                    </div>
+                                                <div class="row">
+                                                    <div class="col-md-2">
+                                                        <input type="submit" class="btn btn-primary btn-block" value="Salvar">
+                                                     </div>
+                                                </div>
 
-                                    <div class="row">
-                                        <div class="col-md-2">
-                                            <input type="submit" class="btn btn-primary btn-block" value="Salvar" v-on:click="ativarBanner($event)">
-                                        </div>
-                                    </div>
 
-                                </form>
+                                            </div>
+                                    </form>
+                                </div>
 
                             </div>
                         </div>
-
-
                     </div>
 
 
@@ -385,13 +416,10 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
-
-
             </div>
-
         </div>
+
         <!-- /.box-body -->
 
     </section>

@@ -6,6 +6,8 @@ use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\File;
 
 
 class UserController extends Controller
@@ -13,6 +15,7 @@ class UserController extends Controller
 
     private $user;
     private $extensoes = ['jpg','jpeg', 'png'];
+    private $caminhoImg = 'img/usuarios/';
 
     public function __construct(User $user)
     {
@@ -23,8 +26,7 @@ class UserController extends Controller
 
     public function index(){
 
-        $nome = auth()->user()->name;
-        $users = $this->user->all();
+        $users = User::with('perfis')->get();
 
         return view('painel.user.index', ['users' => $users]);
 
@@ -34,9 +36,7 @@ class UserController extends Controller
     //retorna um objeto json
     public function listUser(){
 
-        $users = new \App\User;
-
-        $data = $users->orderBy('name', 'asc')->get();
+        $data = User::with('perfis')->orderBy('name', 'asc')->get();
 
         return response()->json($data);
 
@@ -70,29 +70,33 @@ class UserController extends Controller
 
         $user = new User();
 
+        //verifica se foi enviada alguma imagem com o formulário
+        if(!empty($request->file('foto'))){
+
+            //armazena a imagem enviada pelo form
+            $image = $request->file('foto');
+            //pega a extensao da imagem
+            $extensao = $image->getClientOriginalExtension();
+            //recebe o nome da imagem que foi movida para a pasta de destino
+            $user->foto = $this->moverImagem($image, $extensao);
+        }
+
         $user->name = $request->input('name');
         $user->email = $request->input('email');
         $user->password = bcrypt($request->input('password'));
         $user->tipo = $request->input('tipo');
-
-        //$user->habilidades = substr($request->input('habilidades'), 0, -1);
-
-        $user->save();
-
-        if($request->file('foto')){
-
-            $foto = $request->file('foto');
-            $fotoTratada = $this->validaImagem($foto, $user);
-
-            $user->foto = $fotoTratada;
-        }
+        $user->usuarioPrincipal = $request->input('usuarioPrincipal');
 
         if($user->save()){
-            return redirect('/painel/user')->with('sucesso', 'Usuário cadstrado com sucesso!');
+
+            $userPerfil = $this->user->find($user->id);
+
+            $userPerfil->perfis()->create($request->all());
+
+            return redirect('/painel/user')->with('sucesso', 'Usuário cadastrado com sucesso!');
         }else{
             return redirect('/painel/user')->with('erro', 'Ocorreu algum erro ao cadastrar um novo usuário, tente novamente mais tarde!');
         }
-
 
     }
 
@@ -113,36 +117,27 @@ class UserController extends Controller
 
         $user = $this->user->find($id);
 
-        if($request->input('password') != ''){
+        //verifica se foi alterada a senha
+        if(!empty($request->input('password'))){
             $user->password = bcrypt($request->input('password'));
+        }
+
+        //verifica se foi enviada alguma imagem com o formulário
+        if(!empty($request->file('foto'))){
+
+            //armazena a imagem enviada pelo form
+            $image = $request->file('foto');
+            //pega a extensao da imagem
+            $extensao = $image->getClientOriginalExtension();
+            //recebe o nome da imagem que foi movida para a pasta de destino
+            $user->foto = $this->moverImagem($image, $extensao);
         }
 
         $user->name = $request->input('name');
         $user->email = $request->input('email');
-        $user->cep = $request->input('cep');
-        $user->estado = $request->input('estado');
-        $user->cidade = $request->input('cidade');
-        $user->bairro = $request->input('bairro');
-        $user->logradouro = $request->input('logradouro');
-        $user->numero = $request->input('numero');
-        $user->complemento = $request->input('complemento');
-        $user->fone = $request->input('fone');
-        $user->celular = $request->input('celular');
-        $user->empresa = $request->input('empresa');
-        $user->profissao = $request->input('profissao');
-        $user->sexo = $request->input('sexo');
+        $user->password = bcrypt($request->input('password'));
         $user->tipo = $request->input('tipo');
-
-        $user->save();
-
-        if($request->file('foto')){
-
-            $foto = $request->file('foto');
-
-            $fotoNome = $this->validaImagem($foto, $user);
-
-            $user->foto = $fotoNome;
-        }
+        $user->usuarioPrincipal = $request->input('usuarioPrincipal');
 
         if($user->update()){
             return redirect('/painel/user')->with('sucesso', 'Dados do usuário editados com sucesso!');
@@ -158,18 +153,21 @@ class UserController extends Controller
 
             $user = $this->user->find($id);
 
-            if ($user->delete()) {
-                return redirect('/painel/user')->with('sucesso', 'Usuario deletado com sucesso!');
-            } else {
-                return redirect('/painel/user')->with('erro', 'Erro ao deletar o usuário, tente novamente mais tarde!');
+            if($user->delete($id)) {
+                //metodo que verifica se a imagem salva no banco exite no diretorio
+                //caso exista remove a mesma do diretorio
+                $this->removeImagemDir($user->foto);
+
+                return redirect('/painel/user')->with('sucesso', 'Usuário deletado com sucesso!');
+            }else{
+
+                return redirect('/painel/user')->with('erro', 'Ocorreu algum erro ao deletar os dados do usuário, tente novamente mais tarde!!');
+
             }
 
         }else{
-
             return redirect('/painel/user')->with('erro', 'Você esta logado com este usuário, portanto não pode excluir o mesmo!!!');
-
         }
-
     }
 
     public function ativar($id){
@@ -197,25 +195,6 @@ class UserController extends Controller
 
     }
 
-    public function validaImagem($foto, $user){
-
-        $extensao = $foto->getClientOriginalExtension();
-
-        if(!in_array($extensao, $this->extensoes)){
-            return back()->with('erro', 'Erro ao fazer upload de imagem! Formatos aceitos .jpg ou .png');
-        }else{
-
-            $img_name = 'user_id_'.$user->id.'_'.$foto->getClientOriginalName();
-
-            $path =  base_path() . '/public/img/imagens_user/';
-
-            $foto->move($path, $img_name);
-
-            return '/img/imagens_user/'.$img_name;
-
-        }
-    }
-
     public function formataHabilidades($value){
 
         $habilidades = explode(",", $value);
@@ -225,5 +204,40 @@ class UserController extends Controller
         return $habilidades;
 
     }
+
+    /*
+    * Metodo responsavel por verificar a extensao, redimencionar e mover a imagem para seu destino
+    */
+    public function moverImagem($image, $extensao){
+
+        if(!in_array($extensao, $this->extensoes)) {
+            return back()->with('erro', 'Erro ao fazer upload de imagem! Formatos aceitos jpg, jpeg e png');
+        } else {
+
+            $filename = 'portifolio' . time() . '.' . $extensao;
+
+            $path = public_path($this->caminhoImg . $filename);
+
+            Image::make($image->getRealPath())->resize(64,64)->save($path);
+
+            return $this->caminhoImg . $filename;
+
+        }
+
+    }
+
+    /*
+     * Metodo responsavel por verificar se a imagem existe no diretorio e remove-lá
+     */
+    public function removeImagemDir($imagem){
+
+        //verifica se a foto antiga existe no diretorio
+        if(File::exists($imagem)) {
+            //remove a foto do diretorio
+            File::delete($imagem);
+        }
+
+    }
+
 
 }

@@ -17,7 +17,7 @@ class CreateBannersTable extends Migration
             $table->increments('id');
             $table->string('titulo')->nullable();
             $table->string('descricao')->nullable();
-            $table->string('banner');
+            $table->string('banners');
             $table->enum('status', [0,1])->default(0); //0 = fora do slider; 1 = dentro do slider
             $table->timestamps();
         });

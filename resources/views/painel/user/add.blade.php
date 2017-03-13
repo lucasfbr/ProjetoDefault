@@ -129,6 +129,18 @@
                             <div class="box-body">
 
                                 <div class="row">
+                                    <div class="col-md-6 form-group">
+                                        <label for="resumo">Breve descrição do usuário(Resumo)</label>
+                                        <textarea name="resumo" id="resumo" class="form-control" rows="5"></textarea>
+                                    </div>
+
+                                    <div class="col-md-6 form-group">
+                                        <label for="descricao">Descrição do usuário(Detalhada)</label>
+                                        <textarea name="descricao" id="descricao" class="form-control" rows="5"></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="row">
 
                                     <div class="col-md-3 form-group">
                                         <label for="cep">Cep</label>
@@ -259,55 +271,10 @@
 
                                 </div>
 
-                            </div>
-
-                    </fieldset>
-
-                    <fieldset class="scheduler-border">
-                        <legend class="scheduler-border text-light-blue">Formacao do usuário</legend>
-
-                            <div class="box-body">
-
                                 <div class="row">
-
-                                    <div class="col-md-6 form-group">
-                                        <label for="titulo">Titulo</label>
-                                        <input class="form-control" id="titulo" name="titulo" type="text" value=""
-                                               autofocus>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-
-                                    <div class="col-md-6 form-group">
-                                        <label for="conteudo">Conteúdo</label>
-                                        <textarea class="form-control" rows="5"name="conteudo" id="conteudo" rols="5" cols="10"></textarea>
-                                    </div>
-
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-6 form-group">
-                                        <label for="link">Link</label>
-                                        <input class="form-control" id="link" name="link" type="text" value="" autofocus>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-6 form-group">
-                                        <label for="dataFormacao">Data da Formação</label>
-                                        <input class="form-control" id="dataFormacao" name="dataFormacao" type="text"
-                                               value="" autofocus>
-                                    </div>
-
-                                </div>
-
-                                <div class="row">
-
-                                    <div class="box-footer">
+                                    <div class="col-md-3  form-group">
                                         <input type="submit" class="btn btn-primary" value="Cadastrar">
                                     </div>
-
                                 </div>
 
                             </div>

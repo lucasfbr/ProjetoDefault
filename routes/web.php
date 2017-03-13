@@ -83,7 +83,7 @@ Route::group(['middleware' => 'auth' , 'prefix' => 'painel'], function (){
 
     //BannersController
     Route::post('/banner/create', 'Painel\BannerController@create');
-    Route::get('/banner/update/{id}', 'Painel\BannerController@update');
+    Route::post('/banner/update/{id}', 'Painel\BannerController@update');
     Route::get('/banner/delete/{id}', 'Painel\BannerController@delete');
 
 

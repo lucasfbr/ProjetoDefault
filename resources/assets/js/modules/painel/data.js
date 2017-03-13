@@ -17,6 +17,13 @@ module.exports = {
     },
     resumoServico: '',
     resumoTotal: 0,
-    banners: []
+    bannerFuncao: 'create',
+    banner: {
+        titulo : '',
+        descricao : '',
+        status: ''
+    },
+    banerFormulario: false,
+
 
 };

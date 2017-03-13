@@ -81,28 +81,43 @@ module.exports = {
         this.resumoTotal = parseInt(this.resumoServico.length);
 
     },
-    ativarBanner: function (e) {
+    editarBanner: function (e, id, titulo, descricao, status) {
 
         e.preventDefault();
 
         var self = this;
 
-        //console.log(self.banners.length)
-
-        if(self.banners.length == 0)
-            return false;
-
-        for(var i = 0; i < self.banners.length; i++) {
-
-            //console.log(self.banners[i]);
-
-            self.$http.get('/painel/banner/update/' + self.banners[i]).then(function (response) {
-                console.log(response.data);
-            });
-
+        self.bannerFuncao = 'update/' + id;
+        jQuery(self.$els.titulo).val(titulo);
+        jQuery(self.$els.titulo).focus();
+        jQuery(self.$els.descricao).val(descricao);
+        if (status == '1') {
+            jQuery(self.$els.checked).prop( "checked", true );
+        }
+        else {
+            jQuery(self.$els.checked).prop( "checked", false );
         }
 
-    }
 
+        self.banerFormulario = true;
+
+    },
+    incluirBanner: function (e) {
+
+        e.preventDefault();
+
+        var self = this;
+
+        self.bannerFuncao = 'create';
+
+        jQuery(self.$els.titulo).val("");
+        jQuery(self.$els.descricao).val("");
+        jQuery(self.$els.checked).prop( "checked", false );
+
+        jQuery(self.$els.titulo).focus();
+
+        self.banerFormulario = true;
+
+    }
 
 };

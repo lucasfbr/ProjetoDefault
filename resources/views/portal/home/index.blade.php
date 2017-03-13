@@ -17,8 +17,8 @@
             <div class="carousel-inner" role="listbox">
 
             @if(count($banners) > 0)
-                @foreach($banners as $ban)
-                    <div class="item active">
+                @foreach($banners as $key => $ban)
+                    <div class="item {{$key == '0' ? 'active' : ''}}">
                         <img src="{{$ban->banner}}" class="img-responsive" alt="...">
                         <div class="carousel-caption">
                             <h3>{{$ban->titulo}}</h3>
