@@ -81,6 +81,28 @@ module.exports = {
         this.resumoTotal = parseInt(this.resumoServico.length);
 
     },
+    ativarBanner: function (e) {
+
+        e.preventDefault();
+
+        var self = this;
+
+        //console.log(self.banners.length)
+
+        if(self.banners.length == 0)
+            return false;
+
+        for(var i = 0; i < self.banners.length; i++) {
+
+            //console.log(self.banners[i]);
+
+            self.$http.get('/painel/banner/update/' + self.banners[i]).then(function (response) {
+                console.log(response.data);
+            });
+
+        }
+
+    }
 
 
 };

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Painel;
 
 use App\Configuracoes;
+use App\Banner;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Intervention\Image\Facades\Image;
@@ -24,7 +25,9 @@ class ConfiguracoesController extends Controller
 
         $config = $this->config->find('1');
 
-        return view('painel.configuracoes.index', ['dados' => $config]);
+        $banners = Banner::all();
+
+        return view('painel.configuracoes.index', ['dados' => $config, 'banners' => $banners]);
 
     }
 

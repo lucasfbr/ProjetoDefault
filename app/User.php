@@ -38,7 +38,7 @@ class User extends Authenticatable
     }
 
 
-    public function getFotoAttribute($value){
+    /*public function getFotoAttribute($value){
 
         $fotoUsuario = '';
 
@@ -50,7 +50,7 @@ class User extends Authenticatable
 
         return $fotoUsuario;
 
-    }
+    }*/
 
     public function getTipoAttribute($value){
 

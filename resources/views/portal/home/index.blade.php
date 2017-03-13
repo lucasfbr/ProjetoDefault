@@ -15,27 +15,40 @@
 
             <!-- Wrapper for slides -->
             <div class="carousel-inner" role="listbox">
-                <div class="item active">
-                    <img src="/img/sliders/foto1.jpg" class="img-responsive" alt="...">
-                    <div class="carousel-caption">
-                        <h3>Foto 1</h3>
-                        <p>Descricao da foto</p>
+
+            @if(count($banners) > 0)
+                @foreach($banners as $ban)
+                    <div class="item active">
+                        <img src="{{$ban->banner}}" class="img-responsive" alt="...">
+                        <div class="carousel-caption">
+                            <h3>{{$ban->titulo}}</h3>
+                            <p>{{$ban->descricao}}</p>
+                        </div>
                     </div>
-                </div>
-                <div class="item">
-                    <img src="/img/sliders/foto2.jpg" class="img-responsive" alt="...">
-                    <div class="carousel-caption">
-                        <h3>Foto 2</h3>
-                        <p>Descricao da foto</p>
+                @endforeach
+            @else
+                    <div class="item active">
+                        <img src="/img/default.png" class="img-responsive" alt="...">
+                        <div class="carousel-caption">
+                            <h3>Foto 1</h3>
+                            <p>Descricao da foto</p>
+                        </div>
                     </div>
-                </div>
-                <div class="item">
-                    <img src="/img/sliders/foto3.jpg" class="img-responsive" alt="...">
-                    <div class="carousel-caption">
-                        <h3>Foto 3</h3>
-                        <p>Descricao da foto</p>
+                    <div class="item">
+                        <img src="/img/default.png" class="img-responsive" alt="...">
+                        <div class="carousel-caption">
+                            <h3>Foto 2</h3>
+                            <p>Descricao da foto</p>
+                        </div>
                     </div>
-                </div>
+                    <div class="item">
+                        <img src="/img/default.png" class="img-responsive" alt="...">
+                        <div class="carousel-caption">
+                            <h3>Foto 3</h3>
+                            <p>Descricao da foto</p>
+                        </div>
+                    </div>
+            @endif
             </div>
 
             <!-- Controls -->
@@ -85,7 +98,9 @@
                 </div>
             @else
                 <div class="row">
-                    <div class="alert alert-info text-center"><h4>Nenhum serviço cadastrado até o momento, acesse o seu painel administrativo e entre no menu serviços, assim poderá cadastrar um serviço</h4></div>
+                    <div class="alert alert-info text-center">
+                        <h4>Nenhum registro cadastrado para "Serviços"</h4>
+                    </div>
                 </div>
             @endif
         </div>
@@ -128,7 +143,7 @@
 
                 <div class="row">
                     <div class="alert alert-info text-center">
-                        <h4>Nenhum portifólio foi cadastrado até o momento. Acesse o seu painel administrativo e entre no menu portifólio, assim poderá cadastrar um portifólio</h4>
+                        <h4>Nenhum registro cadastrado para "Portifólio"</h4>
                     </div>
                 </div>
 
@@ -189,7 +204,7 @@
 
                 <div class="row">
                     <div class="alert alert-info text-center">
-                        <h4>Nenhum registro cadastrado até o momento para "Quem somos"</h4>
+                        <h4>Nenhum registro cadastrado para "Quem somos"</h4>
                     </div>
                 </div>
 
@@ -214,31 +229,25 @@
                 </div>
             </div>
 
-            <div class="row nossaEquipe-item">
-                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 servicos_item">
-                    <div><img src="/img/foto.jpg" class="img-responsive img-circle"></div>
-                    <h4>Colaborador 1</h4>
-                    <p>Breve descriãço do colaborador.</p>
+            @if(count($nossaEquipe) > 0)
+                @foreach($nossaEquipe as $equipe)
+                <div class="row nossaEquipe-item">
+                    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 servicos_item">
+                        <div><img src="{{$equipe->foto ? $equipe->foto : '/img/foto.jpg'}}" class="img-responsive img-circle"></div>
+                        <h4>{{$equipe->name}}</h4>
+                        <p>{{$equipe->perfis->resumo}}</p>
+                    </div>
+                </div>
+                @endforeach
+            @else
+
+                <div class="row">
+                    <div class="alert alert-info text-center">
+                        <h4>Nenhum registro cadastrado para "Nossa Equipe"</h4>
+                    </div>
                 </div>
 
-                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 servicos_item">
-                    <div><img src="/img/foto.jpg" class="img-responsive img-circle"></div>
-                    <h4>Colaborador 2</h4>
-                    <p>Breve descriãço do colaborador.</p>
-                </div>
-
-                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 servicos_item">
-                    <div><img src="/img/foto.jpg" class="img-responsive img-circle"></div>
-                    <h4>Colaborador 3</h4>
-                    <p>Breve descriãço do colaborador.</p>
-                </div>
-
-                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 servicos_item">
-                    <div><img src="/img/foto.jpg" class="img-responsive img-circle"></div>
-                    <h4>Colaborador 4</h4>
-                    <p>Breve descriãço do colaborador.</p>
-                </div>
-            </div>
+            @endif
         </div>
     </section>
     <!-- Fim nossa equipe -->
@@ -267,7 +276,7 @@
             @else
                 <div class="row">
                     <div class="alert alert-info text-center">
-                        <h4>Nenhum mapa foi cadastrado até o momento. Acesse o painel administrativo, entre em configurações e aṕos em redes sociais e google maps, lá você definirá seu mapa</h4>
+                        <h4>Nenhum mapa cadastrado até o momento!</h4>
                     </div>
                 </div>
             @endif

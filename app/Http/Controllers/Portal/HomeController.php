@@ -9,6 +9,8 @@ use App\Http\Controllers\Controller;
 use App\Service;
 use App\Portifolio;
 use App\Quemsomos;
+use App\User;
+use App\Banner;
 
 class HomeController extends Controller
 {
@@ -16,20 +18,24 @@ class HomeController extends Controller
 
     public function index(){
 
-        $serv = new Service;
+        $banners = Banner::where('status','1')->take(3)->get();
 
-        $servicos = $serv::where('status', '1')->take(4)->get();
+        $servicos = Service::where('status', '1')->take(4)->get();
 
-        $port = new Portifolio;
+        $portifolio = Portifolio::where('status', '1')->take(4)->get();
 
-        $portifolio = $port::where('status', '1')->take(4)->get();
+        $quemsomos = Quemsomos::where('status', '1')->take(1)->get();
 
-        $quem = new Quemsomos();
+        $nossaEquipe = User::where('tipo', '1')->take(4)->with('perfis')->get();
 
-        $quemsomos = $quem::where('status', '1')->take(1)->get();
-
-        return view('portal.home.index', ['servicos' => $servicos, 'portifolio' => $portifolio, 'quemsomos' => $quemsomos]);
-
+        return view('portal.home.index',
+            [
+                'banners' => $banners,
+                'servicos' => $servicos,
+                'portifolio' => $portifolio,
+                'quemsomos' => $quemsomos,
+                'nossaEquipe' => $nossaEquipe
+            ]);
     }
 
 }

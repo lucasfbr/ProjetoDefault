@@ -16,6 +16,7 @@ module.exports = {
         listPagination: []
     },
     resumoServico: '',
-    resumoTotal: 0
+    resumoTotal: 0,
+    banners: []
 
 };

@@ -37,16 +37,90 @@
 
 
                 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingZero">
+                            <h4 class="panel-title">
+                                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseZero"
+                                   aria-expanded="true" aria-controls="collapseZero">
+                                    Banners
+                                </a>
+                            </h4>
+                        </div>
+
+                        <div id="collapseZero" class="panel-collapse collapse in" role="tabpanel"
+                             aria-labelledby="headingZero">
+                            <div class="panel-body">
+                                Abaixo será possivel gerenciar os banners da página principal
+
+                                <hr>
+                                @if(count($banners) > 0)
+                                    <div class="row">
+
+                                        @foreach($banners as $ban)
+                                            <div class="col-sm-6 col-md-3">
+                                                <div class="thumbnail">
+                                                    <img alt="100%x200" data-src="holder.js/100%x200" style="height: 200px; width: 100%; display: block;" src="{{$ban->banner}}" data-holder-rendered="true">
+                                                    <div class="caption">
+                                                        <h3>{{ str_limit($ban->titulo, 20)}}</h3>
+                                                        <p>{{ $ban->descricao }}</p>
+                                                        <p><a href="/painel/banner/delete/{{$ban->id}}" onclick="return confirm('Realmente deseja excluir este registro?')" class="btn btn-default" role="button">Excluir</a></p>
+                                                        <p><input type="checkbox" value="{{$ban->id}}" {{ $ban->status == '1' ? 'checked' : '' }} v-model="banners"> Ativar no slider</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endforeach
+
+                                    </div>
+                                @else
+                                    <div class="alert alert-info text-center col-md-6 col-md-offset-3">
+                                        <h4>Nenhum banner cadastrado até o momento!</h4>
+                                    </div>
+
+                                @endif
+                                <hr>
+
+                                <form role="form" method="post" action="/painel/banner/create/"
+                                      enctype="multipart/form-data">
+                                {{ csrf_field() }}
+
+                                    <div class="row">
+
+                                        <div class="col-md-3 form-group">
+                                            <label for="logo">Banner</label>
+                                            <input type="file" id="banner" name="banner">
+
+                                            <p class="help-block">Selecione uma imagem</p>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <input type="submit" class="btn btn-primary btn-block" value="Salvar" v-on:click="ativarBanner($event)">
+                                        </div>
+                                    </div>
+
+                                </form>
+
+                            </div>
+                        </div>
+
+
+                    </div>
+
+
+
                     <div class="panel panel-default">
                         <div class="panel-heading" role="tab" id="headingOne">
                             <h4 class="panel-title">
                                 <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne"
-                                   aria-expanded="true" aria-controls="collapseOne">
+                                   aria-expanded="false" aria-controls="collapseOne">
                                     Cabeçalho e Rodapé
                                 </a>
                             </h4>
                         </div>
-                        <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel"
+                        <div id="collapseOne" class="panel-collapse collapse" role="tabpanel"
                              aria-labelledby="headingOne">
                             <div class="panel-body">
                                 Abaixo será possivel gerenciar todas as informações localizadas no cabeçalho e rodapé
