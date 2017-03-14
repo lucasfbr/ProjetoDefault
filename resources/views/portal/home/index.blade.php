@@ -16,39 +16,41 @@
             <!-- Wrapper for slides -->
             <div class="carousel-inner" role="listbox">
 
-            @if(count($banners) > 0)
-                @foreach($banners as $key => $ban)
-                    <div class="item {{$key == '0' ? 'active' : ''}}">
-                        <img src="{{$ban->banner}}" class="img-responsive" alt="...">
-                        <div class="carousel-caption">
-                            <h3>{{$ban->titulo}}</h3>
-                            <p>{{$ban->descricao}}</p>
+                @if(count($banners) > 0)
+
+                    @foreach($banners as $key => $ban)
+                        <div class="item {{$key == '0' ? 'active' : ''}}">
+                            <img src="{{$ban->banner}}" class="img-responsive" alt="...">
+                            <div class="carousel-caption">
+                                <h3>{{$ban->titulo}}</h3>
+                                <p>{{$ban->descricao}}</p>
+                            </div>
                         </div>
-                    </div>
-                @endforeach
-            @else
-                    <div class="item active">
-                        <img src="/img/default.png" class="img-responsive" alt="...">
-                        <div class="carousel-caption">
-                            <h3>Foto 1</h3>
-                            <p>Descricao da foto</p>
+                    @endforeach
+                @else
+                        <div class="item active">
+                            <img src="/img/default.png" class="img-responsive" alt="...">
+                            <div class="carousel-caption">
+                                <h3>Foto 1</h3>
+                                <p>Descricao da foto</p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="item">
-                        <img src="/img/default.png" class="img-responsive" alt="...">
-                        <div class="carousel-caption">
-                            <h3>Foto 2</h3>
-                            <p>Descricao da foto</p>
+                        <div class="item">
+                            <img src="/img/default.png" class="img-responsive" alt="...">
+                            <div class="carousel-caption">
+                                <h3>Foto 2</h3>
+                                <p>Descricao da foto</p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="item">
-                        <img src="/img/default.png" class="img-responsive" alt="...">
-                        <div class="carousel-caption">
-                            <h3>Foto 3</h3>
-                            <p>Descricao da foto</p>
+                        <div class="item">
+                            <img src="/img/default.png" class="img-responsive" alt="...">
+                            <div class="carousel-caption">
+                                <h3>Foto 3</h3>
+                                <p>Descricao da foto</p>
+                            </div>
                         </div>
-                    </div>
-            @endif
+                @endif
+
             </div>
 
             <!-- Controls -->
@@ -64,7 +66,6 @@
 
         <!-- Fim Slider da aplicacao -->
     </div>
-
 
     <!-- Servicos -->
     <section id="servicos">
@@ -166,39 +167,40 @@
                 </div>
             </div>
 
-            @if(count($quemsomos) > 0 )
-            <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-6 row-quemSomos">
-                    <div class="col-sm-8 text-right">
+            @if(count($quemsomos) > 0)
 
-                        <h4>{{$quemsomos[0]->titulo_sobre}}</h4>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-6 row-quemSomos">
+                        <div class="col-sm-8 text-right">
 
-                        <p>
-                            {{$quemsomos[0]->texto_sobre}}
-                        </p>
+                            <h4>{{$quemsomos[0]->titulo_sobre}}</h4>
+
+                            <p>
+                                {{$quemsomos[0]->texto_sobre}}
+                            </p>
+                        </div>
+                        <div class="col-sm-4">
+                            <img src="/{{$quemsomos[0]->imagem_sobre}}" class="img-responsive img-rounded quemSomos-img">
+                        </div>
                     </div>
-                    <div class="col-sm-4">
-                        <img src="/{{$quemsomos[0]->imagem_sobre}}" class="img-responsive img-rounded quemSomos-img">
+                    <div class="col-xs-12 col-sm-12 col-md-6">
+                        <div class="col-sm-4">
+                            <img src="/{{$quemsomos[0]->imagem_missao}}" class="img-responsive img-rounded quemSomos-img">
+                        </div>
+                        <div class="col-sm-8 text-left">
+                            <h4>{{$quemsomos[0]->titulo_missao}}</h4>
+                            <p>
+                                {{$quemsomos[0]->texto_missao}}
+                            </p>
+                        </div>
                     </div>
                 </div>
-                <div class="col-xs-12 col-sm-12 col-md-6">
-                    <div class="col-sm-4">
-                        <img src="/{{$quemsomos[0]->imagem_missao}}" class="img-responsive img-rounded quemSomos-img">
-                    </div>
-                    <div class="col-sm-8 text-left">
-                        <h4>{{$quemsomos[0]->titulo_missao}}</h4>
-                        <p>
-                            {{$quemsomos[0]->texto_missao}}
-                        </p>
-                    </div>
-                </div>
-            </div>
 
-            <div class="row">
-                <div class="col-xs-12 text-center btn-todos">
-                    <a href="/quemsomos" class="btn btn-default btn-lg">Veja mais</a>
+                <div class="row">
+                    <div class="col-xs-12 text-center btn-todos">
+                        <a href="/quemsomos" class="btn btn-default btn-lg">Veja mais</a>
+                    </div>
                 </div>
-            </div>
 
             @else
 
@@ -209,8 +211,6 @@
                 </div>
 
             @endif
-
-
 
         </div>
     </section>
@@ -235,7 +235,7 @@
                     <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 servicos_item">
                         <div><img src="{{$equipe->foto ? $equipe->foto : '/img/foto.jpg'}}" class="img-responsive img-circle"></div>
                         <h4>{{$equipe->name}}</h4>
-                        <p>{{$equipe->perfis->resumo}}</p>
+                        <p>{{$equipe->perfis ? $equipe->perfis->resumo : ''}}</p>
                     </div>
                 </div>
                 @endforeach

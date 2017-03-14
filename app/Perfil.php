@@ -25,9 +25,6 @@ class Perfil extends Model
          'profissao',
          'empresa',
          'sexo',
-         'formacao',
-         'habilidades',
-         'notas'
     ];
 
 

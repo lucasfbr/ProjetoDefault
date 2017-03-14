@@ -14,7 +14,6 @@ use App\Banner;
 
 class HomeController extends Controller
 {
-    private $servico;
 
     public function index(){
 

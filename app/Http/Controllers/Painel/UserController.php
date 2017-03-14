@@ -46,9 +46,9 @@ class UserController extends Controller
 
         $user = $this->user->find($id);
 
-        //$user->habilidades = $this->formataHabilidades($user->habilidades);
+        $perfil = $user->perfis;
 
-        return view('painel.user.detail', ['user' => $user]);
+        return view('painel.user.detail', ['user' => $user, 'perfil' => $perfil]);
 
     }
 
@@ -91,7 +91,9 @@ class UserController extends Controller
 
             $userPerfil = $this->user->find($user->id);
 
-            $userPerfil->perfis()->create($request->all());
+            if(!$userPerfil->perfis()->create($request->all())){
+                return redirect('/painel/user')->with('erro', 'Ocorreu algum erro ao cadastrar o perfil do usuário, tente novamente mais tarde!');
+            }
 
             return redirect('/painel/user')->with('sucesso', 'Usuário cadastrado com sucesso!');
         }else{
@@ -104,7 +106,9 @@ class UserController extends Controller
 
         $user = $this->user->find($id);
 
-        return view('painel.user.edit', ['user' => $user]);
+        $perfil = $user->perfis;
+
+        return view('painel.user.edit', ['user' => $user, 'perfil' => $perfil]);
 
     }
 
@@ -140,6 +144,50 @@ class UserController extends Controller
         $user->usuarioPrincipal = $request->input('usuarioPrincipal');
 
         if($user->update()){
+
+            $perfil = $user->perfis;
+
+            if($perfil) {
+
+                $perfil->resumo = $request->input('resumo');
+                $perfil->descricao = $request->input('descricao');
+                $perfil->fone = $request->input('fone');
+                $perfil->celular = $request->input('celular');
+                $perfil->cep = $request->input('cep');
+                $perfil->estado = $request->input('estado');
+                $perfil->cidade = $request->input('cidade');
+                $perfil->bairro = $request->input('bairro');
+                $perfil->logradouro = $request->input('logradouro');
+                $perfil->numero = $request->input('numero') ? $request->input('numero') : '0';
+                $perfil->complemento = $request->input('complemento');
+                $perfil->profissao = $request->input('profissao');
+                $perfil->empresa = $request->input('empresa');
+                $perfil->sexo = $request->input('sexo');
+
+                if(!$perfil->update()){
+                    return redirect('/painel/user')->with('erro', 'Ocorreu algum erro ao editar o perfil do usuário, tente novamente mais tarde!');
+                }
+
+            }else{
+                $user->perfis()->create([
+                    'resumo' => $request->input('resumo'),
+                    'descricao' => $request->input('descricao'),
+                    'fone' => $request->input('fone'),
+                    'celular' => $request->input('celular'),
+                    'cep' => $request->input('cep'),
+                    'estado' => $request->input('estado'),
+                    'cidade' => $request->input('cidade'),
+                    'bairro' => $request->input('bairro'),
+                    'logradouro' => $request->input('logradouro'),
+                    'numero' => $request->input('numero') ? $request->input('numero') : '0',
+                    'complemento' => $request->input('complemento'),
+                    'profissao' => $request->input('profissao'),
+                    'empresa' => $request->input('empresa'),
+                    'sexo' => $request->input('sexo'),
+                ]);
+            }
+
+
             return redirect('/painel/user')->with('sucesso', 'Dados do usuário editados com sucesso!');
         }else{
             return redirect('/painel/user')->with('erro', 'Ocorreu algum erro ao editar os dados do usuário, tente novamente mais tarde!');
@@ -214,11 +262,11 @@ class UserController extends Controller
             return back()->with('erro', 'Erro ao fazer upload de imagem! Formatos aceitos jpg, jpeg e png');
         } else {
 
-            $filename = 'portifolio' . time() . '.' . $extensao;
+            $filename = 'users' . time() . '.' . $extensao;
 
             $path = public_path($this->caminhoImg . $filename);
 
-            Image::make($image->getRealPath())->resize(64,64)->save($path);
+            Image::make($image->getRealPath())->resize(200,200)->save($path);
 
             return $this->caminhoImg . $filename;
 

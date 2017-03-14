@@ -30,12 +30,12 @@
                                 <!-- Add the bg color to the header using any of the bg-* classes -->
                                 <div class="widget-user-header bg-yellow">
                                     <div class="widget-user-image">
-                                        <img class="img-circle" src="{{$user->foto}}" alt="User Avatar">
+                                        <img class="img-circle" src="/{{$user->foto ? $user->foto : 'img/default3.png'}}" alt="User Avatar">
                                     </div>
                                     <!-- /.widget-user-image -->
                                     <h3 class="widget-user-username">{{ $user->name }}</h3>
-                                    <h5 class="widget-user-desc">{{ $user->profissao }}</h5>
-                                    <h5 class="widget-user-desc">{{ $user->empresa }}</h5>
+                                    <h5 class="widget-user-desc">{{ $perfil ? $perfil->profissao : ''}}</h5>
+                                    <h5 class="widget-user-desc">{{ $perfil ? $perfil->empresa : '' }}</h5>
                                 </div>
 
 
@@ -48,23 +48,21 @@
                                         <strong><i class="fa fa-book margin-r-5"></i>Formação</strong>
 
                                         <p class="text-muted">
-                                            {{ $user->formacao }}
+                                            {{-- $user->formacao --}}
                                         </p>
 
                                         <hr>
 
                                         <strong><i class="fa fa-map-marker margin-r-5"></i>Localização</strong>
 
-                                        <p class="text-muted">{{$user->logradouro}}, {{$user->numero}}, {{$user->bairro}}, {{ $user->cidade }}, {{ $user->estado }}</p>
+                                        <p class="text-muted">{{ $perfil ? $perfil->logradouro : ''}}, {{ $perfil ? $perfil->numero : ''}}, {{ $perfil ? $perfil->bairro : ''}}, {{ $perfil ? $perfil->cidade : '' }}, {{ $perfil ? $perfil->estado : '' }}</p>
 
                                         <hr>
 
                                         <strong><i class="fa fa-pencil margin-r-5"></i>Habilidades</strong>
 
                                         <p>
-                                            @foreach($user->habilidades as $habilidade)
-                                                <span class="label label-primary">{{$habilidade}}</span>
-                                            @endforeach
+
                                         </p>
 
                                         <hr>
@@ -77,20 +75,20 @@
                                         <strong><i class="fa fa-phone margin-r-5"></i>Telefone</strong>
 
                                         <p class="text-muted">
-                                            {{ $user->fone }}
+                                            {{ $perfil ? $perfil->fone : '' }}
                                         </p>
 
                                         <hr>
 
                                         <strong><i class="fa fa-mobile margin-r-5"></i>Celular</strong>
 
-                                        <p class="text-muted">{{ $user->celular }}</p>
+                                        <p class="text-muted">{{ $perfil ? $perfil->celular : '' }}</p>
 
                                         <hr>
 
                                         <strong><i class="fa fa-venus-mars margin-r-5"></i>Sexo</strong>
 
-                                        <p>{{ $user->sexo }}</p>
+                                        <p>{{ $perfil ? genero($perfil->sexo) : '' }}</p>
 
                                         <hr>
 
@@ -106,7 +104,7 @@
                                     <div  class="box-body col-md-12">
                                         <strong><i class="fa fa-file-text-o margin-r-5"></i> Notas</strong>
 
-                                        <p>{{ $user->notas }}</p>
+                                        <p>{{-- $user->notas --}}</p>
                                     </div>
 
                                 @if($user->tipo == 'Consultor')
@@ -116,7 +114,7 @@
                                         <li><a href="#">Projetos <span class="pull-right badge bg-blue">31</span></a></li>
                                         <li><a href="#">Tarefas <span class="pull-right badge bg-aqua">5</span></a></li>
                                         <li><a href="#">Projetos Completos <span class="pull-right badge bg-green">12</span></a></li>
-                                        <li><a href="#">Segidores <span class="pull-right badge bg-red">842</span></a></li>
+                                        <li><a href="#">Seguidores <span class="pull-right badge bg-red">842</span></a></li>
                                     </ul>
                                 </div>
 

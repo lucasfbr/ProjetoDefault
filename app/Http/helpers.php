@@ -60,3 +60,15 @@ function info_sistem()
     return (object) $dados;
 
 }
+
+function genero($valor){
+
+    if($valor === 'm'){
+        $sexo = 'Masculino';
+    }else{
+        $sexo = 'Feminino';
+    }
+
+    return $sexo;
+
+}
