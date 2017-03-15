@@ -49,7 +49,7 @@
                             <p>{{$quemsomos->titulo_missao}}</p>
                             <hr>
                             <h4>Texto sobre a missão</h4>
-                            <p class="text-left">>{{ $quemsomos->texto_missao }}</p>
+                            <p class="text-left">{{ $quemsomos->texto_missao }}</p>
 
                         </div>
 

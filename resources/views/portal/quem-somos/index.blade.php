@@ -81,11 +81,15 @@
                                             </div>
 
                                             <div class="timeline-footer">
-                                                <a class="btn btn-primary btn-xs">...</a>
+                                                <a href="{{$form->link}}" target="_blank" class="btn btn-primary btn-xs">Página da instituição</a>
                                             </div>
                                         </div>
                                     </li>
                                 @endforeach
+
+                                    <li>
+                                        <i class="fa fa-circle bg-blue"></i>
+                                    </li>
 
                             </ul>
                         </div>

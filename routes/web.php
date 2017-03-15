@@ -86,6 +86,15 @@ Route::group(['middleware' => 'auth' , 'prefix' => 'painel'], function (){
     Route::post('/banner/update/{id}', 'Painel\BannerController@update');
     Route::get('/banner/delete/{id}', 'Painel\BannerController@delete');
 
+    //FormacaoController
+    Route::get('/formacao/{id}', 'Painel\FormacaoController@index');
+    Route::get('/formacao/add/{id}', 'Painel\FormacaoController@add');
+    Route::post('/formacao/create', 'Painel\FormacaoController@create');
+    Route::get('/formacao/edit/{id}', 'Painel\FormacaoController@edit');
+    Route::post('/formacao/update/{id}', 'Painel\FormacaoController@update');
+    Route::get('/formacao/detail/{id}', 'Painel\FormacaoController@detail');
+    Route::get('/formacao/delete/{id}', 'Painel\FormacaoController@delete');
+
 
     //RoleController
     Route::get('/role', 'Painel\RoleController@index');

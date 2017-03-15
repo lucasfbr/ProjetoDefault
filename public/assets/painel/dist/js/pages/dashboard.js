@@ -115,7 +115,9 @@ $(function () {
   });
 
   //The Calender
-  $("#calendar").datepicker();
+  $("#calendar").datepicker({
+    Format: 'dd/mm/yy',
+  });
 
   //SLIMSCROLL FOR CHAT WIDGET
   $('#chat-box').slimScroll({

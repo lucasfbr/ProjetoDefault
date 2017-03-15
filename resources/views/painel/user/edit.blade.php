@@ -39,7 +39,7 @@
                 <div class="box-header with-border">
                     <h3 class="box-title">Edite os dados do usuário</h3>
 
-                    <div class="text-right"><a href="/painel/user/formacao/{{$user->id}}" class="btn btn-warning" alt="Cadastre a formação academica deste usuário" title="Cadastre a formação academica deste usuário">
+                    <div class="text-right"><a href="/painel/formacao/{{$user->id}}" class="btn btn-warning" alt="Cadastre a formação academica deste usuário" title="Cadastre a formação academica deste usuário">
                             <span class="fa fa-graduation-cap" aria-hidden="true"></span></a></div>
                 </div>
 
@@ -303,7 +303,7 @@
                                     <div class="col-md-3  form-group">
                                         <input type="submit" class="btn btn-primary" value="Editar">
 
-                                        <a href="/painel/user/formacao/{{$user->id}}" class="btn btn-warning"
+                                        <a href="/painel/formacao/{{$user->id}}" class="btn btn-warning"
                                            alt="Cadastre a formação academica deste usuário" title="Cadastre a formação academica deste usuário"><span
                                                     class="fa fa-graduation-cap" aria-hidden="true"></span></a>
                                     </div>

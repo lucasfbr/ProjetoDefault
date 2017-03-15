@@ -28,4 +28,10 @@ class Formacao extends Model
 
     }
 
+    public function setDataFormacaoAttribute($value){
+
+        $this->attributes['dataFormacao'] = Carbon::parse($value)->format('y/d/m');
+
+    }
+
 }
