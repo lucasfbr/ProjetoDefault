@@ -82,27 +82,19 @@ class User extends Authenticatable
 
     }
 
-    /*public function getSexoAttribute($value){
+    public function getPerfilAttribute($value){
 
-        $sexo = '';
+        $perfil = '';
 
-        if($value == 'm'){
-            $sexo = 'Masculino';
+        if($value == '0'){
+            $perfil = 'Incompleto';
         }else{
-            $sexo = 'Feminino';
+            $perfil = 'Completo';
         }
 
-        return $sexo;
+        return $perfil;
 
-    }*/
-
-    /*public function getHabilidadesAttribute($value){
-
-        $dados = explode(",", $value);
-
-        return $dados;
-
-    }*/
+    }
 
 
     public function roles(){

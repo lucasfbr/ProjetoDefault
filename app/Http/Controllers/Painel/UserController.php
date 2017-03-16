@@ -163,6 +163,8 @@ class UserController extends Controller
                 $perfil->profissao = $request->input('profissao');
                 $perfil->empresa = $request->input('empresa');
                 $perfil->sexo = $request->input('sexo');
+                $perfil->habilidades = $request->input('habilidades');
+                $perfil->notas = $request->input('notas');
 
                 if(!$perfil->update()){
                     return redirect('/painel/user')->with('erro', 'Ocorreu algum erro ao editar o perfil do usuário, tente novamente mais tarde!');
@@ -184,6 +186,8 @@ class UserController extends Controller
                     'profissao' => $request->input('profissao'),
                     'empresa' => $request->input('empresa'),
                     'sexo' => $request->input('sexo'),
+                    'habilidades' => $request->input('habilidades'),
+                    'notas' => $request->input('notas')
                 ]);
             }
 
@@ -240,16 +244,6 @@ class UserController extends Controller
         }else{
             return redirect('/painel/user')->with('erro', 'Erro ao desativar o usuário, tente novamente mais tarde!');
         }
-
-    }
-
-    public function formataHabilidades($value){
-
-        $habilidades = explode(",", $value);
-
-        //var_dump($habilidades);exit;
-
-        return $habilidades;
 
     }
 

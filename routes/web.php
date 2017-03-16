@@ -46,6 +46,15 @@ Route::group(['middleware' => 'auth' , 'prefix' => 'painel'], function (){
     Route::get('/user/ativar/{id}', 'Painel\UserController@ativar');
     Route::get('/user/desativar/{id}', 'Painel\UserController@desativar');
 
+    //PerfilController
+    Route::get('/perfil', 'Painel\PerfilController@index');
+    Route::get('/perfil/add', 'Painel\PerfilController@add');
+    Route::post('/perfil/create', 'Painel\PerfilController@create');
+    Route::get('/perfil/detail/{id}', 'Painel\PerfilController@detail');
+    Route::get('/perfil/edit/{id}', 'Painel\PerfilController@edit');
+    Route::post('/perfil/update/{id}', 'Painel\PerfilController@update');
+    Route::get('/perfil/delete/{id}', 'Painel\PerfilController@delete');
+
     //ServiceController
     Route::get('/service', 'Painel\ServiceController@index');
     Route::get('/service/add', 'Painel\ServiceController@add');

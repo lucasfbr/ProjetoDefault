@@ -300,19 +300,6 @@
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-md-6 form-group">
-                                        <label for="habilidades">Habilidades</label>
-                                        <textarea name="habilidades" id="habilidades" class="form-control" rows="5">{{$perfil->habilidades}}</textarea>
-                                        <p>Separe suas habilidades por virgula. Ex: Word,Excell,Liderança</p>
-                                    </div>
-
-                                    <div class="col-md-6 form-group">
-                                        <label for="notas">Notas</label>
-                                        <textarea name="notas" id="notas" class="form-control" rows="5">{{$perfil->notas}}</textarea>
-                                    </div>
-                                </div>
-
-                                <div class="row">
                                     <div class="col-md-3  form-group">
                                         <input type="submit" class="btn btn-primary" value="Editar">
 

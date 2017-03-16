@@ -72,3 +72,13 @@ function genero($valor){
     return $sexo;
 
 }
+
+//metodo que separa as strings na virgula utilizando o
+//explode do php
+function stringToArray($value){
+
+    $habilidades = explode(",", $value);
+
+    return $habilidades;
+
+}
