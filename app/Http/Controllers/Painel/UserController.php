@@ -114,15 +114,21 @@ class UserController extends Controller
 
     public function update(Request $request, $id){
 
-        $this->validate($request, [
+        $dados = [
             'name' => 'required|max:255',
             'email' => 'required|email|max:255',
-        ]);
+        ];
+
+        if($request->input('password')){
+            $dados = array_add($dados, 'password', 'required|min:6|confirmed');
+        }
+
+        $this->validate($request, $dados);
 
         $user = $this->user->find($id);
 
         //verifica se foi alterada a senha
-        if(!empty($request->input('password'))){
+        if($request->input('password')){
             $user->password = bcrypt($request->input('password'));
         }
 
@@ -139,7 +145,6 @@ class UserController extends Controller
 
         $user->name = $request->input('name');
         $user->email = $request->input('email');
-        $user->password = bcrypt($request->input('password'));
         $user->tipo = $request->input('tipo');
         $user->usuarioPrincipal = $request->input('usuarioPrincipal');
 
