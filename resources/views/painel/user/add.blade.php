@@ -78,7 +78,7 @@
 
                                 <div class="row">
 
-                                    <div class="col-md-4 form-group">
+                                    <div class="col-md-5 form-group">
                                         <label for="img">Foto</label>
                                         <input type="file" id="foto" name="foto">
 
@@ -86,7 +86,7 @@
                                     </div>
 
 
-                                    <div class="col-md-4 form-group">
+                                    <div class="col-md-5 form-group">
                                         <label>Tipo de usuário</label>
                                         <br/>
                                         <label class="radio-inline">
@@ -117,6 +117,14 @@
                                         <p class="help-block">O perfil e a formação do usuário principal serão exibidos na
                                             página "Quem Somos"</p>
                                     </div>
+
+                                    <div class="col-md-5 form-group">
+                                        <label for="img">Foto de perfil</label>
+                                        <input type="file" id="foto_perfil" name="foto_perfil">
+
+                                        <p class="help-block">Foto destinada somente ao usuário principal</p>
+                                    </div>
+
                                 </div>
 
                             </div>
@@ -124,21 +132,9 @@
                     </fieldset>
 
                     <fieldset class="scheduler-border">
-                        <legend class="scheduler-border text-light-blue">Perfil do usuário</legend>
+                        <legend class="scheduler-border text-light-blue">Informações Pessoais</legend>
 
                             <div class="box-body">
-
-                                <div class="row">
-                                    <div class="col-md-6 form-group">
-                                        <label for="resumo">Breve descrição do usuário(Resumo)</label>
-                                        <textarea name="resumo" id="resumo" class="form-control" rows="5"></textarea>
-                                    </div>
-
-                                    <div class="col-md-6 form-group">
-                                        <label for="descricao">Descrição do usuário(Detalhada)</label>
-                                        <textarea name="descricao" id="descricao" class="form-control" rows="5"></textarea>
-                                    </div>
-                                </div>
 
                                 <div class="row">
 
@@ -182,7 +178,6 @@
                                         <p class="text-danger" style="display: none" v-show="naoLocalizado"><strong>Bairro
                                                 não localizado</strong>. Preencha manualmente</p>
                                     </div>
-
 
                                 </div>
 
@@ -272,6 +267,18 @@
                                 </div>
 
                                 <div class="row">
+
+
+                                        <div class="col-md-6 form-group">
+                                            <label for="resumo">Breve descrição do usuário(Resumo)</label>
+                                            <textarea name="resumo" id="resumo" class="form-control" rows="5"></textarea>
+                                        </div>
+
+                                        <div class="col-md-6 form-group">
+                                            <label for="descricao">Descrição do usuário(Detalhada)</label>
+                                            <textarea name="descricao" id="descricao" class="form-control" rows="5"></textarea>
+                                        </div>
+
                                     <div class="col-md-6 form-group">
                                         <label for="habilidades">Habilidades</label>
                                         <textarea name="habilidades" id="habilidades" class="form-control" rows="5"></textarea>

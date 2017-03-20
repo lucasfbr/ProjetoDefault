@@ -19,12 +19,15 @@ class Perfil extends Model
          'cep',
          'estado',
          'cidade',
+         'bairro',
          'logradouro',
          'numero',
          'complemento',
          'profissao',
          'empresa',
          'sexo',
+         'habilidades',
+         'notas'
     ];
 
 

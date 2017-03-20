@@ -14,6 +14,7 @@ class PerfilController extends Controller
     private $user;
     private $extensoes = ['jpg','jpeg', 'png'];
     private $caminhoImg = 'img/usuarios/';
+    private $caminhoImgPerfil = 'img/perfil/';
 
     public function __construct(User $user)
     {
@@ -91,6 +92,18 @@ class PerfilController extends Controller
 
             if($perfil) {
 
+                if(!empty($request->file('foto_perfil'))){
+
+                    //armazena a imagem enviada pelo form
+                    $image = $request->file('foto_perfil');
+                    //pega a extensao da imagem
+                    $extensao = $image->getClientOriginalExtension();
+                    //recebe o nome da imagem que foi movida para a pasta de destino
+                    $foto_perfil = $this->moverImagemPerfil($image, $extensao);
+
+                    $perfil->foto_perfil = $foto_perfil;
+                }
+
                 $perfil->resumo = $request->input('resumo');
                 $perfil->descricao = $request->input('descricao');
                 $perfil->fone = $request->input('fone');
@@ -114,6 +127,16 @@ class PerfilController extends Controller
 
             }else{
 
+                if(!empty($request->file('foto_perfil'))){
+
+                    //armazena a imagem enviada pelo form
+                    $image = $request->file('foto_perfil');
+                    //pega a extensao da imagem
+                    $extensao = $image->getClientOriginalExtension();
+                    //recebe o nome da imagem que foi movida para a pasta de destino
+                    $foto_perfil = $this->moverImagemPerfil($image, $extensao);
+                }
+
                 $user->perfis()->create([
                     'resumo' => $request->input('resumo'),
                     'descricao' => $request->input('descricao'),
@@ -130,7 +153,8 @@ class PerfilController extends Controller
                     'empresa' => $request->input('empresa'),
                     'sexo' => $request->input('sexo'),
                     'habilidades' => $request->input('habilidades'),
-                    'notas' => $request->input('notas')
+                    'notas' => $request->input('notas'),
+                    'foto_perfil' => $foto_perfil,
                 ]);
             }
 
@@ -160,6 +184,24 @@ class PerfilController extends Controller
             Image::make($image->getRealPath())->resize(200,200)->save($path);
 
             return $this->caminhoImg . $filename;
+
+        }
+
+    }
+
+    public function moverImagemPerfil($image, $extensao){
+
+        if(!in_array($extensao, $this->extensoes)) {
+            return back()->with('erro', 'Erro ao fazer upload de imagem! Formatos aceitos jpg, jpeg e png');
+        } else {
+
+            $filename = 'perfil' . time() . '.' . $extensao;
+
+            $path = public_path($this->caminhoImgPerfil . $filename);
+
+            Image::make($image->getRealPath())->resize(390,460)->save($path);
+
+            return $this->caminhoImgPerfil . $filename;
 
         }
 

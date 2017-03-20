@@ -106,7 +106,7 @@
 
                                 <div class="row">
 
-                                    <div class="col-md-4 form-group">
+                                    <div class="col-md-5 form-group">
                                         <label for="img">Foto</label>
                                         <input type="file" id="foto" name="foto">
 
@@ -114,7 +114,7 @@
                                     </div>
 
 
-                                    <div class="col-md-4 form-group">
+                                    <div class="col-md-5 form-group">
                                         <label>Tipo de usuário</label>
                                         <br/>
                                         <label class="radio-inline">
@@ -144,6 +144,14 @@
                                         <p class="help-block">O perfil e a formação do usuário principal serão exibidos na
                                             página "Quem Somos"</p>
                                     </div>
+
+                                    <div class="col-md-5 form-group">
+                                        <label for="img">Foto de perfil</label>
+                                        <input type="file" id="foto_perfil" name="foto_perfil">
+
+                                        <p class="help-block">Foto destinada somente ao usuário principal</p>
+                                    </div>
+
                                 </div>
 
                             </div>
@@ -151,21 +159,9 @@
                         </fieldset>
 
                         <fieldset class="scheduler-border">
-                            <legend class="scheduler-border text-light-blue">Perfil do usuário</legend>
+                            <legend class="scheduler-border text-light-blue">Informações Pessoais</legend>
 
                             <div class="box-body">
-
-                                <div class="row">
-                                    <div class="col-md-6 form-group">
-                                        <label for="resumo">Breve descrição do usuário(Resumo)</label>
-                                        <textarea name="resumo" id="resumo" class="form-control" rows="5">{{ $perfil ? $perfil->resumo : '' }}</textarea>
-                                    </div>
-
-                                    <div class="col-md-6 form-group">
-                                        <label for="descricao">Descrição do usuário(Detalhada)</label>
-                                        <textarea name="descricao" id="descricao" class="form-control" rows="5">{{ $perfil ? $perfil->descricao : '' }}</textarea>
-                                    </div>
-                                </div>
 
                                 <div class="row">
 
@@ -300,15 +296,27 @@
                                 </div>
 
                                 <div class="row">
+
+                                        <div class="col-md-6 form-group">
+                                            <label for="resumo">Breve descrição do usuário(Resumo)</label>
+                                            <textarea name="resumo" id="resumo" class="form-control" rows="5">{{ $perfil ? $perfil->resumo : '' }}</textarea>
+                                        </div>
+
+                                        <div class="col-md-6 form-group">
+                                            <label for="descricao">Descrição do usuário(Detalhada)</label>
+                                            <textarea name="descricao" id="descricao" class="form-control" rows="5">{{ $perfil ? $perfil->descricao : '' }}</textarea>
+                                        </div>
+
+
                                     <div class="col-md-6 form-group">
                                         <label for="habilidades">Habilidades</label>
-                                        <textarea name="habilidades" id="habilidades" class="form-control" rows="5">{{$perfil->habilidades}}</textarea>
+                                        <textarea name="habilidades" id="habilidades" class="form-control" rows="5">{{$perfil ? $perfil->habilidades : ''}}</textarea>
                                         <p>Separe suas habilidades por virgula. Ex: Word,Excell,Liderança</p>
                                     </div>
 
                                     <div class="col-md-6 form-group">
                                         <label for="notas">Notas</label>
-                                        <textarea name="notas" id="notas" class="form-control" rows="5">{{$perfil->notas}}</textarea>
+                                        <textarea name="notas" id="notas" class="form-control" rows="5">{{$perfil ? $perfil->notas : ''}}</textarea>
                                     </div>
                                 </div>
 

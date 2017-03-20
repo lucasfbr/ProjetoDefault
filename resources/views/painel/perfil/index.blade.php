@@ -16,7 +16,7 @@
     <section class="content">
 
         <div class="row">
-            <div class="col-md-3">
+            <div class="col-md-4">
 
                 <!-- Profile Image -->
                 <div class="box box-primary">
@@ -26,7 +26,7 @@
 
                         <h3 class="profile-username text-center">{{$user->name}}</h3>
 
-                        <p class="text-muted text-center">{{$perfil->profissao}}</p>
+                        <p class="text-muted text-center">{{$perfil ? $perfil->profissao : ''}}</p>
 
                         <ul class="list-group list-group-unbordered">
                             <li class="list-group-item">
@@ -58,34 +58,39 @@
                         <strong><i class="fa fa-map-marker margin-r-5"></i> Localidade</strong>
 
                         <p class="text-muted">
-                            {{$perfil->logradouro ? $perfil->logradouro . ', ' : ''}}
-                            {{$perfil->numero ? $perfil->numero . ' - ' : ''}}
-                            {{$perfil->bairro ? $perfil->bairro . ' - ' : ''}}
-                            {{$perfil->cidade ? $perfil->cidade . ' - ' : ''}}
-                            {{$perfil->estado ? $perfil->estado : ''}}
+                            {{$perfil ? $perfil->logradouro . ', ' : ''}}
+                            {{$perfil ? $perfil->numero . ' - ' : ''}}
+                            {{$perfil ? $perfil->bairro . ' - ' : ''}}
+                            {{$perfil ? $perfil->cidade . ' - ' : ''}}
+                            {{$perfil ? $perfil->estado : ''}}
                         </p>
                         <hr>
 
                         <strong><i class="fa fa-pencil margin-r-5"></i> Habilidades</strong>
 
                         <p>
-                            @foreach(stringToArray($perfil->habilidades) as $habilidade)
-                                <span class="label label-primary">{{$habilidade}}</span>
-                            @endforeach
+                            @if($perfil)
+                                @foreach(stringToArray($perfil->habilidades) as $key => $habilidade)
+                                    <span class="label label-primary">{{$habilidade}}</span>
+                                    @if((($key + 1) % 4) == 0)
+                                    <br><br>
+                                    @endif
+                                @endforeach
+                            @endif
                         </p>
 
                         <hr>
 
                         <strong><i class="fa fa-file-text-o margin-r-5"></i> Notas</strong>
 
-                        <p>{{$perfil->notas}}</p>
+                        <p>{{$perfil ? $perfil->notas : ''}}</p>
                     </div>
                     <!-- /.box-body -->
                 </div>
                 <!-- /.box -->
             </div>
             <!-- /.col -->
-            <div class="col-md-9">
+            <div class="col-md-8">
                 <div class="nav-tabs-custom">
                     <ul class="nav nav-tabs">
                         <li class="active"><a href="#settings" data-toggle="tab" aria-expanded="false">Alterações</a></li>
@@ -181,7 +186,7 @@
                                         <div class="col-sm-10">
                                             <input class="form-control" id="cep" name="cep"
                                                    type="text"
-                                                   value="{{$perfil->cep}}"
+                                                   value="{{$perfil ? $perfil->cep : ''}}"
                                                    v-model="cep"
                                                    v-on:keyup="buscar"
                                                    data-inputmask='"mask": "99999-999"' data-mask>
@@ -199,7 +204,7 @@
                                         <div class="col-sm-10">
                                             <input class="form-control" id="estado" name="estado"
                                                    type="text"
-                                                   value="{{$perfil->estado}}"
+                                                   value="{{$perfil ? $perfil->estado : ''}}"
                                                    v-model="endereco.uf" v-el:estado>
 
                                             @if ($errors->has('estado'))
@@ -218,7 +223,7 @@
                                         <div class="col-sm-10">
                                             <input class="form-control" id="cidade" name="cidade"
                                                    type="text"
-                                                   value="{{$perfil->cidade}}"
+                                                   value="{{$perfil ? $perfil->cidade : ''}}"
                                                    v-model="endereco.localidade">
 
                                             @if ($errors->has('cidade'))
@@ -237,7 +242,7 @@
                                         <div class="col-sm-10">
                                             <input class="form-control" id="bairro" name="bairro"
                                                    type="text"
-                                                   value="{{$perfil->bairro}}"
+                                                   value="{{$perfil ? $perfil->bairro : ''}}"
                                                    v-model="endereco.bairro">
 
                                             @if ($errors->has('bairro'))
@@ -256,7 +261,7 @@
                                         <div class="col-sm-10">
                                             <input class="form-control" id="logradouro" name="logradouro"
                                                    type="text"
-                                                   value="{{$perfil->logradouro}}"
+                                                   value="{{$perfil ? $perfil->logradouro : ''}}"
                                                    v-model="endereco.logradouro">
 
                                             @if ($errors->has('logradouro'))
@@ -276,7 +281,7 @@
                                         <div class="col-sm-10">
                                             <input class="form-control" id="numero" name="numero"
                                                    type="text"
-                                                   value="{{$perfil->numero}}"
+                                                   value="{{$perfil ? $perfil->numero : ''}}"
                                                    v-el:numero>
 
                                             @if ($errors->has('numero'))
@@ -294,7 +299,7 @@
                                             <input class="form-control" id="complemento" name="complemento"
                                                    placeholder="Complemento"
                                                    type="text"
-                                                   value="{{$perfil->complemento}}">
+                                                   value="{{$perfil ? $perfil->complemento : ''}}">
                                         </div>
                                     </div>
 
@@ -328,7 +333,8 @@
                                         <div class="col-sm-10">
                                             <input class="form-control" id="fone" name="fone"
                                                    type="text"
-                                                   value="{{$perfil->fone}}">
+                                                   data-inputmask='"mask": "(99) 9999-9999"' data-mask
+                                                   value="{{$perfil ? $perfil->fone : ''}}">
                                         </div>
                                     </div>
 
@@ -338,7 +344,8 @@
                                         <div class="col-sm-10">
                                             <input class="form-control" id="celular" name="celular"
                                                    type="text"
-                                                   value="{{$perfil->celular}}">
+                                                   data-inputmask='"mask": "(99) 99999-9999"' data-mask
+                                                   value="{{$perfil ? $perfil->celular : ''}}">
 
                                             @if ($errors->has('celular'))
                                                 <span class="help-block">
@@ -361,7 +368,7 @@
                                         <div class="col-sm-10">
                                             <input class="form-control" id="empresa" name="empresa"
                                                    type="text"
-                                                   value="{{$perfil->empresa}}">
+                                                   value="{{$perfil ? $perfil->empresa : ''}}">
 
                                             @if ($errors->has('empresa'))
                                                 <span class="help-block">
@@ -378,7 +385,7 @@
                                         <div class="col-sm-10">
                                             <input class="form-control" id="profissao" name="profissao"
                                                    type="text"
-                                                   value="{{$perfil->profissao}}">
+                                                   value="{{$perfil ? $perfil->profissao : ''}}">
 
                                             @if ($errors->has('profissao'))
                                                 <span class="help-block">
@@ -388,56 +395,70 @@
                                         </div>
                                     </div>
 
-                                    <div class="form-group {{ $errors->has('resumo') ? ' has-error' : '' }}">
-                                        <label for="resumo" class="col-sm-2 control-label">Breve descrição do
-                                            usuário</label>
+                                    @if($user->tipo == 'Consultor' || $user->tipo == 'Administrador')
+                                        <div class="form-group {{ $errors->has('resumo') ? ' has-error' : '' }}">
+                                            <label for="resumo" class="col-sm-2 control-label">Breve descrição do
+                                                usuário</label>
 
-                                        <div class="col-sm-10">
-                                            <textarea id="resumo" name="resumo" class="form-control" rows="3">{{$perfil->resumo}}</textarea>
-                                            @if ($errors->has('resumo'))
-                                                <span class="help-block">
-                                                <strong>{{ $errors->first('resumo') }}</strong>
-                                            </span>
-                                            @endif
+                                            <div class="col-sm-10">
+                                                <textarea id="resumo" name="resumo" class="form-control" rows="3">{{$perfil ? $perfil->resumo : ''}}</textarea>
+                                                @if ($errors->has('resumo'))
+                                                    <span class="help-block">
+                                                    <strong>{{ $errors->first('resumo') }}</strong>
+                                                </span>
+                                                @endif
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    <div class="form-group {{ $errors->has('descricao') ? ' has-error' : '' }}">
-                                        <label for="descricao" class="col-sm-2 control-label">Experiência Profissional</label>
+                                        <div class="form-group {{ $errors->has('descricao') ? ' has-error' : '' }}">
+                                            <label for="descricao" class="col-sm-2 control-label">Experiência Profissional</label>
 
-                                        <div class="col-sm-10">
-                                            <textarea name="descricao" id="descricao" class="form-control" rows="3">{{$perfil->descricao}}</textarea>
-                                            @if ($errors->has('descricao'))
-                                                <span class="help-block">
-                                                <strong>{{ $errors->first('descricao') }}</strong>
-                                            </span>
-                                            @endif
+                                            <div class="col-sm-10">
+                                                <textarea name="descricao" id="descricao" class="form-control" rows="3">{{$perfil ? $perfil->descricao : ''}}</textarea>
+                                                @if ($errors->has('descricao'))
+                                                    <span class="help-block">
+                                                    <strong>{{ $errors->first('descricao') }}</strong>
+                                                </span>
+                                                @endif
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    <div class="form-group {{ $errors->has('habilidades') ? ' has-error' : '' }}">
-                                        <label for="habilidades" class="col-sm-2 control-label">Habilidades</label>
+                                        <div class="form-group {{ $errors->has('habilidades') ? ' has-error' : '' }}">
+                                            <label for="habilidades" class="col-sm-2 control-label">Habilidades</label>
 
-                                        <div class="col-sm-10">
-                                            <textarea id="habilidades" name="habilidades" class="form-control" rows="3">{{$perfil->habilidades}}</textarea>
-                                            <p>Separe suas habilidades por virgula. Ex: Word,Excell,Liderança</p>
+                                            <div class="col-sm-10">
+                                                <textarea id="habilidades" name="habilidades" class="form-control" rows="3">{{$perfil ? $perfil->habilidades : ''}}</textarea>
+                                                <p>Separe suas habilidades por virgula. Ex: Word,Excell,Liderança</p>
 
-                                            @if ($errors->has('habilidades'))
-                                                <span class="help-block">
-                                                <strong>{{ $errors->first('habilidades') }}</strong>
-                                            </span>
-                                            @endif
+                                                @if ($errors->has('habilidades'))
+                                                    <span class="help-block">
+                                                    <strong>{{ $errors->first('habilidades') }}</strong>
+                                                </span>
+                                                @endif
 
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    <div class="form-group">
-                                        <label for="notas" class="col-sm-2 control-label">Notas</label>
+                                        <div class="form-group">
+                                            <label for="notas" class="col-sm-2 control-label">Notas</label>
 
-                                        <div class="col-sm-10">
-                                            <textarea id="notas" name="notas" class="form-control" rows="3">{{$perfil->notas}}</textarea>
+                                            <div class="col-sm-10">
+                                                <textarea id="notas" name="notas" class="form-control" rows="3">{{$perfil ? $perfil->notas : ''}}</textarea>
+                                            </div>
                                         </div>
-                                    </div>
+
+                                        @if($user->usuarioPrincipal == 1)
+                                        <div class="form-group">
+                                            <label for="foto_perfil" class="col-sm-2 control-label">Foto do Perfil</label>
+                                            <div class="col-sm-10">
+                                                <input type="file" id="foto_perfil" name="foto_perfil">
+
+                                                <p class="help-block">Selecione uma foto ou imagem para o perfil</p>
+                                            </div>
+                                        </div>
+                                        @endif
+
+                                    @endif
 
                                 </fieldset>
 
@@ -465,38 +486,45 @@
                             <!-- The timeline -->
                             <ul class="timeline timeline-inverse">
 
-                            @foreach($formacao as $form)
-                                <!-- timeline time label -->
-                                    <li class="time-label">
-                                        <span class="bg-blue">
-                                            {{$form->dataFormacao}}
-                                        </span>
-                                    </li>
-                                    <!-- /.timeline-label -->
+                                @if($formacao)
+                                    @foreach($formacao as $form)
+                                        <!-- timeline time label -->
+                                            <li class="time-label">
+                                                <span class="bg-blue">
+                                                    {{$form->dataFormacao}}
+                                                </span>
+                                            </li>
+                                            <!-- /.timeline-label -->
 
-                                    <!-- timeline item -->
+                                            <!-- timeline item -->
+                                            <li>
+                                                <!-- timeline icon -->
+                                                <i class="fa fa-graduation-cap bg-blue"></i>
+                                                <div class="timeline-item">
+
+                                                    <h3 class="timeline-header">{{$form->titulo}}</h3>
+
+                                                    <div class="timeline-body">
+                                                        {{$form->conteudo}}
+                                                    </div>
+
+                                                    <div class="timeline-footer">
+                                                        <a href="{{$form->link}}" target="_blank"
+                                                           class="btn btn-success btn-xs">Página da instituição</a>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                    @endforeach
+
+
                                     <li>
-                                        <!-- timeline icon -->
-                                        <i class="fa fa-graduation-cap bg-blue"></i>
-                                        <div class="timeline-item">
-
-                                            <h3 class="timeline-header">{{$form->titulo}}</h3>
-
-                                            <div class="timeline-body">
-                                                {{$form->conteudo}}
-                                            </div>
-
-                                            <div class="timeline-footer">
-                                                <a href="{{$form->link}}" target="_blank"
-                                                   class="btn btn-success btn-xs">Página da instituição</a>
-                                            </div>
-                                        </div>
+                                        <i class="fa fa-circle bg-blue"></i>
                                     </li>
-                                @endforeach
-
-                                <li>
-                                    <i class="fa fa-circle bg-blue"></i>
-                                </li>
+                                @else
+                                    <li>
+                                        <p class="text-info">Nenhuma formação  registrada</p>
+                                    </li>
+                                @endif
                             </ul>
                         </div>
                         <!-- /.tab-pane -->
