@@ -90,6 +90,48 @@ elixir((mix) => {
 
     ], 'public/css/painel.css');
 
+    //js do campus
+    mix.scripts([
+        '../../../node_modules/jquery/dist/jquery.js',
+        '../../../node_modules/jquery-ui-1-11-4/jquery-ui.js',
+        '../../../node_modules/bootstrap/dist/js/bootstrap.js',
+        //'../../../node_modules/raphael/raphael.js',
+        //'../../../node_modules/morris.js/morris.js',
+        //'../../../node_modules/jquery-sparkline/jquery.sparkline.js',
+        //'../../../node_modules/jvectormap/jquery-jvectormap.js',
+        //'../../../node_modules/jvectormap/tests/assets/jquery-jvectormap-world-mill-en.js',
+        //'../../../node_modules/jquery-knob/dist/jquery.knob.min.js',
+        //'../../../node_modules/moment/moment.js',
+        //'../../../node_modules/bootstrap-daterangepicker/daterangepicker.js',
+        //'../../../node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.js',
+        //'../../../node_modules/bootstrap3-wysihtml5-bower/dist/bootstrap3-wysihtml5.all.js',
+        //'../../../node_modules/jquery-slimscroll/jquery.slimscroll.js',
+        //'../../../node_modules/fastclick/fastclick.js',
+        //'painel/app.js',
+        //'painel/dashboard.js',
+        //'painel/demo.js',
+
+    ], 'public/js/campus.js');
+
+    //css do campus
+    mix.styles([
+        '../../../node_modules/bootstrap/dist/css/bootstrap.css',
+        '../../../node_modules/font-awesome/css/font-awesome.css',
+        '../../../node_modules/ionicons/css/ionicons.css',
+        'campus/AdminLTE.css',
+        'campus/_all-skins.css',
+        'campus/blue.css',
+        //'../../../node_modules/morris.js/morris.css',
+        //'../../../node_modules/jvectormap/jquery-jvectormap.css',
+        //'../../../node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker.css',
+        //'../../../node_modules/bootstrap-daterangepicker/daterangepicker.css',
+        //'../../../node_modules/bootstrap3-wysihtml5-bower/dist/bootstrap3-wysihtml5.css',
+        'campus/style.css',
+
+
+
+    ], 'public/css/campus.css');
+
     //pega o conteudo de uma pasta e joga em outra pasta
     //nete caso de node_modules/font-awesome/fonts para /public/fonts/
     mix.copy('node_modules/font-awesome/fonts', 'public/fonts');

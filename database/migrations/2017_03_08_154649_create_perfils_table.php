@@ -33,11 +33,9 @@ class CreatePerfilsTable extends Migration
             $table->string('empresa', 255)->nullable();
             $table->string('sexo', 255)->nullable();
 
-
             $table->text('habilidades')->nullable();
             $table->text('notas')->nullable();
             $table->timestamps();
-
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 

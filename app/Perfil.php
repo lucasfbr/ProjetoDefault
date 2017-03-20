@@ -11,8 +11,6 @@ class Perfil extends Model
 
     protected $fillable = [
          'user_id',
-         'resumo',
-         'descricao',
          'ddd',
          'fone',
          'celular',
@@ -23,9 +21,12 @@ class Perfil extends Model
          'logradouro',
          'numero',
          'complemento',
+         'sexo',
          'profissao',
          'empresa',
-         'sexo',
+         'resumo',
+         'descricao',
+         'foto_perfil',
          'habilidades',
          'notas'
     ];

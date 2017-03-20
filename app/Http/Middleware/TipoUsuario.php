@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 
-class PerfilUsuario
+class TipoUsuario
 {
     /**
      * Handle an incoming request.
@@ -18,8 +18,8 @@ class PerfilUsuario
 
         $user = auth()->user();
 
-        if(($user->tipo === 'Consultor') AND ($user->status === 'Ativo')){
-
+        if($user->tipo === 'Cliente'){
+            return redirect('/campus');
         }
 
         return $next($request);

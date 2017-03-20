@@ -66,24 +66,29 @@
                         </p>
                         <hr>
 
-                        <strong><i class="fa fa-pencil margin-r-5"></i> Habilidades</strong>
 
-                        <p>
-                            @if($perfil)
-                                @foreach(stringToArray($perfil->habilidades) as $key => $habilidade)
-                                    <span class="label label-primary">{{$habilidade}}</span>
-                                    @if((($key + 1) % 4) == 0)
-                                    <br><br>
-                                    @endif
-                                @endforeach
-                            @endif
-                        </p>
+                        @if($user->tipo == 'Administrador' || $user->tipo == 'Consultor' )
+                            <strong><i class="fa fa-pencil margin-r-5"></i> Habilidades</strong>
 
-                        <hr>
+                            <p>
+                                @if($perfil)
+                                    @foreach(stringToArray($perfil->habilidades) as $key => $habilidade)
+                                        <span class="label label-primary">{{$habilidade}}</span>
+                                        @if((($key + 1) % 4) == 0)
+                                        <br><br>
+                                        @endif
+                                    @endforeach
+                                @endif
+                            </p>
 
-                        <strong><i class="fa fa-file-text-o margin-r-5"></i> Notas</strong>
+                            <hr>
 
-                        <p>{{$perfil ? $perfil->notas : ''}}</p>
+                            <strong><i class="fa fa-file-text-o margin-r-5"></i> Notas</strong>
+
+                            <p>{{$perfil ? $perfil->notas : ''}}</p>
+                        @endif
+
+
                     </div>
                     <!-- /.box-body -->
                 </div>

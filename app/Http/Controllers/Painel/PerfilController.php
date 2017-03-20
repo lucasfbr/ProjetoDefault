@@ -57,6 +57,8 @@ class PerfilController extends Controller
             $dados = array_add($dados, 'password', 'required|min:6|confirmed');
         }
 
+
+
         //usuario consultor
         if($user->tipo == 1){
             $dados = array_add($dados, 'resumo', 'required');
@@ -84,7 +86,6 @@ class PerfilController extends Controller
 
         $user->name = $request->input('name');
         $user->email = $request->input('email');
-        $user->perfil = '1';
 
         if($user->update()){
 
@@ -102,27 +103,36 @@ class PerfilController extends Controller
                     $foto_perfil = $this->moverImagemPerfil($image, $extensao);
 
                     $perfil->foto_perfil = $foto_perfil;
+                }else{
+                    $perfil->foto_perfil = '';
                 }
 
-                $perfil->resumo = $request->input('resumo');
-                $perfil->descricao = $request->input('descricao');
-                $perfil->fone = $request->input('fone');
-                $perfil->celular = $request->input('celular');
-                $perfil->cep = $request->input('cep');
-                $perfil->estado = $request->input('estado');
-                $perfil->cidade = $request->input('cidade');
-                $perfil->bairro = $request->input('bairro');
-                $perfil->logradouro = $request->input('logradouro');
+                $perfil->resumo = $request->input('resumo') ? $request->input('resumo') : '';
+                $perfil->descricao = $request->input('descricao') ? $request->input('descricao') : '';
+                $perfil->fone = $request->input('fone') ? $request->input('fone') : '';
+                $perfil->celular = $request->input('celular') ? $request->input('celular') : '';
+                $perfil->cep = $request->input('cep') ? $request->input('cep') : '';
+                $perfil->estado = $request->input('estado') ? $request->input('estado') : '';
+                $perfil->cidade = $request->input('cidade') ? $request->input('cidade') : '';
+                $perfil->bairro = $request->input('bairro') ? $request->input('bairro') : '';
+                $perfil->logradouro = $request->input('logradouro') ? $request->input('logradouro') : '';
                 $perfil->numero = $request->input('numero') ? $request->input('numero') : '0';
-                $perfil->complemento = $request->input('complemento');
-                $perfil->profissao = $request->input('profissao');
-                $perfil->empresa = $request->input('empresa');
-                $perfil->sexo = $request->input('sexo');
-                $perfil->habilidades = $request->input('habilidades');
-                $perfil->notas = $request->input('notas');
+                $perfil->complemento = $request->input('complemento') ? $request->input('complemento') : '';
+                $perfil->profissao = $request->input('profissao') ? $request->input('profissao') : '';
+                $perfil->empresa = $request->input('empresa') ? $request->input('empresa') : '';
+                $perfil->sexo = $request->input('sexo') ? $request->input('sexo') : '';
+                $perfil->habilidades = $request->input('habilidades') ? $request->input('habilidades') : '';
+                $perfil->notas = $request->input('notas') ? $request->input('notas') : '';
 
-                if(!$perfil->update()){
-                    return redirect('/painel/perfil')->with('erro', 'Ocorreu algum erro ao editar o perfil do usuário, tente novamente mais tarde!')->with('settings', 'active');;
+                if($perfil->update()) {
+
+                    if ($user->perfil === 'Incompleto'){
+                        $user->perfil = '1';
+                        $user->update();
+                    }
+
+                }else{
+                    return redirect('/painel/perfil')->with('erro', 'Ocorreu algum erro ao editar o perfil do usuário, tente novamente mais tarde!')->with('settings', 'active');
                 }
 
             }else{
@@ -135,27 +145,36 @@ class PerfilController extends Controller
                     $extensao = $image->getClientOriginalExtension();
                     //recebe o nome da imagem que foi movida para a pasta de destino
                     $foto_perfil = $this->moverImagemPerfil($image, $extensao);
+                }else{
+                    $foto_perfil = '';
                 }
 
-                $user->perfis()->create([
-                    'resumo' => $request->input('resumo'),
-                    'descricao' => $request->input('descricao'),
-                    'fone' => $request->input('fone'),
-                    'celular' => $request->input('celular'),
-                    'cep' => $request->input('cep'),
-                    'estado' => $request->input('estado'),
-                    'cidade' => $request->input('cidade'),
-                    'bairro' => $request->input('bairro'),
-                    'logradouro' => $request->input('logradouro'),
-                    'numero' => $request->input('numero') ? $request->input('numero') : '0',
-                    'complemento' => $request->input('complemento'),
-                    'profissao' => $request->input('profissao'),
-                    'empresa' => $request->input('empresa'),
-                    'sexo' => $request->input('sexo'),
-                    'habilidades' => $request->input('habilidades'),
-                    'notas' => $request->input('notas'),
-                    'foto_perfil' => $foto_perfil,
-                ]);
+                $cadPerfil = $user->perfis()->create([
+                                'resumo' => $request->input('resumo') ? $request->input('resumo') : '',
+                                'descricao' => $request->input('descricao') ? $request->input('descricao') : '',
+                                'fone' => $request->input('fone') ? $request->input('fone') : '',
+                                'celular' => $request->input('celular') ? $request->input('celular') : '',
+                                'cep' => $request->input('cep') ? $request->input('cep') : '',
+                                'estado' => $request->input('estado') ? $request->input('estado') : '',
+                                'cidade' => $request->input('cidade') ? $request->input('cidade') : '',
+                                'bairro' => $request->input('bairro') ? $request->input('bairro') : '',
+                                'logradouro' => $request->input('logradouro') ? $request->input('logradouro') : '',
+                                'numero' => $request->input('numero') ? $request->input('numero') : '0',
+                                'complemento' => $request->input('complemento') ? $request->input('complemento') : '',
+                                'profissao' => $request->input('profissao') ? $request->input('profissao') : '',
+                                'empresa' => $request->input('empresa') ? $request->input('empresa') : '',
+                                'sexo' => $request->input('sexo') ? $request->input('sexo') : '',
+                                'habilidades' => $request->input('habilidades') ? $request->input('habilidades') : '',
+                                'notas' => $request->input('notas') ? $request->input('notas') : '',
+                                'foto_perfil' => $foto_perfil,
+                            ]);
+                 if($cadPerfil) {
+                     $user->perfil = '1';
+                     $user->update();
+                 }else{
+                     return redirect('/painel/perfil')->with('erro', 'Ocorreu algum erro ao criar o perfil do usuário, tente novamente mais tarde!')->with('settings', 'active');
+                 }
+
             }
 
             return redirect('/painel/perfil/')->with('sucesso', 'Dados do perfil editados com sucesso!')->with('settings', 'active');

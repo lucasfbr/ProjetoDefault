@@ -11,7 +11,12 @@
 |
 */
 
-Route::group(['middleware' => 'auth' , 'prefix' => 'painel'], function (){
+/*
+ * Na rota painel temos dois middlewares o "auth" responsavel por verificar se o usuario esta autenticado
+ * e o "tipo" que verifica qual usuario esta cadastrado no sistema, pode ser Administrador,consultor ou cliente,
+ * caso seja cliente o usuario e direcionado para a rota campus
+ */
+Route::group(['middleware' => ['auth','tipo'], 'prefix' => 'painel'], function (){
 
     //HomeController
     Route::get('/', 'Painel\HomeController@index');
@@ -111,6 +116,14 @@ Route::group(['middleware' => 'auth' , 'prefix' => 'painel'], function (){
     Route::get('/permission', 'Painel\PermissionController@index');
 
 });
+
+Route::group(['middleware' => 'auth', 'prefix' => 'campus'], function (){
+
+    //HomeController
+    Route::get('/', 'Campus\HomeController@index');
+
+});
+
 
 Auth::routes();
 

@@ -182,7 +182,7 @@
                                        class="btn btn-success" alt="Ativar usuário" title="Ativar usuário">
                                         <span class="glyphicon glyphicon-thumbs-down"></span>
                                     </a>
-                            </span>
+                                    </span>
 
                                 </td>
                             </tr>
