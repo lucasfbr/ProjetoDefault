@@ -19,6 +19,7 @@ class CreateArtigosTable extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('titulo');
             $table->text('conteudo');
+            $table->string('imagem')->nullable();
             $table->timestamps();
         });
     }

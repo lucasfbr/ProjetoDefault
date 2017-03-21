@@ -32,7 +32,7 @@ Route::group(['middleware' => ['auth','tipo'], 'prefix' => 'painel'], function (
 
     //ArtigoController
     Route::get('/artigo', 'Painel\ArtigoController@index');
-    Route::get('/artigot/add', 'Painel\ArtigoController@add');
+    Route::get('/artigo/add', 'Painel\ArtigoController@add');
     Route::post('/artigo/create', 'Painel\ArtigoController@create');
     Route::get('/artigo/detail/{id}', 'Painel\ArtigoController@detail');
     Route::get('/artigo/edit/{id}', 'Painel\ArtigoController@edit');
