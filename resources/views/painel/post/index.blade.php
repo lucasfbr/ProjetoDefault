@@ -26,40 +26,48 @@
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                             {{ session('sucesso') }}
                         </div>
+                        <br><br>
                     @elseif(session('erro'))
                         <div class="alert alert-danger alert-dismissible" role="alert">
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                             {{ session('erro') }}
                         </div>
+                        <br><br>
                     @endif
-
-                    <br /><br />
 
                     <a href="/painel/post/add" class="btn btn-success">Novo Post</a>
 
-                    <table class="table table-bordered table-striped table-hover table-condensed">
-                        <tr>
-                            <th>Titulo</th>
-                            <th>Descrição</th>
-                            <th>Ações</th>
-                        </tr>
+                    <br><br>
 
-                        @forelse($posts as $post)
-                            <tr>
-                                <td width="150px">{{$post->titulo}}</td>
-                                <td>{{$post->conteudo}}</td>
-                                <td width="150px">
-                                    <a href="/painel/post/detail/{{$post->id}}" class="btn btn-info" alt="Exibir o post" title="Exibir o post"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
-                                    <a href="/painel/post/edit/{{$post->id}}" class="btn btn-warning" alt="Editar o post" title="Editar o post"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
-                                    <a href="/painel/post/delete/{{$post->id}}" class="btn btn-danger" alt="Excluir o post" title="Excluir o post"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
-                                </td>
-                            </tr>
-                        @empty
-                            <tr>
-                                <td colspan="90"> Nenhum post encontrado </td>
-                            </tr>
-                        @endforelse
-                    </table>
+                        @if(count($posts) > 0)
+                            <div class="row">
+
+                                @foreach($posts as $post)
+                                    <div class="col-sm-6 col-md-4">
+                                        <div class="thumbnail">
+                                            <img class="img-responsive" src="/{{$post->imagem}}" data-holder-rendered="true">
+                                            <div class="caption">
+                                                <h3>{{ str_limit($post->titulo, 20)}}</h3>
+                                                <hr>
+                                                <p>
+                                                    <a href="/painel/post/detail/{{$post->id}}" title="Saiba mais" alt="Saiba mais" class="btn btn-success btn-xs"><span class="glyphicon glyphicon-search"></span> Detalhes</a>
+                                                    <a href="/painel/post/edit/{{$post->id}}" class="btn btn-primary btn-xs" role="button"><span class="glyphicon glyphicon-wrench"></span> Editar</a>
+                                                    <a href="/painel/post/delete/{{$post->id}}" onclick="return confirm('Realmente deseja excluir este post?')" class="btn btn-warning btn-xs" role="button"><span class="glyphicon glyphicon-remove"></span> Excluir</a>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+
+                            </div>
+                        @else
+                            <div class="alert alert-info text-center col-md-6 col-md-offset-3">
+                                <h4>Nenhum post foi cadastrado até o momento!</h4>
+                            </div>
+
+                        @endif
+
+
 
                 </div>
                 <!-- /.box-body -->

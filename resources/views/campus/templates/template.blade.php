@@ -323,6 +323,7 @@
                 <li><a href="/campus"><i class="glyphicon glyphicon-envelope"></i>Mensgens</a></li>
                 <li><a href="/campus"><i class="glyphicon glyphicon-usd"></i>Pagamentos</a></li>
                 <li><a href="/campus"><i class="glyphicon glyphicon-star"></i>Avaliações</a></li>
+                <li><a href="/campus"><i class="glyphicon glyphicon-wrench"></i>Perfil</a></li>
             </ul>
         </section>
         <!-- /.sidebar -->

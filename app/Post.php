@@ -9,7 +9,7 @@ class Post extends Model
 {
 
     protected $fillable = [
-        'user_id','titulo','conteudo','img_p','img_g'
+        'user_id','titulo','conteudo','imagem'
     ];
 
     public function user(){
@@ -18,15 +18,4 @@ class Post extends Model
 
     }
 
-    public function getImgpAttribute($value){
-
-        return str_replace("/public", "", "$value");
-
-    }
-
-    public function getImggAttribute($value){
-
-        return str_replace("/public", "", "$value");
-
-    }
 }

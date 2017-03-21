@@ -7,18 +7,17 @@ use App\Http\Controllers\Controller;
 
 use App\Post;
 use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\File;
 
 
 class PostController extends Controller
 {
     private $post;
-    private $extensoes = ['jpg', 'png'];
-    private $caminhoImg = '/img/posts/';
+    private $extensoes = ['jpg','jpeg', 'png'];
+    private $caminhoImg = 'img/posts/';
 
     public function __construct(Post $post)
     {
-        $this->middleware('auth');
-
         $this->post = $post;
     }
 
@@ -26,7 +25,7 @@ class PostController extends Controller
 
         $posts = $this->post->all();
 
-        return view('painel.post.index', ['posts' => $posts]);
+        return view('painel.post.index', compact('posts'));
 
     }
 
@@ -34,7 +33,9 @@ class PostController extends Controller
 
         $post = $this->post->find($id);
 
-        return view('painel.post.detail', ['post' => $post]);
+        $user = $post->user;
+
+        return view('painel.post.detail', compact('post','user'));
 
     }
 
@@ -46,7 +47,6 @@ class PostController extends Controller
 
     public function create(Request $request){
 
-
         $this->validate($request, [
 
             'user_id' => 'required',
@@ -57,52 +57,27 @@ class PostController extends Controller
 
         $post = new Post();
 
-        $post->titulo = $request->input('titulo');
-        $post->conteudo = $request->input('conteudo');
-        $post->user_id = $request->input('user_id');
-        $post->img_p = '';
-        $post->img_g = '';
+        //verifica se foi enviada alguma imagem com o formulário
+        if(!empty($request->file('imagem'))){
+
+            //armazena a imagem enviada pelo form
+            $image = $request->file('imagem');
+            //pega a extensao da imagem
+            $extensao = $image->getClientOriginalExtension();
+            //recebe o nome da imagem que foi movida para a pasta de destino
+            $post->imagem = $this->moverImagem($image, $extensao);
+        }
+
+        $post->user_id  = $request->user_id;
+        $post->titulo   = $request->titulo;
+        $post->conteudo = $request->conteudo;
 
         if($post->save()){
-
-            if($request->file('img_p')){
-
-                $image = $request->file('img_p');
-
-                $filename  = 'P_' . time() . '.' . $image->getClientOriginalExtension();
-
-                $path = public_path($this->caminhoImg . $filename);
-
-                Image::make($image->getRealPath())->resize(200, 200)->save($path);
-
-                $post->img_p = $this->caminhoImg . $filename;
-
-                $post->save();
-            }
-
-            if($request->file('img_g')){
-
-                $image = $request->file('img_g');
-
-                $filename  = 'G_' . time() . '.' . $image->getClientOriginalExtension();
-
-                $path = public_path($this->caminhoImg . $filename);
-
-                Image::make($image->getRealPath())->resize(400, 300)->save($path);
-
-                $post->img_g = $this->caminhoImg . $filename;
-
-                $post->save();
-            }
-
             return redirect('/painel/post')->with('sucesso', 'Post cadastrado com sucesso!');
-
-
         }else{
-
             return redirect('/painel/post')->with('erro', 'Erro ao cadastrar o post, tente novamente mais tarde!');
-
         }
+
 
     }
 
@@ -124,10 +99,22 @@ class PostController extends Controller
 
         $post =  $this->post->find($id);
 
-        $dados = $request->only('titulo', 'conteudo');
+        //verifica se foi enviada alguma imagem com o formulário
+        if(!empty($request->file('imagem'))){
+
+            //armazena a imagem enviada pelo form
+            $image = $request->file('imagem');
+            //pega a extensao da imagem
+            $extensao = $image->getClientOriginalExtension();
+            //recebe o nome da imagem que foi movida para a pasta de destino
+            $post->imagem = $this->moverImagem($image, $extensao);
+        }
+
+        $post->titulo = $request->titulo;
+        $post->conteudo = $request->conteudo;
 
         //atualizando o post e redirecionando para a lista de posts
-        if($post->update($dados)){
+        if($post->update()){
             return redirect('/painel/post')->with('sucesso', 'Post atualizado com sucesso!');
         }else{
             return redirect('/painel/post')->with('erro', 'Erro ao atualizar o post, tente novamente mais tarde!');
@@ -136,12 +123,51 @@ class PostController extends Controller
 
     public function delete($id){
 
-        $post = Post::find($id);
+        $post = $this->post->find($id);
 
         if($post->delete()){
+
+            //metodo que verifica se a imagem salva no banco exite no diretorio
+            //caso exista remove a mesma do diretorio
+            $this->removeImagemDir($post->imagem);
+
             return redirect('/painel/post')->with('sucesso', 'Post deletado com sucesso!');
         }else{
             return redirect('/painel/post')->with('erro', 'Erro ao deletar o post, tente novamente mais tarde!');
+        }
+
+    }
+
+    /*
+     * Metodo responsavel por verificar a extensao, redimencionar e mover a imagem para seu destino
+     */
+    public function moverImagem($image, $extensao){
+
+        if(!in_array($extensao, $this->extensoes)) {
+            return back()->with('erro', 'Erro ao fazer upload de imagem! Formatos aceitos: jpg, jpeg e png');
+        } else {
+
+            $filename = 'posts' . time() . '.' . $extensao;
+
+            $path = public_path($this->caminhoImg . $filename);
+
+            Image::make($image->getRealPath())->resize(640,427)->save($path);
+
+            return $this->caminhoImg . $filename;
+
+        }
+
+    }
+
+    /*
+   * Metodo responsavel por verificar se a imagem existe no diretorio e remove-lá
+   */
+    public function removeImagemDir($imagem){
+
+        //verifica se a foto antiga existe no diretorio
+        if(File::exists($imagem)) {
+            //remove a foto do diretorio
+            File::delete($imagem);
         }
 
     }

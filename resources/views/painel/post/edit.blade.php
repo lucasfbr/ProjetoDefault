@@ -9,7 +9,7 @@
         </h1>
         <ol class="breadcrumb">
             <li><a href="/painel"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li class="/painel/post">Posts</li>
+            <li><a href="/painel/post">Posts</a></li>
             <li class="active">Edit</li>
         </ol>
     </section>
@@ -62,8 +62,9 @@
                         <div class="col-md-12">
                             <div class="form-group{{ $errors->has('conteudo') ? ' has-error' : '' }}">
                                 <label>Conteúdo</label>
-                                <textarea class="form-control" id="conteudo" name="conteudo" rows="10"
-                                          placeholder="Conteúdo do post ...">{{ $post->titulo }}</textarea>
+                                <textarea class="form-control textarea" id="conteudo" name="conteudo" rows="10">
+                                    {!! $post->conteudo !!}
+                                </textarea>
 
                                 @if ($errors->has('conteudo'))
                                     <span class="help-block">
@@ -75,19 +76,10 @@
 
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="img">Imagem destacada</label>
-                                <input type="file" id="img_p" name="img_p">
+                                <label for="img">Imagem</label>
+                                <input type="file" id="imagem" name="imagem">
 
-                                <p class="help-block">Selecione uma imagem para ser exibida no resumo</p>
-                            </div>
-                        </div>
-
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="img">Imagem do texto</label>
-                                <input type="file" id="img_g" name="img_g">
-
-                                <p class="help-block">Selecione uma imagem para ser exibida com o post completo</p>
+                                <p class="help-block">Selecione uma imagem para ser exibida no topo do post</p>
                             </div>
                         </div>
 

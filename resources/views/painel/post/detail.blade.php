@@ -22,9 +22,29 @@
 
                 <div class="box-body">
 
-                    <h1>{{ $post->titulo }}</h1>
+                    <div class="box box-widget">
+                        <div class="box-header with-border">
+                            <div class="user-block">
+                                <img class="img-circle" src="/{{$user->foto}}" alt="User Image">
+                                <span class="username"><a href="#">{{$user->name}}</a></span>
+                                <span class="description">Publicado - {{$user->created_at}}</span>
+                            </div>
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body">
 
-                    {!! $post->conteudo !!}
+                            <div class="col-xs-12 col-md-9">
+                                <img class="img-responsive pad" src="/{{$post->imagem}}" alt="Photo">
+
+                                <div class="text-justify">{!! $post->conteudo !!}</div>
+                            </div>
+
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+
+
+
 
                 </div>
                 <!-- /.box-body -->
