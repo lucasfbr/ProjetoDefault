@@ -50,6 +50,8 @@
                 <li><a href="#quemsomos">Quem Somos</a></li>
                 <li><a href="#localizacao">Localizacao</a></li>
                 <li><a href="#contato">Contato</a></li>
+                <li><a href="/artigos">Artigos</a></li>
+                <li><a href="/posts">Blog</a></li>
                 <li><a href="/login">Login</a></li>
             </ul>
         </div><!-- /.navbar-collapse -->

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Painel;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -22,29 +23,34 @@ class ArtigoController extends Controller
         $this->artigo = $artigo;
     }
 
+    public function index($tipo){
 
-    public function index(){
-        
-        $artigos = Artigo::all();
 
-        return view('painel.artigo.index', compact('artigos'));
+        if($tipo == 'published') {
+            //foi criado no model um scope que representará uma query que foi nomeada de "published"
+            $artigos = Artigo::latest('published_at')->published()->get();
+        }else{
+            //foi criado no model um scope que representará uma query que foi nomeada de "unpublished"
+            $artigos = Artigo::latest('published_at')->unpublished()->get();
+        }
+
+        return view('painel.artigo.index', compact('artigos', 'tipo'));
 
     }
 
-
-    public function detail($id){
+    public function detail($id,$tipo){
 
         $artigo = $this->artigo->find($id);
 
         $user = $artigo->user;
 
-        return view('painel.artigo.detail', compact('artigo','user'));
+        return view('painel.artigo.detail', compact('artigo','user','tipo'));
 
     }
 
-    public function add(){
+    public function add($tipo){
 
-        return view('painel.artigo.add');
+        return view('painel.artigo.add', compact('tipo'));
 
     }
 
@@ -54,11 +60,14 @@ class ArtigoController extends Controller
 
             'user_id' => 'required',
             'titulo' => 'required',
-            'conteudo' => 'required|min:10'
+            'conteudo' => 'required|min:10',
+            'published_at' => 'required'
 
         ]);
 
-        $artigo = new artigo();
+        $input = $request->all();
+
+        $tipo = $request->tipo;
 
         //verifica se foi enviada alguma imagem com o formulário
         if(!empty($request->file('imagem'))){
@@ -68,26 +77,24 @@ class ArtigoController extends Controller
             //pega a extensao da imagem
             $extensao = $image->getClientOriginalExtension();
             //recebe o nome da imagem que foi movida para a pasta de destino
-            $artigo->imagem = $this->moverImagem($image, $extensao);
+            $input['imagem'] = $this->moverImagem($image, $extensao);
         }
 
-        $artigo->user_id  = $request->user_id;
-        $artigo->titulo   = $request->titulo;
-        $artigo->conteudo = $request->conteudo;
+       $artigo = $this->artigo->create($input);
 
-        if($artigo->save()){
-            return redirect('/painel/artigo')->with('sucesso', 'artigo cadastrado com sucesso!');
+        if($artigo){
+            return redirect('/painel/artigo/'.$tipo)->with('sucesso', 'artigo cadastrado com sucesso!');
         }else{
-            return redirect('/painel/artigo')->with('erro', 'Erro ao cadastrar o artigo, tente novamente mais tarde!');
+            return redirect('/painel/artigo/'.$tipo)->with('erro', 'Erro ao cadastrar o artigo, tente novamente mais tarde!');
         }
 
     }
 
-    public function edit($id){
+    public function edit($id,$tipo){
 
         $artigo = $this->artigo->find($id);
 
-        return view('painel.artigo.edit', compact('artigo'));
+        return view('painel.artigo.edit', compact('artigo','tipo'));
 
     }
 
@@ -95,11 +102,17 @@ class ArtigoController extends Controller
 
         $this->validate($request, [
             'titulo'   => 'required',
-            'conteudo' => 'required|min:10'
+            'conteudo' => 'required|min:10',
+            'published_at' => 'required'
+
 
         ]);
 
         $artigo =  $this->artigo->find($id);
+
+        $input = $request->all();
+
+        $tipo = $request->tipo;
 
         //verifica se foi enviada alguma imagem com o formulário
         if(!empty($request->file('imagem'))){
@@ -109,21 +122,20 @@ class ArtigoController extends Controller
             //pega a extensao da imagem
             $extensao = $image->getClientOriginalExtension();
             //recebe o nome da imagem que foi movida para a pasta de destino
-            $artigo->imagem = $this->moverImagem($image, $extensao);
+            $input['imagem'] = $this->moverImagem($image, $extensao);
         }
 
-        $artigo->titulo = $request->titulo;
-        $artigo->conteudo = $request->conteudo;
+        $update = $artigo->update($input);
 
         //atualizando o artigo e redirecionando para a lista de artigos
-        if($artigo->update()){
-            return redirect('/painel/artigo')->with('sucesso', 'artigo atualizado com sucesso!');
+        if($update){
+            return redirect('/painel/artigo/'.$tipo)->with('sucesso', 'artigo atualizado com sucesso!');
         }else{
-            return redirect('/painel/artigo')->with('erro', 'Erro ao atualizar o artigo, tente novamente mais tarde!');
+            return redirect('/painel/artigo/'.$tipo)->with('erro', 'Erro ao atualizar o artigo, tente novamente mais tarde!');
         }
     }
 
-    public function delete($id){
+    public function delete($id,$tipo){
 
         $artigo = $this->artigo->find($id);
 
@@ -133,9 +145,9 @@ class ArtigoController extends Controller
             //caso exista remove a mesma do diretorio
             $this->removeImagemDir($artigo->imagem);
 
-            return redirect('/painel/artigo')->with('sucesso', 'artigo deletado com sucesso!');
+            return redirect('/painel/artigo/'.$tipo)->with('sucesso', 'artigo deletado com sucesso!');
         }else{
-            return redirect('/painel/artigo')->with('erro', 'Erro ao deletar o artigo, tente novamente mais tarde!');
+            return redirect('/painel/artigo/'.$tipo)->with('erro', 'Erro ao deletar o artigo, tente novamente mais tarde!');
         }
 
     }

@@ -6,7 +6,7 @@
         <section class="content-header">
             <h1>
                 Posts
-                <small>cadastrar, editar e excluir posts</small>
+                <small>{{$tipo == 'published' ? 'publicados' : 'não publicados'}}</small>
             </h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -35,7 +35,7 @@
                         <br><br>
                     @endif
 
-                    <a href="/painel/post/add" class="btn btn-success">Novo Post</a>
+                    <a href="/painel/post/add/{{$tipo}}" class="btn btn-success">Novo Post</a>
 
                     <br><br>
 
@@ -50,9 +50,9 @@
                                                 <h3>{{ str_limit($post->titulo, 20)}}</h3>
                                                 <hr>
                                                 <p>
-                                                    <a href="/painel/post/detail/{{$post->id}}" title="Saiba mais" alt="Saiba mais" class="btn btn-success btn-xs"><span class="glyphicon glyphicon-search"></span> Detalhes</a>
-                                                    <a href="/painel/post/edit/{{$post->id}}" class="btn btn-primary btn-xs" role="button"><span class="glyphicon glyphicon-wrench"></span> Editar</a>
-                                                    <a href="/painel/post/delete/{{$post->id}}" onclick="return confirm('Realmente deseja excluir este post?')" class="btn btn-warning btn-xs" role="button"><span class="glyphicon glyphicon-remove"></span> Excluir</a>
+                                                    <a href="/painel/post/detail/{{$post->id}}/{{$tipo}}" title="Saiba mais" alt="Saiba mais" class="btn btn-success btn-xs"><span class="glyphicon glyphicon-search"></span> Detalhes</a>
+                                                    <a href="/painel/post/edit/{{$post->id}}/{{$tipo}}" class="btn btn-primary btn-xs" role="button"><span class="glyphicon glyphicon-wrench"></span> Editar</a>
+                                                    <a href="/painel/post/delete/{{$post->id}}/{{$tipo}}" onclick="return confirm('Realmente deseja excluir este post?')" class="btn btn-warning btn-xs" role="button"><span class="glyphicon glyphicon-remove"></span> Excluir</a>
                                                 </p>
                                             </div>
                                         </div>

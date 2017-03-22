@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 use App\Post;
+use App\User;
+use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\File;
 
@@ -21,27 +23,39 @@ class PostController extends Controller
         $this->post = $post;
     }
 
-    public function index(){
+    public function index($tipo = 'published'){
 
-        $posts = $this->post->all();
+        $user = User::find(Auth::user()->id);
 
-        return view('painel.post.index', compact('posts'));
+        if($tipo == 'published') {
+            //foi criado no model um scope que representará uma query que foi nomeada de "published"
+            $posts = $user->post()->latest('published_at')->published()->get();
+        }else{
+            //foi criado no model um scope que representará uma query que foi nomeada de "unpublished"
+            $posts = $user->post()->latest('published_at')->unpublished()->get();
+        }
 
-    }
-
-    public function detail($id){
-
-        $post = $this->post->find($id);
-
-        $user = $post->user;
-
-        return view('painel.post.detail', compact('post','user'));
+        return view('painel.post.index', compact('posts','tipo'));
 
     }
 
-    public function add(){
+    public function detail($id,$tipo){
 
-        return view('painel.post.add');
+        $user = User::find(Auth::user()->id);
+
+        $post = $user->post->find($id);
+
+        if(!$post){
+            return redirect('/painel/post/'.$tipo);
+        }
+
+        return view('painel.post.detail', compact('post','user','tipo'));
+
+    }
+
+    public function add($tipo){
+
+        return view('painel.post.add', compact('tipo'));
 
     }
 
@@ -51,11 +65,14 @@ class PostController extends Controller
 
             'user_id' => 'required',
             'titulo' => 'required',
-            'conteudo' => 'required|min:10'
+            'conteudo' => 'required|min:10',
+            'published_at' => 'required'
 
         ]);
 
-        $post = new Post();
+        $input = $request->all();
+
+        $tipo = $request->tipo;
 
         //verifica se foi enviada alguma imagem com o formulário
         if(!empty($request->file('imagem'))){
@@ -65,27 +82,31 @@ class PostController extends Controller
             //pega a extensao da imagem
             $extensao = $image->getClientOriginalExtension();
             //recebe o nome da imagem que foi movida para a pasta de destino
-            $post->imagem = $this->moverImagem($image, $extensao);
+            $input['imagem'] = $this->moverImagem($image, $extensao);
         }
 
-        $post->user_id  = $request->user_id;
-        $post->titulo   = $request->titulo;
-        $post->conteudo = $request->conteudo;
+        $post = $this->post->create($input);
 
-        if($post->save()){
-            return redirect('/painel/post')->with('sucesso', 'Post cadastrado com sucesso!');
+        if($post){
+            return redirect('/painel/post/'.$tipo)->with('sucesso', 'Post cadastrado com sucesso!');
         }else{
-            return redirect('/painel/post')->with('erro', 'Erro ao cadastrar o post, tente novamente mais tarde!');
+            return redirect('/painel/post/'.$tipo)->with('erro', 'Erro ao cadastrar o post, tente novamente mais tarde!');
         }
 
 
     }
 
-    public function edit($id){
+    public function edit($id,$tipo){
 
-        $post = $this->post->find($id);
+        $user = User::find(Auth::user()->id);
 
-        return view('painel.post.edit', ['post' => $post]);
+        $post =  $user->post->find($id);
+
+        if(!$post){
+            return redirect('/painel/post/'.$tipo);
+        }
+
+        return view('painel.post.edit', compact('post','tipo'));
 
     }
 
@@ -93,11 +114,21 @@ class PostController extends Controller
 
         $this->validate($request, [
             'titulo'   => 'required',
-            'conteudo' => 'required|min:10'
-
+            'conteudo' => 'required|min:10',
+            'published_at' => 'required'
         ]);
 
-        $post =  $this->post->find($id);
+        $tipo = $request->tipo;
+
+        $user = User::find(Auth::user()->id);
+
+        $post =  $user->post->find($id);
+
+        if(!$post){
+            return redirect('/painel/post/'.$tipo);
+        }
+
+        $input = $request->all();
 
         //verifica se foi enviada alguma imagem com o formulário
         if(!empty($request->file('imagem'))){
@@ -107,23 +138,28 @@ class PostController extends Controller
             //pega a extensao da imagem
             $extensao = $image->getClientOriginalExtension();
             //recebe o nome da imagem que foi movida para a pasta de destino
-            $post->imagem = $this->moverImagem($image, $extensao);
+            $input['imagem'] = $this->moverImagem($image, $extensao);
         }
 
-        $post->titulo = $request->titulo;
-        $post->conteudo = $request->conteudo;
+        $update = $post->update($input);
 
         //atualizando o post e redirecionando para a lista de posts
-        if($post->update()){
-            return redirect('/painel/post')->with('sucesso', 'Post atualizado com sucesso!');
+        if($update){
+            return redirect('/painel/post/'.$tipo)->with('sucesso', 'Post atualizado com sucesso!');
         }else{
-            return redirect('/painel/post')->with('erro', 'Erro ao atualizar o post, tente novamente mais tarde!');
+            return redirect('/painel/post/'.$tipo)->with('erro', 'Erro ao atualizar o post, tente novamente mais tarde!');
         }
     }
 
-    public function delete($id){
+    public function delete($id,$tipo){
 
-        $post = $this->post->find($id);
+        $user = User::find(Auth::user()->id);
+
+        $post =  $user->post->find($id);
+
+        if(!$post){
+            return redirect('/painel/post/'.$tipo);
+        }
 
         if($post->delete()){
 
@@ -131,9 +167,9 @@ class PostController extends Controller
             //caso exista remove a mesma do diretorio
             $this->removeImagemDir($post->imagem);
 
-            return redirect('/painel/post')->with('sucesso', 'Post deletado com sucesso!');
+            return redirect('/painel/post/'.$tipo)->with('sucesso', 'Post deletado com sucesso!');
         }else{
-            return redirect('/painel/post')->with('erro', 'Erro ao deletar o post, tente novamente mais tarde!');
+            return redirect('/painel/post/'.$tipo)->with('erro', 'Erro ao deletar o post, tente novamente mais tarde!');
         }
 
     }

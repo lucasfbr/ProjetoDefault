@@ -9,7 +9,7 @@
         </h1>
         <ol class="breadcrumb">
             <li><a href="/painel"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li><a href="/painel/artigo">Artigos</a></li>
+            <li><a href="/painel/artigo/{{$tipo}}">Artigos</a></li>
             <li class="active">Edit</li>
         </ol>
     </section>
@@ -40,7 +40,7 @@
                 </div>
                 <!-- /.box-header -->
                 <!-- form start -->
-                <form role="form" method="artigo" action="/painel/artigo/update/{{$artigo->id}}" enctype="multipart/form-data">
+                <form role="form" method="post" action="/painel/artigo/update/{{$artigo->id}}" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     <div class="box-body">
 
@@ -83,7 +83,24 @@
                             </div>
                         </div>
 
+                        <div class="col-md-12">
+                            <div class="form-group{{ $errors->has('published_at') ? ' has-error' : '' }}">
+                                <label for="published_at">Data de publicação</label>
+                                <input class="form-control" id="published_at" name="published_at" value="{{ $artigo->published_at }}"
+                                       type="date" data-inputmask="'alias': 'dd-mm-yyyy'" data-mask="">
+
+                                @if ($errors->has('published_at'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('published_at') }}</strong>
+                                    </span>
+                                @endif
+
+                            </div>
+                        </div>
+
                     </div>
+
+                    <input type="hidden" name="tipo" id="tipo" value="{{ $tipo }}">
 
                     <div class="box-footer">
                         <input type="submit" class="btn btn-primary" value="Editar">

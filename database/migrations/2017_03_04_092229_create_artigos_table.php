@@ -21,6 +21,7 @@ class CreateArtigosTable extends Migration
             $table->text('conteudo');
             $table->string('imagem')->nullable();
             $table->timestamps();
+            $table->dateTime('published_at');
         });
     }
 

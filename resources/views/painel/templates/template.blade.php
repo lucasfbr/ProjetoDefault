@@ -331,8 +331,29 @@
                     </ul>
                 </li>
                 <li class="header">CONFIG. PORTAL</li>
-                <li><a href="/painel/artigo"><i class="fa fa-newspaper-o" aria-hidden="true"></i>Artigos</a></li>
-                <li><a href="/painel/post"><i class="fa fa-bars" aria-hidden="true"></i>Posts</a></li>
+
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-newspaper-o" aria-hidden="true"></i><span>Artigos</span>
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="/painel/artigo/published"><i class="glyphicon glyphicon-ok"></i>Publicados</a></li>
+                        <li><a href="/painel/artigo/unpublished"><i class="glyphicon glyphicon-remove" aria-hidden="true"></i>Não publicados</a></li>
+                    </ul>
+                </li>
+
+                <li class="treeview">
+                    <a href="#">
+                        <i class="glyphicon glyphicon-th-large" aria-hidden="true"></i><span>Posts</span>
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="/painel/post/published"><i class="glyphicon glyphicon-ok"></i>Publicados</a></li>
+                        <li><a href="/painel/post/unpublished"><i class="glyphicon glyphicon-remove" aria-hidden="true"></i>Não publicados</a></li>
+                    </ul>
+                </li>
+
                 <li><a href="/painel/service"><i class="fa fa-share-alt" aria-hidden="true"></i>Serviços</a></li>
                 <li><a href="/painel/portifolio"><i class="glyphicon glyphicon-th" aria-hidden="true"></i>Portifólio</a></li>
                 <li><a href="/painel/quemsomos"><i class="glyphicon glyphicon-th-list" aria-hidden="true"></i>Quem somos</a></li>

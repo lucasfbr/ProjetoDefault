@@ -13,6 +13,10 @@ class DatabaseSeeder extends Seeder
     {
          //this->call(UsersTableSeeder::class);
 
-        factory('App\User', 10)->create();
+        //gerar 10 usuarios aleatorios
+        //factory('App\User', 10)->create();
+
+        //gerar o usuario administrador
+        factory('App\User')->create();
     }
 }

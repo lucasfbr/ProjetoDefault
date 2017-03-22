@@ -35,7 +35,8 @@
                         <br><br>
                     @endif
 
-                    <a href="/painel/artigo/add" class="btn btn-success">Novo artigo</a>
+
+                    <a href="/painel/artigo/add/{{$tipo}}" class="btn btn-success">Novo artigo</a>
 
                     <br><br>
 
@@ -50,9 +51,9 @@
                                                 <h3>{{ str_limit($artigo->titulo, 20)}}</h3>
                                                 <hr>
                                                 <p>
-                                                    <a href="/painel/artigo/detail/{{$artigo->id}}" title="Saiba mais" alt="Saiba mais" class="btn btn-success btn-xs"><span class="glyphicon glyphicon-search"></span> Detalhes</a>
-                                                    <a href="/painel/artigo/edit/{{$artigo->id}}" class="btn btn-primary btn-xs" role="button"><span class="glyphicon glyphicon-wrench"></span> Editar</a>
-                                                    <a href="/painel/artigo/delete/{{$artigo->id}}" onclick="return confirm('Realmente deseja excluir este artigo?')" class="btn btn-warning btn-xs" role="button"><span class="glyphicon glyphicon-remove"></span> Excluir</a>
+                                                    <a href="/painel/artigo/detail/{{$artigo->id}}/{{$tipo}}" title="Saiba mais" alt="Saiba mais" class="btn btn-success btn-xs"><span class="glyphicon glyphicon-search"></span> Detalhes</a>
+                                                    <a href="/painel/artigo/edit/{{$artigo->id}}/{{$tipo}}" class="btn btn-primary btn-xs" role="button"><span class="glyphicon glyphicon-wrench"></span> Editar</a>
+                                                    <a href="/painel/artigo/delete/{{$artigo->id}}/{{$tipo}}" onclick="return confirm('Realmente deseja excluir este artigo?')" class="btn btn-warning btn-xs" role="button"><span class="glyphicon glyphicon-remove"></span> Excluir</a>
                                                 </p>
                                             </div>
                                         </div>

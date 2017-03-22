@@ -22,22 +22,22 @@ Route::group(['middleware' => ['auth','tipo'], 'prefix' => 'painel'], function (
     Route::get('/', 'Painel\HomeController@index');
 
     //PostController
-    Route::get('/post', 'Painel\PostController@index');
-    Route::get('/post/add', 'Painel\PostController@add');
+    Route::get('/post/{tipo}', 'Painel\PostController@index');
+    Route::get('/post/add/{tipo}', 'Painel\PostController@add');
     Route::post('/post/create', 'Painel\PostController@create');
-    Route::get('/post/detail/{id}', 'Painel\PostController@detail');
-    Route::get('/post/edit/{id}', 'Painel\PostController@edit');
+    Route::get('/post/detail/{id}/{tipo}', 'Painel\PostController@detail');
+    Route::get('/post/edit/{id}/{tipo}', 'Painel\PostController@edit');
     Route::post('/post/update/{id}', 'Painel\PostController@update');
-    Route::get('/post/delete/{id}', 'Painel\PostController@delete');
+    Route::get('/post/delete/{id}/{tipo}', 'Painel\PostController@delete');
 
     //ArtigoController
-    Route::get('/artigo', 'Painel\ArtigoController@index');
-    Route::get('/artigo/add', 'Painel\ArtigoController@add');
+    Route::get('/artigo/{tipo}', 'Painel\ArtigoController@index');
+    Route::get('/artigo/add/{tipo}', 'Painel\ArtigoController@add');
     Route::post('/artigo/create', 'Painel\ArtigoController@create');
-    Route::get('/artigo/detail/{id}', 'Painel\ArtigoController@detail');
-    Route::get('/artigo/edit/{id}', 'Painel\ArtigoController@edit');
+    Route::get('/artigo/detail/{id}/{tipo}', 'Painel\ArtigoController@detail');
+    Route::get('/artigo/edit/{id}/{tipo}', 'Painel\ArtigoController@edit');
     Route::post('/artigo/update/{id}', 'Painel\ArtigoController@update');
-    Route::get('/artigo/delete/{id}', 'Painel\ArtigoController@delete');
+    Route::get('/artigo/delete/{id}/{tipo}', 'Painel\ArtigoController@delete');
 
     //UserController
     Route::get('/user', 'Painel\UserController@index');
@@ -140,5 +140,11 @@ Route::get('/quemsomos', 'Portal\QuemsomosController@index');
 
 //NossaEquipeController
 Route::get('/nossaequipe', 'Portal\NossaequipeController@index');
+
+//ArtigosController
+Route::get('/artigos', 'Portal\ArtigoController@index');
+
+//PostsController
+Route::get('/posts', 'Portal\PostController@index');
 
 

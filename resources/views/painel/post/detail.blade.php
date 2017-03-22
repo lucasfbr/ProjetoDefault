@@ -10,7 +10,7 @@
             </h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li><a href="/painel/post">Posts</a></li>
+                <li><a href="/painel/post/{{$tipo}}">Posts</a></li>
                 <li class="active">Detalhes</li>
             </ol>
         </section>

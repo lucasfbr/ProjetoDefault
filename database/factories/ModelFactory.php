@@ -12,18 +12,27 @@
 */
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
-$factory->define(App\User::class, function (Faker\Generator $faker) {
+/*$factory->define(App\User::class, function (Faker\Generator $faker) {
     static $password;
 
     return [
         'name' => $faker->name,
         'email' => $faker->unique()->safeEmail,
-        'estado' => $faker->country,
-        'cidade' => $faker->city,
-        'logradouro' => $faker->address,
         'tipo' => '1',
-        'numero' => $faker->numberBetween(10, 10000),
         'password' => $password ?: $password = bcrypt('secret'),
+        'remember_token' => str_random(10),
+    ];
+});*/
+
+$factory->define(App\User::class, function (Faker\Generator $faker) {
+    static $password;
+
+    return [
+        'name' => 'Lucas Rosa',
+        'email' => 'lucas-fbr@hotmail.com',
+        'password' => bcrypt('123456'),
+        'tipo' => '0',
+        'usuarioPrincipal' => '1',
         'remember_token' => str_random(10),
     ];
 });

@@ -9,7 +9,7 @@
         </h1>
         <ol class="breadcrumb">
             <li><a href="/painel"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li><a href="/painel/post">Posts</a></li>
+            <li><a href="/painel/post/{{$tipo}}">Posts</a></li>
             <li class="active">Edit</li>
         </ol>
     </section>
@@ -82,6 +82,23 @@
                                 <p class="help-block">Selecione uma imagem para ser exibida no topo do post</p>
                             </div>
                         </div>
+
+                        <div class="col-md-12">
+                            <div class="form-group{{ $errors->has('published_at') ? ' has-error' : '' }}">
+                                <label for="published_at">Data de publicação</label>
+                                <input class="form-control" id="published_at" name="published_at" value="{{ $post->published_at }}"
+                                       type="date" data-inputmask="'alias': 'dd-mm-yyyy'" data-mask="">
+
+                                @if ($errors->has('published_at'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('published_at') }}</strong>
+                                    </span>
+                                @endif
+
+                            </div>
+                        </div>
+
+                        <input type="hidden" name="tipo" id="tipo" value="{{ $tipo }}">
 
                     </div>
 
