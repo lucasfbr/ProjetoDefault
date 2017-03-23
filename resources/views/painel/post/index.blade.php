@@ -48,7 +48,7 @@
                                             <img class="img-responsive" src="/{{$post->imagem}}" data-holder-rendered="true">
                                             <div class="caption">
                                                 <h3>{{ str_limit($post->titulo, 20)}}</h3>
-                                                <hr>
+                                                <h5 class="text-info">Por {{$post->user->name}}</h5>
                                                 <p>
                                                     <a href="/painel/post/detail/{{$post->id}}/{{$tipo}}" title="Saiba mais" alt="Saiba mais" class="btn btn-success btn-xs"><span class="glyphicon glyphicon-search"></span> Detalhes</a>
                                                     <a href="/painel/post/edit/{{$post->id}}/{{$tipo}}" class="btn btn-primary btn-xs" role="button"><span class="glyphicon glyphicon-wrench"></span> Editar</a>

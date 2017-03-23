@@ -25,9 +25,9 @@
                     <div class="box box-widget">
                         <div class="box-header with-border">
                             <div class="user-block">
-                                <img class="img-circle" src="/{{$user->foto ? $user->foto : 'img/default3.png' }}" alt="User Image">
-                                <span class="username"><a href="#">{{$user->name}}</a></span>
-                                <span class="description">Publicado - {{$user->created_at}}</span>
+                                <img class="img-circle" src="/{{$post->user->foto ? $user->foto : 'img/default3.png' }}" alt="User Image">
+                                <span class="username"><a href="#">{{$post->user->name}}</a></span>
+                                <span class="description">Publicado - {{$post->user->created_at}}</span>
                             </div>
                         </div>
                         <!-- /.box-header -->

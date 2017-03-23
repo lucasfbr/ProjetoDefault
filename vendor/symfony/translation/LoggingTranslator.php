@@ -89,9 +89,9 @@ class LoggingTranslator implements TranslatorInterface, TranslatorBagInterface
     }
 
     /**
-     * Gets the fallback locales.
+     * Gets the fallback locale.
      *
-     * @return array $locales The fallback locales
+     * @return array $locale The fallback locale
      */
     public function getFallbackLocales()
     {

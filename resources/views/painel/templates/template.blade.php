@@ -400,14 +400,20 @@
 <script src="/assets/painel/plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
 <script src="/assets/painel/plugins/input-mask/jquery.inputmask.extensions.js"></script>
 
+
 <script>
     $(function () {
 
         $("[data-mask]").inputmask();
 
-    });
+        $('#datetimepicker2').datetimepicker({
+            locale: 'pt-br',
 
+        });
+
+    });
 </script>
+
 
 
 <!-- Morris.js charts -->
@@ -421,12 +427,13 @@
 <!-- jQuery Knob Chart -->
 <script src="/assets/painel/plugins/knob/jquery.knob.js"></script>
 <!-- daterangepicker -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>-->
 <script src="/assets/painel/plugins/daterangepicker/daterangepicker.js"></script>
 <!-- datepicker -->
 <script src="/assets/painel/plugins/datepicker/bootstrap-datepicker.js"></script>
 <!-- Bootstrap WYSIHTML5 -->
 <script src="/assets/painel/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+
 
 
 

@@ -160,7 +160,7 @@ class ProviderOverrideTest extends \PHPUnit_Framework_TestCase
 
 
     /**
-     * Returns all locales as array values
+     * Returns all locale as array values
      *
      * @return array
      */

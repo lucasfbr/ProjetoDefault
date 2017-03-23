@@ -14721,7 +14721,7 @@ function program17(depth0,data) {
         });
         var culture = options.locale || defaultOptions.locale || 'en';
         if(!locale.hasOwnProperty(culture)) {
-          console.debug('Locale \'' + culture + '\' not found. Available locales are: ' + Object.keys(locale) + '. Falling back to \'en\'.');
+          console.debug('Locale \'' + culture + '\' not found. Available locale are: ' + Object.keys(locale) + '. Falling back to \'en\'.');
           culture = 'en';
         }
         var localeObject = $.extend(true, {}, locale.en, locale[culture]);

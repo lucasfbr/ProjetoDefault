@@ -146,5 +146,6 @@ Route::get('/artigos', 'Portal\ArtigoController@index');
 
 //PostsController
 Route::get('/posts', 'Portal\PostController@index');
+Route::get('/posts/show/{id}', 'Portal\PostController@show');
 
 

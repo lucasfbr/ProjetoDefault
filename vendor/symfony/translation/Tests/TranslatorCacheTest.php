@@ -190,7 +190,7 @@ class TranslatorCacheTest extends \PHPUnit_Framework_TestCase
          */
 
         /*
-         * Create a translator that loads two catalogues for two different locales.
+         * Create a translator that loads two catalogues for two different locale.
          * The catalogues contain distinct sets of messages.
          */
         $translator = new Translator('a', null, $this->tmpDir);

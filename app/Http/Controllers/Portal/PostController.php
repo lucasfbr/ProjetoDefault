@@ -8,6 +8,11 @@ use App\Post;
 
 class PostController extends Controller
 {
+
+    public function __construct(){
+        \Carbon\Carbon::setLocale('pt_BR');
+    }
+
     public function index(){
 
         $posts = Post::latest('published_at')->published()->with('user')->get();
@@ -18,7 +23,7 @@ class PostController extends Controller
 
     public function show($id){
 
-        $post = Post::find($id)->published()->get();
+        $post = Post::find($id);
 
         return view('portal.post.show', compact('post'));
 

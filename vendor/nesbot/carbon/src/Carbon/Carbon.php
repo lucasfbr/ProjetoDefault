@@ -1145,7 +1145,7 @@ class Carbon extends DateTime
 
         if (file_exists($filename = __DIR__.'/Lang/'.$locale.'.php')) {
             static::translator()->setLocale($locale);
-            // Ensure the locale has been loaded.
+            // Ensure the locales has been loaded.
             static::translator()->addResource('array', require $filename, $locale);
 
             return true;

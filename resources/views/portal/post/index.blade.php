@@ -19,31 +19,52 @@
         <div class="container">
 
             @if(count($posts) > 0)
-                <div class="row">
+
 
                     @foreach($posts as $post)
-                        <div class="row">
-                            <div class="col-xs-6">
+                        <div class="row portalPost">
+                            <div class="col-xs-12 col-md-6 col-lg-6">
                                 <div class="thumbnail">
-                                    <img class="img-responsive" src="/{{$post->imagem}}" data-holder-rendered="true">
+                                    <a href="/posts/show/{{$post->id}}">
+                                        <img class="img-responsive" src="/{{$post->imagem}}" data-holder-rendered="true">
+                                    </a>
                                 </div>
                             </div>
-                            <div class="col-xs-6">
-                                <div class="usuarioPost">
-                                    <img class="img-circle img-responsive" src="/{{$post->user->foto ? $post->user->foto : 'img/default3.png'}}" data-holder-rendered="true">
-                                    <p class="dataPublicacao">{{$post->published_at}}</p>
-                                </div>
+                            <div class="col-xs-12 col-md-6 col-lg-6">
+
                                 <div class="tituloPost">
-                                    <h3>{{$post->titulo}}</h3>
+                                    <p>
+                                        <strong>categoria</strong>
+                                        -
+                                        <span class="dataPost">{{\Carbon\Carbon::parse($post->published_at)->diffForHumans()}}</span>
+                                    </p>
+
+                                    <h3><a href="/posts/show/{{$post->id}}">{{$post->titulo}}</a></h3>
                                 </div>
                                 <div class="conteudoPost">
-                                    {!! $post->conteudo !!}
+                                    <a href="/posts/show/{{$post->id}}">{!! str_limit($post->conteudo, 320) !!}</a>
+                                    <br>
+                                    <div class="row">
+                                        <div class="postAutor col-xs-12">
+
+                                            <div class="media">
+                                                <div class="media-left">
+                                                    <img class="media-object img-circle" src="{{$post->user->foto ? $post->user->foto : '/img/default3.png'}}">
+                                                </div>
+                                                <div class="media-body">
+                                                    <h4 class="media-heading">{{$post->user->name}}</h4>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
                                 </div>
+
                             </div>
                         </div>
                     @endforeach
 
-                </div>
+
             @else
                 <div class="alert alert-info text-center col-md-6 col-md-offset-3">
                     <h4>Nenhum post foi cadastrado até o momento!</h4>

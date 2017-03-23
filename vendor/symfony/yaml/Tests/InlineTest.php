@@ -97,13 +97,13 @@ class InlineTest extends \PHPUnit_Framework_TestCase
     {
         $locale = setlocale(LC_NUMERIC, 0);
         if (false === $locale) {
-            $this->markTestSkipped('Your platform does not support locales.');
+            $this->markTestSkipped('Your platform does not support locale.');
         }
 
         try {
             $requiredLocales = array('fr_FR.UTF-8', 'fr_FR.UTF8', 'fr_FR.utf-8', 'fr_FR.utf8', 'French_France.1252');
             if (false === setlocale(LC_NUMERIC, $requiredLocales)) {
-                $this->markTestSkipped('Could not set any of required locales: '.implode(', ', $requiredLocales));
+                $this->markTestSkipped('Could not set any of required locale: '.implode(', ', $requiredLocales));
             }
 
             $this->assertEquals('1.2', Inline::dump(1.2));

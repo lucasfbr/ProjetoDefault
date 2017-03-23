@@ -44,56 +44,69 @@
                     {{ csrf_field() }}
                     <div class="box-body">
 
-                        <div class="col-md-12">
-                            <div class="form-group{{ $errors->has('titulo') ? ' has-error' : '' }}">
-                                <label for="titulo">Título</label>
-                                <input class="form-control" id="titulo" name="titulo" value="{{ old('titulo') }}"
-                                       type="text">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group{{ $errors->has('titulo') ? ' has-error' : '' }}">
+                                    <label for="titulo">Título</label>
+                                    <input class="form-control" id="titulo" name="titulo" value="{{ old('titulo') }}"
+                                           type="text">
 
-                                @if ($errors->has('titulo'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('titulo') }}</strong>
-                                    </span>
-                                @endif
+                                    @if ($errors->has('titulo'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('titulo') }}</strong>
+                                        </span>
+                                    @endif
 
+                                </div>
                             </div>
                         </div>
 
-                        <div class="col-md-12">
-                            <div class="form-group{{ $errors->has('conteudo') ? ' has-error' : '' }}">
-                                <label>Conteúdo</label>
-                                <textarea class="form-control textarea" id="conteudo" name="conteudo" rows="10"
-                                          placeholder="Conteúdo do post ...">{{ old('conteudo') }}</textarea>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group{{ $errors->has('conteudo') ? ' has-error' : '' }}">
+                                    <label>Conteúdo</label>
+                                    <textarea class="form-control textarea" id="conteudo" name="conteudo" rows="10"
+                                              placeholder="Conteúdo do post ...">{{ old('conteudo') }}</textarea>
 
-                                @if ($errors->has('conteudo'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('conteudo') }}</strong>
-                                    </span>
-                                @endif
+                                    @if ($errors->has('conteudo'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('conteudo') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
                             </div>
                         </div>
 
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="img">Imagem do post</label>
-                                <input type="file" id="imagem" name="imagem">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="img">Imagem do post</label>
+                                    <input type="file" id="imagem" name="imagem">
 
-                                <p class="help-block">Selecione uma imagem para ser exibida no topo do post</p>
+                                    <p class="help-block">Selecione uma imagem para ser exibida no topo do post</p>
+                                </div>
                             </div>
                         </div>
 
-                        <div class="col-md-12">
-                            <div class="form-group{{ $errors->has('published_at') ? ' has-error' : '' }}">
-                                <label for="published_at">Data de publicação</label>
-                                <input class="form-control" id="published_at" name="published_at" value="{{ \Carbon\Carbon::now()->format('d-m-Y') }}"
-                                       type="date" data-inputmask="'alias': 'dd-mm-yyyy'" data-mask="">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group{{ $errors->has('published_at') ? ' has-error' : '' }}">
+                                    <label for="published_at">Data de publicação</label>
+                                    <div class='input-group date' id='datetimepicker2'>
+                                        <input class="form-control" id="published_at" name="published_at"
+                                               type="text" data-inputmask="'alias': 'datetime'" data-mask="" />
+                                        <span class="input-group-addon">
+                                                <span class="glyphicon glyphicon-calendar"></span>
+                                        </span>
+                                    </div>
 
-                                @if ($errors->has('published_at'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('published_at') }}</strong>
-                                    </span>
-                                @endif
+                                    @if ($errors->has('published_at'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('published_at') }}</strong>
+                                        </span>
+                                    @endif
 
+                                </div>
                             </div>
                         </div>
 

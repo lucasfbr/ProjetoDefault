@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Painel;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -10,6 +11,7 @@ use App\User;
 use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\File;
+use Symfony\Component\Debug\Tests\Fixtures\ToStringThrower;
 
 
 class PostController extends Controller
@@ -27,12 +29,27 @@ class PostController extends Controller
 
         $user = User::find(Auth::user()->id);
 
-        if($tipo == 'published') {
-            //foi criado no model um scope que representará uma query que foi nomeada de "published"
-            $posts = $user->post()->latest('published_at')->published()->get();
+        if($user->tipo != 'Administrador') {
+
+            if ($tipo == 'published') {
+                //foi criado no model um scope que representará uma query que foi nomeada de "published"
+                $posts = $user->post()->latest('published_at')->published()->get();
+            } else {
+                //foi criado no model um scope que representará uma query que foi nomeada de "unpublished"
+                $posts = $user->post()->latest('published_at')->unpublished()->get();
+            }
+
         }else{
-            //foi criado no model um scope que representará uma query que foi nomeada de "unpublished"
-            $posts = $user->post()->latest('published_at')->unpublished()->get();
+
+            $posts = new Post;
+
+            if ($tipo == 'published') {
+                //foi criado no model um scope que representará uma query que foi nomeada de "published"
+                $posts = $posts->latest('published_at')->published()->with('user')->get();
+            } else {
+                //foi criado no model um scope que representará uma query que foi nomeada de "unpublished"
+                $posts = $posts->latest('published_at')->unpublished()->with('user')->get();
+            }
         }
 
         return view('painel.post.index', compact('posts','tipo'));
@@ -45,11 +62,13 @@ class PostController extends Controller
 
         $post = $user->post->find($id);
 
-        if(!$post){
+        if((!$post) AND ($user->tipo != 'Administrador')){
             return redirect('/painel/post/'.$tipo);
+        }else{
+            $post =  Post::find($id);
         }
 
-        return view('painel.post.detail', compact('post','user','tipo'));
+        return view('painel.post.detail', compact('post','tipo'));
 
     }
 
@@ -60,6 +79,15 @@ class PostController extends Controller
     }
 
     public function create(Request $request){
+
+        //dd($request->published_at);
+
+        $data = $request->published_at;
+        $data = "03/02/1983 16:00";
+        $data = Carbon::setToStringFormat('Y-m-d H:m:s', $data);
+
+        dd($data);
+
 
         $this->validate($request, [
 
@@ -102,8 +130,10 @@ class PostController extends Controller
 
         $post =  $user->post->find($id);
 
-        if(!$post){
+        if((!$post) AND ($user->tipo != 'Administrador')){
             return redirect('/painel/post/'.$tipo);
+        }else{
+            $post =  $this->post->find($id);
         }
 
         return view('painel.post.edit', compact('post','tipo'));
@@ -124,8 +154,10 @@ class PostController extends Controller
 
         $post =  $user->post->find($id);
 
-        if(!$post){
+        if((!$post) AND ($user->tipo != 'Administrador')){
             return redirect('/painel/post/'.$tipo);
+        }else{
+            $post =  $this->post->find($id);
         }
 
         $input = $request->all();
@@ -157,8 +189,10 @@ class PostController extends Controller
 
         $post =  $user->post->find($id);
 
-        if(!$post){
+        if((!$post) AND ($user->tipo != 'Administrador')){
             return redirect('/painel/post/'.$tipo);
+        }else{
+            $post =  $this->post->find($id);
         }
 
         if($post->delete()){
@@ -187,7 +221,7 @@ class PostController extends Controller
 
             $path = public_path($this->caminhoImg . $filename);
 
-            Image::make($image->getRealPath())->resize(640,427)->save($path);
+            Image::make($image->getRealPath())->resize(920,490)->save($path);
 
             return $this->caminhoImg . $filename;
 

@@ -30,7 +30,7 @@ class Translator extends NamespacedItemResolver implements TranslatorInterface
     protected $locale;
 
     /**
-     * The fallback locale used by the translator.
+     * The fallback locales used by the translator.
      *
      * @var string
      */
@@ -317,7 +317,7 @@ class Translator extends NamespacedItemResolver implements TranslatorInterface
     }
 
     /**
-     * Get the array of locales to be checked.
+     * Get the array of locale to be checked.
      *
      * @param  string|null  $locale
      * @return array

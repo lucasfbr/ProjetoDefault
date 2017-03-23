@@ -184,14 +184,44 @@ footer{
     margin-bottom: 0px;
 }
 
-.tituloPost{
-    font-weight: bold;
-    color: #4b646f;
+.portalPost{
+    margin-bottom: 25px;
 }
 
-.usuarioPost img{
+.tituloPost h3{
+    font-weight: 600;
+    color: #666666;
+}
 
-    width: 65px;
-    height: 65px;
+.tituloPost a{
+    color: #666666;
+}
 
+.dataPost{
+    color: #666666;
+}
+
+.iconeDataPost{
+    width: 10px;
+    height: 10px;
+}
+
+.conteudoPost{
+    font-size: 1.5em;
+    font-weight: 300;
+    color: #878787;
+}
+
+.conteudoPost a{
+    color: #878787;
+}
+
+.postAutor{
+    font-size: 14px;
+    color: #2ca02c;
+}
+
+.postAutor img{
+    width: 45px;
+    height: 45px;
 }

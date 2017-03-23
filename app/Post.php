@@ -33,7 +33,9 @@ class Post extends Model
 
     public function setPublishedAtAttribute($date){
 
-        $this->attributes['published_at'] = Carbon::parse($date)->format('Y-m-d');
+        dd(Carbon::createFromFormat('Y-m-d H:i', $date));
+
+        //$this->attributes['published_at'] = Carbon::createFromFormat('Y-m-d H:i', $date);
 
     }
 

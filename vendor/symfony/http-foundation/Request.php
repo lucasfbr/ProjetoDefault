@@ -1569,7 +1569,7 @@ class Request
     /**
      * Returns the preferred language.
      *
-     * @param array $locales An array of ordered available locales
+     * @param array $locales An array of ordered available locale
      *
      * @return string|null The preferred locale
      */
