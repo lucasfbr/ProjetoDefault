@@ -80,15 +80,6 @@ class PostController extends Controller
 
     public function create(Request $request){
 
-        //dd($request->published_at);
-
-        $data = $request->published_at;
-        $data = "03/02/1983 16:00";
-        $data = Carbon::setToStringFormat('Y-m-d H:m:s', $data);
-
-        dd($data);
-
-
         $this->validate($request, [
 
             'user_id' => 'required',

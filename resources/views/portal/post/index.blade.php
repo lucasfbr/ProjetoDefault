@@ -39,10 +39,10 @@
                                         <span class="dataPost">{{\Carbon\Carbon::parse($post->published_at)->diffForHumans()}}</span>
                                     </p>
 
-                                    <h3><a href="/posts/show/{{$post->id}}">{{$post->titulo}}</a></h3>
+                                    <h3><a href="/posts/show/{{$post->id}}">{{ str_limit($post->titulo, 30) }}</a></h3>
                                 </div>
                                 <div class="conteudoPost">
-                                    <a href="/posts/show/{{$post->id}}">{!! str_limit($post->conteudo, 320) !!}</a>
+                                    <a href="/posts/show/{{$post->id}}">{!! str_limit($post->conteudo, 260) !!}</a>
                                     <br>
                                     <div class="row">
                                         <div class="postAutor col-xs-12">

@@ -31,18 +31,17 @@ class Post extends Model
 
     }
 
-    public function setPublishedAtAttribute($date){
+    public function setPublishedAtAttribute($value){
 
-        dd(Carbon::createFromFormat('Y-m-d H:i', $date));
+        $objDate = \DateTime::createFromFormat('d/m/Y H:i', $value);
 
-        //$this->attributes['published_at'] = Carbon::createFromFormat('Y-m-d H:i', $date);
+        $this->attributes['published_at'] = $objDate->format('Y-m-d H:i:s');
 
     }
 
     public function getPublishedAtAttribute($date){
 
-        return Carbon::parse($date)->format('d-m-Y');
-
+        return Carbon::parse($date)->format('d-m-Y H:i');
     }
 
     public function user(){
