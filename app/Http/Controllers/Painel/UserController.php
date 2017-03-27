@@ -264,6 +264,29 @@ class UserController extends Controller
         }
     }
 
+
+
+    public function userRole(){
+
+        $users = $this->user->all();
+
+        return view('painel.user.user', compact('users'));
+
+    }
+
+    public function userRoleShow($id){
+
+        $user = $this->user->find($id);
+
+        $roles = $user->roles;
+
+        return view('painel.user.role', compact('user','roles'));
+
+    }
+
+
+
+
     public function ativar($id){
 
         $user = $this->user->find($id);

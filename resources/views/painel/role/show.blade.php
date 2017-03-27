@@ -4,12 +4,13 @@
 
     <section class="content-header">
         <h1>
-            Funções
-            <small>Gerencie as funcões dos usuários</small>
+            {{$role->name}}
+            <small>permissões deste usuário</small>
         </h1>
         <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li class="active"><a href="#">Funções</a></li>
+            <li><a href="/painel"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li><a href="/painel/role">Funções</a></li>
+            <li class="active"><a href="#">Detalhes</a></li>
         </ol>
     </section>
 
@@ -17,39 +18,28 @@
 
         <!-- Default box -->
         <div class="box">
+
             <div class="box-body">
 
                 <div class="row">
                     <div class="col-xs-12">
 
-                        <div class="box-header">
-                            <a href="/painel/role/add" class="btn btn-primary" title="Cadastrar uma nova função" alt="Cadastrar uma nova funçã"><i class="fa fa-plus" aria-hidden="true"></i></a>
-
-                            <div class="box-tools">
-                                <div class="input-group input-group-sm" style="width: 150px;">
-                                    <input name="table_search" class="form-control pull-right" placeholder="Buscar" type="text">
-
-                                    <div class="input-group-btn">
-                                        <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                         <!-- /.box-header -->
                         <div class="box-body table-responsive no-padding">
+
+                        @if($role->name != 'adm')
                             <table class="table table-hover">
-                                <tbody><tr>
+                                <tbody>
+                                <tr>
                                     <th>Nome</th>
                                     <th>Descrição</th>
                                     <th>Ações</th>
                                 </tr>
-                                @forelse($roles as $role)
+                                @forelse($permissions as $permission)
                                 <tr>
-                                    <td>{{$role->name}}</td>
-                                    <td>{{$role->label}}</td>
+                                    <td>{{$permission->name}}</td>
+                                    <td>{{$permission->label}}</td>
                                     <td>
-                                        <a href="/painel/role/{{$role->id}}" class="btn btn-success" title="Visualizar permissoes desta função" alt="Visualizar permissoes desta função"><i class="fa fa-eye" aria-hidden="true"></i></a>
-                                        <a href="/painel/role/edit" class="btn btn-warning" title="Editar função" alt="Cadastrar uma nova funçã"><i class="fa fa-wrench" aria-hidden="true"></i></a>
                                         <a href="/painel/role/delete" class="btn btn-danger" title="Excluir função" alt="Cadastrar uma nova funçã"><i class="fa fa-trash" aria-hidden="true"></i></a>
                                     </td>
                                 </tr>
@@ -62,13 +52,19 @@
                                 @endforelse
                                 </tbody>
                             </table>
+                         @else
+                                <div class="alert alert-success text-center col-md-10 col-md-offset-1">
+                                    <h4>O usuário "adm" tem acesso liberado em todo o sistema! </h4>
+                                </div>
+
+                            @endif
                         </div>
                         <!-- /.box-body -->
                     </div>
                 </div>
 
             </div>
-            <!-- /.box-body -->
+
         </div>
         <!-- /.box -->
 

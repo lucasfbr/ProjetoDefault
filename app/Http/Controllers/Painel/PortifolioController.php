@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use App\Portifolio;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\File;
+use Gate;
+use Illuminate\Routing\Redirector;
 
 class PortifolioController extends Controller
 {
@@ -15,9 +17,13 @@ class PortifolioController extends Controller
     private $extensoes = ['jpg','jpeg', 'png'];
     private $caminhoImg = 'img/portifolio/';
 
-    public function __construct(Portifolio $portifolio){
+    public function __construct(Portifolio $portifolio, Redirector $redirect){
 
         $this->portifolio = $portifolio;
+
+        if(Gate::denies('view_artigo')) {
+            $redirect->to('/painel')->send();
+        }
     }
 
     public function index(){

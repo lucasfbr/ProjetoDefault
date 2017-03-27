@@ -319,15 +319,16 @@
                 <li class="header">CONFIG. SISTEMA</li>
                 <li><a href="/painel"><i class="glyphicon glyphicon-home"></i>Início</a></li>
                 <li><a href="/painel/configuracoes"><i class="glyphicon glyphicon-th-large"></i>Configurações Básicas</a></li>
-                <li><a href="/painel/user"><i class="fa fa-users" aria-hidden="true"></i>Usuários</a></li>
+                <li><a href="/painel/user"><i class="fa fa-users" aria-hidden="true"></i>Consultores e clientes</a></li>
                 <li class="treeview">
                     <a href="#">
                         <i class="fa fa-key" aria-hidden="true"></i><span>Controle de Acesso</span>
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="/painel/role"><i class="glyphicon glyphicon-user"></i> Funções</a></li>
-                        <li><a href="/painel/permission"><i class="fa fa-unlock-alt" aria-hidden="true"></i>Permissões</a></li>
+                        <li><a href="/painel/user/role"><i class="fa fa-user" aria-hidden="true"></i> Usuários</a></li>
+                        <li><a href="/painel/role"><i class="fa fa-lock" aria-hidden="true"></i> Grupos</a></li>
+                        <li><a href="/painel/permission"><i class="fa fa-unlock-alt" aria-hidden="true"></i> Permissões</a></li>
                     </ul>
                 </li>
                 <li class="header">CONFIG. PORTAL</li>

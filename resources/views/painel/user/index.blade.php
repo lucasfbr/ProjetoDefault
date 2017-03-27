@@ -154,24 +154,24 @@
                                 <td>@{{u.perfis.bairro}}</td>
                                 <td>@{{u.perfis.logradouro}}, @{{u.perfis.numero}}</td>
                                 <td>@{{u.tipo}}</td>
-                                <td width="190px">
-                                    <a href="/painel/user/detail/@{{u.id}}" class="btn btn-info"
+                                <td width="210px">
+                                    <a href="/painel/user/detail/@{{u.id}}" class="btn btn-sm btn-info"
                                        alt="Exibir o usuário" title="Exibir o usuário"><span
                                                 class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
-                                    <a href="/painel/user/edit/@{{u.id}}" class="btn btn-warning"
+                                    <a href="/painel/user/edit/@{{u.id}}" class="btn btn-sm btn-warning"
                                        alt="Editar o usuário" title="Editar o usuário"><span
                                                 class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
 
                                     <a href="/painel/user/delete/@{{u.id}}"
                                        onclick="return confirm('Realmente deseja excluir este usuário?')"
-                                       class="btn btn-danger" alt="Excluir o usuário"
+                                       class="btn btn-sm btn-danger" alt="Excluir o usuário"
                                        title="Excluir o usuário"><span class="glyphicon glyphicon-remove"
                                                                        aria-hidden="true"></span></a>
 
                                     <span v-if="u.status == 'Ativo'">
                                     <a href="/painel/user/desativar/@{{u.id}}"
                                        onclick="return confirm('Realmente deseja desativar este usuário?')"
-                                       class="btn btn-success" alt="Desativar usuário" title="Desativar usuário">
+                                       class="btn btn-sm btn-success" alt="Desativar usuário" title="Desativar usuário">
                                         <span class="glyphicon glyphicon-thumbs-up"></span>
                                     </a>
                                     </span>
@@ -179,10 +179,14 @@
                                     <span v-else>
                                     <a href="/painel/user/ativar/@{{u.id}}"
                                        onclick="return confirm('Realmente deseja ativar este usuário?')"
-                                       class="btn btn-success" alt="Ativar usuário" title="Ativar usuário">
+                                       class="btn btn-sm btn-success" alt="Ativar usuário" title="Ativar usuário">
                                         <span class="glyphicon glyphicon-thumbs-down"></span>
                                     </a>
                                     </span>
+
+                                    <a href="/painel/user/role/@{{u.id}}"
+                                       class="btn btn-sm btn-info" alt="Grupos do usuário"
+                                       title="Grupos do usuário"><i class="fa fa-lock" aria-hidden="true"></i></a>
 
                                 </td>
                             </tr>

@@ -19,7 +19,7 @@ class ArtigoPolicy
     public function __construct(){
     }
 
-    public function artigoUpdate(User $user, Artigo $artigo){
+    public function editArtigo(User $user, Artigo $artigo){
 
         return $user->id == $artigo->user_id;
 

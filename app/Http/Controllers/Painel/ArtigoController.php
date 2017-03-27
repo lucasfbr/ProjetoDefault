@@ -68,6 +68,11 @@ class ArtigoController extends Controller
 
         //$artigos = $user->artigo()->latest('published_at')->published()->paginate(6);
 
+
+        if(Gate::denies('view_artigo')) {
+            return redirect()->back();
+        }
+
         $artigos = $this->artigo->latest('published_at')->published()->with('user')->paginate(6);
 
         return view('painel.artigo.index', compact('artigos','tipo'));
@@ -157,8 +162,8 @@ class ArtigoController extends Controller
         //modo com mensagem padrao
         //$this->authorize('artigo-update', $artigo);
         //modo com mensagem personalizada
-        if(Gate::denies('update_artigo', $artigo))
-            abort(403, 'Acesso não autorizado');
+        //if(Gate::denies('update_artigo', $artigo))
+        //    abort(403, 'Acesso não autorizado');
 
         return view('painel.artigo.edit', compact('artigo','tipo', 'categorias'));
 

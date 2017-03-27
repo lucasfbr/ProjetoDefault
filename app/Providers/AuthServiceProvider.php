@@ -30,7 +30,6 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies($gate);
 
-
         $permissions = Permission::with('roles')->get();
 
         foreach ($permissions as $permission){

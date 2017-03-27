@@ -60,6 +60,8 @@ Route::group(['middleware' => ['auth','tipo'], 'prefix' => 'painel'], function (
     Route::get('/user/delete/{id}', 'Painel\UserController@delete');
     Route::get('/user/ativar/{id}', 'Painel\UserController@ativar');
     Route::get('/user/desativar/{id}', 'Painel\UserController@desativar');
+    Route::get('/user/role', 'Painel\UserController@userRole');
+    Route::get('/user/role/show/{id}', 'Painel\UserController@userRoleShow');
 
     //PerfilController
     Route::get('/perfil', 'Painel\PerfilController@index');
@@ -122,6 +124,8 @@ Route::group(['middleware' => ['auth','tipo'], 'prefix' => 'painel'], function (
 
     //RoleController
     Route::get('/role', 'Painel\RoleController@index');
+    Route::get('/role/{id}', 'Painel\RoleController@role');
+
     //PermissionController
     Route::get('/permission', 'Painel\PermissionController@index');
 
