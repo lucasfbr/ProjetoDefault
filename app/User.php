@@ -133,15 +133,15 @@ class User extends Authenticatable
 
     }
 
-    public function post(){
+    public function categoria(){
 
-        return $this->hasMany(Post::class);
+        return $this->hasMany(Categoria::class);
 
     }
 
     public function artigo(){
 
-        return $this->hasMany(Post::class);
+        return $this->hasMany(Artigo::class);
 
     }
 

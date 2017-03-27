@@ -3,54 +3,98 @@
 namespace App\Http\Controllers\Painel;
 
 use Carbon\Carbon;
+use Gate;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+use App\Artigo;
+use App\User;
+use App\Categoria;
+use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\File;
-use App\Artigo;
 
 class ArtigoController extends Controller
 {
-
     private $artigo;
     private $extensoes = ['jpg','jpeg', 'png'];
     private $caminhoImg = 'img/artigos/';
 
-
     public function __construct(Artigo $artigo)
     {
         $this->artigo = $artigo;
+        \Carbon\Carbon::setLocale('pt_BR');
     }
 
-    public function index($tipo){
+    public function index($tipo = 'published'){
 
+        /*
+        $user = User::find(Auth::user()->id);
 
-        if($tipo == 'published') {
-            //foi criado no model um scope que representará uma query que foi nomeada de "published"
-            $artigos = Artigo::latest('published_at')->published()->get();
+        if($user->tipo != 'Administrador') {
+
+            if ($tipo == 'publicado') {
+
+                //foi criado no model um scope que representará uma query que foi nomeada de "published"
+                $artigos = $user->artigo()->latest('published_at')->published()->paginate(6);
+            }elseif($tipo == 'agendado') {
+                //foi criado no model um scope que representará uma query que foi nomeada de "unpublished"
+                $artigos = $user->artigo()->latest('published_at')->unpublished()->paginate(6);
+            }else {
+                //busca o scope da lixeira que vem definido por default no laravel
+                //o campo responsavel é o campo deleted_at
+                $artigos = $user->artigo()->onlyTrashed->paginate(6);
+            }
+
         }else{
-            //foi criado no model um scope que representará uma query que foi nomeada de "unpublished"
-            $artigos = Artigo::latest('published_at')->unpublished()->get();
-        }
 
-        return view('painel.artigo.index', compact('artigos', 'tipo'));
+            $artigos = new artigo;
+
+            if ($tipo == 'publicado') {
+                //foi criado no model um scope que representará uma query que foi nomeada de "published"
+                $artigos = $artigos->latest('published_at')->published()->with('user')->paginate(6);
+            }elseif($tipo == 'agendado'){
+                //foi criado no model um scope que representará uma query que foi nomeada de "unpublished"
+                $artigos = $artigos->latest('published_at')->unpublished()->with('user')->paginate(6);
+            }else{
+                //busca o scope da lixeira que vem definido por default no laravel
+                //o campo responsavel é o campo deleted_at
+                $artigos = $artigos->onlyTrashed()->paginate(6);
+            }
+        }
+        */
+
+        //$user = User::find(Auth::user()->id);
+
+        //$artigos = $user->artigo()->latest('published_at')->published()->paginate(6);
+
+        $artigos = $this->artigo->latest('published_at')->published()->with('user')->paginate(6);
+
+        return view('painel.artigo.index', compact('artigos','tipo'));
 
     }
 
     public function detail($id,$tipo){
 
-        $artigo = $this->artigo->find($id);
+        $user = User::find(Auth::user()->id);
 
-        $user = $artigo->user;
+        $artigoUser = $user->artigo->find($id);
 
-        return view('painel.artigo.detail', compact('artigo','user','tipo'));
+        if((!$artigoUser) AND ($user->tipo != 'Administrador')){
+            return redirect('/painel/artigo/'.$tipo);
+        }else{
+            $artigo =  artigo::find($id);
+        }
+
+        return view('painel.artigo.detail', compact('artigo','tipo'));
 
     }
 
     public function add($tipo){
 
-        return view('painel.artigo.add', compact('tipo'));
+        $categorias = Categoria::all();
+
+        return view('painel.artigo.add', compact('tipo','categorias'));
 
     }
 
@@ -59,11 +103,14 @@ class ArtigoController extends Controller
         $this->validate($request, [
 
             'user_id' => 'required',
+            'categoria_id' => 'required',
             'titulo' => 'required',
             'conteudo' => 'required|min:10',
             'published_at' => 'required'
 
         ]);
+
+        $user = User::find(Auth::user()->id);
 
         $input = $request->all();
 
@@ -80,7 +127,7 @@ class ArtigoController extends Controller
             $input['imagem'] = $this->moverImagem($image, $extensao);
         }
 
-       $artigo = $this->artigo->create($input);
+        $artigo = $user->artigo()->create($input);
 
         if($artigo){
             return redirect('/painel/artigo/'.$tipo)->with('sucesso', 'artigo cadastrado com sucesso!');
@@ -88,31 +135,57 @@ class ArtigoController extends Controller
             return redirect('/painel/artigo/'.$tipo)->with('erro', 'Erro ao cadastrar o artigo, tente novamente mais tarde!');
         }
 
+
     }
 
     public function edit($id,$tipo){
 
+        /*$user = User::find(Auth::user()->id);
+
+        $artigo =  $user->artigo->find($id);
+
+        if((!$artigo) AND ($user->tipo != 'Administrador')){
+            return redirect('/painel/artigo/'.$tipo);
+        }else{
+            $artigo =  $this->artigo->find($id);
+        }*/
+
+        $categorias = Categoria::all();
+
         $artigo = $this->artigo->find($id);
 
-        return view('painel.artigo.edit', compact('artigo','tipo'));
+        //modo com mensagem padrao
+        //$this->authorize('artigo-update', $artigo);
+        //modo com mensagem personalizada
+        if(Gate::denies('update_artigo', $artigo))
+            abort(403, 'Acesso não autorizado');
+
+        return view('painel.artigo.edit', compact('artigo','tipo', 'categorias'));
 
     }
 
     public function update(Request $request, $id){
 
         $this->validate($request, [
+            'categoria_id' => 'required',
             'titulo'   => 'required',
             'conteudo' => 'required|min:10',
             'published_at' => 'required'
-
-
         ]);
 
-        $artigo =  $this->artigo->find($id);
+        $tipo = $request->tipo;
+
+        $user = User::find(Auth::user()->id);
+
+        $artigo =  $user->artigo->find($id);
+
+        if((!$artigo) AND ($user->tipo != 'Administrador')){
+            return redirect('/painel/artigo/'.$tipo);
+        }else{
+            $artigo =  $this->artigo->find($id);
+        }
 
         $input = $request->all();
-
-        $tipo = $request->tipo;
 
         //verifica se foi enviada alguma imagem com o formulário
         if(!empty($request->file('imagem'))){
@@ -137,18 +210,44 @@ class ArtigoController extends Controller
 
     public function delete($id,$tipo){
 
-        $artigo = $this->artigo->find($id);
+        $user = User::find(Auth::user()->id);
+
+        $artigo =  $user->artigo->find($id);
+
+        if((!$artigo) AND ($user->tipo != 'Administrador')){
+            return redirect('/painel/artigo/'.$tipo);
+        }else{
+            $artigo =  $this->artigo->find($id);
+        }
 
         if($artigo->delete()){
 
             //metodo que verifica se a imagem salva no banco exite no diretorio
             //caso exista remove a mesma do diretorio
-            $this->removeImagemDir($artigo->imagem);
+            //$this->removeImagemDir($artigo->imagem);
 
             return redirect('/painel/artigo/'.$tipo)->with('sucesso', 'artigo deletado com sucesso!');
         }else{
             return redirect('/painel/artigo/'.$tipo)->with('erro', 'Erro ao deletar o artigo, tente novamente mais tarde!');
         }
+
+    }
+
+    public function restore($id){
+
+        $user = User::find(Auth::user()->id);
+
+        $artigo = $user->artigo->find($id);
+
+        if((!$artigo) AND ($user->tipo != 'Administrador')){
+            return redirect('/painel/artigo/trashed');
+        }
+
+        $trashed = $this->artigo->withTrashed()->find($id);
+
+        $trashed->restore();
+
+        return redirect('/painel/artigo/published');
 
     }
 
@@ -165,7 +264,7 @@ class ArtigoController extends Controller
 
             $path = public_path($this->caminhoImg . $filename);
 
-            Image::make($image->getRealPath())->resize(640,427)->save($path);
+            Image::make($image->getRealPath())->resize(920,490)->save($path);
 
             return $this->caminhoImg . $filename;
 
@@ -185,5 +284,5 @@ class ArtigoController extends Controller
         }
 
     }
-    
+
 }

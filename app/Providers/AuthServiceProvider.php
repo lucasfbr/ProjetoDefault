@@ -5,7 +5,7 @@ namespace App\Providers;
 use Illuminate\Contracts\Auth\Access\Gate as GateContract;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
-use App\Post;
+use App\Artigo;
 use App\User;
 use App\Permission;
 
@@ -18,7 +18,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        //\App\Post::class => \App\Policies\PostPolicy::class,
+        //\App\Artigo::class => \App\Policies\ArtigoPolicy::class,
     ];
 
     /**
@@ -28,7 +28,8 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot(GateContract $gate)
     {
-        /*$this->registerPolicies($gate);
+        $this->registerPolicies($gate);
+
 
         $permissions = Permission::with('roles')->get();
 
@@ -41,11 +42,28 @@ class AuthServiceProvider extends ServiceProvider
 
         $gate->before(function (User $user, $ability){
 
-            if($user->hasAnyRoles('Adm'))
+            if($user->hasAnyRoles('adm'))
                 return true;
+        });
+
+
+
+        /*$gate->define('artigo-update', function (User $user, Artigo $artigo){
+            print_r($user->id . ' -> ' . $artigo->user_id);exit;
+            return $user->id == $artigo->user_id;
         });*/
 
+       /* $permissions = Permission::with('roles')->get();
 
+        foreach ($permissions as $permission){
+
+            $gate->define($permission->name, function (User $user) use ($permission){
+
+                return $user->hasPermission($permission);
+
+            });
+
+        }*/
 
     }
 

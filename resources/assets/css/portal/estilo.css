@@ -184,44 +184,53 @@ footer{
     margin-bottom: 0px;
 }
 
-.portalPost{
+.portalArtigo{
     margin-bottom: 25px;
 }
 
-.tituloPost h3{
+.tituloArtigo h3{
     font-weight: 600;
     color: #666666;
 }
 
-.tituloPost a{
+.tituloArtigo a{
     color: #666666;
 }
 
-.dataPost{
+.dataArtigo{
     color: #666666;
 }
 
-.iconeDataPost{
+.iconeDataArtigo{
     width: 10px;
     height: 10px;
 }
 
-.conteudoPost{
+.conteudoArtigo{
     font-size: 1.5em;
     font-weight: 300;
     color: #878787;
 }
 
-.conteudoPost a{
+.conteudoArtigo a{
     color: #878787;
 }
 
-.postAutor{
+.artigoAutor{
     font-size: 14px;
     color: #2ca02c;
 }
 
-.postAutor img{
+.artigoAutor img{
     width: 45px;
     height: 45px;
+}
+
+.artigoImg{
+    margin-bottom: 15px;
+}
+
+.separador{
+    border-bottom: 1px #CCCCCC solid;
+    margin-bottom: 15px;
 }

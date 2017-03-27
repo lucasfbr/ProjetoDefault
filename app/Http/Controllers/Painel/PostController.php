@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 
 use App\Post;
 use App\User;
+use App\Categoria;
 use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\File;
@@ -23,6 +24,7 @@ class PostController extends Controller
     public function __construct(Post $post)
     {
         $this->post = $post;
+        \Carbon\Carbon::setLocale('pt_BR');
     }
 
     public function index($tipo = 'published'){
@@ -31,24 +33,32 @@ class PostController extends Controller
 
         if($user->tipo != 'Administrador') {
 
-            if ($tipo == 'published') {
+            if ($tipo == 'publicado') {
                 //foi criado no model um scope que representará uma query que foi nomeada de "published"
-                $posts = $user->post()->latest('published_at')->published()->get();
-            } else {
+                $posts = $user->post()->latest('published_at')->published()->paginate(6);
+            }elseif($tipo == 'agendado') {
                 //foi criado no model um scope que representará uma query que foi nomeada de "unpublished"
-                $posts = $user->post()->latest('published_at')->unpublished()->get();
+                $posts = $user->post()->latest('published_at')->unpublished()->paginate(6);
+            }else {
+                //busca o scope da lixeira que vem definido por default no laravel
+                //o campo responsavel é o campo deleted_at
+                $posts = $user->post()->onlyTrashed->paginate(6);
             }
 
         }else{
 
             $posts = new Post;
 
-            if ($tipo == 'published') {
+            if ($tipo == 'publicado') {
                 //foi criado no model um scope que representará uma query que foi nomeada de "published"
-                $posts = $posts->latest('published_at')->published()->with('user')->get();
-            } else {
+                $posts = $posts->latest('published_at')->published()->with('user')->paginate(6);
+            }elseif($tipo == 'agendado'){
                 //foi criado no model um scope que representará uma query que foi nomeada de "unpublished"
-                $posts = $posts->latest('published_at')->unpublished()->with('user')->get();
+                $posts = $posts->latest('published_at')->unpublished()->with('user')->paginate(6);
+            }else{
+                //busca o scope da lixeira que vem definido por default no laravel
+                //o campo responsavel é o campo deleted_at
+                $posts = $posts->onlyTrashed()->paginate(6);
             }
         }
 
@@ -60,9 +70,9 @@ class PostController extends Controller
 
         $user = User::find(Auth::user()->id);
 
-        $post = $user->post->find($id);
+        $postUser = $user->post->find($id);
 
-        if((!$post) AND ($user->tipo != 'Administrador')){
+        if((!$postUser) AND ($user->tipo != 'Administrador')){
             return redirect('/painel/post/'.$tipo);
         }else{
             $post =  Post::find($id);
@@ -74,7 +84,9 @@ class PostController extends Controller
 
     public function add($tipo){
 
-        return view('painel.post.add', compact('tipo'));
+        $categorias = Categoria::all();
+
+        return view('painel.post.add', compact('tipo','categorias'));
 
     }
 
@@ -83,6 +95,7 @@ class PostController extends Controller
         $this->validate($request, [
 
             'user_id' => 'required',
+            'categoria_id' => 'required',
             'titulo' => 'required',
             'conteudo' => 'required|min:10',
             'published_at' => 'required'
@@ -127,13 +140,16 @@ class PostController extends Controller
             $post =  $this->post->find($id);
         }
 
-        return view('painel.post.edit', compact('post','tipo'));
+        $categorias = Categoria::all();
+
+        return view('painel.post.edit', compact('post','tipo', 'categorias'));
 
     }
 
     public function update(Request $request, $id){
 
         $this->validate($request, [
+            'categoria_id' => 'required',
             'titulo'   => 'required',
             'conteudo' => 'required|min:10',
             'published_at' => 'required'
@@ -190,12 +206,30 @@ class PostController extends Controller
 
             //metodo que verifica se a imagem salva no banco exite no diretorio
             //caso exista remove a mesma do diretorio
-            $this->removeImagemDir($post->imagem);
+            //$this->removeImagemDir($post->imagem);
 
             return redirect('/painel/post/'.$tipo)->with('sucesso', 'Post deletado com sucesso!');
         }else{
             return redirect('/painel/post/'.$tipo)->with('erro', 'Erro ao deletar o post, tente novamente mais tarde!');
         }
+
+    }
+
+    public function restore($id){
+
+        $user = User::find(Auth::user()->id);
+
+        $post = $user->post->find($id);
+
+        if((!$post) AND ($user->tipo != 'Administrador')){
+            return redirect('/painel/post/trashed');
+        }
+
+        $trashed = $this->post->withTrashed()->find($id);
+
+        $trashed->restore();
+
+        return redirect('/painel/post/published');
 
     }
 

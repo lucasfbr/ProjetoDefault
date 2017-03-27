@@ -26,4 +26,26 @@ class PermissionController extends Controller
 
     }
 
+    public function debug(){
+
+        $nameuser = auth()->user()->name;
+
+        var_dump("<h1>".$nameuser."</h1>");
+
+        foreach (auth()->user()->roles as $role) {
+
+            echo $role->name . ' -> ';
+
+            $permissions = $role->permissions;
+
+            foreach ($permissions as $permission){
+                echo $permission->name . ',';
+            }
+
+            echo "<hr>";
+
+        }
+
+    }
+
 }

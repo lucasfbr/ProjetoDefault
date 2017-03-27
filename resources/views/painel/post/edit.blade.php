@@ -40,10 +40,32 @@
                 </div>
                 <!-- /.box-header -->
                 <!-- form start -->
+                <div class="col-md-10 col-md-offset-1">
                 <form role="form" method="post" action="/painel/post/update/{{$post->id}}"
                       enctype="multipart/form-data">
                     {{ csrf_field() }}
                     <div class="box-body">
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group{{ $errors->has('categoria_id') ? ' has-error' : '' }}">
+                                    <label for="categoria_id">Categoria</label>
+                                    <select class="form-control" name="categoria_id" id="categoria_id">
+                                        @foreach($categorias as $cat)
+                                            <option value="{{$cat->id}}" {{$cat->id == $post->categoria->id ? 'selected' : ''}}>{{$cat->titulo}}</option>
+                                        @endforeach
+                                    </select>
+
+                                    @if ($errors->has('categoria_id'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('categoria_id') }}</strong>
+                                        </span>
+                                    @endif
+
+                                </div>
+                                <p class="text-info"><a href="/painel/categorias">[+] Add categoria</a></p>
+                            </div>
+                        </div>
 
                         <div class="row">
                             <div class="col-md-12">
@@ -121,6 +143,7 @@
                         <input type="submit" class="btn btn-primary" value="Editar">
                     </div>
                 </form>
+                </div>
             </div>
 
         </div>

@@ -4,17 +4,22 @@ namespace App;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use App\User;
 
 class Artigo extends Model
 {
+    use SoftDeletes;
+
     protected $fillable = [
-        'user_id','titulo','conteudo','imagem', 'published_at'
+        'user_id', 'categoria_id', 'titulo','conteudo','imagem','published_at'
     ];
 
     protected  $dates = [
-        'published_at',
         'created_at',
         'updated_at',
+        'published_at',
+        'deleted_at',
     ];
 
     public function scopePublished($query){
@@ -29,21 +34,28 @@ class Artigo extends Model
 
     }
 
+    public function setPublishedAtAttribute($value){
+
+        $objDate = \DateTime::createFromFormat('d/m/Y H:i', $value);
+
+        $this->attributes['published_at'] = $objDate->format('Y-m-d H:i:s');
+
+    }
+
+    public function getPublishedAtAttribute($date){
+
+        return Carbon::parse($date)->format('d-m-Y H:i');
+    }
+
     public function user(){
 
         return $this->belongsTo(User::class);
 
     }
 
-   public function setPublishedAtAttribute($date){
+    public function categoria(){
 
-        $this->attributes['published_at'] = Carbon::parse($date)->format('Y-m-d');
-
-   }
-
-    public function getPublishedAtAttribute($date){
-
-        return Carbon::parse($date)->format('d-m-Y');
+        return $this->belongsTo(Categoria::class);
 
     }
 }

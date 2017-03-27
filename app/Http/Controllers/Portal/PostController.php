@@ -15,7 +15,7 @@ class PostController extends Controller
 
     public function index(){
 
-        $posts = Post::latest('published_at')->published()->with('user')->get();
+        $posts = Post::latest('published_at')->published()->with('user')->paginate(6);
 
         return view('portal.post.index', compact('posts'));
 

@@ -29,6 +29,15 @@ Route::group(['middleware' => ['auth','tipo'], 'prefix' => 'painel'], function (
     Route::get('/post/edit/{id}/{tipo}', 'Painel\PostController@edit');
     Route::post('/post/update/{id}', 'Painel\PostController@update');
     Route::get('/post/delete/{id}/{tipo}', 'Painel\PostController@delete');
+    Route::get('/post/restore/{id}', 'Painel\PostController@restore');
+
+    //Categoria
+    Route::get('/categoria', 'Painel\CategoriaController@index');
+    Route::get('/categoria/add', 'Painel\CategoriaController@add');
+    Route::post('/categoria/create', 'Painel\CategoriaController@create');
+    Route::get('/categoria/edit/{id}', 'Painel\CategoriaController@edit');
+    Route::post('/categoria/update/{id}', 'Painel\CategoriaController@update');
+    Route::get('/categoria/delete/{id}', 'Painel\CategoriaController@delete');
 
     //ArtigoController
     Route::get('/artigo/{tipo}', 'Painel\ArtigoController@index');
@@ -38,6 +47,7 @@ Route::group(['middleware' => ['auth','tipo'], 'prefix' => 'painel'], function (
     Route::get('/artigo/edit/{id}/{tipo}', 'Painel\ArtigoController@edit');
     Route::post('/artigo/update/{id}', 'Painel\ArtigoController@update');
     Route::get('/artigo/delete/{id}/{tipo}', 'Painel\ArtigoController@delete');
+    Route::get('/artigo/restore/{id}', 'Painel\ArtigoController@restore');
 
     //UserController
     Route::get('/user', 'Painel\UserController@index');
@@ -115,6 +125,10 @@ Route::group(['middleware' => ['auth','tipo'], 'prefix' => 'painel'], function (
     //PermissionController
     Route::get('/permission', 'Painel\PermissionController@index');
 
+    //debug permissions
+    Route::get('/debug', 'Painel\PermissionController@debug');
+
+
 });
 
 Route::group(['middleware' => 'auth', 'prefix' => 'campus'], function (){
@@ -143,9 +157,6 @@ Route::get('/nossaequipe', 'Portal\NossaequipeController@index');
 
 //ArtigosController
 Route::get('/artigos', 'Portal\ArtigoController@index');
-
-//PostsController
-Route::get('/posts', 'Portal\PostController@index');
-Route::get('/posts/show/{id}', 'Portal\PostController@show');
+Route::get('/artigos/show/{id}', 'Portal\ArtigoController@show');
 
 

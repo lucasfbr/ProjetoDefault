@@ -334,23 +334,14 @@
 
                 <li class="treeview">
                     <a href="#">
-                        <i class="fa fa-newspaper-o" aria-hidden="true"></i><span>Artigos</span>
+                        <i class="glyphicon glyphicon-th-large" aria-hidden="true"></i><span>Artigos</span>
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="/painel/artigo/published"><i class="glyphicon glyphicon-ok"></i>Publicados</a></li>
-                        <li><a href="/painel/artigo/unpublished"><i class="glyphicon glyphicon-remove" aria-hidden="true"></i>Não publicados</a></li>
-                    </ul>
-                </li>
-
-                <li class="treeview">
-                    <a href="#">
-                        <i class="glyphicon glyphicon-th-large" aria-hidden="true"></i><span>Posts</span>
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a href="/painel/post/published"><i class="glyphicon glyphicon-ok"></i>Publicados</a></li>
-                        <li><a href="/painel/post/unpublished"><i class="glyphicon glyphicon-remove" aria-hidden="true"></i>Não publicados</a></li>
+                        <li><a href="/painel/artigo/publicado"><i class="glyphicon glyphicon-ok"></i>Publicados</a></li>
+                        <li><a href="/painel/artigo/agendado"><i class="glyphicon glyphicon-time" aria-hidden="true"></i>Agendados</a></li>
+                        <li><a href="/painel/categoria"><i class="glyphicon glyphicon-list-alt" aria-hidden="true"></i>Categorias</a></li>
+                        <li><a href="/painel/artigo/lixeira"><i class="glyphicon glyphicon-trash" aria-hidden="true"></i>Lixeira</a></li>
                     </ul>
                 </li>
 

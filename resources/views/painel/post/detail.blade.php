@@ -22,23 +22,23 @@
 
                 <div class="box-body">
 
-                    <div class="box box-widget">
+                    <div class="box box-widget col-md-9">
                         <div class="box-header with-border">
                             <div class="user-block">
-                                <img class="img-circle" src="/{{$post->user->foto ? $user->foto : 'img/default3.png' }}" alt="User Image">
+                                <img class="img-circle" src="/{{$post->user->foto ? $post->user->foto : 'img/default3.png' }}" alt="User Image">
                                 <span class="username"><a href="#">{{$post->user->name}}</a></span>
-                                <span class="description">Publicado - {{$post->user->created_at}}</span>
+                                <span class="description">Publicado - {{\Carbon\Carbon::parse($post->published_at)->diffForHumans()}}</span>
+                                <span class="description">Categoria - {{$post->categoria->titulo}}</span>
                             </div>
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body">
-
-                            <div class="col-xs-12 col-md-9 col-lg-5">
+                            <div class="col-xs-12 col-md-10 col-md-offset-1">
+                                <h2>{{$post->titulo}}</h2>
                                 <img class="img-responsive pad" src="/{{$post->imagem}}" alt="Photo">
-
+                                <br>
                                 <div class="text-justify">{!! $post->conteudo !!}</div>
                             </div>
-
                         </div>
                         <!-- /.box-body -->
                     </div>

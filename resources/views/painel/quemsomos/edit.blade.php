@@ -40,6 +40,7 @@
                 </div>
                 <!-- /.box-header -->
                 <!-- form start -->
+                <div class="col-md-10 col-md-offset-1">
                 <form role="form" method="post" action="/painel/quemsomos/update/{{$quemsomos->id}}" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     <div class="box-body">
@@ -116,6 +117,7 @@
                         <input type="submit" class="btn btn-primary" value="Editar">
                     </div>
                 </form>
+                </div>
             </div>
         </div>
     </section>

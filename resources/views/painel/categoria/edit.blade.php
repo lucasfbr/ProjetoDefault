@@ -4,12 +4,12 @@
 
     <section class="content-header">
         <h1>
-            Portifólio
-            <small></small>
+            Categorias
+            <small>edite esta categoria</small>
         </h1>
         <ol class="breadcrumb">
             <li><a href="/painel"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li class=""><a href="/painel/portifolio">Portifólio</a></li>
+            <li><a href="/painel/categoria">Categorias</a></li>
             <li class="active">Editar</li>
         </ol>
     </section>
@@ -36,48 +36,43 @@
                 @endif
 
                 <div class="box-header with-border">
-                    <h3 class="box-title">Editar portifólio</h3>
+                    <h3 class="box-title">Editar</h3>
                 </div>
                 <!-- /.box-header -->
                 <!-- form start -->
-                <div class="col-md-10 col-md-offset-1">
-                <form role="form" method="post" action="/painel/portifolio/update/{{$portifolio->id}}" enctype="multipart/form-data">
+                <form role="form" method="post" action="/painel/categoria/update/{{$categoria->id}}" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     <div class="box-body">
 
-                        <div class="form-group{{ $errors->has('titulo') ? ' has-error' : '' }}">
-                            <label for="titulo">Titulo</label>
-                            <input class="form-control" id="titulo" name="titulo" type="text" value="{{ $portifolio->titulo }}"
-                                   autofocus>
-                            @if ($errors->has('titulo'))
-                                <span class="help-block">
-                                        <strong>{{ $errors->first('titulo') }}</strong>
-                                    </span>
-                            @endif
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group{{ $errors->has('titulo') ? ' has-error' : '' }}">
+                                    <label for="titulo">Título</label>
+                                    <input class="form-control" id="titulo" name="titulo" value="{{ $categoria->titulo }}"
+                                           type="text">
+
+                                    @if ($errors->has('titulo'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('titulo') }}</strong>
+                                        </span>
+                                    @endif
+
+                                </div>
+                            </div>
                         </div>
-
-                        <div class="form-group">
-                            <label for="img">Foto</label>
-                            <input type="file" id="imagem" name="imagem">
-
-                            <p class="help-block">Selecione uma foto ou imagem para o portifólio</p>
-                        </div>
-
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" id="status" name="status" value="1" {{ $portifolio->status == '1' ? 'checked' : '' }}><strong>Exibir na página principal</strong>
-                            </label>
-                        </div>
-
                     </div>
+
+                    <input type="hidden" name="user_id" id="user_id" value="{{ Auth::user()->id }}">
 
                     <div class="box-footer">
                         <input type="submit" class="btn btn-primary" value="Editar">
                     </div>
                 </form>
-                </div>
             </div>
+
         </div>
+
+
     </section>
 
 @endsection

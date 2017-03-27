@@ -5,18 +5,22 @@ namespace App;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use App\User;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
 
 class Post extends Model
 {
+    use SoftDeletes;
 
     protected $fillable = [
-        'user_id','titulo','conteudo','imagem','published_at'
+        'user_id', 'categoria_id', 'titulo','conteudo','imagem','published_at'
     ];
 
     protected  $dates = [
-        'published_at',
         'created_at',
         'updated_at',
+        'published_at',
+        'deleted_at',
     ];
 
     public function scopePublished($query){
@@ -47,6 +51,12 @@ class Post extends Model
     public function user(){
 
         return $this->belongsTo(User::class);
+
+    }
+
+    public function categoria(){
+
+        return $this->belongsTo(Categoria::class);
 
     }
 

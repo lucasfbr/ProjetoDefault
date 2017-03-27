@@ -40,12 +40,34 @@
                 </div>
                 <!-- /.box-header -->
                 <!-- form start -->
+                <div class="col-md-10 col-md-offset-1">
                 <form role="form" method="post" action="/painel/post/create" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     <div class="box-body">
 
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-12">
+                                <div class="form-group{{ $errors->has('categoria_id') ? ' has-error' : '' }}">
+                                    <label for="categoria_id">Categoria</label>
+                                    <select class="form-control" name="categoria_id" id="categoria_id">
+                                        <option value="">Selecione uma categoria</option>
+                                        @foreach($categorias as $cat)
+                                            <option value="{{$cat->id}}">{{$cat->titulo}}</option>
+                                        @endforeach
+                                    </select>
+
+                                    @if ($errors->has('categoria_id'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('categoria_id') }}</strong>
+                                        </span>
+                                    @endif
+
+                                </div>
+                                <p class="text-info"><a href="/painel/categorias">[+] Add categoria</a></p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
                                 <div class="form-group{{ $errors->has('titulo') ? ' has-error' : '' }}">
                                     <label for="titulo">Título</label>
                                     <input class="form-control" id="titulo" name="titulo" value="{{ old('titulo') }}"
@@ -62,7 +84,7 @@
                         </div>
 
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <div class="form-group{{ $errors->has('conteudo') ? ' has-error' : '' }}">
                                     <label>Conteúdo</label>
                                     <textarea class="form-control textarea" id="conteudo" name="conteudo" rows="10"
@@ -78,7 +100,7 @@
                         </div>
 
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="img">Imagem do post</label>
                                     <input type="file" id="imagem" name="imagem">
@@ -89,7 +111,7 @@
                         </div>
 
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <div class="form-group{{ $errors->has('published_at') ? ' has-error' : '' }}">
                                     <label for="published_at">Data de publicação</label>
                                     <div class='input-group date' id='datetimepicker2'>
@@ -119,6 +141,7 @@
                         <input type="submit" class="btn btn-primary" value="Cadastrar">
                     </div>
                 </form>
+                </div>
             </div>
 
         </div>

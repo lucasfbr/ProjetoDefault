@@ -50,8 +50,8 @@
                             <div class="thumbnail">
                                 <img alt="100%x200" data-src="holder.js/100%x200" style="height: 200px; width: 100%; display: block;" src="/{{$quem->imagem_sobre}}" data-holder-rendered="true">
                                 <div class="caption">
-                                    <h3>{{ str_limit($quem->titulo_sobre, 20)}}</h3>
-                                    <p>{{ str_limit($quem->texto_sobre, 130) }} <a href="/painel/quemsomos/detail/{{$quem->id}}" title="Saiba mais" alt="Saiba mais">[<span class="glyphicon glyphicon-plus"></span>]</a></p>
+                                    <h3>{{ str_limit($quem->titulo_sobre, 10)}}</h3>
+                                    <p>{{ str_limit($quem->texto_sobre, 50) }} <a href="/painel/quemsomos/detail/{{$quem->id}}" title="Saiba mais" alt="Saiba mais">[<span class="glyphicon glyphicon-plus"></span>]</a></p>
                                     <p><a href="/painel/quemsomos/edit/{{$quem->id}}" class="btn btn-primary" role="button">Editar</a> <a href="/painel/quemsomos/delete/{{$quem->id}}" onclick="return confirm('Realmente deseja excluir este registro?')" class="btn btn-default" role="button">Excluir</a></p>
                                 </div>
                             </div>
@@ -60,7 +60,7 @@
 
                     </div>
                     @else
-                        <div class="alert alert-info text-center col-md-6 col-md-offset-3">
+                        <div class="alert alert-info text-center col-md-10 col-md-offset-1">
                             <h4>Nenhum registro até o momento!</h4>
                         </div>
 
