@@ -154,7 +154,7 @@
                                 <td>@{{u.perfis.bairro}}</td>
                                 <td>@{{u.perfis.logradouro}}, @{{u.perfis.numero}}</td>
                                 <td>@{{u.tipo}}</td>
-                                <td width="210px">
+                                <td width="180px">
                                     <a href="/painel/user/detail/@{{u.id}}" class="btn btn-sm btn-info"
                                        alt="Exibir o usuário" title="Exibir o usuário"><span
                                                 class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
@@ -183,11 +183,6 @@
                                         <span class="glyphicon glyphicon-thumbs-down"></span>
                                     </a>
                                     </span>
-
-                                    <a href="/painel/user/role/@{{u.id}}"
-                                       class="btn btn-sm btn-info" alt="Grupos do usuário"
-                                       title="Grupos do usuário"><i class="fa fa-lock" aria-hidden="true"></i></a>
-
                                 </td>
                             </tr>
 

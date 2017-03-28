@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Painel;
 
+use App\Role;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -280,11 +281,55 @@ class UserController extends Controller
 
         $roles = $user->roles;
 
-        return view('painel.user.role', compact('user','roles'));
+        $totalRoles = Role::all();
+
+        return view('painel.user.role', compact('user','roles','totalRoles'));
 
     }
 
+    public function roleAdd($id){
 
+        $user = $this->user->find($id);
+
+        $roles = Role::all();
+
+        return view('painel.user.roleAdd', compact('user','roles'));
+
+    }
+
+    public function roleCreate(Request $request, $id){
+
+        $this->validate($request, [
+            'grupo' => 'required',
+        ]);
+
+        $user = $this->user->find($id);
+
+        $role_id = $request->input('grupo');
+
+        $user->roles()->attach($role_id);
+
+        if($user->save()){
+            return redirect('/painel/user/role/show/'.$id)->with('sucesso', 'Usuário adicionado ao grupo com sucesso' );
+        }else{
+            return redirect('/painel/user/role/show/'.$id)->with('erro', 'Erro ao adicionar o usuário em um grupo, tente novamente mais tarde!');
+        }
+
+    }
+
+    public function userRoleDelete($id,$role_id){
+
+        $user = $this->user->find($id);
+
+        $user->roles()->detach($role_id);
+
+        if($user->save()){
+            return redirect('/painel/user/role/show/'.$id)->with('sucesso', 'Usuário removido do grupo com sucesso' );
+        }else{
+            return redirect('/painel/user/role/show/'.$id)->with('erro', 'Erro ao remover o usuário do grupo, tente novamente mais tarde!');
+        }
+
+    }
 
 
     public function ativar($id){

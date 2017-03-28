@@ -4,12 +4,12 @@
 
     <section class="content-header">
         <h1>
-            Funções
-            <small>Gerencie as funcões dos usuários</small>
+            Grupos
+            <small>Gerencie os grupos do sistema</small>
         </h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li class="active"><a href="#">Funções</a></li>
+            <li class="active"><a href="#">Grupos</a></li>
         </ol>
     </section>
 
@@ -23,17 +23,26 @@
                     <div class="col-xs-12">
 
                         <div class="box-header">
-                            <a href="/painel/role/add" class="btn btn-primary" title="Cadastrar uma nova função" alt="Cadastrar uma nova funçã"><i class="fa fa-plus" aria-hidden="true"></i></a>
 
-                            <div class="box-tools">
-                                <div class="input-group input-group-sm" style="width: 150px;">
-                                    <input name="table_search" class="form-control pull-right" placeholder="Buscar" type="text">
-
-                                    <div class="input-group-btn">
-                                        <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
-                                    </div>
+                            @if (session('sucesso'))
+                                <div class="alert alert-success alert-dismissible" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                                aria-hidden="true">&times;</span></button>
+                                    {{ session('sucesso') }}
                                 </div>
-                            </div>
+                                <br/>
+                            @elseif(session('erro'))
+                                <div class="alert alert-danger alert-dismissible" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                                aria-hidden="true">&times;</span></button>
+                                    {{ session('erro') }}
+                                </div>
+                                <br/>
+                            @endif
+
+
+                            <a href="/painel/role/add" class="btn btn-primary" title="Cadastrar uma nova função" alt="Cadastrar uma nova funçã"><i class="fa fa-plus" aria-hidden="true"></i></a>
+                                <br><br>
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body table-responsive no-padding">
@@ -48,9 +57,9 @@
                                     <td>{{$role->name}}</td>
                                     <td>{{$role->label}}</td>
                                     <td>
-                                        <a href="/painel/role/{{$role->id}}" class="btn btn-success" title="Visualizar permissoes desta função" alt="Visualizar permissoes desta função"><i class="fa fa-eye" aria-hidden="true"></i></a>
-                                        <a href="/painel/role/edit" class="btn btn-warning" title="Editar função" alt="Cadastrar uma nova funçã"><i class="fa fa-wrench" aria-hidden="true"></i></a>
-                                        <a href="/painel/role/delete" class="btn btn-danger" title="Excluir função" alt="Cadastrar uma nova funçã"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                                        <a href="/painel/role/show/{{$role->id}}" class="btn btn-success" title="Visualizar permissoes desta função" alt="Visualizar permissoes desta função"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                        <a href="/painel/role/edit/{{$role->id}}" class="btn btn-warning" title="Editar função" alt="Cadastrar uma nova funçã"><i class="fa fa-wrench" aria-hidden="true"></i></a>
+                                        <a href="/painel/role/delete/{{$role->id}}" onclick="return confirm('Realmente deseja remover este grupo?')" class="btn btn-danger" title="Excluir função" alt="Cadastrar uma nova funçã"><i class="fa fa-trash" aria-hidden="true"></i></a>
                                     </td>
                                 </tr>
                                 @empty

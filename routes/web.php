@@ -62,6 +62,9 @@ Route::group(['middleware' => ['auth','tipo'], 'prefix' => 'painel'], function (
     Route::get('/user/desativar/{id}', 'Painel\UserController@desativar');
     Route::get('/user/role', 'Painel\UserController@userRole');
     Route::get('/user/role/show/{id}', 'Painel\UserController@userRoleShow');
+    Route::get('/user/role/add/{id}', 'Painel\UserController@roleAdd');
+    Route::post('/user/role/create/{id}', 'Painel\UserController@roleCreate');
+    Route::get('/user/role/delete/{id}/{role}', 'Painel\UserController@userRoleDelete');
 
     //PerfilController
     Route::get('/perfil', 'Painel\PerfilController@index');
@@ -124,7 +127,13 @@ Route::group(['middleware' => ['auth','tipo'], 'prefix' => 'painel'], function (
 
     //RoleController
     Route::get('/role', 'Painel\RoleController@index');
-    Route::get('/role/{id}', 'Painel\RoleController@role');
+    Route::get('/role/show/{id}', 'Painel\RoleController@show');
+    Route::get('/role/add', 'Painel\RoleController@add');
+    Route::post('/role/create', 'Painel\RoleController@create');
+    Route::get('/role/edit/{id}', 'Painel\RoleController@edit');
+    Route::post('/role/update/{id}', 'Painel\RoleController@update');
+    Route::get('/role/delete/{id}', 'Painel\RoleController@delete');
+
 
     //PermissionController
     Route::get('/permission', 'Painel\PermissionController@index');
