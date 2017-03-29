@@ -3,7 +3,6 @@
 namespace App\Providers;
 
 use Illuminate\Contracts\Auth\Access\Gate as GateContract;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use App\Artigo;
 use App\User;
@@ -18,7 +17,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        //\App\Artigo::class => \App\Policies\ArtigoPolicy::class,
+        \App\Artigo::class => \App\Policies\ArtigoPolicy::class,
     ];
 
     /**
@@ -29,6 +28,7 @@ class AuthServiceProvider extends ServiceProvider
     public function boot(GateContract $gate)
     {
         $this->registerPolicies($gate);
+
 
         $permissions = Permission::with('roles')->get();
 

@@ -19,7 +19,37 @@ class ArtigoPolicy
     public function __construct(){
     }
 
-    public function editArtigo(User $user, Artigo $artigo){
+    public function view_artigo(User $user, Artigo $artigo){
+
+            return $user->id == $artigo->user_id;
+
+    }
+
+    public function create_artigo(User $user, Artigo $artigo){
+
+        return $user->id == $artigo->user_id;
+
+    }
+
+    public function edit_artigo(User $user, Artigo $artigo){
+
+        return $user->id == $artigo->user_id;
+
+    }
+
+    public function update_artigo(User $user, Artigo $artigo){
+
+        return $user->id == $artigo->user_id;
+
+    }
+
+    public function delete_artigo(User $user, Artigo $artigo){
+
+        return $user->id == $artigo->user_id;
+
+    }
+
+    public function restore_artigo(User $user, Artigo $artigo){
 
         return $user->id == $artigo->user_id;
 

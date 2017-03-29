@@ -5,7 +5,7 @@
     <section class="content-header">
         <h1>
             {{$role->name}}
-            <small>permissões deste usuário</small>
+            <small>permissões definidas para este grupo</small>
         </h1>
         <ol class="breadcrumb">
             <li><a href="/painel"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -24,6 +24,29 @@
                 <div class="row">
                     <div class="col-xs-12">
 
+                        <div class="box-header">
+
+                            @if (session('sucesso'))
+                                <div class="alert alert-success alert-dismissible" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                                aria-hidden="true">&times;</span></button>
+                                    {{ session('sucesso') }}
+                                </div>
+                                <br/>
+                            @elseif(session('erro'))
+                                <div class="alert alert-danger alert-dismissible" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                                aria-hidden="true">&times;</span></button>
+                                    {{ session('erro') }}
+                                </div>
+                                <br/>
+                            @endif
+
+
+                            <a href="/painel/role/add/permission/{{$role->id}}" class="btn btn-primary" title="Cadastrar uma nova função" alt="Cadastrar uma nova funçã"><i class="fa fa-plus" aria-hidden="true"></i></a>
+                            <br><br>
+                        </div>
+
                         <!-- /.box-header -->
                         <div class="box-body table-responsive no-padding">
 
@@ -40,13 +63,13 @@
                                     <td>{{$permission->name}}</td>
                                     <td>{{$permission->label}}</td>
                                     <td>
-                                        <a href="/painel/role/delete" class="btn btn-danger" title="Excluir função" alt="Cadastrar uma nova funçã"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                                        <a href="/painel/role/delete/permission/{{$role->id}}/{{$permission->id}}" onclick="return confirm('Realmente deseja desvicular esta permissão do grupo?')" class="btn btn-danger" title="Excluir permissão" alt="Excluir permissão"><i class="fa fa-trash" aria-hidden="true"></i></a>
                                     </td>
                                 </tr>
                                 @empty
                                     <tr>
                                         <td colspan="90">
-                                            <h4 class="text-center">Nenhuma função cadastrada até o momento!</h4>
+                                            <h4 class="text-center">Nenhuma permissão cadastrada para o grupo {{$role->name}}!</h4>
                                         </td>
                                     </tr>
                                 @endforelse

@@ -316,23 +316,42 @@
 
             <!-- sidebar menu: : style can be found in sidebar.less -->
             <ul class="sidebar-menu">
-                <li class="header">CONFIG. SISTEMA</li>
                 <li><a href="/painel"><i class="glyphicon glyphicon-home"></i>Início</a></li>
-                <li><a href="/painel/configuracoes"><i class="glyphicon glyphicon-th-large"></i>Configurações Básicas</a></li>
-                <li><a href="/painel/user"><i class="fa fa-users" aria-hidden="true"></i>Consultores e clientes</a></li>
-                <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-key" aria-hidden="true"></i><span>Controle de Acesso</span>
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a href="/painel/user/role"><i class="fa fa-user" aria-hidden="true"></i> Usuários</a></li>
-                        <li><a href="/painel/role"><i class="fa fa-lock" aria-hidden="true"></i> Grupos</a></li>
-                        <li><a href="/painel/permission"><i class="fa fa-unlock-alt" aria-hidden="true"></i> Permissões</a></li>
-                    </ul>
-                </li>
-                <li class="header">CONFIG. PORTAL</li>
 
+                @can('view_configuracoes')
+                    <li class="header">CONFIG. SISTEMA</li>
+                    <li><a href="/painel/configuracoes"><i class="glyphicon glyphicon-th-large"></i>Configurações Básicas</a></li>
+                @endcan
+
+                @can('view_usuarios')
+                    <li><a href="/painel/user"><i class="fa fa-users" aria-hidden="true"></i>Consultores e clientes</a></li>
+                @endcan
+
+                @can('view_controle_acesso')
+                    <li class="treeview">
+
+                        <a href="#">
+                            <i class="fa fa-key" aria-hidden="true"></i><span>Controle de Acesso</span>
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+
+                        <ul class="treeview-menu">
+                            <li><a href="/painel/user/role"><i class="fa fa-user" aria-hidden="true"></i> Usuários</a></li>
+                            <li><a href="/painel/role"><i class="fa fa-lock" aria-hidden="true"></i> Grupos</a></li>
+                            <li><a href="/painel/permission"><i class="fa fa-unlock-alt" aria-hidden="true"></i> Permissões</a></li>
+                        </ul>
+
+                    </li>
+                @endcan
+
+                @can('view_config_portal')
+                    <li class="header">CONFIG. PORTAL</li>
+                    <li><a href="/painel/service"><i class="fa fa-share-alt" aria-hidden="true"></i>Serviços</a></li>
+                    <li><a href="/painel/portifolio"><i class="glyphicon glyphicon-th" aria-hidden="true"></i>Portifólio</a></li>
+                    <li><a href="/painel/quemsomos"><i class="glyphicon glyphicon-th-list" aria-hidden="true"></i>Quem somos</a></li>
+                @endcan
+
+                <li class="header">Painel do consultor</li>
                 <li class="treeview">
                     <a href="#">
                         <i class="glyphicon glyphicon-th-large" aria-hidden="true"></i><span>Artigos</span>
@@ -345,12 +364,6 @@
                         <li><a href="/painel/artigo/lixeira"><i class="glyphicon glyphicon-trash" aria-hidden="true"></i>Lixeira</a></li>
                     </ul>
                 </li>
-
-                <li><a href="/painel/service"><i class="fa fa-share-alt" aria-hidden="true"></i>Serviços</a></li>
-                <li><a href="/painel/portifolio"><i class="glyphicon glyphicon-th" aria-hidden="true"></i>Portifólio</a></li>
-                <li><a href="/painel/quemsomos"><i class="glyphicon glyphicon-th-list" aria-hidden="true"></i>Quem somos</a></li>
-
-                <li class="header">CONFIG. DO USUÁRIO</li>
                 <li><a href="/painel/perfil"><i class="glyphicon glyphicon-user" aria-hidden="true"></i>Perfil de Usuário</a></li>
 
             </ul>

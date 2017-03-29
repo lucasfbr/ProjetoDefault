@@ -13,4 +13,10 @@ class Role extends Model
 
     }
 
+    public function setNameAttribute($value){
+
+        $this->attributes['name'] = lcfirst($value);
+
+    }
+
 }

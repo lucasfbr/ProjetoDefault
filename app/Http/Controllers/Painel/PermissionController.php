@@ -13,8 +13,6 @@ class PermissionController extends Controller
 
     public function __construct(Permission $permission)
     {
-        $this->middleware('auth');
-
         $this->permission = $permission;
     }
 
@@ -26,26 +24,69 @@ class PermissionController extends Controller
 
     }
 
-    public function debug(){
+   public function add(){
+        
+       return view('painel.permission.add');
+       
+   }
 
-        $nameuser = auth()->user()->name;
+   public function create(Request $request){
 
-        var_dump("<h1>".$nameuser."</h1>");
+       $this->validate($request, [
+           'name' => 'required',
+           'descricao' => 'required'
+       ]);
+       
+       $permission = new Permission;
 
-        foreach (auth()->user()->roles as $role) {
+       $permission->name = $request->input('name');
+       $permission->label = $request->input('descricao');
 
-            echo $role->name . ' -> ';
+       if($permission->save()){
+           return redirect('/painel/permission')->with('sucesso', 'Permissão cadastrado com sucesso!' );
+       }else{
+           return redirect('/painel/permission')->with('erro', 'Erro ao cadastrar uma nova permissão, tente novamente mais tarde!');
+       }
+       
+   }
 
-            $permissions = $role->permissions;
+   public function edit($id){
 
-            foreach ($permissions as $permission){
-                echo $permission->name . ',';
-            }
+       $permission =  $this->permission->find($id);
 
-            echo "<hr>";
+       return view('painel.permission.edit', compact('permission'));
+   }
 
-        }
+   public function update(Request $request, $id){
 
-    }
+       $this->validate($request, [
+           'name' => 'required',
+           'descricao' => 'required'
+       ]);
+
+       $permission =  $this->permission->find($id);
+
+       $permission->name = $request->input('name');
+       $permission->label = $request->input('descricao');
+
+       if($permission->update()){
+           return redirect('/painel/permission')->with('sucesso', 'Permissão editada com sucesso!' );
+       }else{
+           return redirect('/painel/permission')->with('erro', 'Erro ao editar a permissão, tente novamente mais tarde!');
+       }
+
+   }
+
+   public function delete($id){
+
+       $permission =  $this->permission->find($id);
+
+       if($permission->delete()){
+           return redirect('/painel/permission')->with('sucesso', 'Permissão deletada com sucesso!' );
+       }else{
+           return redirect('/painel/permission')->with('erro', 'Erro ao deletar a permissão, tente novamente mais tarde!');
+       }
+
+   }
 
 }

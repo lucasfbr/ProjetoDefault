@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Role;
 use App\User;
+use App\Permission;
 use Illuminate\Support\Facades\App;
 
 class RoleController extends Controller
@@ -15,16 +16,14 @@ class RoleController extends Controller
 
     public function __construct(Role $role)
     {
-        $this->middleware('auth');
-
         $this->role = $role;
     }
 
     public function index(){
 
-        $roles = $this->role->all();
+        $roles = $this->role->orderBy('name', 'asc')->get();
 
-        return view('painel.role.index', ['roles' => $roles]);
+        return view('painel.role.index', compact('roles'));
 
     }
 
@@ -100,6 +99,48 @@ class RoleController extends Controller
             return redirect('/painel/role')->with('sucesso', 'Grupo deletado com sucesso!' );
         }else{
             return redirect('/painel/role')->with('erro', 'Erro ao deletar o grupo, tente novamente mais tarde!');
+        }
+
+    }
+
+    public function addPermission($role_id){
+
+        $role = $this->role->find($role_id);
+
+        $permissions = Permission::all();
+
+        return view('painel.role.addPermission', compact('role','permissions'));
+
+    }
+
+    public function createPermission(Request $request, $role_id){
+
+        $this->validate($request, [
+            'permissoes' => 'required',
+        ]);
+
+        $permission = $request->input('permissoes');
+        $role       = $this->role->find($role_id);
+        $role_permission =  $role->permissions()->sync($permission);
+
+        if($role_permission){
+            return redirect('/painel/role/show/'.$role->id)->with('sucesso', 'Permissões adicionadas com sucesso!' );
+        }else{
+            return redirect('/painel/role/show/'.$role->id)->with('erro', 'Erro ao adicionar as permissões, tente novamente mais tarde!');
+        }
+
+    }
+
+    public function deletePermission($role_id, $permission_id){
+
+        $role = $this->role->find($role_id);
+
+        $delete = $role->permissions()->detach($permission_id);
+
+        if($delete){
+            return redirect('/painel/role/show/'.$role->id)->with('sucesso', 'Permissão desvinculada com sucesso!' );
+        }else{
+            return redirect('/painel/role/show/'.$role->id)->with('erro', 'Erro ao desvincular, tente novamente mais tarde!');
         }
 
     }

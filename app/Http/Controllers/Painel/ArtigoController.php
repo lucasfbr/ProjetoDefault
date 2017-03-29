@@ -28,6 +28,8 @@ class ArtigoController extends Controller
 
     public function index($tipo = 'published'){
 
+
+
         /*
         $user = User::find(Auth::user()->id);
 
@@ -68,14 +70,22 @@ class ArtigoController extends Controller
 
         //$artigos = $user->artigo()->latest('published_at')->published()->paginate(6);
 
+        //if(Gate::denies('view', $this->artigo)) {
+        //    return redirect()->back();
+        //}
 
-        if(Gate::denies('view_artigo')) {
-            return redirect()->back();
-        }
+        //$artigos = $this->artigo->latest('published_at')->published()->with('user')->paginate(6);
 
         $artigos = $this->artigo->latest('published_at')->published()->with('user')->paginate(6);
 
+        //if(Gate::denies('view_artigo', $artigos))
+        //    abort(403, 'Acesso não autorizado');
+
+
+
         return view('painel.artigo.index', compact('artigos','tipo'));
+
+
 
     }
 
@@ -162,8 +172,8 @@ class ArtigoController extends Controller
         //modo com mensagem padrao
         //$this->authorize('artigo-update', $artigo);
         //modo com mensagem personalizada
-        //if(Gate::denies('update_artigo', $artigo))
-        //    abort(403, 'Acesso não autorizado');
+        if(Gate::denies('edit_artigo', $artigo))
+            return redirect()->back();
 
         return view('painel.artigo.edit', compact('artigo','tipo', 'categorias'));
 
@@ -183,6 +193,9 @@ class ArtigoController extends Controller
         $user = User::find(Auth::user()->id);
 
         $artigo =  $user->artigo->find($id);
+
+        if(Gate::denies('update_artigo', $artigo))
+            return redirect()->back();
 
         if((!$artigo) AND ($user->tipo != 'Administrador')){
             return redirect('/painel/artigo/'.$tipo);
@@ -219,6 +232,9 @@ class ArtigoController extends Controller
 
         $artigo =  $user->artigo->find($id);
 
+        if(Gate::denies('delete_artigo', $artigo))
+            return redirect()->back();
+
         if((!$artigo) AND ($user->tipo != 'Administrador')){
             return redirect('/painel/artigo/'.$tipo);
         }else{
@@ -243,6 +259,9 @@ class ArtigoController extends Controller
         $user = User::find(Auth::user()->id);
 
         $artigo = $user->artigo->find($id);
+
+        if(Gate::denies('restore_artigo', $artigo))
+            return redirect()->back();
 
         if((!$artigo) AND ($user->tipo != 'Administrador')){
             return redirect('/painel/artigo/trashed');

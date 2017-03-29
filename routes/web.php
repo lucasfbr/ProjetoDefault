@@ -129,14 +129,22 @@ Route::group(['middleware' => ['auth','tipo'], 'prefix' => 'painel'], function (
     Route::get('/role', 'Painel\RoleController@index');
     Route::get('/role/show/{id}', 'Painel\RoleController@show');
     Route::get('/role/add', 'Painel\RoleController@add');
+    Route::get('/role/add/permission/{role_id}', 'Painel\RoleController@addPermission');
     Route::post('/role/create', 'Painel\RoleController@create');
+    Route::post('/role/create/permission/{role_id}', 'Painel\RoleController@createPermission');
     Route::get('/role/edit/{id}', 'Painel\RoleController@edit');
     Route::post('/role/update/{id}', 'Painel\RoleController@update');
     Route::get('/role/delete/{id}', 'Painel\RoleController@delete');
+    Route::get('/role/delete/permission/{role_id}/{permission_id}', 'Painel\RoleController@deletePermission');
 
 
     //PermissionController
     Route::get('/permission', 'Painel\PermissionController@index');
+    Route::get('/permission/add', 'Painel\PermissionController@add');
+    Route::post('/permission/create', 'Painel\PermissionController@create');
+    Route::get('/permission/edit/{id}', 'Painel\PermissionController@edit');
+    Route::post('/permission/update/{id}', 'Painel\PermissionController@update');
+    Route::get('/permission/delete/{id}', 'Painel\PermissionController@delete');
 
     //debug permissions
     Route::get('/debug', 'Painel\PermissionController@debug');
