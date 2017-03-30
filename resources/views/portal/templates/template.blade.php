@@ -113,7 +113,23 @@
     </div>
 </footer>
 
-
 <script type="text/javascript" src="/js/portal.js"></script>
+
+<!-- InputMask -->
+<script src="/assets/painel/plugins/input-mask/jquery.inputmask.js"></script>
+<script src="/assets/painel/plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
+<script src="/assets/painel/plugins/input-mask/jquery.inputmask.extensions.js"></script>
+
+
+<script>
+    $(function () {
+
+        $("[data-mask]").inputmask();
+
+    });
+</script>
+
+
+
 </body>
 </html>

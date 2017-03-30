@@ -180,4 +180,22 @@ Route::get('/nossaequipe', 'Portal\NossaequipeController@index');
 Route::get('/artigos', 'Portal\ArtigoController@index');
 Route::get('/artigos/show/{id}', 'Portal\ArtigoController@show');
 
+//ContatoController
+Route::post('/mensagens/create', 'Portal\MensagemController@create');
+
+//envio de email
+Route::post('/sendmail', function (\Illuminate\Http\Request $request, \Illuminate\Mail\Mailer $mailer){
+
+    $mailer->to('lucasfbr03@gmail.com')
+           ->send(new \App\Mail\ContatoMail(
+            $request->input('nome'),
+            $request->input('email'),
+            $request->input('telefone'),
+            $request->input('mensagem')
+        ));
+
+    return redirect()->back();
+
+})->name('sendmail');
+
 

@@ -307,35 +307,68 @@
 
             <div class="row">
                 <div class="col-xs-12">
-                    <form name="frmContato" id="frmContato">
+                    <form name="frmContato" id="frmContato" method="post" action="/mensagens/create">
+                        {{ csrf_field() }}
                         <div class="row">
                             <div class="col-md-6">
-                                <div class="form-group">
+                                <div class="form-group{{ $errors->has('nome') ? ' has-error' : '' }}">
                                     <input type="text" class="form-control input-lg" name="nome" id="nome"
-                                           placeholder="Qual é seu nome?" required>
+                                           placeholder="Qual é seu nome?" value="{{ old('nome') }}">
+
+                                    @if ($errors->has('nome'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('nome') }}</strong>
+                                        </span>
+                                    @endif
                                 </div>
 
-                                <div class="form-group">
+                                <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                                     <input type="text" class="form-control input-lg" name="email" id="email"
-                                           placeholder="Qual o seu email?" required>
+                                           placeholder="Qual o seu email?" value="{{ old('email') }}" >
+
+                                    @if ($errors->has('email'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('email') }}</strong>
+                                        </span>
+                                    @endif
                                 </div>
 
                                 <div class="form-group">
-                                    <input type="text" class="form-control input-lg" name="telefon" id="telefonr"
-                                           placeholder="Qual o seu telefone?" required>
+                                    <input type="text" class="form-control input-lg" name="telefone" id="telefone"
+                                           placeholder="Qual o seu telefone?" value="{{ old('telefone') }}"  data-inputmask='"mask": "(99)99999-9999"' data-mask>
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <div class="form-group contato">
-                                <textarea class="form-control input-lg" name="mensagem" id="mensagem"
-                                          placeholder="Sua mensagem!" required></textarea>
+                                <div class="form-group{{ $errors->has('mensagem') ? ' has-error' : '' }}">
+                                    <textarea class="form-control input-lg" name="mensagem" id="mensagem"
+                                          placeholder="Sua mensagem!" rows="6">{{ old('mensagem') }}</textarea>
+
+                                    @if ($errors->has('mensagem'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('mensagem') }}</strong>
+                                        </span>
+                                    @endif
                                 </div>
                             </div>
+
                         </div>
                         <div class="row">
-                            <div class="col-md-6">
-                                <div class="alert alert-success">Envio realizado</div>
-                            </div>
+                            @if (session('sucesso'))
+                                <div class="col-md-6">
+                                    <div class="alert alert-success alert-dismissible" role="alert">
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        {{ session('sucesso') }}
+                                    </div>
+                                </div>
+                            @elseif(session('erro'))
+                                <div class="col-md-6">
+                                    <div class="alert alert-danger alert-dismissible" role="alert">
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        {{ session('erro') }}
+                                    </div>
+                                </div>
+                            @endif
+
                             <div class="col-md-6">
                                 <button type="submit" class="btn btn-default btn-lg">Enviar Formulário</button>
                             </div>
