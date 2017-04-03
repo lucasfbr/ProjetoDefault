@@ -19,6 +19,7 @@ class CreateMensagemsTable extends Migration
             $table->string('email');
             $table->string('telefone');
             $table->text('mensagem');
+            $table->softDeletes();
             $table->timestamps();
         });
 

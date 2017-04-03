@@ -146,9 +146,13 @@ Route::group(['middleware' => ['auth','tipo'], 'prefix' => 'painel'], function (
     Route::post('/permission/update/{id}', 'Painel\PermissionController@update');
     Route::get('/permission/delete/{id}', 'Painel\PermissionController@delete');
 
-    //debug permissions
-    Route::get('/debug', 'Painel\PermissionController@debug');
-
+    //MensagemController
+    Route::get('/mensagem', 'Painel\MensagemController@index');
+    Route::get('/mensagem/search', 'Painel\MensagemController@search');
+    Route::get('/mensagem/add', 'Painel\MensagemController@add');
+    Route::post('/mensagem/create', 'Painel\MensagemController@create');
+    Route::get('/mensagem/read/{id}', 'Painel\MensagemController@read');
+    Route::get('/mensagem/delete/{id}', 'Painel\MensagemController@delete');
 
 });
 
@@ -184,7 +188,7 @@ Route::get('/artigos/show/{id}', 'Portal\ArtigoController@show');
 Route::post('/mensagens/create', 'Portal\MensagemController@create');
 
 //envio de email
-Route::post('/sendmail', function (\Illuminate\Http\Request $request, \Illuminate\Mail\Mailer $mailer){
+/*Route::post('/sendmail', function (\Illuminate\Http\Request $request, \Illuminate\Mail\Mailer $mailer){
 
     $mailer->to('lucasfbr03@gmail.com')
            ->send(new \App\Mail\ContatoMail(
@@ -196,6 +200,6 @@ Route::post('/sendmail', function (\Illuminate\Http\Request $request, \Illuminat
 
     return redirect()->back();
 
-})->name('sendmail');
+})->name('sendmail');*/
 
 

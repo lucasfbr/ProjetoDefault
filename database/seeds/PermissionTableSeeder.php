@@ -11,9 +11,9 @@ class PermissionTableSeeder extends Seeder
      */
     public function run()
     {
-        if(DB::table('permission')->get()->count() == 0){
+        if(DB::table('permissions')->get()->count() == 0){
 
-            DB::table('permission')->insert([
+            DB::table('permissions')->insert([
 
                 [
                     'name' => 'view_artigo',

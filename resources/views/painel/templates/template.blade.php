@@ -21,7 +21,6 @@
     <!-- bootstrap wysihtml5 - text editor -->
     <link rel="stylesheet" href="/assets/painel/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
 
-
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -349,6 +348,7 @@
                     <li><a href="/painel/service"><i class="fa fa-share-alt" aria-hidden="true"></i>Serviços</a></li>
                     <li><a href="/painel/portifolio"><i class="glyphicon glyphicon-th" aria-hidden="true"></i>Portifólio</a></li>
                     <li><a href="/painel/quemsomos"><i class="glyphicon glyphicon-th-list" aria-hidden="true"></i>Quem somos</a></li>
+                    <li><a href="/painel/mensagem"><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i>Mensagens</a></li>
                 @endcan
 
                 <li class="header">Painel do consultor</li>
@@ -440,13 +440,10 @@
 <script src="/assets/painel/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
 
 
-
-
 <!-- Slimscroll -->
 <script src="/assets/painel/plugins/slimScroll/jquery.slimscroll.min.js"></script>
 <!-- FastClick -->
 <script src="/assets/painel/plugins/fastclick/fastclick.js"></script>
-
 
 
 <!-- AdminLTE App -->
@@ -454,6 +451,7 @@
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="/assets/painel/dist/js/pages/dashboard.js"></script>
 <!-- AdminLTE for demo purposes -->
+
 <script src="/assets/painel/dist/js/demo.js"></script>
 
 

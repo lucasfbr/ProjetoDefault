@@ -7,9 +7,18 @@ use Illuminate\Http\Request;
 use Illuminate\Mail\Mailer;
 use App\Mail\ContatoMail;
 use Validator;
+use App\Mensagem;
 
 class MensagemController extends Controller
 {
+
+    private $mensagem;
+
+    public function __construct(Mensagem $mensagem){
+
+        $this->mensagem = $mensagem;
+
+    }
 
     public function create(Request $request, Mailer $mailer)
     {
@@ -27,10 +36,16 @@ class MensagemController extends Controller
         }
 
         //enviando email com a mensagem do cliente para o administrador do sistema
-        $this->sendmail($request, $mailer);
+        //$this->sendmail($request, $mailer);
 
         /*Inicio do cadastro da mensagem no banco e redirecionamento*/
+        $cadastro = $this->mensagem->create($request->all());
 
+        if($cadastro){
+            return redirect('/#contato')->with('sucesso', 'Mensagem enviada com sucesso, logo entraremos em contato!');
+        }else{
+            return redirect('/#contato')->with('erro', 'Erro ao enviar a mensagem, tente novamente mais tarde!');
+        }
         /*Fim do cadastro da mensagem no banco e redirecionamento*/
 
     }
@@ -38,7 +53,7 @@ class MensagemController extends Controller
     public function sendmail($request, $mailer)
     {
 
-        $mailer->to('lucasfbr03@gmail.com')
+        $mailer->to('lucas-fbr@hotmail.com')
             ->send(new ContatoMail(
                 $request->input('nome'),
                 $request->input('email'),
