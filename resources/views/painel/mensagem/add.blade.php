@@ -30,7 +30,7 @@
                     </div>
                     <div class="box-body no-padding">
                         <ul class="nav nav-pills nav-stacked">
-                            <li class="active"><a href="#"><i class="fa fa-inbox"></i> Caixa de entrada
+                            <li class="active"><a href="/painel/mensagem"><i class="fa fa-inbox"></i> Caixa de entrada
                                     <span class="label label-primary pull-right">12</span></a></li>
                             <li><a href="#"><i class="fa fa-envelope-o"></i> Enviados</a></li>
                             <li><a href="#"><i class="fa fa-file-text-o"></i> Rascunhos</a></li>

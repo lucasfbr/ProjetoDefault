@@ -66,6 +66,7 @@ elixir((mix) => {
         //'../../../node_modules/bootstrap3-wysihtml5-bower/dist/bootstrap3-wysihtml5.all.js',
         //'../../../node_modules/jquery-slimscroll/jquery.slimscroll.js',
         //'../../../node_modules/fastclick/fastclick.js',
+        'painel/funcoes.js',
         //'painel/app.js',
         //'painel/dashboard.js',
         //'painel/demo.js',

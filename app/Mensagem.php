@@ -23,7 +23,7 @@ class Mensagem extends Model
 
     public function getCreatedAtAttribute($date){
 
-        return Carbon::parse($date)->format('d/m/Y');
+        return Carbon::parse($date)->format('d/m/Y - h:i');
     }
 
 

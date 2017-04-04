@@ -69,8 +69,10 @@
                     <div class="box-body no-padding">
                         <div class="mailbox-controls">
                             <!-- Check all button -->
-                            <button type="button" class="btn btn-default btn-sm checkbox-toggle"><i class="fa fa-square-o"></i>
-                            </button>
+
+
+                            <input type="checkbox" id="selectAll" name="selectAll" class="btn btn-default btn-sm">
+
                             <div class="btn-group">
                                 <button type="button" class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i></button>
                                 <button type="button" class="btn btn-default btn-sm"><i class="fa fa-reply"></i></button>
@@ -90,7 +92,7 @@
                                 <tbody>
                                 @forelse($mensagens as $msg)
                                     <tr>
-                                        <td><input type="checkbox" name="check" value="1"></td>
+                                        <td><input type="checkbox" name="lista" id="lista" value="{{$msg->id}}"></td>
                                         <td class="mailbox-name"><a href="/painel/mensagem/read/{{$msg->id}}">{{$msg->nome}}</a></td>
                                         <td class="mailbox-subject"><b>Formulário de contato</b> - {{str_limit($msg->mensagem, 55)}}
                                         </td>
