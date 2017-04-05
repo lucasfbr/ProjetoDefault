@@ -118,6 +118,50 @@ module.exports = {
 
         self.banerFormulario = true;
 
+    },
+    //caixa de entrada das mensagens
+    enviarMsgLixeira: function () {
+
+        var self = this;
+
+        if(self.msgCheck == '')
+            return false
+
+        self.$http.get('/painel/mensagem/delete/'+self.msgCheck).then(function (response) {
+
+            if(response.data)
+                location.reload();
+
+        });
+
+    },
+    //excluir mensagem diretamente da leitura da mema
+    readMsgLixeira: function (id) {
+
+        var self = this;
+
+        if(id == '')
+            return false
+
+
+        var confirmacaoUsuario = confirm('Realmente deseja excluir este registro?');
+
+        if(confirmacaoUsuario) {
+
+            self.$http.get('/painel/mensagem/delete/' + id).then(function (response) {
+
+                if (response.data)
+                    jQuery(window.document.location).attr('href', '/painel/mensagem');
+
+            });
+
+        }
+
+    },
+    refresh: function () {
+
+        location.reload();
+
     }
 
 };

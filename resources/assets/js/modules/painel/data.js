@@ -24,6 +24,7 @@ module.exports = {
         status: ''
     },
     banerFormulario: false,
+    msgCheck: [], //check box das mensagens
 
 
 };

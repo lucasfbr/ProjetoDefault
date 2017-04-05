@@ -152,7 +152,8 @@ Route::group(['middleware' => ['auth','tipo'], 'prefix' => 'painel'], function (
     Route::get('/mensagem/add', 'Painel\MensagemController@add');
     Route::post('/mensagem/create', 'Painel\MensagemController@create');
     Route::get('/mensagem/read/{id}', 'Painel\MensagemController@read');
-    Route::get('/mensagem/delete/{id}', 'Painel\MensagemController@delete');
+    Route::get('/mensagem/read/print/{id}', 'Painel\MensagemController@readPrint');
+    Route::get('/mensagem/delete/{ids}', 'Painel\MensagemController@delete');
 
 });
 

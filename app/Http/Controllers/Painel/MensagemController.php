@@ -29,11 +29,13 @@ class MensagemController extends Controller
 
     public function search(Request $request){
 
+        dd('chegou');
+
         $search = $request->input('val');
 
-        $mensagens = $this->mensagem->where('nome','like', '%'.$search.'%')->paginate(50);
+        $mensagens = $this->mensagem->where('nome', 'like', '%' . $search . '%')->paginate(50);
 
-        return view('painel.mensagem.index', compact('mensagens','search'));
+        return view('painel.mensagem.index', compact('mensagens','search','tipo'));
 
     }
 
@@ -45,7 +47,36 @@ class MensagemController extends Controller
 
     public function read($id){
 
-        return view('painel.mensagem.read');
+        $mensagem = $this->mensagem->find($id);
+
+        return view('painel.mensagem.read', compact('mensagem'));
 
     }
+
+    public function readPrint($id){
+
+        $mensagem = $this->mensagem->find($id);
+
+        return view('painel.mensagem.readPrint', compact('mensagem'));
+
+    }
+
+    public function delete($ids){
+
+        $array = explode(',', $ids);
+
+        $msg = new Mensagem;
+
+        if($msg->destroy($array)){
+
+            return response()->json(true);
+
+        }else{
+
+            return response()->json(false);
+
+        }
+
+    }
+
 }

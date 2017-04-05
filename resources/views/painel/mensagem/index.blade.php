@@ -36,9 +36,9 @@
                                     <span class="label label-primary pull-right">12</span></a>
                             </li>
                             <li><a href="#"><i class="fa fa-envelope-o"></i> Enviados</a></li>
-                            <li><a href="#"><i class="fa fa-filter"></i> Lixeira <span class="label label-warning pull-right">65</span></a>
+                            <li><a href="/painel/mensagem"><i class="fa fa-trash-o"></i>  Lixeira <span class="label label-warning pull-right">65</span></a>
                             </li>
-                            <li><a href="#"><i class="fa fa-trash-o"></i> Enviar para lixeira</a></li>
+
                         </ul>
                     </div>
                     <!-- /.box-body -->
@@ -70,16 +70,14 @@
                         <div class="mailbox-controls">
                             <!-- Check all button -->
 
-
-                            <input type="checkbox" id="selectAll" name="selectAll" class="btn btn-default btn-sm">
+                            <input class="btn btn-default btn-sm" type="checkbox" id="selectAll" name="selectAll">
 
                             <div class="btn-group">
-                                <button type="button" class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i></button>
-                                <button type="button" class="btn btn-default btn-sm"><i class="fa fa-reply"></i></button>
-                                <button type="button" class="btn btn-default btn-sm"><i class="fa fa-share"></i></button>
+                                <button type="button" class="btn btn-default btn-sm" v-on:click="enviarMsgLixeira"><i class="fa fa-trash-o"></i></button>
+                                <button type="button" class="btn btn-default btn-sm" v-on:click="refresh"><i class="fa fa-refresh"></i></button>
                             </div>
                             <!-- /.btn-group -->
-                            <button type="button" class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button>
+
                             <div class="pull-right">
                                 {{$mensagens->currentPage()}} de {{$mensagens->lastPage()}}
 
@@ -92,7 +90,7 @@
                                 <tbody>
                                 @forelse($mensagens as $msg)
                                     <tr>
-                                        <td><input type="checkbox" name="lista" id="lista" value="{{$msg->id}}"></td>
+                                        <td><input type="checkbox" name="lista" id="lista" value="{{$msg->id}}" v-model="msgCheck"></td>
                                         <td class="mailbox-name"><a href="/painel/mensagem/read/{{$msg->id}}">{{$msg->nome}}</a></td>
                                         <td class="mailbox-subject"><b>Formulário de contato</b> - {{str_limit($msg->mensagem, 55)}}
                                         </td>
