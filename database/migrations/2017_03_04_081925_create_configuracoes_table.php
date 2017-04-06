@@ -15,23 +15,23 @@ class CreateConfiguracoesTable extends Migration
     {
         Schema::create('configuracoes', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('logo');
-            $table->string('titulo');
-            $table->string('logradouro');
-            $table->string('numero');
-            $table->string('bairro');
-            $table->string('cidade');
-            $table->string('uf');
-            $table->string('cep');
-            $table->string('telefone');
-            $table->text('googlemaps');
-            $table->string('facebook');
-            $table->string('youtube');
-            $table->string('skype');
-            $table->string('twitter');
-            $table->string('linkedin');
-            $table->string('google');
-            $table->longText('termosDeContrato');
+            $table->string('logo')->nullable();
+            $table->string('titulo')->nullable();
+            $table->string('logradouro')->nullable();
+            $table->string('numero')->nullable();
+            $table->string('bairro')->nullable();
+            $table->string('cidade')->nullable();
+            $table->string('uf')->nullable();
+            $table->string('cep')->nullable();
+            $table->string('telefone')->nullable();
+            $table->text('googlemaps')->nullable();
+            $table->string('facebook')->nullable();
+            $table->string('youtube')->nullable();
+            $table->string('skype')->nullable();
+            $table->string('twitter')->nullable();
+            $table->string('linkedin')->nullable();
+            $table->string('google')->nullable();
+            $table->longText('termosDeContrato')->nullable();
             $table->timestamps();
         });
     }

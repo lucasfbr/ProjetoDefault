@@ -12,7 +12,7 @@ class Mensagem extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'nome', 'email', 'telefone', 'mensagem'
+        'nome', 'email', 'telefone', 'mensagem', 'resposta'
     ];
 
     protected  $dates = [
@@ -23,8 +23,14 @@ class Mensagem extends Model
 
     public function getCreatedAtAttribute($date){
 
-        return Carbon::parse($date)->format('d/m/Y - h:i');
+        return Carbon::parse($date)->format('d/m/Y - H:i');
     }
+
+    public function getUpdatedAtAttribute($date){
+
+        return Carbon::parse($date)->format('d/m/Y - H:i');
+    }
+
 
 
 }

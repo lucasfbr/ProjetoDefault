@@ -6,6 +6,8 @@ use Carbon\Carbon;
 use Gate;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Mail\Mailer;
+use App\Mail\RespostaContatoMail;
 use App\Mensagem;
 
 class MensagemController extends Controller
@@ -23,13 +25,14 @@ class MensagemController extends Controller
         $search = '';
         $mensagens = $this->mensagem->paginate(50);
 
-        return view('painel.mensagem.index', compact('mensagens', 'search'));
+        $totalMensagens = $this->totalMensagens();
+        $totalLixeira = $this->totalLixeira();
+
+        return view('painel.mensagem.index', compact('mensagens', 'search', 'totalMensagens', 'totalLixeira'));
 
     }
 
     public function search(Request $request){
-
-        dd('chegou');
 
         $search = $request->input('val');
 
@@ -49,7 +52,10 @@ class MensagemController extends Controller
 
         $mensagem = $this->mensagem->find($id);
 
-        return view('painel.mensagem.read', compact('mensagem'));
+        $totalMensagens = $this->totalMensagens();
+        $totalLixeira = $this->totalLixeira();
+
+        return view('painel.mensagem.read', compact('mensagem','totalMensagens','totalLixeira'));
 
     }
 
@@ -58,6 +64,32 @@ class MensagemController extends Controller
         $mensagem = $this->mensagem->find($id);
 
         return view('painel.mensagem.readPrint', compact('mensagem'));
+
+    }
+
+    public function resposta(Request $request, Mailer $mailer, $id){
+
+        $mensagem = $this->mensagem->find($id);
+
+        $resposta = $request->input('resposta');
+
+        if($resposta){
+
+
+            //enviando email com a mensagem do cliente para o administrador do sistema
+            if(usuarioPrincipal()->name AND usuarioPrincipal()->email) {
+                $this->sendmail($request, $mailer);
+
+                $mensagem->resposta = $resposta;
+                $mensagem->update();
+
+            }else{
+                return redirect('/painel/mensagem/read/'.$id)->with('erro', 'Somente o usuario principal poderá responder uma mensagem, defina seu usuario como tal para poder enviar uma resposta!');
+            }
+
+        }
+
+        return redirect('/painel/mensagem/read/'.$id);
 
     }
 
@@ -76,6 +108,35 @@ class MensagemController extends Controller
             return response()->json(false);
 
         }
+
+    }
+
+    //Enviar email de resposta para o cliente
+    public function sendmail($request, $mailer)
+    {
+
+        $mailer->to($request->input('email'))
+            ->send(new RespostaContatoMail(
+                $request->input('nome'),
+                $request->input('email'),
+                $request->input('telefone'),
+                $request->input('mensagem'),
+                usuarioPrincipal()->name,
+                usuarioPrincipal()->email,
+                $request->input('resposta')
+            ));
+
+    }
+
+    public function totalMensagens(){
+
+        return $totalMensagens = $this->mensagem->all()->count();
+
+    }
+
+    public function totalLixeira(){
+
+        return $this->mensagem->onlyTrashed()->count();
 
     }
 

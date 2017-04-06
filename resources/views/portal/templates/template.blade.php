@@ -9,6 +9,7 @@
 
     <link href="/css/portal.css" rel="stylesheet">
 
+
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -120,15 +121,15 @@
 <script src="/assets/painel/plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
 <script src="/assets/painel/plugins/input-mask/jquery.inputmask.extensions.js"></script>
 
-
 <script>
     $(function () {
 
         $("[data-mask]").inputmask();
 
-    });
-</script>
 
+    });
+
+</script>
 
 
 </body>

@@ -36,7 +36,7 @@ class MensagemController extends Controller
         }
 
         //enviando email com a mensagem do cliente para o administrador do sistema
-        //$this->sendmail($request, $mailer);
+        $this->sendmail($request, $mailer);
 
         /*Inicio do cadastro da mensagem no banco e redirecionamento*/
         $cadastro = $this->mensagem->create($request->all());
@@ -53,7 +53,7 @@ class MensagemController extends Controller
     public function sendmail($request, $mailer)
     {
 
-        $mailer->to('lucas-fbr@hotmail.com')
+        $mailer->to(usuarioPrincipal()->email)
             ->send(new ContatoMail(
                 $request->input('nome'),
                 $request->input('email'),

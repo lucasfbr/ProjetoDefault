@@ -38,6 +38,28 @@
             <h3 class="box-title">Mensagem enviada para o site paludoconsultoria.com.br</h3>
 
         </div>
+
+        @if($mensagem->resposta)
+            <div class="box-body no-padding">
+
+                <div class="mailbox-read-info">
+                    <h3>Assunto: Resposta pelo site</h3>
+                    <h5>De: Hernani Otávio Paludo
+                        <span class="mailbox-read-time pull-right">{{$mensagem->updated_at}}</span>
+                    </h5>
+                </div>
+
+                <!-- /.mailbox-controls -->
+                <div class="mailbox-read-message">
+                    <p>{!! $mensagem->resposta !!}</p>
+                </div>
+                <!-- /.mailbox-read-message -->
+            </div>
+            <!-- /.box-body -->
+
+            <div class="msgSeparador"></div>
+        @endif
+
         <!-- /.box-header -->
         <div class="box-body no-padding">
             <div class="mailbox-read-info">

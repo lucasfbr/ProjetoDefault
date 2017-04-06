@@ -30,13 +30,14 @@
                     </div>
                     <div class="box-body no-padding">
                         <ul class="nav nav-pills nav-stacked">
-                            <li class="active"><a href="/painel/mensagem"><i class="fa fa-inbox"></i> Caixa de entrada
-                                    <span class="label label-primary pull-right">12</span></a></li>
-                            <li><a href="#"><i class="fa fa-envelope-o"></i> Enviados</a></li>
-                            <li><a href="#"><i class="fa fa-file-text-o"></i> Rascunhos</a></li>
-                            <li><a href="#"><i class="fa fa-filter"></i> Lixeira <span class="label label-warning pull-right">65</span></a>
+                            <li class="active">
+                                <a href="/painel/mensagem/">
+                                    <i class="fa fa-inbox"></i> Caixa de entrada
+                                    <span class="label label-primary pull-right">{{$totalMensagens}}</span></a>
                             </li>
-                            <li><a href="#"><i class="fa fa-trash-o"></i> Enviar para lixeira</a></li>
+                            <li><a href="/painel/mensagem"><i class="fa fa-trash-o"></i>  Lixeira <span class="label label-warning pull-right">{{$totalLixeira}}</span></a>
+                            </li>
+
                         </ul>
                     </div>
                     <!-- /.box-body -->
@@ -45,15 +46,42 @@
             </div>
             <!-- /.col -->
             <div class="col-md-9">
+
+
+                @if (session('erro'))
+                    <div class="alert alert-danger alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        {{ session('erro') }}
+                    </div>
+                @endif
+
                 <div class="box box-primary">
                     <div class="box-header with-border">
                         <h3 class="box-title">Mensagem enviada para {{ info_sistem()->titulo != '' ? info_sistem()->titulo : 'Titulo do sistema' }}</h3>
 
-                        <div class="box-tools pull-right">
-                            <a href="#" class="btn btn-box-tool" data-toggle="tooltip" title="Previous"><i class="fa fa-chevron-left"></i></a>
-                            <a href="#" class="btn btn-box-tool" data-toggle="tooltip" title="Next"><i class="fa fa-chevron-right"></i></a>
-                        </div>
                     </div>
+
+                    @if($mensagem->resposta)
+                        <div class="box-body no-padding">
+
+                            <div class="mailbox-read-info">
+                                <h3>Assunto: Resposta pelo site</h3>
+                                <h5>De: {{usuarioPrincipal()->name}}
+                                    <span class="mailbox-read-time pull-right">{{$mensagem->updated_at}}</span>
+                                </h5>
+                            </div>
+
+                            <!-- /.mailbox-controls -->
+                            <div class="mailbox-read-message">
+                                <p>{!! $mensagem->resposta !!}</p>
+                            </div>
+                            <!-- /.mailbox-read-message -->
+                        </div>
+                        <!-- /.box-body -->
+
+                        <div class="msgSeparador"></div>
+                    @endif
+
                     <!-- /.box-header -->
                     <div class="box-body no-padding">
                         <div class="mailbox-read-info">
@@ -75,8 +103,7 @@
                                         <!-- /.box-footer -->
                     <div class="box-footer">
                         <div class="pull-right">
-                            <button type="button" class="btn btn-default"><i class="fa fa-reply"></i> Reply</button>
-                            <button type="button" class="btn btn-default"><i class="fa fa-share"></i> Forward</button>
+                            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal"><i class="fa fa-share"></i>Responder</button>
                         </div>
                         <button type="button" class="btn btn-default" v-on:click="readMsgLixeira({{$mensagem->id}})" ><i class="fa fa-trash-o"></i> Delete</button>
                         <a href="/painel/mensagem/read/print/{{$mensagem->id}}" class="btn btn-default"><i class="fa fa-print"></i> Print</a>
@@ -88,6 +115,40 @@
             <!-- /.col -->
         </div>
         <!-- /.row -->
+
+
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Envie uma resposta para esta mensagem</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form method="post" action="/painel/mensagem/read/resposta/{{$mensagem->id}}">
+                            {{ csrf_field() }}
+                            <div class="form-group">
+                                <textarea class="form-control textarea" id="resposta" name="resposta" rows="10"
+                                          placeholder="Conteúdo da mensagem ...">
+                                </textarea>
+                                <input type="hidden" name="nome" id="nome" value="{{$mensagem->nome}}">
+                                <input type="hidden" name="email" id="email" value="{{$mensagem->email}}">
+                                <input type="hidden" name="telefone" id="telefone" value="{{$mensagem->telefone}}">
+                                <input type="hidden" name="mensagem" id="mensagem" value="{{$mensagem->mensagem}}">
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                                <input type="submit" class="btn btn-primary" value="Enviar">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
     </section>
 
 @endsection

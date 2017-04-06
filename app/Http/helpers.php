@@ -1,6 +1,7 @@
 <?php
 
 use App\Configuracoes;
+use App\User;
 
 function info_sistem()
 {
@@ -81,4 +82,21 @@ function stringToArray($value){
 
     return $habilidades;
 
+}
+
+function usuarioPrincipal(){
+
+    $array['name'] = '';
+    $array['email'] = '';
+
+    $user = new User();
+
+    $userPricipal = $user::where('usuarioPrincipal', '1')->get();
+
+    if(count($userPricipal) > 0) {
+        $array['name'] = $userPricipal[0]->name;
+        $array['email'] = $userPricipal[0]->email;
+    }
+
+    return (object) $array;
 }

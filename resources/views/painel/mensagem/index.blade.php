@@ -33,10 +33,9 @@
                             <li class="active">
                                 <a href="/painel/mensagem/">
                                     <i class="fa fa-inbox"></i> Caixa de entrada
-                                    <span class="label label-primary pull-right">12</span></a>
+                                    <span class="label label-primary pull-right">{{$totalMensagens}}</span></a>
                             </li>
-                            <li><a href="#"><i class="fa fa-envelope-o"></i> Enviados</a></li>
-                            <li><a href="/painel/mensagem"><i class="fa fa-trash-o"></i>  Lixeira <span class="label label-warning pull-right">65</span></a>
+                            <li><a href="/painel/mensagem"><i class="fa fa-trash-o"></i>  Lixeira <span class="label label-warning pull-right">{{$totalLixeira}}</span></a>
                             </li>
 
                         </ul>
