@@ -46,11 +46,11 @@
             <div class="col-md-9">
                 <div class="box box-primary">
                     <div class="box-header with-border">
-                        <h3 class="box-title"> Caixa de entrada</h3>
+                        <h3 class="box-title"> Caixa de entrada da lixeira</h3>
 
                         <div class="box-tools pull-right">
                             <div class="has-feedback">
-                                <form method="get" action="/painel/mensagem/search">
+                                <form method="get" action="/painel/mensagem/trash/search">
                                     <div class="input-group">
                                         <input name="val" id="val" type="text" class="form-control" placeholder="Buscar..." aria-describedby="basic-addon2">
                                         <span class="input-group-addon" id="basic-addon2">
@@ -70,7 +70,8 @@
                             <input type="checkbox" name="selectall" id="selectall">
 
                             <div class="btn-group">
-                                <button type="button" class="btn btn-default btn-sm" v-on:click="enviarMsgLixeira"><i class="fa fa-trash-o"></i></button>
+                                <button type="button" class="btn btn-default btn-sm" v-on:click="deletarMsg" title="Deletar permanentemente"><i class="fa fa-trash-o"></i></button>
+                                <button type="button" class="btn btn-default btn-sm" v-on:click="restaurarMsg" title="Restaurar para caixa de entrada"><span class="glyphicon glyphicon-open-file" aria-hidden="true"></span></button>
                                 <button type="button" class="btn btn-default btn-sm" v-on:click="refresh"><i class="fa fa-refresh"></i></button>
                             </div>
                             <!-- /.btn-group -->
@@ -96,7 +97,7 @@
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td class="text-center">Caixa de mensagens vazia</td>
+                                        <td class="text-center">lixeira vazia</td>
                                     </tr>
                                 @endforelse
                                 </tbody>

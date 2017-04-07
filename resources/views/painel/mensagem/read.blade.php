@@ -6,7 +6,7 @@
     <section class="content-header">
         <h1>
             Mensagens
-            <small>13 Mensagens novas</small>
+            <small>{{$totalMensagens}} Mensagens novas</small>
         </h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -17,8 +17,6 @@
     <section class="content">
         <div class="row">
             <div class="col-md-3">
-                <a href="compose.html" class="btn btn-primary btn-block margin-bottom">Nova mensagem</a>
-
                 <div class="box box-solid">
                     <div class="box-header with-border">
                         <h3 class="box-title">Pastas</h3>
@@ -35,7 +33,7 @@
                                     <i class="fa fa-inbox"></i> Caixa de entrada
                                     <span class="label label-primary pull-right">{{$totalMensagens}}</span></a>
                             </li>
-                            <li><a href="/painel/mensagem"><i class="fa fa-trash-o"></i>  Lixeira <span class="label label-warning pull-right">{{$totalLixeira}}</span></a>
+                            <li><a href="/painel/mensagem/trash"><i class="fa fa-trash-o"></i>  Lixeira <span class="label label-warning pull-right">{{$totalLixeira}}</span></a>
                             </li>
 
                         </ul>

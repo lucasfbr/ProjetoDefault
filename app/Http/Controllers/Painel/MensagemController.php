@@ -38,7 +38,10 @@ class MensagemController extends Controller
 
         $mensagens = $this->mensagem->where('nome', 'like', '%' . $search . '%')->paginate(50);
 
-        return view('painel.mensagem.index', compact('mensagens','search','tipo'));
+        $totalMensagens = $this->totalMensagens();
+        $totalLixeira = $this->totalLixeira();
+
+        return view('painel.mensagem.index', compact('mensagens','search', 'totalMensagens', 'totalLixeira'));
 
     }
 
@@ -100,6 +103,67 @@ class MensagemController extends Controller
         $msg = new Mensagem;
 
         if($msg->destroy($array)){
+
+            return response()->json(true);
+
+        }else{
+
+            return response()->json(false);
+
+        }
+
+    }
+
+    public function trash(){
+
+        $search = '';
+        $mensagens = $this->mensagem->onlyTrashed()->paginate(50);
+
+        $totalMensagens = $this->totalMensagens();
+        $totalLixeira = $this->totalLixeira();
+
+        return view('painel.mensagem.trash', compact('mensagens', 'search', 'totalMensagens', 'totalLixeira'));
+
+    }
+
+    public function searchTrash(Request $request){
+
+        $search = $request->input('val');
+
+        $mensagens = $this->mensagem->onlyTrashed()->where('nome', 'like', '%' . $search . '%')->paginate(50);
+
+        $totalMensagens = $this->totalMensagens();
+        $totalLixeira = $this->totalLixeira();
+
+        return view('painel.mensagem.trash', compact('mensagens','search', 'totalMensagens', 'totalLixeira'));
+
+    }
+
+    public function destroy($id){
+
+        $array = explode(',', $id);
+
+        $msg = new Mensagem;
+
+        if($msg->whereIn('id', $array)->forceDelete()){
+
+            return response()->json(true);
+
+        }else{
+
+            return response()->json(false);
+
+        }
+
+    }
+
+    public function restore($id){
+
+        $array = explode(',', $id);
+
+        $msg = new Mensagem;
+
+        if($msg->whereIn('id', $array)->restore()){
 
             return response()->json(true);
 

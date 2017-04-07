@@ -149,11 +149,13 @@ Route::group(['middleware' => ['auth','tipo'], 'prefix' => 'painel'], function (
     //MensagemController
     Route::get('/mensagem', 'Painel\MensagemController@index');
     Route::get('/mensagem/search', 'Painel\MensagemController@search');
-    Route::get('/mensagem/add', 'Painel\MensagemController@add');
-    Route::post('/mensagem/create', 'Painel\MensagemController@create');
     Route::get('/mensagem/read/{id}', 'Painel\MensagemController@read');
     Route::get('/mensagem/read/print/{id}', 'Painel\MensagemController@readPrint');
     Route::post('/mensagem/read/resposta/{id}', 'Painel\MensagemController@resposta');
+    Route::get('/mensagem/trash', 'Painel\MensagemController@trash');
+    Route::get('/mensagem/trash/search', 'Painel\MensagemController@searchTrash');
+    Route::get('/mensagem/trash/destroy/{id}', 'Painel\MensagemController@destroy');
+    Route::get('/mensagem/trash/restore/{id}', 'Painel\MensagemController@restore');
     Route::get('/mensagem/delete/{ids}', 'Painel\MensagemController@delete');
 
 });

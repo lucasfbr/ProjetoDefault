@@ -119,7 +119,7 @@ module.exports = {
         self.banerFormulario = true;
 
     },
-    //caixa de entrada das mensagens
+    //enviar para a lixeira
     enviarMsgLixeira: function () {
 
         var self = this;
@@ -127,15 +127,20 @@ module.exports = {
         if(self.msgCheck == '')
             return false
 
-        self.$http.get('/painel/mensagem/delete/'+self.msgCheck).then(function (response) {
+        var confirmacaoUsuario = confirm('Realmente deseja excluir este registro?');
 
-            if(response.data)
-                location.reload();
+        if(confirmacaoUsuario) {
 
-        });
+            self.$http.get('/painel/mensagem/delete/' + self.msgCheck).then(function (response) {
+
+                if (response.data)
+                    location.reload();
+
+            });
+        }
 
     },
-    //excluir mensagem diretamente da leitura da mema
+    //enviar msg para a lixeira diretamente do read
     readMsgLixeira: function (id) {
 
         var self = this;
@@ -144,7 +149,7 @@ module.exports = {
             return false
 
 
-        var confirmacaoUsuario = confirm('Realmente deseja excluir este registro?');
+        var confirmacaoUsuario = confirm('Realmente deseja enviar este registro para a lixeira?');
 
         if(confirmacaoUsuario) {
 
@@ -152,6 +157,52 @@ module.exports = {
 
                 if (response.data)
                     jQuery(window.document.location).attr('href', '/painel/mensagem');
+
+            });
+
+        }
+
+    },
+    //excluir permanentemente a mensagem
+    deletarMsg: function () {
+
+        var self = this;
+
+        if(self.msgCheck == '')
+            return false
+
+        var confirmacaoUsuario = confirm('Realmente deseja excluir este registro? Ele será removido permanentemente');
+
+        if(confirmacaoUsuario) {
+
+            self.$http.get('/painel/mensagem/trash/destroy/' + self.msgCheck).then(function (response) {
+
+                if (response.data)
+                    jQuery(window.document.location).attr('href', '/painel/mensagem/trash');
+
+            });
+
+        }
+
+    },
+    //restaurar mensagem para a caixa de entrada
+    restaurarMsg: function () {
+
+        var self = this;
+
+        alert(self.msgCheck)
+
+        if(self.msgCheck == '')
+            return false
+
+        var confirmacaoUsuario = confirm('Realmente deseja restaurar este registro?');
+
+        if(confirmacaoUsuario) {
+
+            self.$http.get('/painel/mensagem/trash/restore/' + self.msgCheck).then(function (response) {
+
+                if (response.data)
+                    jQuery(window.document.location).attr('href', '/painel/mensagem/trash');
 
             });
 
