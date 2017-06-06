@@ -172,6 +172,7 @@ class ArtigoController extends Controller
         //modo com mensagem padrao
         //$this->authorize('artigo-update', $artigo);
         //modo com mensagem personalizada
+        //Verificação feita nas policies
         if(Gate::denies('edit_artigo', $artigo))
             return redirect()->back();
 
@@ -194,6 +195,7 @@ class ArtigoController extends Controller
 
         $artigo =  $user->artigo->find($id);
 
+        //Verificação feita nas policies
         if(Gate::denies('update_artigo', $artigo))
             return redirect()->back();
 
@@ -232,6 +234,7 @@ class ArtigoController extends Controller
 
         $artigo =  $user->artigo->find($id);
 
+        //Verificação feita nas policies
         if(Gate::denies('delete_artigo', $artigo))
             return redirect()->back();
 
@@ -260,6 +263,7 @@ class ArtigoController extends Controller
 
         $artigo = $user->artigo->find($id);
 
+        //Verificação feita nas policies
         if(Gate::denies('restore_artigo', $artigo))
             return redirect()->back();
 

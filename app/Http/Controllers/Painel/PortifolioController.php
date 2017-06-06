@@ -21,9 +21,9 @@ class PortifolioController extends Controller
 
         $this->portifolio = $portifolio;
 
-        if(Gate::denies('view_artigo')) {
-            $redirect->to('/painel')->send();
-        }
+        //if(Gate::denies('view_portifolio')) {
+        //    $redirect->to('/painel')->send();
+        //}
     }
 
     public function index(){

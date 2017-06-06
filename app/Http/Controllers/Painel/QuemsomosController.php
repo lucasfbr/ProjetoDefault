@@ -5,8 +5,11 @@ namespace App\Http\Controllers\Painel;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Quemsomos;
+use Illuminate\Support\Facades\Gate;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\File;
+use Illuminate\Routing\Redirector;
+
 
 class QuemsomosController extends Controller
 {
@@ -15,12 +18,17 @@ class QuemsomosController extends Controller
     private $extensoes = ['jpg','jpeg', 'png'];
     private $caminhoImg = 'img/quemsomos/';
 
-    public function __construct(Quemsomos $quemsomos){
+    public function __construct(Quemsomos $quemsomos, Redirector $redirect){
 
         $this->quemsomos = $quemsomos;
     }
 
     public function index(){
+
+        //verifica a permissão do usuário
+        //se usuario autorizado segue o código, caso contrário retorna para página anterior
+        if(Gate::denies('view_quemsomos'))
+            return redirect()->back();
 
         $quemsomos = $this->quemsomos->all();
 

@@ -345,10 +345,23 @@
 
                 @can('view_config_portal')
                     <li class="header">CONFIG. PORTAL</li>
+
+                    @can('view_services')
                     <li><a href="/painel/service"><i class="fa fa-share-alt" aria-hidden="true"></i>Serviços</a></li>
+                    @endcan
+
+                    @can('view_portifolio')
                     <li><a href="/painel/portifolio"><i class="glyphicon glyphicon-th" aria-hidden="true"></i>Portifólio</a></li>
+                    @endcan
+
+                    @can('view_quemsomos')
                     <li><a href="/painel/quemsomos"><i class="glyphicon glyphicon-th-list" aria-hidden="true"></i>Quem somos</a></li>
+                    @endcan
+
+                    @can('view_mensagens')
                     <li><a href="/painel/mensagem"><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i>Mensagens</a></li>
+                    @endcan
+
                 @endcan
 
                 <li class="header">Painel do consultor</li>

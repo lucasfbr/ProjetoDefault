@@ -31,7 +31,7 @@ class RoleController extends Controller
 
         $role = $this->role->find($id);
 
-        $permissions = $role->permissions;
+        $permissions = $role->permissions->all();
 
         return view('painel.role.show', compact('role','permissions'));
 
@@ -121,7 +121,7 @@ class RoleController extends Controller
 
         $permission = $request->input('permissoes');
         $role       = $this->role->find($role_id);
-        $role_permission =  $role->permissions()->sync($permission);
+        $role_permission =  $role->permissions()->sync($permission, false);
 
         if($role_permission){
             return redirect('/painel/role/show/'.$role->id)->with('sucesso', 'Permissões adicionadas com sucesso!' );

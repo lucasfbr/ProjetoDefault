@@ -23,7 +23,7 @@ class MensagemController extends Controller
     public function index(){
 
         $search = '';
-        $mensagens = $this->mensagem->paginate(50);
+        $mensagens = $this->mensagem->orderBy('created_at', 'desc')->paginate(50);
 
         $totalMensagens = $this->totalMensagens();
         $totalLixeira = $this->totalLixeira();
