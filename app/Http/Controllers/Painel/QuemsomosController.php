@@ -8,7 +8,7 @@ use App\Quemsomos;
 use Illuminate\Support\Facades\Gate;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\File;
-use Illuminate\Routing\Redirector;
+
 
 
 class QuemsomosController extends Controller
@@ -18,17 +18,23 @@ class QuemsomosController extends Controller
     private $extensoes = ['jpg','jpeg', 'png'];
     private $caminhoImg = 'img/quemsomos/';
 
-    public function __construct(Quemsomos $quemsomos, Redirector $redirect){
+    public function __construct(Quemsomos $quemsomos){
 
         $this->quemsomos = $quemsomos;
     }
 
     public function index(){
 
-        //verifica a permissão do usuário
-        //se usuario autorizado segue o código, caso contrário retorna para página anterior
+        /*
+         * PERMISSÃO DO USUÁRIO
+         *
+         * Visualizar o index
+         *
+         * verifica a permissão do usuário
+         * se usuario autorizado segue o código, caso contrário retorna para página anterior
+         */
         if(Gate::denies('view_quemsomos'))
-            return redirect()->back();
+            return redirect()->back()->with('erro', 'Você não tem permissão para de acesso à página QUEM SOMOS, entre em contato com o administrador do site!');
 
         $quemsomos = $this->quemsomos->all();
 
@@ -38,11 +44,33 @@ class QuemsomosController extends Controller
 
     public function add(){
 
+        /*
+         * PERMISSÃO DO USUÁRIO
+         *
+         * Visualizar formulário de cadastro
+         *
+         * verifica a permissão do usuário
+         * se usuario autorizado segue o código, caso contrário retorna para página anterior
+         */
+        if(Gate::denies('add_quemsomos'))
+            return redirect()->back()->with('erro', 'Você não tem permissão para adicionar um novo registro, entre em contato com o administrador do site!');
+
         return view('painel.quemsomos.add');
 
     }
 
     public function create(Request $request){
+
+        /*
+         * PERMISSÃO DO USUÁRIO
+         *
+         * Cadastrar a informação
+         *
+         * verifica a permissão do usuário
+         * se usuario autorizado segue o código, caso contrário retorna para página anterior
+         */
+        if(Gate::denies('create_quemsomos'))
+            return redirect()->back()->with('erro', 'Você não tem permissão para criar um novo registro, entre em contato com o administrador do site!');
 
         $this->validate($request, [
             'titulo_sobre' => 'required|max:255',
@@ -97,6 +125,17 @@ class QuemsomosController extends Controller
 
     public function edit($id){
 
+        /*
+         * PERMISSÃO DO USUÁRIO
+         *
+         * Visualizar o formulário de edição
+         *
+         * verifica a permissão do usuário
+         * se usuario autorizado segue o código, caso contrário retorna para página anterior
+         */
+        if(Gate::denies('edit_quemsomos'))
+            return redirect()->back()->with('erro', 'Você não tem permissão para editar este registro, entre em contato com o administrador do site!');;
+
         $quemsomos = $this->quemsomos->find($id);
 
         return view('painel.quemsomos.edit', ['quemsomos' => $quemsomos]);
@@ -104,6 +143,17 @@ class QuemsomosController extends Controller
     }
 
     public function update(Request $request, $id){
+
+        /*
+         * PERMISSÃO DO USUÁRIO
+         *
+         * Atualizar a informação
+         *
+         * verifica a permissão do usuário
+         * se usuario autorizado segue o código, caso contrário retorna para página anterior
+         */
+        if(Gate::denies('update_quemsomos'))
+            return redirect()->back()->with('erro', 'Você não tem permissão para editar este registro, entre em contato com o administrador do site!');
 
         $this->validate($request, [
             'titulo_sobre' => 'required|max:255',
@@ -157,6 +207,17 @@ class QuemsomosController extends Controller
 
     public function detail($id){
 
+        /*
+         * PERMISSÃO DO USUÁRIO
+         *
+         * Visualizar os detalhes
+         *
+         * verifica a permissão do usuário
+         * se usuario autorizado segue o código, caso contrário retorna para página anterior
+         */
+        if(Gate::denies('detail_quemsomos'))
+            return redirect()->back()->with('erro', 'Você não tem permissão para visualizar este registro, entre em contato com o administrador do site!');
+
         $quemsomos = $this->quemsomos->find($id);
 
         return view('painel.quemsomos.detail', ['quemsomos' => $quemsomos]);
@@ -164,6 +225,17 @@ class QuemsomosController extends Controller
     }
 
     public function delete($id){
+
+        /*
+         * PERMISSÃO DO USUÁRIO
+         *
+         * Deletar a informação
+         *
+         * verifica a permissão do usuário
+         * se usuario autorizado segue o código, caso contrário retorna para página anterior
+         */
+        if(Gate::denies('delete_quemsomos'))
+            return redirect()->back()->with('erro', 'Você não tem permissão para deletar este registro, entre em contato com o administrador do site!');
 
         $quemsomos = $this->quemsomos->find($id);
 

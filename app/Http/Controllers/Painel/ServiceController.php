@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Painel;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Service;
+use Illuminate\Support\Facades\Gate;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\File;
 
@@ -21,6 +22,17 @@ class ServiceController extends Controller
 
     public function index(){
 
+        /*
+         * PERMISSÃO DO USUÁRIO
+         *
+         * Visualizar o index
+         *
+         * verifica a permissão do usuário
+         * se usuario autorizado segue o código, caso contrário retorna para página anterior
+         */
+        if(Gate::denies('view_services'))
+            return redirect()->back()->with('erro', 'Você não tem permissão para de acesso à página SERVIÇOS, entre em contato com o administrador do site!');
+
         $servicos = $this->service->all();
 
         return view('painel.service.index', ['servicos' => $servicos]);
@@ -29,11 +41,34 @@ class ServiceController extends Controller
 
     public function add(){
 
+        /*
+        * PERMISSÃO DO USUÁRIO
+        *
+        * Visualizar formulario para add servico
+        *
+        * verifica a permissão do usuário
+        * se usuario autorizado segue o código, caso contrário retorna para página anterior
+        */
+        if(Gate::denies('add_service'))
+            return redirect()->back()->with('erro', 'Você não tem permissão para adicionar um novo registro, entre em contato com o administrador do site!');
+
         return view('painel.service.add');
 
     }
 
     public function create(Request $request){
+
+        /*
+       * PERMISSÃO DO USUÁRIO
+       *
+       * Criar um novo serviço
+       *
+       * verifica a permissão do usuário
+       * se usuario autorizado segue o código, caso contrário retorna para página anterior
+       */
+        if(Gate::denies('create_service'))
+            return redirect()->back()->with('erro', 'Você não tem permissão para criar um novo registro, entre em contato com o administrador do site!');
+
 
         $this->validate($request, [
             'titulo' => 'required|max:255',
@@ -75,6 +110,17 @@ class ServiceController extends Controller
 
     public function edit($id){
 
+        /*
+         * PERMISSÃO DO USUÁRIO
+         *
+         * Visualizar formulário de edição
+         *
+         * verifica a permissão do usuário
+         * se usuario autorizado segue o código, caso contrário retorna para página anterior
+         */
+        if(Gate::denies('edit_service'))
+            return redirect()->back()->with('erro', 'Você não tem permissão para editar este registro, entre em contato com o administrador do site!');
+
         $servico = $this->service->find($id);
 
         return view('painel.service.edit', ['servico' => $servico]);
@@ -82,6 +128,17 @@ class ServiceController extends Controller
     }
 
     public function update(Request $request, $id){
+
+        /*
+         * PERMISSÃO DO USUÁRIO
+         *
+         * Editar informações do registro
+         *
+         * verifica a permissão do usuário
+         * se usuario autorizado segue o código, caso contrário retorna para página anterior
+         */
+        if(Gate::denies('update_service'))
+            return redirect()->back()->with('erro', 'Você não tem permissão para Atualizar este registro, entre em contato com o administrador do site!');
 
         $this->validate($request, [
             'titulo' => 'required|max:255',
@@ -125,6 +182,17 @@ class ServiceController extends Controller
 
     public function detail($id){
 
+        /*
+         * PERMISSÃO DO USUÁRIO
+         *
+         * Visualizar os detalhes do registro
+         *
+         * verifica a permissão do usuário
+         * se usuario autorizado segue o código, caso contrário retorna para página anterior
+         */
+        if(Gate::denies('detail_service'))
+            return redirect()->back()->with('erro', 'Você não tem permissão para visualizar este registro, entre em contato com o administrador do site!');
+
         $servico = $this->service->find($id);
 
         return view('painel.service.detail', ['servico' => $servico]);
@@ -132,6 +200,17 @@ class ServiceController extends Controller
     }
 
     public function delete($id){
+
+        /*
+         * PERMISSÃO DO USUÁRIO
+         *
+         * Deletar registro
+         *
+         * verifica a permissão do usuário
+         * se usuario autorizado segue o código, caso contrário retorna para página anterior
+         */
+        if(Gate::denies('delete_service'))
+            return redirect()->back()->with('erro', 'Você não tem permissão para deletar este registro, entre em contato com o administrador do site!');
 
         $servico = $this->service->find($id);
 

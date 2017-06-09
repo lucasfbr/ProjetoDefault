@@ -1,5 +1,7 @@
 <?php
 
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,7 +18,7 @@
  * e o "tipo" que verifica qual usuario esta cadastrado no sistema, pode ser Administrador,consultor ou cliente,
  * caso seja cliente o usuario e direcionado para a rota campus
  */
-Route::group(['middleware' => ['auth','tipo'], 'prefix' => 'painel'], function (){
+Route::group(['middleware' => ['auth'], 'prefix' => 'painel'], function (){
 
     //HomeController
     Route::get('/', 'Painel\HomeController@index');

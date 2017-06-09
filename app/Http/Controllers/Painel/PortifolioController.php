@@ -5,10 +5,10 @@ namespace App\Http\Controllers\Painel;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Portifolio;
+use Illuminate\Support\Facades\Gate;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\File;
-use Gate;
-use Illuminate\Routing\Redirector;
+
 
 class PortifolioController extends Controller
 {
@@ -17,16 +17,24 @@ class PortifolioController extends Controller
     private $extensoes = ['jpg','jpeg', 'png'];
     private $caminhoImg = 'img/portifolio/';
 
-    public function __construct(Portifolio $portifolio, Redirector $redirect){
+    public function __construct(Portifolio $portifolio){
 
         $this->portifolio = $portifolio;
 
-        //if(Gate::denies('view_portifolio')) {
-        //    $redirect->to('/painel')->send();
-        //}
     }
 
     public function index(){
+
+        /*
+        * PERMISSÃO DO USUÁRIO
+        *
+        * Visualizar o index
+        *
+        * verifica a permissão do usuário
+        * se usuario autorizado segue o código, caso contrário retorna para página anterior
+        */
+        if(Gate::denies('view_portifolio'))
+            return redirect()->back()->with('erro', 'Você não tem permissão para de acesso à página PORTIFÓLIO, entre em contato com o administrador do site!');
 
         $portifolio = $this->portifolio->all();
 
@@ -36,11 +44,33 @@ class PortifolioController extends Controller
 
     public function add(){
 
+        /*
+        * PERMISSÃO DO USUÁRIO
+        *
+        * Visualizar formulario para add portifolio
+        *
+        * verifica a permissão do usuário
+        * se usuario autorizado segue o código, caso contrário retorna para página anterior
+        */
+        if(Gate::denies('add_portifolio'))
+            return redirect()->back()->with('erro', 'Você não tem permissão para adicionar um novo registro, entre em contato com o administrador do site!');
+
         return view('painel.portifolio.add');
 
     }
 
     public function create(Request $request){
+
+        /*
+        * PERMISSÃO DO USUÁRIO
+        *
+        * Criar um novo portifolio
+        *
+        * verifica a permissão do usuário
+        * se usuario autorizado segue o código, caso contrário retorna para página anterior
+        */
+        if(Gate::denies('create_portifolio'))
+            return redirect()->back()->with('erro', 'Você não tem permissão para criar um novo registro, entre em contato com o administrador do site!');
 
         $this->validate($request, [
             'titulo' => 'required|max:255',
@@ -78,6 +108,17 @@ class PortifolioController extends Controller
 
     public function edit($id){
 
+        /*
+        * PERMISSÃO DO USUÁRIO
+        *
+        * Visualizar formulário de edição
+        *
+        * verifica a permissão do usuário
+        * se usuario autorizado segue o código, caso contrário retorna para página anterior
+        */
+        if(Gate::denies('edit_portifolio'))
+            return redirect()->back()->with('erro', 'Você não tem permissão para editar este registro, entre em contato com o administrador do site!');
+
         $portifolio = $this->portifolio->find($id);
 
         return view('painel.portifolio.edit', ['portifolio' => $portifolio]);
@@ -85,6 +126,17 @@ class PortifolioController extends Controller
     }
 
     public function update(Request $request, $id){
+
+        /*
+        * PERMISSÃO DO USUÁRIO
+        *
+        * Editar informações do registro
+        *
+        * verifica a permissão do usuário
+        * se usuario autorizado segue o código, caso contrário retorna para página anterior
+        */
+        if(Gate::denies('update_portifolio'))
+            return redirect()->back()->with('erro', 'Você não tem permissão para Atualizar este registro, entre em contato com o administrador do site!');
 
         $this->validate($request, [
             'titulo' => 'required|max:255',
@@ -125,6 +177,17 @@ class PortifolioController extends Controller
 
     public function detail($id){
 
+        /*
+        * PERMISSÃO DO USUÁRIO
+        *
+        * Visualizar os detalhes do registro
+        *
+        * verifica a permissão do usuário
+        * se usuario autorizado segue o código, caso contrário retorna para página anterior
+        */
+        if(Gate::denies('detail_portifolio'))
+            return redirect()->back()->with('erro', 'Você não tem permissão para visualizar este registro, entre em contato com o administrador do site!');
+
         $portifolio = $this->portifolio->find($id);
 
         return view('painel.portifolio.detail', ['portifolio' => $portifolio]);
@@ -132,6 +195,17 @@ class PortifolioController extends Controller
     }
 
     public function delete($id){
+
+        /*
+        * PERMISSÃO DO USUÁRIO
+        *
+        * Deletar registro
+        *
+        * verifica a permissão do usuário
+        * se usuario autorizado segue o código, caso contrário retorna para página anterior
+        */
+        if(Gate::denies('delete_portifolio'))
+            return redirect()->back()->with('erro', 'Você não tem permissão para deletar este registro, entre em contato com o administrador do site!');
 
         $portifolio = $this->portifolio->find($id);
 

@@ -3,7 +3,6 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use Illuminate\Support\Facades\Gate;
 
 class PermissaoUsuario
 {
@@ -17,16 +16,12 @@ class PermissaoUsuario
     public function handle($request, Closure $next)
     {
 
-        //$user = auth()->user();
+        $user = auth()->user();
 
-        //if($user->tipo === 'Cliente'){
-        //    return redirect('/campus');
-        //}
-
-
-        if(Gate::denies('view_quemsomos')) {
-            return redirect('/painel');
+        if($user->tipo === 'Cliente'){
+            return redirect('/campus');
         }
+
 
         return $next($request);
 
