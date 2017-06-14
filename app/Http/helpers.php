@@ -100,3 +100,17 @@ function usuarioPrincipal(){
 
     return (object) $array;
 }
+
+function totalConsultores(){
+
+    $user = new User();
+
+    $consultores = $user::where('tipo', '1')->count();
+
+    return $consultores;
+
+}
+
+function totalConsultoresCincoEstrelas(){
+
+}

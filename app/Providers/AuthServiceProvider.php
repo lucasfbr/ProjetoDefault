@@ -46,22 +46,6 @@ class AuthServiceProvider extends ServiceProvider
         });
 
 
-        /*$gate->define('artigo-update', function (User $user, Artigo $artigo){
-            print_r($user->id . ' -> ' . $artigo->user_id);exit;
-            return $user->id == $artigo->user_id;
-        });*/
-
-       /* $permissions = Permission::with('roles')->get();
-
-        foreach ($permissions as $permission){
-
-            $gate->define($permission->name, function (User $user) use ($permission){
-
-                return $user->hasPermission($permission);
-
-            });
-
-        }*/
 
     }
 

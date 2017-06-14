@@ -8,6 +8,7 @@ use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\File;
 use App\User;
 use App\Formacao;
+use Illuminate\Support\Facades\Gate;
 
 class FormacaoController extends Controller
 {
@@ -22,6 +23,17 @@ class FormacaoController extends Controller
 
     public function index($id){
 
+        /*
+         * PERMISSÃO DO USUÁRIO
+         *
+         * Visualizar a página formação
+         *
+         * verifica a permissão do usuário
+         * se usuario autorizado segue o código, caso contrário retorna para página anterior
+         */
+        if(Gate::denies('view_formacao'))
+            return redirect()->back()->with('erro', 'Você não tem permissão para visualizar esta página, entre em contato com o administrador do site!');
+
         $user = User::find($id);
 
         $formacoes = $user->formacao;
@@ -32,11 +44,33 @@ class FormacaoController extends Controller
 
     public function add($id){
 
+        /*
+        * PERMISSÃO DO USUÁRIO
+        *
+        * Visualizar o formulário para adicionar uma formação
+        *
+        * verifica a permissão do usuário
+        * se usuario autorizado segue o código, caso contrário retorna para página anterior
+        */
+        if(Gate::denies('add_formacao'))
+            return redirect()->back()->with('erro', 'Você não tem permissão para visualizar esta página, entre em contato com o administrador do site!');
+
         return view('painel.formacao.add', ['user_id' => $id]);
 
     }
 
     public function create(Request $request){
+
+        /*
+       * PERMISSÃO DO USUÁRIO
+       *
+       * Cadastrar uma nova formação
+       *
+       * verifica a permissão do usuário
+       * se usuario autorizado segue o código, caso contrário retorna para página anterior
+       */
+        if(Gate::denies('create_formacao'))
+            return redirect()->back()->with('erro', 'Você não tem permissão para executar esta ação, entre em contato com o administrador do site!');
 
         $this->validate($request, [
             'titulo' => 'required|max:255',
@@ -55,6 +89,17 @@ class FormacaoController extends Controller
 
     public function edit(Request $request, $id){
 
+        /*
+     * PERMISSÃO DO USUÁRIO
+     *
+     * Visualizar o formulário de edição da formacao
+     *
+     * verifica a permissão do usuário
+     * se usuario autorizado segue o código, caso contrário retorna para página anterior
+     */
+        if(Gate::denies('edit_formacao'))
+            return redirect()->back()->with('erro', 'Você não tem permissão para executar esta ação, entre em contato com o administrador do site!');
+
         $formacao = $this->formacao->find($id);
 
         return view('painel.formacao.edit', ['formacao' => $formacao]);
@@ -62,6 +107,17 @@ class FormacaoController extends Controller
     }
 
     public function update(Request $request, $id){
+
+        /*
+       * PERMISSÃO DO USUÁRIO
+       *
+       * Atualizar uma formação
+       *
+       * verifica a permissão do usuário
+       * se usuario autorizado segue o código, caso contrário retorna para página anterior
+       */
+        if(Gate::denies('update_formacao'))
+            return redirect()->back()->with('erro', 'Você não tem permissão para executar esta ação, entre em contato com o administrador do site!');
 
         $this->validate($request, [
             'titulo' => 'required|max:255',
@@ -82,6 +138,17 @@ class FormacaoController extends Controller
 
     public function detail($id){
 
+        /*
+      * PERMISSÃO DO USUÁRIO
+      *
+      * Visualizar os detalhes de uma formação
+      *
+      * verifica a permissão do usuário
+      * se usuario autorizado segue o código, caso contrário retorna para página anterior
+      */
+        if(Gate::denies('detail_formacao'))
+            return redirect()->back()->with('erro', 'Você não tem permissão para executar esta ação, entre em contato com o administrador do site!');
+
         $formacao = $this->formacao->find($id);
 
         $perfil = $formacao->perfis;
@@ -91,6 +158,17 @@ class FormacaoController extends Controller
     }
 
     public function delete($id){
+
+        /*
+        * PERMISSÃO DO USUÁRIO
+        *
+        * Deletar uma formação
+        *
+        * verifica a permissão do usuário
+        * se usuario autorizado segue o código, caso contrário retorna para página anterior
+        */
+        if(Gate::denies('delete_formacao'))
+            return redirect()->back()->with('erro', 'Você não tem permissão para executar esta ação, entre em contato com o administrador do site!');
 
         $formacao = $this->formacao->find($id);
 

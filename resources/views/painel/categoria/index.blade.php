@@ -46,9 +46,8 @@
                                     <table class="table table-striped table-hover table-responsive">
                                         <thead>
                                             <tr>
-                                                <th>Nome</th>
-                                                <th>Autor</th>
-                                                <th>Criada em</th>
+                                                <th>Titulo</th>
+                                                <th>Descrição</th>
                                                 <th>Ações</th>
                                             </tr>
                                         </thead>
@@ -56,11 +55,10 @@
                                             @foreach($categorias as $cat)
                                                 <tr>
                                                     <td>{{$cat->titulo}}</td>
-                                                    <td>{{$cat->user->name}}</td>
-                                                    <td>{{\Carbon\Carbon::parse($cat->created_at)->format('d/m/Y')}}</td>
+                                                    <td>{{$cat->descricao}}</td>
                                                     <td>
                                                         <a href="/painel/categoria/edit/{{$cat->id}}" class="btn btn-warning"
-                                                           alt="Editar a categoria" title="Editar a categoria"><span
+                                                           alt="Editar categoria" title="Editar categoria"><span
                                                                     class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
 
                                                         <a href="/painel/categoria/delete/{{$cat->id}}"
@@ -73,6 +71,7 @@
                                             @endforeach
                                         </tbody>
                                     </table>
+
 
                         @else
                             <div class="alert alert-info text-center col-md-10 col-md-offset-1">

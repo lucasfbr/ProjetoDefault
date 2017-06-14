@@ -15,14 +15,16 @@ class DatabaseSeeder extends Seeder
         //factory('App\User', 10)->create();
 
         //gerar o usuario administrador
-        factory('App\User')->create();
+        //factory('App\User')->create();
         //gerar 10 mensagens enviadas pelo formulario de contato
-        factory('App\Mensagem', 10)->create();
+        //factory('App\Mensagem', 10)->create();
         //cria os principais grupos do sistema
         $this->call(RolesTableSeeder::class);
         //cria as pricipais permissões do sistema
         $this->call(PermissionTableSeeder::class);
         //cria o registro na tabela de configuracoes basicas
         $this->call(ConfigTableSeeder::class);
+        //cria o usuario Lucas Rosa e relaciona com a tabela roles_user com as permisoes de Admin
+        $this->call(UsersTableSeeder::class);
     }
 }

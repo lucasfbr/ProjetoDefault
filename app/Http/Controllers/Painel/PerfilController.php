@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Painel;
 
 use App\User;
+use App\Service;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -16,20 +17,29 @@ class PerfilController extends Controller
     private $caminhoImg = 'img/usuarios/';
     private $caminhoImgPerfil = 'img/perfil/';
 
-    public function __construct(User $user)
+    public function __construct(User $user, Service $service)
     {
         $this->user = $user;
+        $this->service = $service;
     }
 
     public function index(){
 
         $user = $this->user->find(Auth::user()->id);
 
+        //busca o perfil do usuario
         $perfil = $user->perfis;
 
+        //busca todas as formações do usuario
         $formacao = $user->formacao;
 
-        return view('painel.perfil.index', compact('user','perfil','formacao'));
+        //busca todos os servicos para criar os checkbox na aba "Áreas de atuação"
+        $services = $this->service->all();
+
+        //busca todos os servicos vinculados ao usuario
+        $userService = $user->service;
+
+        return view('painel.perfil.index', compact('user','perfil','formacao','services','userService'));
 
     }
 

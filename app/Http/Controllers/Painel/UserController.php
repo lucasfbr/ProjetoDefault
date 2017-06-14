@@ -4,11 +4,13 @@ namespace App\Http\Controllers\Painel;
 
 use App\Role;
 use App\User;
+use App\Service;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Gate;
 
 
 class UserController extends Controller
@@ -331,6 +333,37 @@ class UserController extends Controller
 
     }
 
+    public function addUserService(Request $request, $user_id){
+
+
+        /*
+         * PERMISSÃO DO USUÁRIO
+         *
+         * Cadastrar areas de atuação do consultor
+         *
+         * verifica a permissão do usuário
+         * se usuario autorizado segue o código, caso contrário retorna para página anterior
+         */
+        if(Gate::denies('add_atuacao'))
+            return redirect()->back()->with('erro', 'Você não tem permissão para visualizar esta página, entre em contato com o administrador do site!');
+
+
+        $this->validate($request, [
+            'services' => 'required',
+        ]);
+
+        $user = $this->user->find($user_id);
+
+        $services = $request->input('services');
+
+        if($user->service()->sync($services)){
+            return redirect('/painel/perfil/')->with('sucesso', 'Cadastro de consultorias feito com sucesso' );
+        }else{
+            return redirect('/painel/perfil/')->with('erro', 'Erro ao fazer o cadstro de suas consultorias, tente novamente mais tarde!');
+        }
+
+
+    }
 
     public function ativar($id){
 

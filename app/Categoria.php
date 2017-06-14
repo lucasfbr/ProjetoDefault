@@ -3,20 +3,16 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\User;
 
 class Categoria extends Model
 {
-    protected $fillable = ['user_id','titulo'];
+    protected $fillable = ['titulo','descricao'];
 
-    public function user(){
 
-        return $this->belongsTo(User::class);
+    public function artigo(){
 
-    }
-
-    public function post(){
-
-        return $this->hasMany(Post::class);
+        return $this->hasMany(Artigo::class);
 
     }
 

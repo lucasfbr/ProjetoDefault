@@ -322,6 +322,10 @@
                     <li><a href="/painel/configuracoes"><i class="glyphicon glyphicon-th-large"></i>Configurações Básicas</a></li>
                 @endcan
 
+                @can('view_categorias_consultoria')
+                    <li><a href="/painel/categoria"><i class="fa fa-bars" aria-hidden="true"></i>Tipos de Consultorias</a></li>
+                @endcan
+
                 @can('view_usuarios')
                     <li><a href="/painel/user"><i class="fa fa-users" aria-hidden="true"></i>Consultores e clientes</a></li>
                 @endcan
@@ -364,7 +368,11 @@
 
                 @endcan
 
-                <li class="header">Painel do consultor</li>
+                <li class="header">Painel Administrativo</li>
+
+                <li><a href="/painel/perfil"><i class="glyphicon glyphicon-user" aria-hidden="true"></i>Perfil de Usuário</a></li>
+
+                @can('view_artigo')
                 <li class="treeview">
                     <a href="#">
                         <i class="glyphicon glyphicon-th-large" aria-hidden="true"></i><span>Artigos</span>
@@ -377,7 +385,12 @@
                         <li><a href="/painel/artigo/lixeira"><i class="glyphicon glyphicon-trash" aria-hidden="true"></i>Lixeira</a></li>
                     </ul>
                 </li>
-                <li><a href="/painel/perfil"><i class="glyphicon glyphicon-user" aria-hidden="true"></i>Perfil de Usuário</a></li>
+                @endcan
+
+                @can('view_consultores')
+                <li><a href="/painel/consultores"><i class="fa fa-users" aria-hidden="true"></i>Consultores</a></li>
+                @endcan
+
 
             </ul>
         </section>

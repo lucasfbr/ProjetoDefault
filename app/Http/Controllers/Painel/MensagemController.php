@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Painel;
 
 use Carbon\Carbon;
-use Gate;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Mail\Mailer;
@@ -21,6 +21,17 @@ class MensagemController extends Controller
     }
 
     public function index(){
+
+        /*
+         * PERMISSÃO DO USUÁRIO
+         *
+         * Visualizar o index
+         *
+         * verifica a permissão do usuário
+         * se usuario autorizado segue o código, caso contrário retorna para página anterior
+         */
+        if(Gate::denies('view_mensagens'))
+            return redirect()->back()->with('erro', 'Você não tem permissão de acesso à página MENSAGENS, entre em contato com o administrador do site!');
 
         $search = '';
         $mensagens = $this->mensagem->orderBy('created_at', 'desc')->paginate(50);
@@ -47,11 +58,33 @@ class MensagemController extends Controller
 
     public function add(){
 
+        /*
+         * PERMISSÃO DO USUÁRIO
+         *
+         * Visualizar o formulário de add
+         *
+         * verifica a permissão do usuário
+         * se usuario autorizado segue o código, caso contrário retorna para página anterior
+         */
+        if(Gate::denies('add_mensagens'))
+            return redirect()->back()->with('erro', 'Você não tem permissão para adicionar mensagens, entre em contato com o administrador do site!');
+
         return view('painel.mensagem.add');
 
     }
 
     public function read($id){
+
+        /*
+         * PERMISSÃO DO USUÁRIO
+         *
+         * Ler mensagens
+         *
+         * verifica a permissão do usuário
+         * se usuario autorizado segue o código, caso contrário retorna para página anterior
+         */
+        if(Gate::denies('read_mensagens'))
+            return redirect()->back()->with('erro', 'Você não tem permissão para ler mensagens, entre em contato com o administrador do site!');
 
         $mensagem = $this->mensagem->find($id);
 
@@ -64,6 +97,17 @@ class MensagemController extends Controller
 
     public function readPrint($id){
 
+        /*
+        * PERMISSÃO DO USUÁRIO
+        *
+        * Print mensagens
+        *
+        * verifica a permissão do usuário
+        * se usuario autorizado segue o código, caso contrário retorna para página anterior
+        */
+        if(Gate::denies('print_mensagens'))
+            return redirect()->back()->with('erro', 'Você não tem permissão para imprimir mensagens, entre em contato com o administrador do site!');
+
         $mensagem = $this->mensagem->find($id);
 
         return view('painel.mensagem.readPrint', compact('mensagem'));
@@ -71,6 +115,19 @@ class MensagemController extends Controller
     }
 
     public function resposta(Request $request, Mailer $mailer, $id){
+
+
+        /*
+        * PERMISSÃO DO USUÁRIO
+        *
+        * Responder mensagens
+        *
+        * verifica a permissão do usuário
+        * se usuario autorizado segue o código, caso contrário retorna para página anterior
+        */
+        if(Gate::denies('responder_mensagens'))
+            return redirect()->back()->with('erro', 'Você não tem permissão para responder mensagens, entre em contato com o administrador do site!');
+
 
         $mensagem = $this->mensagem->find($id);
 
@@ -98,6 +155,17 @@ class MensagemController extends Controller
 
     public function delete($ids){
 
+        /*
+       * PERMISSÃO DO USUÁRIO
+       *
+       * Deletar mensagens
+       *
+       * verifica a permissão do usuário
+       * se usuario autorizado segue o código, caso contrário retorna para página anterior
+       */
+        if(Gate::denies('deletar_mensagens'))
+            return redirect()->back()->with('erro', 'Você não tem permissão para deletar mensagens, entre em contato com o administrador do site!');
+
         $array = explode(',', $ids);
 
         $msg = new Mensagem;
@@ -115,6 +183,18 @@ class MensagemController extends Controller
     }
 
     public function trash(){
+
+        /*
+         * PERMISSÃO DO USUÁRIO
+         *
+         * Lixeira mensagens
+         *
+         * verifica a permissão do usuário
+         * se usuario autorizado segue o código, caso contrário retorna para página anterior
+         */
+        if(Gate::denies('lixeira_mensagens'))
+            return redirect()->back()->with('erro', 'Você não tem permissão para enviar mensagens para a lixeira, entre em contato com o administrador do site!');
+
 
         $search = '';
         $mensagens = $this->mensagem->onlyTrashed()->paginate(50);
@@ -141,6 +221,17 @@ class MensagemController extends Controller
 
     public function destroy($id){
 
+        /*
+        * PERMISSÃO DO USUÁRIO
+        *
+        * Apagar da lixeira
+        *
+        * verifica a permissão do usuário
+        * se usuario autorizado segue o código, caso contrário retorna para página anterior
+        */
+        if(Gate::denies('limpar_lixeira_mensagens'))
+            return redirect()->back()->with('erro', 'Você não tem permissão de limpar a lixeira, entre em contato com o administrador do site!');
+
         $array = explode(',', $id);
 
         $msg = new Mensagem;
@@ -158,6 +249,17 @@ class MensagemController extends Controller
     }
 
     public function restore($id){
+
+        /*
+       * PERMISSÃO DO USUÁRIO
+       *
+       * Restaurar da lixeira
+       *
+       * verifica a permissão do usuário
+       * se usuario autorizado segue o código, caso contrário retorna para página anterior
+       */
+        if(Gate::denies('restore_mensagens'))
+            return redirect()->back()->with('erro', 'Você não tem permissão de restaurar mensagens, entre em contato com o administrador do site!');
 
         $array = explode(',', $id);
 
@@ -178,6 +280,17 @@ class MensagemController extends Controller
     //Enviar email de resposta para o cliente
     public function sendmail($request, $mailer)
     {
+
+        /*
+      * PERMISSÃO DO USUÁRIO
+      *
+      * Enviar mensgem
+      *
+      * verifica a permissão do usuário
+      * se usuario autorizado segue o código, caso contrário retorna para página anterior
+      */
+        if(Gate::denies('enviar_mensagens'))
+            return redirect()->back()->with('erro', 'Você não tem permissão para enviar mensagens, entre em contato com o administrador do site!');
 
         $mailer->to($request->input('email'))
             ->send(new RespostaContatoMail(

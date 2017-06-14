@@ -64,10 +64,26 @@
                             {{$perfil ? $perfil->cidade . ' - ' : ''}}
                             {{$perfil ? $perfil->estado : ''}}
                         </p>
+
                         <hr>
 
-
                         @if($user->tipo == 'Administrador' || $user->tipo == 'Consultor' )
+
+                            <strong><i class="fa fa-pencil margin-r-5"></i> Consultor nas áreas de:</strong>
+
+                            <p>
+                                @if($userService)
+                                    @foreach($userService as $key => $us)
+                                        <span class="label label-primary">{{$us->titulo}}</span>
+                                        @if((($key + 1) % 4) == 0)
+                                            <br><br>
+                                        @endif
+                                    @endforeach
+                                @endif
+                            </p>
+
+                            <hr>
+
                             <strong><i class="fa fa-pencil margin-r-5"></i> Habilidades</strong>
 
                             <p>
@@ -89,6 +105,8 @@
                         @endif
 
 
+
+
                     </div>
                     <!-- /.box-body -->
                 </div>
@@ -99,7 +117,14 @@
                 <div class="nav-tabs-custom">
                     <ul class="nav nav-tabs">
                         <li class="active"><a href="#settings" data-toggle="tab" aria-expanded="false">Alterações</a></li>
+
+                        @can('view_formacao')
                         <li class=""><a href="#timeline" data-toggle="tab" aria-expanded="true">Formação</a></li>
+                        @endcan
+
+                        @can('view_atuacao')
+                        <li class=""><a href="#atuacao" data-toggle="tab" aria-expanded="true">Áreas de atuação</a></li>
+                        @endcan
                     </ul>
                     <div class="tab-content">
 
@@ -476,9 +501,9 @@
 
                             </form>
                         </div>
-
-
                         <!-- /.tab-pane -->
+
+
                         <div class="tab-pane" id="timeline">
 
                             <a href="/painel/formacao/{{$user->id}}" class="btn btn-warning"
@@ -532,8 +557,44 @@
                                 @endif
                             </ul>
                         </div>
+
                         <!-- /.tab-pane -->
-                        <!-- /.tab-pane -->
+
+                        <div class="tab-pane" id="atuacao">
+
+                                <form class="form-horizontal" role="form" method="post" action="/painel/user/addUserService/{{$user->id}}" enctype="multipart/form-data">
+                                    {{ csrf_field() }}
+
+                                    <fieldset class="scheduler-border">
+                                        <legend class="scheduler-border text-light-blue">
+                                            Selecione quais áreas você prestará consultoria
+                                        </legend>
+                                    </fieldset>
+
+
+                                    @foreach($services as $ser)
+
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" name="services[]" value="{{$ser->id}}" @foreach($userService as $us) @if($us->id == $ser->id) checked @endif @endforeach>
+                                                {{$ser->titulo}}
+                                            </label>
+                                        </div>
+
+                                    @endforeach
+
+                                    <br><br>
+                                    <div class="form-group">
+                                        <div class="col-sm-10">
+                                            <button type="submit" class="btn btn-danger">Cadastrar</button>
+                                        </div>
+                                    </div>
+
+                                </form>
+
+                        </div>
+
+
                     </div>
                     <!-- /.tab-content -->
                 </div>

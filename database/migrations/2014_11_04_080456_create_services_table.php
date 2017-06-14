@@ -22,6 +22,16 @@ class CreateServicesTable extends Migration
             $table->enum('status', [0,1])->default(0);
             $table->timestamps();
         });
+
+        Schema::create('service_user', function (Blueprint $table) {
+            $table->increments('id');
+
+            $table->integer('user_id')->unsigned();
+            $table->integer('service_id')->unsigned();
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('service_id')->references('id')->on('services')->onDelete('cascade');
+        });
     }
 
     /**
@@ -31,6 +41,7 @@ class CreateServicesTable extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('service_user');
         Schema::dropIfExists('services');
     }
 }

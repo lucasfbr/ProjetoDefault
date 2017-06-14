@@ -12,10 +12,30 @@
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
             <li class="active">Mensagens</li>
         </ol>
+
+
+        @if (session('sucesso'))
+            <div class="alert alert-success alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                {{ session('sucesso') }}
+            </div>
+            <br/>
+        @elseif(session('erro'))
+            <div class="alert alert-danger alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                {{ session('erro') }}
+            </div>
+            <br/>
+        @endif
+
+
     </section>
 
     <section class="content">
         <div class="row">
+
             <div class="col-md-3">
                 <div class="box box-solid">
                     <div class="box-header with-border">
@@ -44,6 +64,7 @@
             </div>
             <!-- /.col -->
             <div class="col-md-9">
+
                 <div class="box box-primary">
                     <div class="box-header with-border">
                         <h3 class="box-title"> Caixa de entrada</h3>

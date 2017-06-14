@@ -18,7 +18,8 @@ class CategoriaController extends Controller
 
     public function index(){
 
-        $categorias = $this->categoria->with('user')->paginate(6);
+        //$categorias = $this->categoria->with('user')->paginate(6);
+        $categorias = $this->categoria->paginate(10);
 
         return view('painel.categoria.index', compact('categorias'));
 
@@ -33,8 +34,8 @@ class CategoriaController extends Controller
     public function create(Request $request){
 
         $this->validate($request, [
-            'user_id' => 'required',
             'titulo' => 'required',
+            'descricao' => 'required',
         ]);
 
         $categoria = $this->categoria->create($request->all());
@@ -58,8 +59,8 @@ class CategoriaController extends Controller
     public function update(Request $request, $id){
 
         $this->validate($request, [
-            'user_id' => 'required',
             'titulo' => 'required',
+            'descricao' => 'required',
         ]);
 
         $categoria = $this->categoria->find($id);
@@ -85,5 +86,6 @@ class CategoriaController extends Controller
         }
 
     }
+
 
 }

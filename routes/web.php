@@ -66,6 +66,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'painel'], function (){
     Route::get('/user/role/show/{id}', 'Painel\UserController@userRoleShow');
     Route::get('/user/role/add/{id}', 'Painel\UserController@roleAdd');
     Route::post('/user/role/create/{id}', 'Painel\UserController@roleCreate');
+    Route::post('/user/addUserService/{id}', 'Painel\UserController@addUserService');
     Route::get('/user/role/delete/{id}/{role}', 'Painel\UserController@userRoleDelete');
 
     //PerfilController

@@ -31,7 +31,7 @@ class ServiceController extends Controller
          * se usuario autorizado segue o código, caso contrário retorna para página anterior
          */
         if(Gate::denies('view_services'))
-            return redirect()->back()->with('erro', 'Você não tem permissão para de acesso à página SERVIÇOS, entre em contato com o administrador do site!');
+            return redirect()->back()->with('erro', 'Você não tem permissão de acesso à página SERVIÇOS, entre em contato com o administrador do site!');
 
         $servicos = $this->service->all();
 

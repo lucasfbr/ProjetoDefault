@@ -38,14 +38,14 @@
                 <div class="box-header with-border">
                     <h3 class="box-title">Cadastro</h3>
                 </div>
-                <!-- /.box-header -->
-                <!-- form start -->
+
+              <div class="col-md-10 col-md-offset-1">
                 <form role="form" method="post" action="/painel/categoria/create" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     <div class="box-body">
 
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <div class="form-group{{ $errors->has('titulo') ? ' has-error' : '' }}">
                                     <label for="titulo">Título</label>
                                     <input class="form-control" id="titulo" name="titulo" value="{{ old('titulo') }}"
@@ -56,18 +56,28 @@
                                             <strong>{{ $errors->first('titulo') }}</strong>
                                         </span>
                                     @endif
-
                                 </div>
+
+                                <div class="form-group{{ $errors->has('descricao') ? ' has-error' : '' }}">
+                                    <label for="descricao">Descrição</label>
+                                    <textarea class="form-control" id="descricao" name="descricao" cols="10" rows="5">{{ old('descricao') }}</textarea>
+
+                                    @if ($errors->has('descricao'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('descricao') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+
                             </div>
                         </div>
                     </div>
-
-                    <input type="hidden" name="user_id" id="user_id" value="{{ Auth::user()->id }}">
 
                     <div class="box-footer">
                         <input type="submit" class="btn btn-primary" value="Cadastrar">
                     </div>
                 </form>
+              </div>
             </div>
 
         </div>

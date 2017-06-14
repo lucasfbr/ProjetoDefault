@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Permission;
 use App\Perfil;
 use App\Formacao;
+use App\Service;
 use Carbon\Carbon;
 
 class User extends Authenticatable
@@ -133,9 +134,9 @@ class User extends Authenticatable
 
     }
 
-    public function categoria(){
+    public function service(){
 
-        return $this->hasMany(Categoria::class);
+        return $this->belongsToMany(Service::class);
 
     }
 
