@@ -9,7 +9,7 @@
         </h1>
         <ol class="breadcrumb">
             <li><a href="/painel"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li><a href="/painel/artigo/{{$tipo}}">Artigos</a></li>
+            <li><a href="/painel/artigo/">Artigos</a></li>
             <li class="active">Edit</li>
         </ol>
     </section>
@@ -134,8 +134,6 @@
                                 </div>
                             </div>
                         </div>
-
-                        <input type="hidden" name="tipo" id="tipo" value="{{ $tipo }}">
 
                     </div>
 

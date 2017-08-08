@@ -6,7 +6,6 @@
         <section class="content-header">
             <h1>
                 Artigos
-                <small>{{$tipo == 'publicado' ? 'publicados' : 'agendados'}}</small>
             </h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -35,7 +34,11 @@
                         <br><br>
                     @endif
 
-                    <a href="/painel/artigo/add/{{$tipo}}" class="btn btn-success">Novo artigo</a>
+                    @if($tipo != 'lixeira')
+                        <a href="/painel/artigo/add" class="btn btn-success">Novo artigo</a>
+                    @else
+                        <a href="/painel/artigo/limparlixeira" class="btn btn-success"  onclick="return confirm('Realmente deseja limpar a lixeira?')">Limpar lixeira</a>
+                    @endif
 
                     <br><br>
 
@@ -50,17 +53,15 @@
                                             <div class="caption">
                                                 <h3>{{ str_limit($artigo->titulo, 15)}}</h3>
                                                 <h5 class="text-info">Por {{$artigo->user->name}}</h5>
-                                                <h5 class="text-info">{{$tipo == 'publicado' || $tipo == 'lixeira' ? 'Publica em:' : 'Agendado para:'}}  {{\Carbon\Carbon::parse($artigo->publicated_at)->format('d/m/Y')}}</h5>
+                                                <h5 class="text-info">criado em: {{\Carbon\Carbon::parse($artigo->created_at)->format('d/m/Y')}}</h5>
+                                                <h5 class="text-info">Agendado para: {{\Carbon\Carbon::parse($artigo->published_at)->format('d/m/Y')}}</h5>
                                                 <p>
-                                                    @if($tipo == 'trashed')
-                                                        <a href="/painel/artigo/restore/{{$artigo->id}}" title="Restaurar o artigo" alt="Restaurar o artigo" class="btn btn-success btn-xs"><span class="glyphicon glyphicon-search"></span> Restaurar</a>
-                                                    @elseif($tipo == 'unpublished')
-                                                        <a href="/painel/artigo/detail/{{$artigo->id}}/{{$tipo}}" title="Saiba mais" alt="Saiba mais" class="btn btn-success btn-xs"><span class="glyphicon glyphicon-search"></span> Detalhes</a>
-                                                        <a href="/painel/artigo/edit/{{$artigo->id}}/{{$tipo}}" class="btn btn-primary btn-xs" role="button"><span class="glyphicon glyphicon-wrench"></span> Editar</a>
+                                                    @if($tipo != 'lixeira')
+                                                        <a href="/painel/artigo/detail/{{$artigo->id}}" title="Saiba mais" alt="Saiba mais" class="btn btn-success btn-xs"><span class="glyphicon glyphicon-search"></span> Detalhes</a>
+                                                        <a href="/painel/artigo/edit/{{$artigo->id}}" class="btn btn-primary btn-xs" role="button"><span class="glyphicon glyphicon-wrench"></span> Editar</a>
+                                                        <a href="/painel/artigo/delete/{{$artigo->id}}" onclick="return confirm('Realmente deseja mover este artigo para a lixeira?')" class="btn btn-warning btn-xs" role="button"><span class="glyphicon glyphicon-trash"></span> Lixeira</a>
                                                     @else
-                                                        <a href="/painel/artigo/detail/{{$artigo->id}}/{{$tipo}}" title="Saiba mais" alt="Saiba mais" class="btn btn-success btn-xs"><span class="glyphicon glyphicon-search"></span> Detalhes</a>
-                                                        <a href="/painel/artigo/edit/{{$artigo->id}}/{{$tipo}}" class="btn btn-primary btn-xs" role="button"><span class="glyphicon glyphicon-wrench"></span> Editar</a>
-                                                        <a href="/painel/artigo/delete/{{$artigo->id}}/{{$tipo}}" onclick="return confirm('Realmente deseja mover este artigo para a lixeira?')" class="btn btn-warning btn-xs" role="button"><span class="glyphicon glyphicon-trash"></span> Lixeira</a>
+                                                        <a href="/painel/artigo/restore/{{$artigo->id}}" onclick="return confirm('Realmente deseja restaurar este artigo?')" class="btn btn-warning btn-xs" role="button"><span class="glyphicon glyphicon-trash"></span> Restaurar</a>
                                                     @endif
                                                 </p>
                                             </div>
@@ -72,7 +73,7 @@
                             </div>
                         @else
                             <div class="alert alert-info text-center col-md-10 col-md-offset-1">
-                                <h4>Nenhum artigo {{$tipo == 'publicado' || $tipo == 'agendado' ? $tipo : 'na '.$tipo}} até o momento!</h4>
+                                <h4>Nenhum artigo até o momento!</h4>
                             </div>
 
                         @endif

@@ -9,7 +9,7 @@
         </h1>
         <ol class="breadcrumb">
             <li><a href="/painel"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li><a href="/painel/artigo/{{$tipo}}">artigos</a></li>
+            <li><a href="/painel/artigo">artigos</a></li>
             <li class="active">Cadastro</li>
         </ol>
     </section>
@@ -135,7 +135,6 @@
                     </div>
 
                     <input type="hidden" name="user_id" id="user_id" value="{{ Auth::user()->id }}">
-                    <input type="hidden" name="tipo" id="tipo" value="{{ $tipo }}">
 
                     <div class="box-footer">
                         <input type="submit" class="btn btn-primary" value="Cadastrar">

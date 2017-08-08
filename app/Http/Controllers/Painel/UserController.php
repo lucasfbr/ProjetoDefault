@@ -36,6 +36,22 @@ class UserController extends Controller
 
     }
 
+    public function consultores($service_id, Service $service){
+
+        $servico = $service->find($service_id);
+
+        //$users = User::with('service')->where('id', $service_id)->get();
+
+        $users = $servico->user;
+
+        dd($users);
+
+        //$users = $servico->user;
+
+        return view('painel.user.cliente.index', compact('users','servico'));
+
+    }
+
     //metodo que responderá a requisição ajax vinda do vuejs
     //retorna um objeto json
     public function listUser(){
@@ -52,7 +68,9 @@ class UserController extends Controller
 
         $perfil = $user->perfis;
 
-        return view('painel.user.detail', ['user' => $user, 'perfil' => $perfil]);
+        $formacao = $user->formacao;
+
+        return view('painel.user.detail', ['user' => $user, 'perfil' => $perfil, 'formacao' => $formacao]);
 
     }
 

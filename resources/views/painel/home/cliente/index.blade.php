@@ -124,9 +124,12 @@
                                         <div class="thumbnail">
                                             <img alt="100%x200" data-src="holder.js/100%x200" style="height: 200px; width: 100%; display: block;" src="/{{$servico->imagem}}" data-holder-rendered="true">
                                             <div class="caption">
-                                                <h3 class="text-center">{{$servico->titulo}}</h3>
+                                                <h3 class="text-center">{{ str_limit($servico->titulo, 20) }}</h3>
                                                 <p class="text-center">{{ $servico->resumo }}</p>
-                                                <p class="text-center"><a href="#" class="btn btn-primary" role="button">Consultores disponíveis</a></p>
+                                                <p class="text-center">
+                                                    <a href="#" class="btn btn-default" role="button">Saiba mais</a>
+                                                    <a href="/painel/user/consultores/{{$servico->id}}" class="btn btn-primary" role="button">Consultores disponíveis</a>
+                                                </p>
                                             </div>
                                         </div>
                                     </div>

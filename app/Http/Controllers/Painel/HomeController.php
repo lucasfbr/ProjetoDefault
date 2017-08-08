@@ -42,4 +42,6 @@ class HomeController extends Controller
         return view('painel.home.admin.index');
     }
 
+
+
 }

@@ -45,11 +45,7 @@
                                     </div>
                                     <!-- /.box-header -->
                                     <div class="box-body col-md-6">
-                                        <strong><i class="fa fa-book margin-r-5"></i>Formação</strong>
-
-                                        <p class="text-muted">
-                                            {{-- $user->formacao --}}
-                                        </p>
+                                        <a href="" data-toggle="modal" data-target="#myModal"><strong><i class="fa fa-book margin-r-5"></i>Formação</strong></a>
 
                                         <hr>
 
@@ -61,9 +57,14 @@
 
                                         <strong><i class="fa fa-pencil margin-r-5"></i>Habilidades</strong>
 
-                                        <p>
+                                        <br />
 
-                                        </p>
+                                        @foreach(stringToArray($perfil->habilidades) as $key => $habilidade)
+                                            <span class="label label-primary">{{$habilidade}}</span>
+                                            @if((($key + 1) % 4) == 0)
+                                                <br>
+                                            @endif
+                                        @endforeach
 
                                         <hr>
 
@@ -132,5 +133,66 @@
             <!-- /.box -->
 
         </section>
+
+
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Formação de <strong>{{$user->name}}</strong></h4>
+                    </div>
+                    <div class="modal-body">
+                        <ul class="timeline timeline-inverse">
+
+                        @if($formacao)
+                            @foreach($formacao as $form)
+                                <!-- timeline time label -->
+                                    <li class="time-label">
+                                                <span class="bg-blue">
+                                                    {{$form->dataFormacao}}
+                                                </span>
+                                    </li>
+                                    <!-- /.timeline-label -->
+
+                                    <!-- timeline item -->
+                                    <li>
+                                        <!-- timeline icon -->
+                                        <i class="fa fa-graduation-cap bg-blue"></i>
+                                        <div class="timeline-item">
+
+                                            <h3 class="timeline-header">{{$form->titulo}}</h3>
+
+                                            <div class="timeline-body">
+                                                {{$form->conteudo}}
+                                            </div>
+
+                                            <div class="timeline-footer">
+                                                <a href="{{$form->link}}" target="_blank"
+                                                   class="btn btn-success btn-xs">Página da instituição</a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                @endforeach
+
+
+                                <li>
+                                    <i class="fa fa-circle bg-blue"></i>
+                                </li>
+                            @else
+                                <li>
+                                    <p class="text-info">Nenhuma formação  registrada</p>
+                                </li>
+                            @endif
+                        </ul>
+                    </div>
+                    <div class="modal-footer">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
 
 @endsection

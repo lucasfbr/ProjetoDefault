@@ -379,10 +379,9 @@
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="/painel/artigo/publicado"><i class="glyphicon glyphicon-ok"></i>Publicados</a></li>
-                        <li><a href="/painel/artigo/agendado"><i class="glyphicon glyphicon-time" aria-hidden="true"></i>Agendados</a></li>
+                        <li><a href="/painel/artigo/"><i class="glyphicon glyphicon-ok"></i>Lista</a></li>
                         <li><a href="/painel/categoria"><i class="glyphicon glyphicon-list-alt" aria-hidden="true"></i>Categorias</a></li>
-                        <li><a href="/painel/artigo/lixeira"><i class="glyphicon glyphicon-trash" aria-hidden="true"></i>Lixeira</a></li>
+                        <li><a href="/painel/artigo/lixeira/"><i class="glyphicon glyphicon-trash" aria-hidden="true"></i>Lixeira</a></li>
                     </ul>
                 </li>
                 @endcan

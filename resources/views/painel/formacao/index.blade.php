@@ -38,7 +38,7 @@
                 @endif
 
 
-                    <a href="/painel/formacao/add/{{$usuarioId}}" class="btn btn-success">Nova Formação</a>
+                    <a href="/painel/formacao/add/{{$usuarioId}}" class="btn btn-success">Add Formação</a>
 
                     <br><br>
 

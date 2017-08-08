@@ -42,17 +42,20 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'painel'], function (){
     Route::get('/categoria/delete/{id}', 'Painel\CategoriaController@delete');
 
     //ArtigoController
-    Route::get('/artigo/{tipo}', 'Painel\ArtigoController@index');
-    Route::get('/artigo/add/{tipo}', 'Painel\ArtigoController@add');
+    Route::get('/artigo/', 'Painel\ArtigoController@index');
+    Route::get('/artigo/lixeira', 'Painel\ArtigoController@lixeira');
+    Route::get('/artigo/limparlixeira', 'Painel\ArtigoController@limparLixeira');
+    Route::get('/artigo/add/', 'Painel\ArtigoController@add');
     Route::post('/artigo/create', 'Painel\ArtigoController@create');
-    Route::get('/artigo/detail/{id}/{tipo}', 'Painel\ArtigoController@detail');
-    Route::get('/artigo/edit/{id}/{tipo}', 'Painel\ArtigoController@edit');
+    Route::get('/artigo/detail/{id}/', 'Painel\ArtigoController@detail');
+    Route::get('/artigo/edit/{id}/', 'Painel\ArtigoController@edit');
     Route::post('/artigo/update/{id}', 'Painel\ArtigoController@update');
-    Route::get('/artigo/delete/{id}/{tipo}', 'Painel\ArtigoController@delete');
+    Route::get('/artigo/delete/{id}/', 'Painel\ArtigoController@delete');
     Route::get('/artigo/restore/{id}', 'Painel\ArtigoController@restore');
 
     //UserController
     Route::get('/user', 'Painel\UserController@index');
+    Route::get('/user/consultores/{service_id}', 'Painel\UserController@consultores');
     Route::get('/user/list', 'Painel\UserController@listUser');
     Route::get('/user/add', 'Painel\UserController@add');
     Route::post('/user/create', 'Painel\UserController@create');

@@ -26,9 +26,7 @@ class ArtigoController extends Controller
         \Carbon\Carbon::setLocale('pt_BR');
     }
 
-    public function index($tipo = 'published'){
-
-
+    public function index($tipo = 'lista'){
 
         /*
         * PERMISSÃO DO USUÁRIO
@@ -42,66 +40,40 @@ class ArtigoController extends Controller
             return redirect()->back()->with('erro', 'Você não tem permissão para exibir esta página, entre em contato com o administrador do site!');
 
 
+        $artigos = $this->artigo->with('user')->paginate(6);
+
+
+        return view('painel.artigo.index', compact('artigos','tipo'));
+
+    }
+
+
+    public function lixeira($tipo = 'lixeira'){
+
         /*
-        $user = User::find(Auth::user()->id);
+       * PERMISSÃO DO USUÁRIO
+       *
+       * Exibir artigos
+       *
+       * verifica a permissão do usuário logado
+       * se usuario é autorizado, segue o código, caso contrário retorna para página anterior
+       */
+        if(Gate::denies('view_artigo'))
+            return redirect()->back()->with('erro', 'Você não tem permissão para exibir esta página, entre em contato com o administrador do site!');
 
-        if($user->tipo != 'Administrador') {
 
-            if ($tipo == 'publicado') {
-
-                //foi criado no model um scope que representará uma query que foi nomeada de "published"
-                $artigos = $user->artigo()->latest('published_at')->published()->paginate(6);
-            }elseif($tipo == 'agendado') {
-                //foi criado no model um scope que representará uma query que foi nomeada de "unpublished"
-                $artigos = $user->artigo()->latest('published_at')->unpublished()->paginate(6);
-            }else {
-                //busca o scope da lixeira que vem definido por default no laravel
-                //o campo responsavel é o campo deleted_at
-                $artigos = $user->artigo()->onlyTrashed->paginate(6);
-            }
-
-        }else{
-
-            $artigos = new artigo;
-
-            if ($tipo == 'publicado') {
-                //foi criado no model um scope que representará uma query que foi nomeada de "published"
-                $artigos = $artigos->latest('published_at')->published()->with('user')->paginate(6);
-            }elseif($tipo == 'agendado'){
-                //foi criado no model um scope que representará uma query que foi nomeada de "unpublished"
-                $artigos = $artigos->latest('published_at')->unpublished()->with('user')->paginate(6);
-            }else{
-                //busca o scope da lixeira que vem definido por default no laravel
-                //o campo responsavel é o campo deleted_at
-                $artigos = $artigos->onlyTrashed()->paginate(6);
-            }
-        }
-        */
-
-        //$user = User::find(Auth::user()->id);
-
-        //$artigos = $user->artigo()->latest('published_at')->published()->paginate(6);
-
-        //if(Gate::denies('view', $this->artigo)) {
-        //    return redirect()->back();
-        //}
-
-        //$artigos = $this->artigo->latest('published_at')->published()->with('user')->paginate(6);
-
-        $artigos = $this->artigo->latest('published_at')->published()->with('user')->paginate(6);
-
-        //if(Gate::denies('view_artigo', $artigos))
-        //    abort(403, 'Acesso não autorizado');
-
+        //busca o scope da lixeira que vem definido por default no laravel
+        //o campo responsavel é o campo deleted_at
+        $artigos = $this->artigo->onlyTrashed()->paginate(6);
 
 
         return view('painel.artigo.index', compact('artigos','tipo'));
 
 
-
     }
 
-    public function detail($id,$tipo){
+
+    public function detail($id){
 
 
         /*
@@ -115,22 +87,13 @@ class ArtigoController extends Controller
         if(Gate::denies('detail_artigo'))
             return redirect()->back()->with('erro', 'Você não tem permissão para exibir os detalhes deste artigo, entre em contato com o administrador do site!');
 
+        $artigo = $this->artigo->find($id);
 
-        $user = User::find(Auth::user()->id);
-
-        $artigoUser = $user->artigo->find($id);
-
-        if((!$artigoUser) AND ($user->tipo != 'Administrador')){
-            return redirect('/painel/artigo/'.$tipo);
-        }else{
-            $artigo =  artigo::find($id);
-        }
-
-        return view('painel.artigo.detail', compact('artigo','tipo'));
+        return view('painel.artigo.detail', compact('artigo'));
 
     }
 
-    public function add($tipo){
+    public function add(){
 
 
         /*
@@ -146,7 +109,7 @@ class ArtigoController extends Controller
 
         $categorias = Categoria::all();
 
-        return view('painel.artigo.add', compact('tipo','categorias'));
+        return view('painel.artigo.add', compact('categorias'));
 
     }
 
@@ -178,8 +141,6 @@ class ArtigoController extends Controller
 
         $input = $request->all();
 
-        $tipo = $request->tipo;
-
         //verifica se foi enviada alguma imagem com o formulário
         if(!empty($request->file('imagem'))){
 
@@ -194,15 +155,15 @@ class ArtigoController extends Controller
         $artigo = $user->artigo()->create($input);
 
         if($artigo){
-            return redirect('/painel/artigo/'.$tipo)->with('sucesso', 'artigo cadastrado com sucesso!');
+            return redirect('/painel/artigo/')->with('sucesso', 'Artigo cadastrado com sucesso!');
         }else{
-            return redirect('/painel/artigo/'.$tipo)->with('erro', 'Erro ao cadastrar o artigo, tente novamente mais tarde!');
+            return redirect('/painel/artigo/')->with('erro', 'Erro ao cadastrar o artigo, tente novamente mais tarde!');
         }
 
 
     }
 
-    public function edit($id,$tipo){
+    public function edit($id){
 
         /*
       * PERMISSÃO DO USUÁRIO
@@ -215,28 +176,11 @@ class ArtigoController extends Controller
         if(Gate::denies('edit_artigo'))
             return redirect()->back()->with('erro', 'Você não tem permissão para editar artigos, entre em contato com o administrador do site!');
 
-        /*$user = User::find(Auth::user()->id);
-
-        $artigo =  $user->artigo->find($id);
-
-        if((!$artigo) AND ($user->tipo != 'Administrador')){
-            return redirect('/painel/artigo/'.$tipo);
-        }else{
-            $artigo =  $this->artigo->find($id);
-        }*/
-
         $categorias = Categoria::all();
 
         $artigo = $this->artigo->find($id);
 
-        //modo com mensagem padrao
-        //$this->authorize('artigo-update', $artigo);
-        //modo com mensagem personalizada
-        //Verificação feita nas policies
-        if(Gate::denies('edit_artigo', $artigo))
-            return redirect()->back();
-
-        return view('painel.artigo.edit', compact('artigo','tipo', 'categorias'));
+        return view('painel.artigo.edit', compact('artigo', 'categorias'));
 
     }
 
@@ -261,21 +205,9 @@ class ArtigoController extends Controller
             'published_at' => 'required'
         ]);
 
-        $tipo = $request->tipo;
-
         $user = User::find(Auth::user()->id);
 
-        $artigo =  $user->artigo->find($id);
-
-        //Verificação feita nas policies
-        if(Gate::denies('update_artigo', $artigo))
-            return redirect()->back();
-
-        if((!$artigo) AND ($user->tipo != 'Administrador')){
-            return redirect('/painel/artigo/'.$tipo);
-        }else{
-            $artigo =  $this->artigo->find($id);
-        }
+        $artigo = $user->artigo->find($id);
 
         $input = $request->all();
 
@@ -294,13 +226,13 @@ class ArtigoController extends Controller
 
         //atualizando o artigo e redirecionando para a lista de artigos
         if($update){
-            return redirect('/painel/artigo/'.$tipo)->with('sucesso', 'artigo atualizado com sucesso!');
+            return redirect('/painel/artigo/')->with('sucesso', 'Artigo atualizado com sucesso!');
         }else{
-            return redirect('/painel/artigo/'.$tipo)->with('erro', 'Erro ao atualizar o artigo, tente novamente mais tarde!');
+            return redirect('/painel/artigo/')->with('erro', 'Erro ao atualizar o artigo, tente novamente mais tarde!');
         }
     }
 
-    public function delete($id,$tipo){
+    public function delete($id){
 
          /*
           * PERMISSÃO DO USUÁRIO
@@ -313,29 +245,13 @@ class ArtigoController extends Controller
         if(Gate::denies('delete_artigo'))
             return redirect()->back()->with('erro', 'Você não tem permissão para deletar artigos, entre em contato com o administrador do site!');
 
-        $user = User::find(Auth::user()->id);
-
-        $artigo =  $user->artigo->find($id);
-
-        //Verificação feita nas policies
-        if(Gate::denies('delete_artigo', $artigo))
-            return redirect()->back();
-
-        if((!$artigo) AND ($user->tipo != 'Administrador')){
-            return redirect('/painel/artigo/'.$tipo);
-        }else{
-            $artigo =  $this->artigo->find($id);
-        }
+        $artigo =  $this->artigo->find($id);
 
         if($artigo->delete()){
 
-            //metodo que verifica se a imagem salva no banco exite no diretorio
-            //caso exista remove a mesma do diretorio
-            //$this->removeImagemDir($artigo->imagem);
-
-            return redirect('/painel/artigo/'.$tipo)->with('sucesso', 'artigo deletado com sucesso!');
+            return redirect('/painel/artigo/')->with('sucesso', 'Artigo deletado com sucesso!');
         }else{
-            return redirect('/painel/artigo/'.$tipo)->with('erro', 'Erro ao deletar o artigo, tente novamente mais tarde!');
+            return redirect('/painel/artigo/')->with('erro', 'Erro ao deletar o artigo, tente novamente mais tarde!');
         }
 
     }
@@ -353,23 +269,41 @@ class ArtigoController extends Controller
         if(Gate::denies('restore_artigo'))
             return redirect()->back()->with('erro', 'Você não tem permissão para restaurar artigos, entre em contato com o administrador do site!');
 
-        $user = User::find(Auth::user()->id);
-
-        $artigo = $user->artigo->find($id);
-
-        //Verificação feita nas policies
-        if(Gate::denies('restore_artigo', $artigo))
-            return redirect()->back();
-
-        if((!$artigo) AND ($user->tipo != 'Administrador')){
-            return redirect('/painel/artigo/trashed');
-        }
-
         $trashed = $this->artigo->withTrashed()->find($id);
 
         $trashed->restore();
 
-        return redirect('/painel/artigo/published');
+        return redirect('/painel/artigo/lixeira')->with('sucesso', 'Artigo restaurado com sucesso!');
+
+    }
+
+    public function limparLixeira(){
+
+        /*
+    * PERMISSÃO DO USUÁRIO
+    *
+    * Update artigo
+    *
+    * verifica a permissão do usuário
+    * se usuario autorizado segue o código, caso contrário retorna para página anterior
+    */
+        if(Gate::denies('restore_artigo'))
+            return redirect()->back()->with('erro', 'Você não tem permissão para restaurar artigos, entre em contato com o administrador do site!');
+
+
+        $artigos = $this->artigo->onlyTrashed()->get();
+
+        $array = array();
+
+        foreach ($artigos as $art){
+            $array[] = $art->id;
+        }
+
+        if($this->artigo->whereIn('id', $array)->forceDelete()){
+            return redirect('/painel/artigo/lixeira')->with('sucesso', 'lixeira limpa com sucesso!');
+        }else{
+            return redirect('/painel/artigo/lixeira')->with('erro', 'Erro ao limpar a lixeira, tente novamente mais tarde');
+        }
 
     }
 
