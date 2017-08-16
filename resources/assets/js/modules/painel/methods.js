@@ -213,6 +213,27 @@ module.exports = {
 
         location.reload();
 
+    },
+    addExperiencia: function (e) {
+
+        e.preventDefault();
+
+        this.experienciaLista.push({
+            empresa:this.experiencia.empresa,
+            cargo:this.experiencia.cargo,
+            dataEntrada:this.experiencia.dataEntrada,
+            dataSaida:this.experiencia.dataSaida});
+
+        this.experiencia = "";
+
+    },
+    removeExperiencia: function (e, id) {
+
+        e.preventDefault();
+
+        this.experienciaLista.splice(id, 1);
+
     }
+    
 
 };

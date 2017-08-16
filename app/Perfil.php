@@ -28,13 +28,21 @@ class Perfil extends Model
          'descricao',
          'foto_perfil',
          'habilidades',
-         'notas'
+         'notas',
+         'experienciaLean',
+         'experienciaConsultor'
     ];
 
 
     public function user(){
 
         return $this->belongsTo(User::class);
+
+    }
+
+    public function experienciaProfissional(){
+
+        return $this->hasMany(Eperienciaprofissional::class);
 
     }
 

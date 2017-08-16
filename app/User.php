@@ -140,12 +140,6 @@ class User extends Authenticatable
 
     }
 
-    public function curriculo(){
-
-        return $this->hasMany(Curriculo::class);
-
-    }
-
     public function artigo(){
 
         return $this->hasMany(Artigo::class);

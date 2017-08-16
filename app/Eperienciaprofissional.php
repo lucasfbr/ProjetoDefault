@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
 
-class Curriculo extends Model
+class Eperienciaprofissional extends Model
 {
     protected $fillable = [
         'empresa',
@@ -14,10 +14,9 @@ class Curriculo extends Model
         'data_saida'
     ];
 
-    public function user(){
+    public function perfil(){
 
         return $this->belongsTo(User::class);
 
     }
-
 }

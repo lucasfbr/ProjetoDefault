@@ -33,6 +33,9 @@ class CreatePerfilsTable extends Migration
             $table->string('empresa', 255)->nullable();
             $table->string('sexo', 255)->nullable();
 
+            $table->string('experienciaLean')->nullable();
+            $table->string('experienciaConsultor')->nullable();
+
             $table->text('habilidades')->nullable();
             $table->text('notas')->nullable();
             $table->timestamps();

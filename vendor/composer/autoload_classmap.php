@@ -11,7 +11,7 @@ return array(
     'CreateBannersTable' => $baseDir . '/database/migrations/2017_03_10_211515_create_banners_table.php',
     'CreateCategoriasTable' => $baseDir . '/database/migrations/2014_01_27_110558_create_categorias_table.php',
     'CreateConfiguracoesTable' => $baseDir . '/database/migrations/2017_03_04_081925_create_configuracoes_table.php',
-    'CreateCurriculosTable' => $baseDir . '/database/migrations/2017_08_10_154345_create_curriculos_table.php',
+    'CreateExperienciasTable' => $baseDir . '/database/migrations/2017_08_15_103038_create_experiencias_profissionais_table.php',
     'CreateFormacaosTable' => $baseDir . '/database/migrations/2017_03_08_153725_create_formacaos_table.php',
     'CreateMensagemsTable' => $baseDir . '/database/migrations/2017_03_30_104723_create_mensagems_table.php',
     'CreatePasswordResetsTable' => $baseDir . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',

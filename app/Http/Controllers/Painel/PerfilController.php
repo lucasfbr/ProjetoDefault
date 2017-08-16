@@ -70,10 +70,10 @@ class PerfilController extends Controller
 
 
         //usuario consultor
-        if($user->tipo == 1){
-            $dados = array_add($dados, 'resumo', 'required');
-            $dados = array_add($dados, 'descricao', 'required');
+        if($user->tipo == 'Administrador' || $user->tipo == 'Consultor'){
             $dados = array_add($dados, 'habilidades', 'required');
+            $dados = array_add($dados, 'experienciaLean', 'required');
+            $dados = array_add($dados, 'experienciaConsultor', 'required');
         }
 
         $this->validate($request, $dados);
@@ -133,6 +133,8 @@ class PerfilController extends Controller
                 $perfil->sexo = $request->input('sexo') ? $request->input('sexo') : '';
                 $perfil->habilidades = $request->input('habilidades') ? $request->input('habilidades') : '';
                 $perfil->notas = $request->input('notas') ? $request->input('notas') : '';
+                $perfil->experienciaConsultor = $request->input('experienciaConsultor') ? $request->input('experienciaConsultor') : '';
+                $perfil->experienciaLean = $request->input('experienciaLean') ? $request->input('experienciaLean') : '';
 
                 if($perfil->update()) {
 
@@ -177,6 +179,8 @@ class PerfilController extends Controller
                                 'habilidades' => $request->input('habilidades') ? $request->input('habilidades') : '',
                                 'notas' => $request->input('notas') ? $request->input('notas') : '',
                                 'foto_perfil' => $foto_perfil,
+                                'experienciaConsultor' => $request->input('experienciaConsultor') ? $request->input('experienciaConsultor') : '',
+                                'experienciaLean' => $request->input('experienciaLean') ? $request->input('experienciaLean') : '',
                             ]);
                  if($cadPerfil) {
                      $user->perfil = '1';
