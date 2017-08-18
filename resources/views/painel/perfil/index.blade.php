@@ -148,8 +148,9 @@
 
                                 <br>
 
-                                <form class="form-horizontal" role="form" method="post" action="/painel/perfil/update/{{$user->id}}" enctype="multipart/form-data">
-                                    {{ csrf_field() }}
+                                <form name="formPerfil" id="formPerfil" class="form-horizontal" role="form" method="post" action="/painel/perfil/update/{{$user->id}}" enctype="multipart/form-data">
+
+                                    <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
 
                                 <fieldset class="scheduler-border">
                                     <legend class="scheduler-border text-light-blue">
@@ -544,6 +545,7 @@
                                                     <div class="list-group-item"><strong>Cardo:</strong>@{{exp.cargo}}</div>
                                                     <div class="list-group-item"><strong>Data de entrada:</strong>@{{exp.dataEntrada}}</div>
                                                     <div class="list-group-item"><strong>Data de saida:</strong>@{{exp.dataSaida}}</div>
+
                                                 </div>
 
 
@@ -593,11 +595,11 @@
                                 <br>
                                 <br>
 
-                                <input type="hidden" name="experienciaProfissional" id="experienciaProfissional" value="@{{experienciaLista}}">
+
 
                                 <div class="form-group">
                                     <div class="col-sm-offset-2 col-sm-10">
-                                        <button type="submit" class="btn btn-danger">Atualizar</button>
+                                        <button type="submit" class="btn btn-danger" v-on:click.prevent="cadExpProfissional">Atualizar</button>
                                     </div>
                                 </div>
 

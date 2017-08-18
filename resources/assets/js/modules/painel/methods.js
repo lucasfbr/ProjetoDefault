@@ -233,7 +233,32 @@ module.exports = {
 
         this.experienciaLista.splice(id, 1);
 
+    },
+    cadExpProfissional: function () {
+
+        //alert('chegou')
+
+        var self = this;
+        var dados = this.experienciaLista;
+
+
+        self.$http.post('/painel/experienciaprofissional/add', dados).then(function (response) {
+
+
+            if (response.data){
+
+                document.formPerfil.submit();
+
+            }else{
+
+                console.log('Erro ao cadastrar as experiencias profissionais')
+
+            }
+
+        });
+
+
     }
-    
+
 
 };

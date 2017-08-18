@@ -5,9 +5,10 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
 
-class Eperienciaprofissional extends Model
+class Experienciasprofissionais extends Model
 {
     protected $fillable = [
+        'perfil_id',
         'empresa',
         'cargo',
         'data_entrada',

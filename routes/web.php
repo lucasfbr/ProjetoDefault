@@ -164,6 +164,9 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'painel'], function (){
     Route::get('/mensagem/trash/restore/{id}', 'Painel\MensagemController@restore');
     Route::get('/mensagem/delete/{ids}', 'Painel\MensagemController@delete');
 
+    Route::get('/experienciaprofissional/all', 'Painel\ExperienciasprofissionaisController@all');
+    Route::post('/experienciaprofissional/add', 'Painel\ExperienciasprofissionaisController@create');
+
 });
 
 Route::group(['middleware' => 'auth', 'prefix' => 'campus'], function (){

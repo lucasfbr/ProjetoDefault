@@ -34,5 +34,42 @@ module.exports = {
             self.user = self.pagination.listPagination[0];
 
         });
+
+
+
+        self.$http.get('/painel/experienciaprofissional/all').then(function (response) {
+
+
+            for(var prop in response.data){
+
+
+                self.experienciaLista.push({
+                    empresa:response.data[prop].empresa,
+                    cargo:response.data[prop].cargo,
+                    dataEntrada:response.data[prop].dataEntrada,
+                    dataSaida:response.data[prop].dataSaida});
+
+
+                //console.log(response.data[prop]);
+
+
+            }
+
+            //console.log(self.experienciaLista);
+
+
+            /*if(response.data){
+
+
+                self.experienciaLista.push({
+                    empresa:this.experiencia.empresa,
+                    cargo:this.experiencia.cargo,
+                    dataEntrada:this.experiencia.dataEntrada,
+                    dataSaida:this.experiencia.dataSaida});
+
+            }*/
+
+        });
+
     }
 }
