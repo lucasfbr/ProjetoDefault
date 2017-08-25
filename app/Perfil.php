@@ -42,7 +42,7 @@ class Perfil extends Model
 
     public function experienciaProfissional(){
 
-        return $this->hasMany(Eperienciaprofissional::class);
+        return $this->hasMany(Experienciasprofissionais::class);
 
     }
 

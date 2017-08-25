@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\User;
 use App\Role;
+use App\Perfil;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -82,6 +83,15 @@ class RegisterController extends Controller
 
         if($user){
 
+            //vincula o usuário criado a um perfil
+            $perfil = new Perfil();
+            $perfil->user_id = $user->id;
+            $perfil->save();
+
+
+            //verifica se o usuario é cliente ou consultor
+            //para assim vincular seu usário a determinado
+            //grupo de acls
             if($user->tipo == 'Consultor')
                 //adiciona ao grupo consultores
                 $user->roles()->attach('2');
@@ -93,8 +103,6 @@ class RegisterController extends Controller
                 $user->status = '1';
                 $user->update();
             }
-
-
 
         }
 

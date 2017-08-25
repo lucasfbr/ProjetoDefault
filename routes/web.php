@@ -73,7 +73,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'painel'], function (){
     Route::get('/user/role/delete/{id}/{role}', 'Painel\UserController@userRoleDelete');
 
     //PerfilController
-    Route::get('/perfil', 'Painel\PerfilController@index');
+    Route::get('/perfil/{id}', 'Painel\PerfilController@index');
     Route::get('/perfil/add', 'Painel\PerfilController@add');
     Route::post('/perfil/create', 'Painel\PerfilController@create');
     Route::get('/perfil/detail/{id}', 'Painel\PerfilController@detail');
@@ -164,8 +164,9 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'painel'], function (){
     Route::get('/mensagem/trash/restore/{id}', 'Painel\MensagemController@restore');
     Route::get('/mensagem/delete/{ids}', 'Painel\MensagemController@delete');
 
-    Route::get('/experienciaprofissional/all', 'Painel\ExperienciasprofissionaisController@all');
+    Route::get('/experienciaprofissional/find/{id}', 'Painel\ExperienciasprofissionaisController@find');
     Route::post('/experienciaprofissional/add', 'Painel\ExperienciasprofissionaisController@create');
+    Route::get('/experienciaprofissional/delete/{id}', 'Painel\ExperienciasprofissionaisController@delete');
 
 });
 

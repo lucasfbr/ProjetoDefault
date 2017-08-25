@@ -15,7 +15,7 @@ class CreateExperienciasProfissionaisTable extends Migration
     {
         Schema::create('experienciasprofissionais', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('perfil_id')->unsigned();
+            $table->integer('perfil_id')->unsigned()->nullable();
             $table->string('empresa', 255);
             $table->string('cargo', 255);
             $table->date('data_entrada');

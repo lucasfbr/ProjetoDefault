@@ -21,7 +21,7 @@
         @if (Auth::user()->perfil == 'Incompleto')
             <div class="alert alert-info alert-dismissible" role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                Verificamos que seu perfil não esta completo, acesse o link <a href="/painel/perfil ">Perfil</a> e complete seu cadastro <br>
+                Verificamos que seu perfil não esta completo, acesse o link <a href="/painel/perfil/{{Auth::user()->id}}">Perfil</a> e complete seu cadastro <br>
             </div>
             <br/>
         @endif

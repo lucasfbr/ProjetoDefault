@@ -26,6 +26,8 @@ module.exports = {
     banerFormulario: false,
     msgCheck: [], //check box das mensagens
     experiencia: {
+        id: '',
+        perfil_id: '',
         empresa: '',
         cargo: '',
         dataEntrada: '',

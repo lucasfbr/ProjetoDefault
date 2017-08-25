@@ -275,7 +275,7 @@
                             <!-- Menu Footer-->
                             <li class="user-footer">
                                 <div class="pull-left">
-                                    <a href="{{ url('/painel/perfil') }}" class="btn btn-default btn-flat">Perfil</a>
+                                    <a href="/painel/perfil/{{Auth::user()->id}}" class="btn btn-default btn-flat">Perfil</a>
                                 </div>
                                 <div class="pull-right">
                                     <a href="{{ url('/logout') }}"
@@ -370,7 +370,7 @@
 
                 <li class="header">Painel Administrativo</li>
 
-                <li><a href="/painel/perfil"><i class="glyphicon glyphicon-user" aria-hidden="true"></i>Perfil de Usuário</a></li>
+                <li><a href="/painel/perfil/{{Auth::user()->id}}"><i class="glyphicon glyphicon-user" aria-hidden="true"></i>Perfil de Usuário</a></li>
 
                 @can('view_artigo')
                 <li class="treeview">
@@ -447,7 +447,7 @@
 
 
 <!-- Morris.js charts -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>-->
 <script src="/assets/painel/plugins/morris/morris.min.js"></script>
 <!-- Sparkline -->
 <script src="/assets/painel/plugins/sparkline/jquery.sparkline.min.js"></script>

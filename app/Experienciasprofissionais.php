@@ -20,4 +20,35 @@ class Experienciasprofissionais extends Model
         return $this->belongsTo(User::class);
 
     }
+
+    public function getDataEntradaAttribute($value){
+
+        return  Carbon::parse($value)->format('d/m/Y');
+
+    }
+
+    public function getDataSaidaAttribute($value){
+
+        return  Carbon::parse($value)->format('d/m/Y');
+
+    }
+
+
+   public function setDataEntradaAttribute($value){
+
+       $objDate = \DateTime::createFromFormat('d/m/Y', $value);
+
+       $this->attributes['data_entrada'] = $objDate->format('Y-m-d');
+
+    }
+
+    public function setDataSaidaAttribute($value){
+
+        $objDate = \DateTime::createFromFormat('d/m/Y', $value);
+
+        $this->attributes['data_saida'] = $objDate->format('Y-m-d');
+
+    }
+
+
 }

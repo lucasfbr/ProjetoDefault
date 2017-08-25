@@ -214,24 +214,67 @@ module.exports = {
         location.reload();
 
     },
+
     addExperiencia: function (e) {
 
         e.preventDefault();
 
         this.experienciaLista.push({
+            id:this.experiencia.id,
+            perfil_id:this.experiencia.perfil_id,
             empresa:this.experiencia.empresa,
             cargo:this.experiencia.cargo,
             dataEntrada:this.experiencia.dataEntrada,
-            dataSaida:this.experiencia.dataSaida});
+            dataSaida:this.experiencia.dataSaida
+        });
 
-        this.experiencia = "";
+        this.experiencia.empresa = "";
+        this.experiencia.cargo = "";
+        this.experiencia.dataEntrada = "";
+        this.experiencia.dataSaida = "";
 
     },
-    removeExperiencia: function (e, id) {
+    removeExperiencia: function (e, indice) {
 
         e.preventDefault();
 
-        this.experienciaLista.splice(id, 1);
+        if(confirm('Realmente deseja excluir este registro?')) {
+
+            var self = this;
+            var id = this.experienciaLista[indice].id;
+
+
+            if (id) {
+
+                //remove registro do banco
+                self.$http.get('/painel/experienciaprofissional/delete/' + id).then(function (response) {
+
+
+                    //console.log(response.data);
+
+                    if (response.data) {
+
+                        //remove registro do array
+                        this.experienciaLista.splice(indice, 1);
+
+                    } else {
+
+                        console.log('Ocorreu algum erro ao deletar o registro');
+
+                    }
+
+                });
+
+            } else {
+                //remove 1 posicao do array com indice = ao id
+                this.experienciaLista.splice(indice, 1);
+            }
+
+        }
+        //console.log(this.experienciaLista[indice].id)
+
+
+
 
     },
     cadExpProfissional: function () {
@@ -241,21 +284,29 @@ module.exports = {
         var self = this;
         var dados = this.experienciaLista;
 
+        if(this.experiencia) {
 
-        self.$http.post('/painel/experienciaprofissional/add', dados).then(function (response) {
+            self.$http.post('/painel/experienciaprofissional/add', dados).then(function (response) {
 
+                //console.log(response.data);
 
-            if (response.data){
+                if (response.data) {
 
-                document.formPerfil.submit();
+                    document.formPerfil.submit();
 
-            }else{
+                } else {
 
-                console.log('Erro ao cadastrar as experiencias profissionais')
+                    console.log('Erro ao cadastrar as experiencias profissionais')
 
-            }
+                }
 
-        });
+            });
+
+        }else{
+
+            document.formPerfil.submit();
+
+        }
 
 
     }

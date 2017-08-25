@@ -69,7 +69,13 @@
 
                         @if($user->tipo == 'Administrador' || $user->tipo == 'Consultor' )
 
-                            <strong><i class="fa fa-pencil margin-r-5"></i> Consultor nas áreas de:</strong>
+                            <strong><i class="fa fa-briefcase margin-r-5"></i> Experiência profissional:</strong>
+
+                            <p>{{$experienciaProfissional ? $experienciaProfissional : ''}}</p>
+
+                            <hr>
+
+                            <strong><i class="fa fa-circle margin-r-5"></i> Consultor nas áreas de:</strong>
 
                             <p>
                                 @if($userService)
@@ -126,7 +132,6 @@
                         <li class=""><a href="#atuacao" data-toggle="tab" aria-expanded="true">Áreas de atuação</a></li>
                         @endcan
 
-                        <li class=""><a href="#curriculo" data-toggle="tab" aria-expanded="true">Curriculo</a></li>
                     </ul>
                     <div class="tab-content">
 
@@ -454,19 +459,6 @@
                                             </div>
                                         </div>
 
-                                        <!--<div class="form-group {{-- $errors->has('descricao') ? ' has-error' : '' --}}">
-                                            <label for="descricao" class="col-sm-2 control-label">Experiência Profissional</label>
-
-                                            <div class="col-sm-10">
-                                                <textarea name="descricao" id="descricao" class="form-control" rows="3">{{$perfil ? $perfil->descricao : ''}}</textarea>
-                                                {{--@if ($errors->has('descricao'))
-                                                    <span class="help-block">
-                                                    <strong>{{ $errors->first('descricao') }}</strong>
-                                                </span>
-                                                @endif--}}
-                                            </div>
-                                        </div>-->
-
                                         <div class="form-group {{ $errors->has('habilidades') ? ' has-error' : '' }}">
                                             <label for="habilidades" class="col-sm-2 control-label">Habilidades</label>
 
@@ -542,9 +534,9 @@
                                                     <div class="list-group-item active">
                                                         @{{exp.empresa}} <div class="pull-right"><a href="#" v-on:click="removeExperiencia($event,$index)"><span class="linkRemove">X</span></a></div>
                                                     </div>
-                                                    <div class="list-group-item"><strong>Cardo:</strong>@{{exp.cargo}}</div>
-                                                    <div class="list-group-item"><strong>Data de entrada:</strong>@{{exp.dataEntrada}}</div>
-                                                    <div class="list-group-item"><strong>Data de saida:</strong>@{{exp.dataSaida}}</div>
+                                                    <div class="list-group-item"><strong>Cardo: </strong>@{{exp.cargo}}</div>
+                                                    <div class="list-group-item"><strong>Data de entrada: </strong>@{{exp.dataEntrada}}</div>
+                                                    <div class="list-group-item"><strong>Data de saida: </strong>@{{exp.dataSaida}}</div>
 
                                                 </div>
 
@@ -552,9 +544,15 @@
                                             </div>
                                         </div>
 
+
+                                        <div class="col-sm-offset-2 col-sm-10 alert alert-info">
+                                            <p>Preencha todos os campos abaixo para liberar o botão "Add"</p>
+                                        </div>
+
                                         <div class="form-group">
                                             <label for="empresa" class="col-sm-2 control-label">Empresa</label>
                                             <div class="col-sm-10">
+                                                <input type="hidden" class="form-control" v-model="experiencia.perfil_id" value="{{$perfil ? $perfil->id : ''}}">
                                                 <input type="text" class="form-control" v-model="experiencia.empresa">
                                             </div>
                                         </div>
@@ -581,9 +579,10 @@
                                           </div>
 
 
+
                                         <div class="form-group">
                                             <div class="col-sm-offset-2 col-sm-10">
-                                                <button class="btn btn-success" v-on:click="addExperiencia($event)">Add</button>
+                                                <button class="btn btn-success" :disabled="!isValid" v-on:click="addExperiencia($event)">Add</button>
                                             </div>
                                         </div>
 
@@ -697,31 +696,6 @@
                                 </form>
 
                         </div>
-
-                        <div class="tab-pane" id="curriculo">
-
-                            <form class="form-horizontal" role="form" method="post" action="/painel/user/addExperiencia/{{$user->id}}" enctype="multipart/form-data">
-                                {{ csrf_field() }}
-
-                                <fieldset class="scheduler-border">
-                                    <legend class="scheduler-border text-light-blue">
-                                        Cadastre suas experiêcias profissionais
-                                    </legend>
-                                </fieldset>
-
-
-                                <br><br>
-                                <div class="form-group">
-                                    <div class="col-sm-10">
-                                        <button type="submit" class="btn btn-danger">Cadastrar</button>
-                                    </div>
-                                </div>
-
-                            </form>
-
-                        </div>
-
-
 
                     </div>
                     <!-- /.tab-content -->

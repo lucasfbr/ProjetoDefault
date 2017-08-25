@@ -37,39 +37,68 @@ module.exports = {
 
 
 
-        self.$http.get('/painel/experienciaprofissional/all').then(function (response) {
+        var url = verificaUrl();
+        var idUsuario = url[0];
+        var paginaAtual = url[1];
+
+        if(paginaAtual == 'perfil'){
 
 
-            for(var prop in response.data){
+            //alert('estamos na página perfil e o id do usuário é : ' + idUsuario);
+
+            self.$http.get('/painel/experienciaprofissional/find/' + idUsuario).then(function (response) {
+
+                //console.log(response.data);
+
+                for (var prop in response.data) {
 
 
-                self.experienciaLista.push({
-                    empresa:response.data[prop].empresa,
-                    cargo:response.data[prop].cargo,
-                    dataEntrada:response.data[prop].dataEntrada,
-                    dataSaida:response.data[prop].dataSaida});
+                    self.experienciaLista.push({
+                        id: response.data[prop].id,
+                        perfil_id: response.data[prop].perfil_id,
+                        empresa: response.data[prop].empresa,
+                        cargo: response.data[prop].cargo,
+                        dataEntrada: response.data[prop].data_entrada,
+                        dataSaida: response.data[prop].data_saida
+                    });
+
+                }
+
+            });
 
 
-                //console.log(response.data[prop]);
+
+        }
+
+        /*Método responsavel por verificar o id do usuario
+        * e confirmar se a url sendo acessada é a página perfil,
+        * */
+        function verificaUrl() {
 
 
-            }
+            var url = window.location;
+            var urlCont;
+            var id;
+            var perfil;
+            var dados = [];
 
-            //console.log(self.experienciaLista);
+            // converte em String
+            url = url.toString()
+            // converte em um array separando pelos (/)
+            url = url.split("/");
+            urlCont = (url.length);
 
+            //id do usuario
+            id = url[urlCont -1];
+            //pagina atual
+            perfil = url[urlCont -2];
 
-            /*if(response.data){
+            dados.push(id);
+            dados.push(perfil);
 
+            return dados;
 
-                self.experienciaLista.push({
-                    empresa:this.experiencia.empresa,
-                    cargo:this.experiencia.cargo,
-                    dataEntrada:this.experiencia.dataEntrada,
-                    dataSaida:this.experiencia.dataSaida});
-
-            }*/
-
-        });
+        }
 
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Painel;
 
+use App\Perfil;
 use App\User;
 use App\Service;
 use Illuminate\Http\Request;
@@ -9,6 +10,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\File;
+use Carbon\Carbon;
 
 class PerfilController extends Controller
 {
@@ -17,29 +19,35 @@ class PerfilController extends Controller
     private $caminhoImg = 'img/usuarios/';
     private $caminhoImgPerfil = 'img/perfil/';
 
-    public function __construct(User $user, Service $service)
+    public function __construct(User $user, Service $service, Perfil $perfil)
     {
         $this->user = $user;
         $this->service = $service;
+        $this->perfil = $perfil;
     }
 
-    public function index(){
+    public function index($id){
 
-        $user = $this->user->find(Auth::user()->id);
+
+        $user = $this->user->find($id);
 
         //busca o perfil do usuario
         $perfil = $user->perfis;
 
+        //dd($user->perfis->experienciaProfissional);
+
+        $experienciaProfissional = $user->tipo == 'Administrador' || $user->tipo == 'Consultor' ? $this->totalExperienciaProfissional($user->perfis->experienciaProfissional) : '';
+
         //busca todas as formações do usuario
-        $formacao = $user->formacao;
+        $formacao = $user->formacao();
 
         //busca todos os servicos para criar os checkbox na aba "Áreas de atuação"
         $services = $this->service->all();
 
         //busca todos os servicos vinculados ao usuario
-        $userService = $user->service;
+        $userService = $user->service();
 
-        return view('painel.perfil.index', compact('user','perfil','formacao','services','userService'));
+        return view('painel.perfil.index', compact('user','perfil','formacao','services','userService', 'experienciaProfissional'));
 
     }
 
@@ -144,7 +152,7 @@ class PerfilController extends Controller
                     }
 
                 }else{
-                    return redirect('/painel/perfil')->with('erro', 'Ocorreu algum erro ao editar o perfil do usuário, tente novamente mais tarde!')->with('settings', 'active');
+                    return redirect('/painel/perfil/'.$id)->with('erro', 'Ocorreu algum erro ao editar o perfil do usuário, tente novamente mais tarde!')->with('settings', 'active');
                 }
 
             }else{
@@ -191,9 +199,9 @@ class PerfilController extends Controller
 
             }
 
-            return redirect('/painel/perfil/')->with('sucesso', 'Dados do perfil editados com sucesso!')->with('settings', 'active');
+            return redirect('/painel/perfil/'.$id)->with('sucesso', 'Dados do perfil editados com sucesso!')->with('settings', 'active');
         }else{
-            return redirect('/painel/perfil/')->with('erro', 'Ocorreu algum erro ao editar os dados do perfil, tente novamente mais tarde!')->with('settings', 'active');
+            return redirect('/painel/perfil/'.$id)->with('erro', 'Ocorreu algum erro ao editar os dados do perfil, tente novamente mais tarde!')->with('settings', 'active');
         }
 
 
@@ -250,6 +258,39 @@ class PerfilController extends Controller
             //remove a foto do diretorio
             File::delete($imagem);
         }
+
+    }
+
+    public function totalExperienciaProfissional($experiencias){
+
+
+        if(count($experiencias) > 0) {
+
+            $carbon = new Carbon();
+
+            foreach ($experiencias as $exp) {
+
+                $datasE = explode('/', $exp->data_entrada);
+                $datasS = explode('/', $exp->data_saida);
+
+                $dataInicial = $carbon::create($datasE[2], $datasE[1], $datasE[0]);
+                $dataFinal = $carbon::create($datasS[2], $datasS[1], $datasS[0]);
+
+                $diferencasY[] = $dataInicial->diff($dataFinal)->y;
+                $diferencasM[] = $dataInicial->diff($dataFinal)->m;
+                $diferencasD[] = $dataInicial->diff($dataFinal)->d;
+
+            }
+
+
+            $resultado = array_sum($diferencasY) . ' Anos ' . array_sum($diferencasM) . ' meses e ' . array_sum($diferencasD) . ' dias';
+
+            return $resultado;
+
+        }
+
+        return '';
+
 
     }
 
