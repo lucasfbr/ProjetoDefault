@@ -39,9 +39,7 @@ class ArtigoController extends Controller
         if(Gate::denies('view_artigo'))
             return redirect()->back()->with('erro', 'Você não tem permissão para exibir esta página, entre em contato com o administrador do site!');
 
-
         $artigos = $this->artigo->with('user')->paginate(6);
-
 
         return view('painel.artigo.index', compact('artigos','tipo'));
 
@@ -76,6 +74,8 @@ class ArtigoController extends Controller
     public function detail($id){
 
 
+        $artigo = $this->artigo->find($id);
+
         /*
         * PERMISSÃO DO USUÁRIO
         *
@@ -84,10 +84,9 @@ class ArtigoController extends Controller
         * verifica a permissão do usuário
         * se usuario autorizado segue o código, caso contrário retorna para página anterior
         */
-        if(Gate::denies('detail_artigo'))
-            return redirect()->back()->with('erro', 'Você não tem permissão para exibir os detalhes deste artigo, entre em contato com o administrador do site!');
+        if(Gate::denies('detail_artigo', $artigo))
+            return redirect('/painel/artigo/')->with('erro', 'Você não tem permissão para visializar este artigo, entre em contato com o administrador do site');
 
-        $artigo = $this->artigo->find($id);
 
         return view('painel.artigo.detail', compact('artigo'));
 
@@ -165,38 +164,27 @@ class ArtigoController extends Controller
 
     public function edit($id){
 
-        /*
-      * PERMISSÃO DO USUÁRIO
-      *
-      * Editar artigo
-      *
-      * verifica a permissão do usuário
-      * se usuario autorizado segue o código, caso contrário retorna para página anterior
-      */
-        if(Gate::denies('edit_artigo'))
-            return redirect()->back()->with('erro', 'Você não tem permissão para editar artigos, entre em contato com o administrador do site!');
 
         $categorias = Categoria::all();
 
         $artigo = $this->artigo->find($id);
+
+        /*
+        * PERMISSÃO DO USUÁRIO
+        *
+        * Editar artigo
+        *
+        * verifica a permissão do usuário
+        * se usuario autorizado segue o código, caso contrário retorna para página anterior
+        */
+        if(Gate::denies('edit_artigo', $artigo))
+            return redirect('/painel/artigo/')->with('erro', 'Você não tem permissão para editar este artigo, entre em contato com o administrador do site!');
 
         return view('painel.artigo.edit', compact('artigo', 'categorias'));
 
     }
 
     public function update(Request $request, $id){
-
-        /*
-     * PERMISSÃO DO USUÁRIO
-     *
-     * Update artigo
-     *
-     * verifica a permissão do usuário
-     * se usuario autorizado segue o código, caso contrário retorna para página anterior
-     */
-        if(Gate::denies('update_artigo'))
-            return redirect()->back()->with('erro', 'Você não tem permissão para atualizar artigos, entre em contato com o administrador do site!');
-
 
         $this->validate($request, [
             'categoria_id' => 'required',
@@ -208,6 +196,18 @@ class ArtigoController extends Controller
         $user = User::find(Auth::user()->id);
 
         $artigo = $user->artigo->find($id);
+
+
+        /*
+          * PERMISSÃO DO USUÁRIO
+          *
+          * Update artigo
+          *
+          * verifica a permissão do usuário
+          * se usuario autorizado segue o código, caso contrário retorna para página anterior
+         */
+        if(Gate::denies('update_artigo', $artigo))
+            return redirect()->back()->with('erro', 'Você não tem permissão para atualizar este artigo, entre em contato com o administrador do site!');
 
         $input = $request->all();
 
@@ -234,7 +234,9 @@ class ArtigoController extends Controller
 
     public function delete($id){
 
-         /*
+        $artigo =  $this->artigo->find($id);
+
+        /*
           * PERMISSÃO DO USUÁRIO
           *
           * Update artigo
@@ -242,10 +244,8 @@ class ArtigoController extends Controller
           * verifica a permissão do usuário
           * se usuario autorizado segue o código, caso contrário retorna para página anterior
           */
-        if(Gate::denies('delete_artigo'))
-            return redirect()->back()->with('erro', 'Você não tem permissão para deletar artigos, entre em contato com o administrador do site!');
-
-        $artigo =  $this->artigo->find($id);
+        if(Gate::denies('delete_artigo', $artigo))
+            return redirect('/painel/artigo/')->with('erro', 'Você não tem permissão para deletar este artigo, entre em contato com o administrador do site!');
 
         if($artigo->delete()){
 
@@ -258,6 +258,8 @@ class ArtigoController extends Controller
 
     public function restore($id){
 
+        $trashed = $this->artigo->withTrashed()->find($id);
+
         /*
       * PERMISSÃO DO USUÁRIO
       *
@@ -266,10 +268,8 @@ class ArtigoController extends Controller
       * verifica a permissão do usuário
       * se usuario autorizado segue o código, caso contrário retorna para página anterior
       */
-        if(Gate::denies('restore_artigo'))
-            return redirect()->back()->with('erro', 'Você não tem permissão para restaurar artigos, entre em contato com o administrador do site!');
-
-        $trashed = $this->artigo->withTrashed()->find($id);
+        if(Gate::denies('restore_artigo', $trashed))
+            return redirect('/painel/artigo/')->with('erro', 'Você não tem permissão para restaurar os artigos, entre em contato com o administrador do site');
 
         $trashed->restore();
 
@@ -288,7 +288,7 @@ class ArtigoController extends Controller
     * se usuario autorizado segue o código, caso contrário retorna para página anterior
     */
         if(Gate::denies('restore_artigo'))
-            return redirect()->back()->with('erro', 'Você não tem permissão para restaurar artigos, entre em contato com o administrador do site!');
+            return redirect()->back()->with('erro', 'Você não tem permissão para limpar a lixeira, entre em contato com o administrador do site!');
 
 
         $artigos = $this->artigo->onlyTrashed()->get();

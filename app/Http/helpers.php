@@ -111,6 +111,126 @@ function totalConsultores(){
 
 }
 
-function totalConsultoresCincoEstrelas(){
+function formatarExpProfissional($experiencia){
+
+    if($experiencia){
+        return $experiencia[0] . ' anos ' . $experiencia[1] . ' meses ' . $experiencia[1] . ' dias';
+    }
 
 }
+
+/*
+ * $expPro = array
+ * $expCons = int
+ * $expLean = int
+ */
+function valorHora($expPro, $expCons, $expLean){
+
+    $anos = array();
+    $peso = array();
+    $vazio = 'Nenhum valor definido';
+
+    if(($expPro) ||  ($expCons) || ($expLean)){
+
+        //$expPro[0] = anos
+        //$expPro[1] = meses
+        //$expPro[2] = dias
+        $anos[] = $expPro[0];
+        $anos[] = intval($expCons);
+        $anos[] = intval($expLean);
+
+        //dd($anos);
+
+        //Anos de experiencia profissional
+        if($anos[0]){
+
+            if($anos[0] <= 5) {
+                $peso['expProfissional'] = 1;
+            }elseif(($anos[0] > 5) AND ($anos[0] <= 10)) {
+                $peso['expProfissional'] = 3;
+            }elseif(($anos[0] > 10) AND ($anos[0] <= 15)) {
+                $peso['expProfissional'] = 5;
+            }else{
+                $peso['expProfissional'] = 9;
+            }
+
+        }
+        //Anos de experiencia como consultor
+        if($anos[1]){
+
+            if($anos[1] == 1) {
+                $peso['expConsultor'] = 1;
+            }elseif(($anos[1] >= 2) AND ($anos[1] <= 5)) {
+                $peso['expConsultor'] = 3;
+            }elseif(($anos[1] > 5) AND ($anos[1] <= 10)) {
+                $peso['expConsultor'] = 5;
+            }else {
+                $peso['expConsultor'] = 9;
+            }
+
+        }
+        //Anos de experiencia com LEAN
+        if($anos[2]){
+
+            if($anos[2] <= 3) {
+                $peso['expLean'] = 1;
+            }elseif($anos[2] > 3 AND $anos[2] <= 5) {
+                $peso['expLean'] = 3;
+            }elseif($anos[2] > 5 AND $anos[2] <= 10) {
+                $peso['expLean'] = 5;
+            }else {
+                $peso['expLean'] = 9;
+            }
+
+        }
+
+        //recebe o retorno da funcao faixasDeValores que retorna
+        //o valor a ser cobrado por hora, com base nos pesos das experiecias enviadas
+        $valorHora = faixasDeValores($peso);
+
+        return 'R$ ' . $valorHora;
+
+    }else{
+
+        return $vazio;
+
+    }
+
+}
+
+/*
+ * $peso = array
+ *
+ * $peso conterá os pesos de cada experiencia.
+ * $peso[expProfissional] = peso experiencia profissional
+ * $peso[expConsultor] = ṕeso experiencia como consultor
+ * $peso[expLean] = peso experiencia com LEAN
+ *
+ */
+function faixasDeValores($peso){
+
+
+    $total = array_sum($peso);
+
+    if(($total <= 4) AND ($total <= 8)){
+        $valor = 100;
+    }elseif(($total > 8) AND ($total <= 12)){
+        $valor = 150;
+    }elseif(($total > 12) AND ($total <= 16)){
+        $valor = 200;
+    }elseif(($total > 16) AND ($total <= 20)){
+        $valor = 300;
+    }elseif(($total > 20) AND ($total <= 28)){
+        $valor = 400;
+    }elseif(($total > 28) AND ($total <= 35)){
+        $valor = 500;
+    }else{
+        $valor = 600;
+    }
+
+    return number_format($valor , 2, ',', '.');
+
+
+
+}
+

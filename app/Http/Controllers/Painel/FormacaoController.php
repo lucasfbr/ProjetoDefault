@@ -80,9 +80,9 @@ class FormacaoController extends Controller
         $formacao = Formacao::create($request->all());
 
         if($formacao){
-            return redirect('/painel/formacao/'. $request->input('user_id'))->with('sucesso', 'Formação cadastrado com sucesso!');
+            return redirect('/painel/perfil/'. $request->input('user_id'))->with('sucesso', 'Formação cadastrado com sucesso!');
         }else{
-            return redirect('/painel/formacao/'. $request->input('user_id'))->with('erro', 'Ocorreu algum erro ao cadastrar uma nova formação, tente novamente mais tarde!');
+            return redirect('/painel/perfil/'. $request->input('user_id'))->with('erro', 'Ocorreu algum erro ao cadastrar uma nova formação, tente novamente mais tarde!');
         }
 
     }

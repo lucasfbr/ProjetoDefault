@@ -375,9 +375,9 @@ class UserController extends Controller
         $services = $request->input('services');
 
         if($user->service()->sync($services)){
-            return redirect('/painel/perfil/')->with('sucesso', 'Cadastro de consultorias feito com sucesso' );
+            return redirect('/painel/perfil/'.$user_id)->with('sucesso', 'Cadastro de consultorias feito com sucesso' );
         }else{
-            return redirect('/painel/perfil/')->with('erro', 'Erro ao fazer o cadstro de suas consultorias, tente novamente mais tarde!');
+            return redirect('/painel/perfil/'.$user_id)->with('erro', 'Erro ao fazer o cadstro de suas consultorias, tente novamente mais tarde!');
         }
 
 

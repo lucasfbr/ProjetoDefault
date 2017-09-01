@@ -21,7 +21,7 @@ class ArtigoPolicy
 
     public function view_artigo(User $user, Artigo $artigo){
 
-            return $user->id == $artigo->user_id;
+        return $user->id == $artigo->user_id;
 
     }
 
@@ -50,6 +50,12 @@ class ArtigoPolicy
     }
 
     public function restore_artigo(User $user, Artigo $artigo){
+
+        return $user->id == $artigo->user_id;
+
+    }
+
+    public function detail_artigo(User $user, Artigo $artigo){
 
         return $user->id == $artigo->user_id;
 

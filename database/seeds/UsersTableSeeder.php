@@ -24,6 +24,8 @@ class UsersTableSeeder extends Seeder
 
             DB::table('role_user')->insert(['role_id'=>'1', 'user_id'=>$user]);
 
+            DB::table('perfils')->insert(['user_id'=>$user]);
+
         }else{
             echo "A tabela Users nao esta vazia, logo a seed nao pode ser executada ";
         }

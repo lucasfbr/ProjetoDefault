@@ -18,6 +18,8 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         \App\Artigo::class => \App\Policies\ArtigoPolicy::class,
+        \App\Perfil::class => \App\Policies\PerfilPolicy::class,
+
     ];
 
     /**

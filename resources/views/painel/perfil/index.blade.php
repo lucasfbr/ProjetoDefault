@@ -15,6 +15,8 @@
 
     <section class="content">
 
+        @can('view_perfil', $perfil)
+
         <div class="row">
             <div class="col-md-4">
 
@@ -39,6 +41,9 @@
                             <li class="list-group-item">
                                 <b>Perfil</b> <a
                                         class="pull-right {{$user->perfil === 'Incompleto' ? 'text-danger' : ''}}">{{$user->perfil}}</a>
+                            </li>
+                            <li class="list-group-item">
+                                <b>Valor Hora</b> <a class="pull-right">{{valorHora($experienciaProfissional,$perfil->experienciaConsultor,$perfil->experienciaLean)}}</a>
                             </li>
                         </ul>
 
@@ -69,9 +74,21 @@
 
                         @if($user->tipo == 'Administrador' || $user->tipo == 'Consultor' )
 
-                            <strong><i class="fa fa-briefcase margin-r-5"></i> Experiência profissional:</strong>
+                            <strong><i class="fa fa-briefcase margin-r-5"></i> Experiência Profissional:</strong>
 
-                            <p>{{$experienciaProfissional ? $experienciaProfissional : ''}}</p>
+                            <p>{{$experienciaProfissional ? formatarExpProfissional($experienciaProfissional) : ''}}</p>
+
+                            <hr>
+
+                            <strong><i class="fa fa-briefcase margin-r-5"></i> Experiência como Consultor:</strong>
+
+                            <p>{{$perfil->experienciaConsultor ? $perfil->experienciaConsultor . ' Ano(s)' : ''}}</p>
+
+                            <hr>
+
+                            <strong><i class="fa fa-briefcase margin-r-5"></i> Experiência em LEAN:</strong>
+
+                            <p>{{$perfil->experienciaLean ? $perfil->experienciaLean . ' Ano(s)': ''}}</p>
 
                             <hr>
 
@@ -126,6 +143,10 @@
 
                         @can('view_formacao')
                         <li class=""><a href="#timeline" data-toggle="tab" aria-expanded="true">Formação</a></li>
+                        @endcan
+
+                        @can('view_projetos')
+                            <li class=""><a href="#projetos" data-toggle="tab" aria-expanded="true">Projetos</a></li>
                         @endcan
 
                         @can('view_atuacao')
@@ -609,7 +630,7 @@
 
                         <div class="tab-pane" id="timeline">
 
-                            <a href="/painel/formacao/{{$user->id}}" class="btn btn-warning"
+                            <a href="/painel/formacao/add/{{$user->id}}" class="btn btn-warning"
                                alt="Adicione uma nova formação" title="Adicione uma nova formação">
                                 Nova Formação
                             </a>
@@ -687,13 +708,71 @@
                                     @endforeach
 
                                     <br><br>
+
+                                    @if(count($services) > 0)
                                     <div class="form-group">
                                         <div class="col-sm-10">
                                             <button type="submit" class="btn btn-danger">Cadastrar</button>
                                         </div>
                                     </div>
+                                    @endif
 
                                 </form>
+
+                        </div>
+
+                        <div class="tab-pane" id="projetos">
+
+                            <a href="/painel/projetos/add/{{$user->id}}" class="btn btn-warning"
+                               alt="Adicione um novo projeto" title="Adicione um novo projeto">
+                                Novo Projeto
+                            </a>
+
+                            <br><br>
+
+                            <!-- The timeline -->
+                            <ul class="timeline timeline-inverse">
+
+                            @if($projetos)ss
+                                @foreach($projetos as $proj)
+                                    <!-- timeline time label -->
+                                        <li class="time-label">
+                                                <span class="bg-blue">
+                                                    {{$proj->data_inicio}}
+                                                </span>
+                                        </li>
+                                        <!-- /.timeline-label -->
+
+                                        <!-- timeline item -->
+                                        <li>
+                                            <!-- timeline icon -->
+                                            <i class="fa fa-graduation-cap bg-blue"></i>
+                                            <div class="timeline-item">
+
+                                                <h3 class="timeline-header">{{$proj->nome}}</h3>
+
+                                                <div class="timeline-body">
+                                                    {{$proj->descricao}}
+                                                </div>
+
+                                                <div class="timeline-footer">
+                                                    <a href="" target="_blank"
+                                                       class="btn btn-success btn-xs">Página da instituição</a>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    @endforeach
+
+
+                                    <li>
+                                        <i class="fa fa-circle bg-blue"></i>
+                                    </li>
+                                @else
+                                    <li>
+                                        <p class="text-info">Não participou de nenhum projeto até o momento</p>
+                                    </li>
+                                @endif
+                            </ul>
 
                         </div>
 
@@ -705,7 +784,7 @@
             <!-- /.col -->
         </div>
         <!-- /.row -->
-
+        @endcan
     </section>
 
 @endsection

@@ -6,6 +6,7 @@ use App\Perfil;
 use App\User;
 use App\Service;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Facades\Image;
@@ -34,26 +35,39 @@ class PerfilController extends Controller
         //busca o perfil do usuario
         $perfil = $user->perfis;
 
+        //depende das polices
+        if(Gate::denies('view_perfil', $user->perfis))
+            return redirect()->back()->with('erro', 'Você não tem permissão para editar este perfil, entre em contato com o administrador do site!');
+
+
         //dd($user->perfis->experienciaProfissional);
 
         $experienciaProfissional = $user->tipo == 'Administrador' || $user->tipo == 'Consultor' ? $this->totalExperienciaProfissional($user->perfis->experienciaProfissional) : '';
 
         //busca todas as formações do usuario
-        $formacao = $user->formacao();
+        $formacao = $user->formacao;
 
         //busca todos os servicos para criar os checkbox na aba "Áreas de atuação"
         $services = $this->service->all();
 
         //busca todos os servicos vinculados ao usuario
-        $userService = $user->service();
+        $userService = $user->service;
 
-        return view('painel.perfil.index', compact('user','perfil','formacao','services','userService', 'experienciaProfissional'));
+        $projetos = '';
+
+        return view('painel.perfil.index', compact('user','perfil','formacao','services','userService', 'experienciaProfissional', 'projetos'));
 
     }
 
     public function update(Request $request, $id){
 
-        $user = $this->user->find($id);
+
+       $user = $this->user->find($id);
+
+        //depende das polices
+        if(Gate::denies('update_perfil', $user->perfis))
+            return redirect()->back()->with('erro', 'Você não tem permissão para editar este perfil, entre em contato com o administrador do site!');
+
 
         $dados = [
             'name' => 'required|max:255',
@@ -283,7 +297,9 @@ class PerfilController extends Controller
             }
 
 
-            $resultado = array_sum($diferencasY) . ' Anos ' . array_sum($diferencasM) . ' meses e ' . array_sum($diferencasD) . ' dias';
+            $resultado[] = array_sum($diferencasY);
+            $resultado[] = array_sum($diferencasM);
+            $resultado[] = array_sum($diferencasD);
 
             return $resultado;
 
