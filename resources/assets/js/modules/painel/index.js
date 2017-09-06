@@ -8,12 +8,12 @@ Vue.use(require('vue-resource'));
 
 module.exports = new Vue({
 
-    http: {
+    /*http: {
         root: '/root',
         headers: {
             'X-CSRF-TOKEN': document.querySelector('#token').getAttribute('value')
         }
-    },
+    },*/
 
     el: '#painel',
     data: data,

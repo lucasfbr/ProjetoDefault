@@ -71,6 +71,19 @@
                                         <strong><i class="fa fa-at margin-r-5"></i> E-mail</strong>
 
                                         <p>{{ $user->email }}</p>
+
+                                        <hr>
+
+                                        <strong><i class="fa fa-briefcase margin-r-5"></i> Experiência Profissional</strong>
+
+                                        <p>{{$experienciaProfissional ? formatarExpProfissional($experienciaProfissional) : 'Nenhuma experiência'}}</p>
+
+                                        <hr>
+
+                                        <strong><i class="fa fa-briefcase margin-r-5"></i> Experiência com metodologia LEAN</strong>
+
+                                        <p>{{$perfil->experienciaLean ? $perfil->experienciaLean . ' Ano(s)': 'Nenhuma experiência'}}</p>
+
                                     </div>
                                     <div class="box-body col-md-6">
                                         <strong><i class="fa fa-phone margin-r-5"></i>Telefone</strong>
@@ -99,6 +112,16 @@
 
                                         <hr>
 
+                                        <strong><i class="fa fa-briefcase margin-r-5"></i> Experiência como consultor</strong>
+
+                                        <p>{{$perfil->experienciaConsultor ? $perfil->experienciaConsultor . ' Ano(s)' : 'Nenhuma experiência'}}</p>
+
+                                        <hr>
+
+                                        <strong><i class="fa fa-money margin-r-5"></i> Valor a ser cobrado por hora</strong>
+
+                                        <p></p>
+
                                     </div>
                                     <!-- /.box-body -->
 
@@ -110,12 +133,11 @@
 
                                 @if($user->tipo == 'Consultor')
 
-                                <div class="box-footer no-padding col-md-12">
+                                <div class="box-footer no-padding col-md-6">
                                     <ul class="nav nav-stacked">
-                                        <li><a href="#">Projetos <span class="pull-right badge bg-blue">31</span></a></li>
-                                        <li><a href="#">Tarefas <span class="pull-right badge bg-aqua">5</span></a></li>
-                                        <li><a href="#">Projetos Completos <span class="pull-right badge bg-green">12</span></a></li>
-                                        <li><a href="#">Seguidores <span class="pull-right badge bg-red">842</span></a></li>
+                                        <li><a href="#">Projetos em andamento <span class="pull-right badge bg-blue">0</span></a></li>
+                                        <li><a href="#">Projetos Completos <span class="pull-right badge bg-green">0</span></a></li>
+                                        <li><a href="#">Avaliações <span class="pull-right badge bg-red">0</span></a></li>
                                     </ul>
                                 </div>
 

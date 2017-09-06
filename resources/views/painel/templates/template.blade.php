@@ -54,10 +54,10 @@
                     <li class="dropdown messages-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <i class="fa fa-envelope-o"></i>
-                            <span class="label label-success">4</span>
+                            <span class="label label-success">0</span>
                         </a>
                         <ul class="dropdown-menu">
-                            <li class="header">You have 4 messages</li>
+                            <li class="header">You have 0 messages</li>
                             <li>
                                 <!-- inner menu: contains the actual data -->
                                 <ul class="menu">
@@ -135,10 +135,10 @@
                     <li class="dropdown notifications-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <i class="fa fa-bell-o"></i>
-                            <span class="label label-warning">10</span>
+                            <span class="label label-warning">0</span>
                         </a>
                         <ul class="dropdown-menu">
-                            <li class="header">You have 10 notifications</li>
+                            <li class="header">You have 0 notifications</li>
                             <li>
                                 <!-- inner menu: contains the actual data -->
                                 <ul class="menu">
@@ -178,10 +178,10 @@
                     <li class="dropdown tasks-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <i class="fa fa-flag-o"></i>
-                            <span class="label label-danger">9</span>
+                            <span class="label label-danger">0</span>
                         </a>
                         <ul class="dropdown-menu">
-                            <li class="header">You have 9 tasks</li>
+                            <li class="header">You have 0 tasks</li>
                             <li>
                                 <!-- inner menu: contains the actual data -->
                                 <ul class="menu">
@@ -322,10 +322,6 @@
                     <li><a href="/painel/configuracoes"><i class="glyphicon glyphicon-th-large"></i>Configurações Básicas</a></li>
                 @endcan
 
-                @can('view_categorias_consultoria')
-                    <li><a href="/painel/categoria"><i class="fa fa-bars" aria-hidden="true"></i>Tipos de Consultorias</a></li>
-                @endcan
-
                 @can('view_usuarios')
                     <li><a href="/painel/user"><i class="fa fa-users" aria-hidden="true"></i>Consultores e clientes</a></li>
                 @endcan
@@ -448,7 +444,7 @@
 
 <!-- Morris.js charts -->
 <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>-->
-<script src="/assets/painel/plugins/morris/morris.min.js"></script>
+<!--<script src="/assets/painel/plugins/morris/morris.min.js"></script>-->
 <!-- Sparkline -->
 <script src="/assets/painel/plugins/sparkline/jquery.sparkline.min.js"></script>
 <!-- jvectormap -->

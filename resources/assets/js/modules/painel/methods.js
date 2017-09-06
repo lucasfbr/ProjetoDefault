@@ -279,14 +279,23 @@ module.exports = {
     },
     cadExpProfissional: function () {
 
-        //alert('chegou')
+        alert('chegou')
 
         var self = this;
         var dados = this.experienciaLista;
 
         if(this.experiencia) {
 
-            self.$http.post('/painel/experienciaprofissional/add', dados).then(function (response) {
+            /*
+             *
+             * ENVIO VIA POST
+             *
+             * Neste caso foi necessário enviar um header com o token gerado pelo formulário,
+             * pois o laravel não aceita comunicação via post sem o token. Contudo o vuejs
+             * permite pegar o value pelo id do input type hiden que neste caso é "#token"
+             *
+             */
+            self.$http.post('/painel/experienciaprofissional/add', dados, { headers: {'X-CSRF-TOKEN': document.querySelector('#token').getAttribute('value')}}).then(function (response) {
 
                 //console.log(response.data);
 

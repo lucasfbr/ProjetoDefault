@@ -2,7 +2,6 @@
 
 @section('content')
 
-
     <section class="content-header">
         <h1>
             Perfil
@@ -82,13 +81,13 @@
 
                             <strong><i class="fa fa-briefcase margin-r-5"></i> Experiência como Consultor:</strong>
 
-                            <p>{{$perfil->experienciaConsultor ? $perfil->experienciaConsultor . ' Ano(s)' : ''}}</p>
+                            <p>{{$perfil->experienciaConsultor ? $perfil->experienciaConsultor . ' Ano(s)' : 'Nenhuma experiência'}}</p>
 
                             <hr>
 
                             <strong><i class="fa fa-briefcase margin-r-5"></i> Experiência em LEAN:</strong>
 
-                            <p>{{$perfil->experienciaLean ? $perfil->experienciaLean . ' Ano(s)': ''}}</p>
+                            <p>{{$perfil->experienciaLean ? $perfil->experienciaLean . ' Ano(s)': 'Nenhuma experiência'}}</p>
 
                             <hr>
 

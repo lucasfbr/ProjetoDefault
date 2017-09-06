@@ -5,27 +5,31 @@ namespace App\Http\Controllers\Painel;
 use App\Role;
 use App\User;
 use App\Service;
+use App\Perfil;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Gate;
+use Carbon\Carbon;
 
 
 class UserController extends Controller
 {
 
     private $user;
+    private $perfil;
     private $extensoes = ['jpg','jpeg', 'png'];
     private $caminhoImg = 'img/usuarios/';
     private $caminhoImgPerfil = 'img/perfil/';
 
-    public function __construct(User $user)
+    public function __construct(User $user, Perfil $perfil)
     {
         //$this->middleware('auth');
 
         $this->user = $user;
+        $this->perfil = $perfil;
     }
 
     public function index(){
@@ -68,9 +72,11 @@ class UserController extends Controller
 
         $perfil = $user->perfis;
 
+        $experienciaProfissional = $user->tipo == 'Administrador' || $user->tipo == 'Consultor' ? $this->totalExperienciaProfissional($user->perfis->experienciaProfissional) : '';
+
         $formacao = $user->formacao;
 
-        return view('painel.user.detail', ['user' => $user, 'perfil' => $perfil, 'formacao' => $formacao]);
+        return view('painel.user.detail', ['user' => $user, 'perfil' => $perfil, 'formacao' => $formacao, 'experienciaProfissional' => $experienciaProfissional]);
 
     }
 
@@ -457,6 +463,41 @@ class UserController extends Controller
             //remove a foto do diretorio
             File::delete($imagem);
         }
+
+    }
+
+    public function totalExperienciaProfissional($experiencias){
+
+
+        if(count($experiencias) > 0) {
+
+            $carbon = new Carbon();
+
+            foreach ($experiencias as $exp) {
+
+                $datasE = explode('/', $exp->data_entrada);
+                $datasS = explode('/', $exp->data_saida);
+
+                $dataInicial = $carbon::create($datasE[2], $datasE[1], $datasE[0]);
+                $dataFinal = $carbon::create($datasS[2], $datasS[1], $datasS[0]);
+
+                $diferencasY[] = $dataInicial->diff($dataFinal)->y;
+                $diferencasM[] = $dataInicial->diff($dataFinal)->m;
+                $diferencasD[] = $dataInicial->diff($dataFinal)->d;
+
+            }
+
+
+            $resultado[] = array_sum($diferencasY);
+            $resultado[] = array_sum($diferencasM);
+            $resultado[] = array_sum($diferencasD);
+
+            return $resultado;
+
+        }
+
+        return '';
+
 
     }
 

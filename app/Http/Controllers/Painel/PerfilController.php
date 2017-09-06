@@ -92,11 +92,11 @@ class PerfilController extends Controller
 
 
         //usuario consultor
-        if($user->tipo == 'Administrador' || $user->tipo == 'Consultor'){
-            $dados = array_add($dados, 'habilidades', 'required');
-            $dados = array_add($dados, 'experienciaLean', 'required');
-            $dados = array_add($dados, 'experienciaConsultor', 'required');
-        }
+        //if($user->tipo == 'Administrador' || $user->tipo == 'Consultor'){
+            //$dados = array_add($dados, 'habilidades', 'required');
+            //$dados = array_add($dados, 'experienciaLean', 'required');
+            //$dados = array_add($dados, 'experienciaConsultor', 'required');
+       //}
 
         $this->validate($request, $dados);
 
