@@ -209,20 +209,20 @@ function valorHora($expPro, $expCons, $expLean){
  */
 function faixasDeValores($peso){
 
-
     $total = array_sum($peso);
 
-    if(($total <= 4) AND ($total <= 8)){
+
+    if($total <= 8){
         $valor = 100;
-    }elseif(($total > 8) AND ($total <= 12)){
+    }elseif(($total > 8) OR ($total <= 12)){
         $valor = 150;
-    }elseif(($total > 12) AND ($total <= 16)){
+    }elseif(($total > 12) OR ($total <= 16)){
         $valor = 200;
-    }elseif(($total > 16) AND ($total <= 20)){
+    }elseif(($total > 16) OR ($total <= 20)){
         $valor = 300;
-    }elseif(($total > 20) AND ($total <= 28)){
+    }elseif(($total > 20) OR ($total <= 28)){
         $valor = 400;
-    }elseif(($total > 28) AND ($total <= 35)){
+    }elseif(($total > 28) OR ($total <= 35)){
         $valor = 500;
     }else{
         $valor = 600;

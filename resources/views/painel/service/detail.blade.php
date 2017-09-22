@@ -18,13 +18,25 @@
 
         <div class="row">
 
-            <div class="col-md-3">
+            <div class="col-md-4">
 
                 <div class="box box-primary">
                     <div class="box-body box-profile">
-                        <img class="profile-user-img img-responsive img-circle" src="/{{$servico->imagem}}" title="{{$servico->titulo}}" alt="{{$servico->titulo}}">
 
-                        <h3 class="profile-username text-center">{{$servico->titulo}}</h3>
+
+                            <h3>Outros Serviços</h3>
+
+                            <hr>
+
+                        <div class="list-group">
+
+                            @foreach($todosServicos as $serv)
+
+                                <a href="/painel/service/detail/{{$serv->id}}" class="list-group-item"><h4>{{$serv->titulo}}</h4></a>
+
+                            @endforeach
+
+                        </div>
 
                     </div>
                     <!-- /.box-body -->
@@ -32,20 +44,26 @@
 
             </div>
 
-            <div class="col-md-9">
+            <div class="col-md-8">
 
                 <div class="box box-primary">
                     <div class="box-body box-profile">
 
                         <div class="page-header">
-                            <h1>{{$servico->titulo}} <small>resumo e texto completo</small></h1>
+                            <h1>{{$servico->titulo}}</h1>
                         </div>
 
-                        <h4>Resumo</h4>
-                        <p>{{$servico->resumo}}</p>
-                        <hr>
-                        <h4>Texto completo</h4>
-                        <p>{{ $servico->texto }}</p>
+
+
+                        @if($servico->imagem_descricao)
+                        <img src="/{{$servico->imagem_descricao}}" class="img-responsive" title="{{$servico->titulo}}" alt="{{$servico->titulo}}">
+                        @endif
+
+                        <br>
+                        <br>
+
+                        {!! $servico->texto !!}
+
                     </div>
                     <!-- /.box-body -->
                 </div>

@@ -19,6 +19,7 @@ class CreateServicesTable extends Migration
             $table->string('resumo');
             $table->text('texto');
             $table->string('imagem')->nullable();
+            $table->string('imagem_descricao')->nullable();
             $table->enum('status', [0,1])->default(0);
             $table->timestamps();
         });

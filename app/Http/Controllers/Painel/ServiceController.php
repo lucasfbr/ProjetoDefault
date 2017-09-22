@@ -78,15 +78,29 @@ class ServiceController extends Controller
 
         $servico = new Service();
 
-        //verifica se foi enviada alguma imagem com o formulário
+        //verifica se foi enviada a imagem destacada
         if(!empty($request->file('imagem'))){
 
             //armazena a imagem enviada pelo form
             $image = $request->file('imagem');
             //pega a extensao da imagem
             $extensao = $image->getClientOriginalExtension();
-            //recebe o nome da imagem que foi movida para a pasta de destino
-            $servico->imagem = $this->moverImagem($image, $extensao);
+            //envia para o metodo moverImagem a imagem, a extensao e um parametro
+            //neste caso 0 que representa a imagem a ser redimencionada para o
+            //thumbnail
+            $servico->imagem = $this->moverImagem($image, $extensao, 0);
+        }
+
+        //verifica se foi enviada a imagem para descricao
+        if(!empty($request->file('imagem_descricao'))){
+
+            //armazena a imagem enviada pelo form
+            $image = $request->file('imagem_descricao');
+            //pega a extensao da imagem
+            $extensao = $image->getClientOriginalExtension();
+            //envia para o metodo moverImagem a imagem, a extensao e um parametro
+            //neste caso 1 que representa a imagem no tamanho original
+            $servico->imagem_descricao = $this->moverImagem($image, $extensao, 1);
         }
 
         $servico->titulo = $request->input('titulo');
@@ -160,12 +174,30 @@ class ServiceController extends Controller
             //pega a extensao da imagem
             $extensao = $image->getClientOriginalExtension();
             //recebe o nome da imagem que foi movida para a pasta de destino
-            $servico->imagem = $this->moverImagem($image, $extensao);
+            $servico->imagem = $this->moverImagem($image, $extensao, 0);
         }
+
+        //verifica se foi enviada a imagem para descricao
+        if($request->file('imagem_descricao')){
+
+            //metodo que verifica se a imagem salva no banco existe no diretorio
+            //caso exista remove a mesma do diretorio
+            //$this->removeImagemDir($servico->imagem_descricao);
+
+            //armazena a imagem enviada pelo form
+            $image = $request->file('imagem_descricao');
+            //pega a extensao da imagem
+            $extensao = $image->getClientOriginalExtension();
+            //envia para o metodo moverImagem a imagem, a extensao e um parametro
+            //neste caso 1 que representa a imagem no tamanho original
+            $servico->imagem_descricao = $this->moverImagem($image, $extensao, 1);
+        }
+
 
         $servico->titulo = $request->input('titulo');
         $servico->resumo = $request->input('resumo');
         $servico->texto = $request->input('texto');
+
         if(empty($request->input('status'))) {
             $servico->status = '0';
         }else{
@@ -195,7 +227,9 @@ class ServiceController extends Controller
 
         $servico = $this->service->find($id);
 
-        return view('painel.service.detail', ['servico' => $servico]);
+        $todosServicos = $this->service->all();
+
+        return view('painel.service.detail', ['servico' => $servico, 'todosServicos' => $todosServicos]);
 
     }
 
@@ -230,7 +264,7 @@ class ServiceController extends Controller
     /*
      * Metodo responsavel por verificar a extensao, redimencionar e mover a imagem para seu destino
      */
-    public function moverImagem($image, $extensao){
+    public function moverImagem($image, $extensao, $tipo){
 
         if(!in_array($extensao, $this->extensoes)) {
             return back()->with('erro', 'Erro ao fazer upload de imagem! Formatos aceitos jpg, jpeg e png');
@@ -240,7 +274,13 @@ class ServiceController extends Controller
 
             $path = public_path($this->caminhoImg . $filename);
 
-            Image::make($image->getRealPath())->resize(242,200)->save($path);
+            //se tipo for igual 0, deve ser redimencionada
+            //se tipo for igual 1, salva a imagem original
+            if($tipo == 0) {
+                Image::make($image->getRealPath())->resize(242, 200)->save($path);
+            }else{
+                Image::make($image->getRealPath())->resize(1024, 580)->save($path);
+            }
 
             return $this->caminhoImg . $filename;
 

@@ -120,7 +120,7 @@
 
                                         <strong><i class="fa fa-money margin-r-5"></i> Valor a ser cobrado por hora</strong>
 
-                                        <p></p>
+                                        <p>{{valorHora($experienciaProfissional,$perfil->experienciaConsultor,$perfil->experienciaLean)}}</p>
 
                                     </div>
                                     <!-- /.box-body -->

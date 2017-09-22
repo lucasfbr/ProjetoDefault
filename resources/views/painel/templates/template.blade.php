@@ -460,6 +460,14 @@
 <!-- Bootstrap WYSIHTML5 -->
 <script src="/assets/painel/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
 
+<script>
+    $(function () {
+        //bootstrap WYSIHTML5 - text editor
+        $("textarea").wysihtml5();
+    });
+
+</script>
+
 
 <!-- Slimscroll -->
 <script src="/assets/painel/plugins/slimScroll/jquery.slimscroll.min.js"></script>
@@ -474,7 +482,6 @@
 <!-- AdminLTE for demo purposes -->
 
 <script src="/assets/painel/dist/js/demo.js"></script>
-
 
 
 

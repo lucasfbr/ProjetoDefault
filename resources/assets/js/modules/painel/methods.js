@@ -279,7 +279,7 @@ module.exports = {
     },
     cadExpProfissional: function () {
 
-        alert('chegou')
+        //alert('chegou')
 
         var self = this;
         var dados = this.experienciaLista;

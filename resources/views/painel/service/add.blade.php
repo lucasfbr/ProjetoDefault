@@ -67,6 +67,19 @@
                             @endif
                         </div>
 
+                        <div class="form-group">
+                            <label for="img">Imagem destacada</label>
+                            <input type="file" id="imagem" name="imagem">
+
+                            <p class="help-block">Selecione uma foto ou imagem para o serviço</p>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="img">Imagem do texto</label>
+                            <input type="file" id="imagem_descricao" name="imagem_descricao">
+
+                            <p class="help-block">Selecione uma imagem para ser exibida no topo do texto</p>
+                        </div>
 
                         <div class="form-group{{ $errors->has('texto') ? ' has-error' : '' }}">
                                 <label>Descrição</label>
@@ -80,12 +93,7 @@
                                 @endif
                             </div>
 
-                            <div class="form-group">
-                                <label for="img">Foto</label>
-                                <input type="file" id="imagem" name="imagem">
 
-                                <p class="help-block">Selecione uma foto ou imagem para o serviço</p>
-                            </div>
 
                             <div class="checkbox">
                                 <label>
